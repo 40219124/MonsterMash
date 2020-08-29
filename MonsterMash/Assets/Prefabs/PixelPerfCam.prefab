@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6061248254197915031}
   - component: {fileID: 6061248254197915028}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: PixelPerfCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,15 +52,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.08888889
-    y: 0.13636364
-    width: 0.82051283
-    height: 0.7272727
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 8
+  m_AssetsPPU: 16
   m_RefResolutionX: 160
   m_RefResolutionY: 144
   m_UpscaleRT: 0
