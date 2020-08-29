@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
     EFourDirections CurrentMoveDir = EFourDirections.none;
 
     public float AnimationTime = 0.5f;
+    public int PixelsPerStep = 16;
     // Start is called before the first frame update
     void Start()
     {
@@ -194,9 +195,9 @@ public class Player : MonoBehaviour
                 timeElapsed = AnimationTime;
             }
 
-            int progress = (int)(8.0f * timeElapsed / AnimationTime);
+            int progress = (int)(PixelsPerStep * timeElapsed / AnimationTime);
 
-            transform.position = start + (dir * (progress / 8.0f));
+            transform.position = start + (dir * ((float)progress / PixelsPerStep));
 
         }
         CurrentMoveDir = EFourDirections.none;
