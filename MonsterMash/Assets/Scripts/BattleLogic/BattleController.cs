@@ -22,6 +22,7 @@ public class BattleController : MonoBehaviour
 	//current action
 	public float TimeLeftOfAction { get; private set;}
 	Action CurrentAction;
+	Agent CurrentAgent;
 
 	void Awake()
 	{
@@ -94,11 +95,13 @@ public class BattleController : MonoBehaviour
 			case eBattleState.PlayerTurn:
 			{
 				BattleState = eBattleState.EnemyTurn;
+				CurrentAgent = Enemy;
 				break;
 			}
 			case eBattleState.EnemyTurn:
 			{
 				BattleState = eBattleState.PlayerTurn;
+				CurrentAgent = Player;
 				break;
 			}
 			default:
@@ -173,6 +176,7 @@ public class BattleController : MonoBehaviour
 
 		TimeLeftOfAction = action.AttackLimb.AttackTime;
 		CurrentAction = action;
+		CurrentAgent.Body.StartAttack();
 		return true;
 	}
 
@@ -180,5 +184,6 @@ public class BattleController : MonoBehaviour
 	{
 		CurrentAction.TargetBodyPart.ApplyAttack(CurrentAction.AttackLimb.Damage);
 		CurrentAction = null;
+		CurrentAgent.Body.EndAttack();
 	}
 }

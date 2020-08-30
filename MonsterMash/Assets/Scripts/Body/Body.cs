@@ -7,6 +7,10 @@ public class Body : MonoBehaviour
 	public Limb RightArmPart;
 	public Limb LegsPart;
 
+	[Space]
+	[Header("UI")]
+	[SerializeField] Animator BodyAnimator;
+
 	public bool IsAlive()
 	{
 		return TorsoPart.IsAlive &&
@@ -26,5 +30,21 @@ public class Body : MonoBehaviour
 	public override string ToString()
 	{
 		return $"Torso: {TorsoPart}, LeftArm: {LeftArmPart}, RightArm: {RightArmPart}, Legs: {LegsPart}";
+	}
+
+	public void StartAttack()
+	{
+		//if (BodyAnimator != null)
+		//{
+		//	BodyAnimator.SetBool("Doing Attack", true);
+		//}
+	}
+
+	public void EndAttack()
+	{
+		//if (BodyAnimator != null)
+		//{
+		//	BodyAnimator.SetBool("Doing Attack", false);
+		//}
 	}
 }
