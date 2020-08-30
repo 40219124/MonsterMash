@@ -1,9 +1,11 @@
-public class Body
+using UnityEngine;
+
+public class Body : MonoBehaviour
 {
-	public Torso TorsoPart { get; private set;}
-	public Limb LeftArmPart { get; private set;}
-	public Limb RightArmPart { get; private set;}
-	public Limb LegsPart { get; private set;}
+	public Torso TorsoPart;
+	public Limb LeftArmPart;
+	public Limb RightArmPart;
+	public Limb LegsPart;
 
 	public bool IsAlive()
 	{
@@ -11,5 +13,18 @@ public class Body
 			(LeftArmPart.IsAlive ||
 			RightArmPart.IsAlive ||
 			LegsPart.IsAlive);
+	}
+
+	public bool IsOurBodyPart(BodyPart bodyPart)
+	{
+		return TorsoPart == bodyPart ||
+			   LeftArmPart == bodyPart ||
+			   RightArmPart == bodyPart ||
+			   LegsPart == bodyPart;
+	}
+
+	public override string ToString()
+	{
+		return $"Torso: {TorsoPart}, LeftArm: {LeftArmPart}, RightArm: {RightArmPart}, Legs: {LegsPart}";
 	}
 }
