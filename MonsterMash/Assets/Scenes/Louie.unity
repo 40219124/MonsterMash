@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PartType: 3
-  Armour: 5
+  Armour: 2
   MaxHealth: 100
 --- !u!1 &1103733000
 GameObject:
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PartType: 3
-  Armour: 5
+  Armour: 2
   MaxHealth: 100
 --- !u!1 &1178173902
 GameObject:

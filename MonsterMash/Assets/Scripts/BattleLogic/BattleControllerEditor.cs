@@ -8,8 +8,15 @@ public class BattleControllerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+		if (BattleController.Instance == null)
+		{
+			EditorGUILayout.LabelField($"Game Not running");
+			return;
+		}
 
-		if (BattleController.Instance?.Player != null &&
+		EditorGUILayout.LabelField($"battle state: {BattleController.Instance.BattleState}");
+
+		if (BattleController.Instance.Player != null &&
 			BattleController.Instance.Enemy != null)
 		{
 			EditorGUILayout.LabelField($"player health: {BattleController.Instance.Player.Body}");
@@ -17,7 +24,7 @@ public class BattleControllerEditor : Editor
 		}
 		else
 		{
-			EditorGUILayout.LabelField($"not setup yet");
+			EditorGUILayout.LabelField($"not in battle");
 		}
 
     }

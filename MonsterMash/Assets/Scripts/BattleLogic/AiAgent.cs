@@ -4,8 +4,12 @@ public class AiAgent: Agent
 {
 	void Update()
 	{
-		if (IsOurTurn)
+		if (CanDoAction())
 		{
+			var attackLimb = Opponent.Body.LeftArmPart;
+			var targetBodyPart = Opponent.Body.TorsoPart;
+			var action = new Action(attackLimb, targetBodyPart);
+			BattleController.Instance.TryAction(action);
 		}
 	}
 }
