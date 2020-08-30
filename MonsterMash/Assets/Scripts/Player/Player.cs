@@ -81,10 +81,12 @@ public class Player : MonoBehaviour
 
     public float AnimationTime = 0.5f;
     public int PixelsPerStep = 16;
+
+    private Animator Anim;
     // Start is called before the first frame update
     void Start()
     {
-
+        Anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -98,38 +100,22 @@ public class Player : MonoBehaviour
         HorizontalValue = Input.GetAxisRaw("Horizontal");
         VerticalValue = Input.GetAxisRaw("Vertical");
 
-        if(MoveAllowed(out EFourDirections nextDir))
+        if (TravelDirection != EAxisDirection.none)
         {
-            CurrentMoveDir = nextDir;
-            StartCoroutine(AnimatePlayerMovement());
-        }
-
-        /*if (RemainingMoveCD <= 0.0f)
-        {
-            switch (TravelDirection)
+            if (MoveAllowed(out EFourDirections nextDir))
             {
-                case EAxisDirection.horizontal:
-                    {
-                        if (MoveAllowed(out EFourDirections nextDir))
-                        {
-                            transform.Translate(Vector3.right * HorizontalValue);
-                            RemainingMoveCD = MoveCD;
-                        }
-                    }
-                    break;
-                case EAxisDirection.vertical:
-                    {
-                        if (MoveAllowed(out EFourDirections nextDir))
-                        {
-                            transform.Translate(Vector3.up * VerticalValue);
-                            RemainingMoveCD = MoveCD;
-                        }
-                    }
-                    break;
-                default:
-                    break;
+                CurrentMoveDir = nextDir;
+                StartCoroutine(AnimatePlayerMovement());
             }
-        }*/
+            else
+            {
+                if (CurrentMoveDir == EFourDirections.none)
+                {
+                    CurrentMoveDir = nextDir;
+                    StartCoroutine(AnimateFailedMovement());
+                }
+            }
+        }
     }
 
     private bool MoveAllowed(out EFourDirections dir)
@@ -144,28 +130,40 @@ public class Player : MonoBehaviour
 
         if (TravelDirection == EAxisDirection.horizontal)
         {
-            if (HorizontalValue < 0 && ValidDirections[(int)EFourDirections.left])
+            if (HorizontalValue < 0)
             {
                 dir = EFourDirections.left;
-                outBool = true;
+                if (ValidDirections[(int)EFourDirections.left])
+                {
+                    outBool = true;
+                }
             }
-            else if (HorizontalValue > 0 && ValidDirections[(int)EFourDirections.right])
+            else if (HorizontalValue > 0)
             {
                 dir = EFourDirections.right;
-                outBool = true;
+                if (ValidDirections[(int)EFourDirections.right])
+                {
+                    outBool = true;
+                }
             }
         }
         else if (TravelDirection == EAxisDirection.vertical)
         {
-            if (VerticalValue < 0 && ValidDirections[(int)EFourDirections.down])
+            if (VerticalValue < 0)
             {
                 dir = EFourDirections.down;
-                outBool = true;
+                if (ValidDirections[(int)EFourDirections.down])
+                {
+                    outBool = true;
+                }
             }
-            else if (VerticalValue > 0 && ValidDirections[(int)EFourDirections.up])
+            else if (VerticalValue > 0)
             {
                 dir = EFourDirections.up;
-                outBool = true;
+                if (ValidDirections[(int)EFourDirections.up])
+                {
+                    outBool = true;
+                }
             }
         }
 
@@ -177,6 +175,17 @@ public class Player : MonoBehaviour
         ValidDirections[(int)direction] = state;
     }
 
+    IEnumerator AnimateFailedMovement()
+    {
+        Anim.SetInteger("Direction", (int)CurrentMoveDir);
+        Anim.SetTrigger("Animate");
+
+        yield return new WaitForSeconds(AnimationTime);
+
+        Anim.SetBool("Animate", false);
+        CurrentMoveDir = EFourDirections.none;
+        yield return null;
+    }
     IEnumerator AnimatePlayerMovement()
     {
         float timeElapsed = 0.0f;
@@ -184,13 +193,15 @@ public class Player : MonoBehaviour
         Vector3 start = transform.position;
         Vector3 dir = DirFromEnum(CurrentMoveDir);
 
+        Anim.SetInteger("Direction", (int)CurrentMoveDir);
+        Anim.SetTrigger("Animate");
 
-        while(timeElapsed < AnimationTime)
+        while (timeElapsed < AnimationTime)
         {
             yield return null;
             timeElapsed += Time.deltaTime;
 
-            if(timeElapsed > AnimationTime)
+            if (timeElapsed > AnimationTime)
             {
                 timeElapsed = AnimationTime;
             }
@@ -200,6 +211,7 @@ public class Player : MonoBehaviour
             transform.position = start + (dir * ((float)progress / PixelsPerStep));
 
         }
+        Anim.SetBool("Animate", false);
         CurrentMoveDir = EFourDirections.none;
         yield return null;
     }
