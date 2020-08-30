@@ -21,6 +21,9 @@ public class Agent : MonoBehaviour
 	protected bool CanDoAction()
 	{
 		var battleController = BattleController.Instance;
-		return IsOurTurn && battleController.TimeLeftOfAction <= 0;
+		return IsOurTurn && 
+			battleController.TimeLeftOfAction <= 0 &&
+			(battleController.BattleState == BattleController.eBattleState.PlayerTurn ||
+			battleController.BattleState == BattleController.eBattleState.EnemyTurn);
 	}
 }
