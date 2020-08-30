@@ -174,50 +174,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915028, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_StretchFill
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915028, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_UpscaleRT
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915028, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_PixelSnapping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915028, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_CropFrameX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915028, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_CropFrameY
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915029, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_NormalizedViewPortRect.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915029, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_NormalizedViewPortRect.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915029, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_NormalizedViewPortRect.width
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915029, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915029, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: orthographic size
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6061248254197915029, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
-      propertyPath: m_ForceIntoRT
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6061248254197915030, guid: 9f90a6b7b1aa88542810e4e8e7f13b04, type: 3}
       propertyPath: m_Name
       value: PixelPerfCam
