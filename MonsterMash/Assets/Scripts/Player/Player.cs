@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
 
     bool[] ValidDirections = { true, true, true, true };
     EFourDirections CurrentMoveDir = EFourDirections.none;
+    EFourDirections CurrentFailDir = EFourDirections.none;
 
     public float AnimationTime = 0.5f;
     public int PixelsPerStep = 16;
@@ -177,14 +178,21 @@ public class Player : MonoBehaviour
 
     IEnumerator AnimateFailedMovement()
     {
-        Anim.SetInteger("Direction", (int)CurrentMoveDir);
+        if(CurrentMoveDir == CurrentFailDir)
+        {
+            CurrentMoveDir = EFourDirections.none;
+            yield break;
+        }
+        CurrentFailDir = CurrentMoveDir;
+        CurrentMoveDir = EFourDirections.none;
+
+        Anim.SetInteger("Direction", (int)CurrentFailDir);
         Anim.SetTrigger("Animate");
+
 
         yield return new WaitForSeconds(AnimationTime);
 
-        Anim.SetBool("Animate", false);
-        CurrentMoveDir = EFourDirections.none;
-        yield return null;
+        CurrentFailDir = EFourDirections.none;
     }
     IEnumerator AnimatePlayerMovement()
     {
@@ -211,7 +219,6 @@ public class Player : MonoBehaviour
             transform.position = start + (dir * ((float)progress / PixelsPerStep));
 
         }
-        Anim.SetBool("Animate", false);
         CurrentMoveDir = EFourDirections.none;
         yield return null;
     }

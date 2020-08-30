@@ -2974,7 +2974,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 170568236757120015, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4216496406460835792, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
       propertyPath: m_Name
@@ -2984,6 +2984,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 4216496406460835794, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
+      propertyPath: AnimationTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4216496406460835795, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
