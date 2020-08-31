@@ -144,43 +144,61 @@ public class BattleController : MonoBehaviour
 			return false;
 		}
 
-		if (action.AttackLimb == null)
+		var attacker = action.Attacker;
+		var target = action.Target;
+
+		if (attacker == null)
 		{
-			Debug.LogError($"trying to do action with action.AttackLimb that is null");
+			Debug.LogError($"trying to do action with action.Attacker that is null");
 			return false;
 		}
 
-		if (action.TargetBodyPart == null)
+		if (target == null)
 		{
-			Debug.LogError($"trying to do action with action.TargetBodyPart that is null");
+			Debug.LogError($"trying to do action with action.Target that is null");
 			return false;
 		}
 
-		if (!action.AttackLimb.IsAlive)
+		var attackerLimb = action.Attacker.GetLimb(action.AttackerPartType);
+		var targetBodyPart = action.Target.GetBodyPart(action.TargetPartType);
+
+		if (attackerLimb == null)
 		{
-			Debug.LogError($"trying to do action with attack limb({action.AttackLimb}) that not Alive");
+			Debug.LogError($"trying to do action with attackerLimb that is null");
 			return false;
 		}
 
-		if (!action.TargetBodyPart.IsAlive)
+		if (targetBodyPart == null)
 		{
-			Debug.LogError($"trying to do action with TargetBodyPart({action.TargetBodyPart}) that not Alive");
+			Debug.LogError($"trying to do action with targetBodyPart that is null");
+			return false;
+		}
+
+		if (!attackerLimb.IsAlive)
+		{
+			Debug.LogError($"trying to do action with attack limb({attackerLimb}) that not Alive");
+			return false;
+		}
+
+		if (!targetBodyPart.IsAlive)
+		{
+			Debug.LogError($"trying to do action with TargetBodyPart({targetBodyPart}) that not Alive");
 			return false;
 		}
 
 		//todo check that body part if part of the correct body
 
-		int actionTime = action.AttackLimb.AttackTime;
-		if (TurnTimeLeft + Settings.ActionTimeForgiveness <= action.AttackLimb.AttackTime)
+		int actionTime = attackerLimb.AttackTime;
+		if (TurnTimeLeft + Settings.ActionTimeForgiveness <= actionTime)
 		{
-			Debug.Log($"not enough time to do action: {TurnTimeLeft} + {Settings.ActionTimeForgiveness} <= {action.AttackLimb.AttackTime}");
+			Debug.Log($"not enough time to do action: {TurnTimeLeft} + {Settings.ActionTimeForgiveness} <= {actionTime}");
 			return false;
 		}
 
 		//this is a valid action so lets do it yay!
 		Debug.Log($"Doing Action: {action}");
 
-		TimeLeftOfAction = action.AttackLimb.AttackTime;
+		TimeLeftOfAction = actionTime;
 		CurrentAction = action;
 		CurrentAgent.Body.StartAttack();
 		return true;
@@ -188,7 +206,9 @@ public class BattleController : MonoBehaviour
 
 	public void FinishAction()
 	{
-		CurrentAction.TargetBodyPart.ApplyAttack(CurrentAction.AttackLimb.Damage);
+		var attackerLimb = CurrentAction.Attacker.GetLimb(CurrentAction.AttackerPartType);
+		int damage = attackerLimb.Damage;
+		CurrentAction.Target.ApplyAttack(CurrentAction.TargetPartType, damage);
 		CurrentAction = null;
 		CurrentAgent.Body.EndAttack();
 		//StartCoroutine(DoVignetteFlash());

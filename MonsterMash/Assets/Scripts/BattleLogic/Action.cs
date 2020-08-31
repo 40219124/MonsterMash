@@ -1,16 +1,23 @@
 public class Action
 {
-	public Limb AttackLimb { get; private set;}
-	public BodyPart TargetBodyPart { get; private set;}
-	
-	public Action(Limb attackLimb, BodyPart targetBodayPart)
+	public Body Attacker { get; private set;}
+	public Body.eBodyPartType AttackerPartType { get; private set;}
+
+	public Body Target { get; private set;}
+
+	public Body.eBodyPartType TargetPartType { get; private set;}
+
+	public Action(Body attacker, Body.eBodyPartType attackerPartType, Body target, Body.eBodyPartType targetPartType)
 	{
-		AttackLimb = attackLimb;
-		TargetBodyPart = targetBodayPart;
+		Attacker = attacker;
+		AttackerPartType = attackerPartType;
+
+		Target = target;
+		TargetPartType = targetPartType;
 	}
 
 	public override string ToString()
 	{
-		return $"Attack: {AttackLimb}, Target: {TargetBodyPart}";
+		return $"Attacker: {Attacker}, Target: {Target}";
 	}
 }

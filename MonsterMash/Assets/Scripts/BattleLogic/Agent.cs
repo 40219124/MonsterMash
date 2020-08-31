@@ -22,6 +22,9 @@ public class Agent : MonoBehaviour
 			return;
 		}
 
+		var attackerLimbType = Body.eBodyPartType.None;
+		var targetBodyPartType = Body.eBodyPartType.None;
+
 		if (ControlType == eControlType.Player)
 		{
 			
@@ -29,11 +32,12 @@ public class Agent : MonoBehaviour
 		}
 		else if (ControlType == eControlType.Ai)
 		{
-			var attackLimb = Opponent.Body.LeftArmPart;
-			var targetBodyPart = Opponent.Body.TorsoPart;
-			var action = new Action(attackLimb, targetBodyPart);
-			BattleController.Instance.TryAction(action);
+			attackerLimbType = Body.eBodyPartType.LeftArm;
+			targetBodyPartType = Body.eBodyPartType.Torso;
 		}
+
+		var action = new Action(Body, attackerLimbType, Opponent.Body, targetBodyPartType);
+		BattleController.Instance.TryAction(action);
 	}
 	
 	public void OnGameStart(Agent opponent)

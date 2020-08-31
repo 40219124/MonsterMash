@@ -5,7 +5,7 @@ using System;
 public class BodyPart : MonoBehaviour
 {
 	[Header("BattleStats")]
-	public eBodyPartType PartType;
+	public eBodyPartSlotType PartType;
 	public int Armour;
 	public int MaxHealth;
 	public int CurrentHealth { get; private set;}
@@ -16,7 +16,7 @@ public class BodyPart : MonoBehaviour
 	[SerializeField] Text HealthDeltaText;
 	[SerializeField] Animator PartAnimator;
 
-	public enum eBodyPartType
+	public enum eBodyPartSlotType
 	{
 		None,
 		Arm,
