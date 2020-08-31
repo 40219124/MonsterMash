@@ -13,7 +13,7 @@ public class BodyPart : MonoBehaviour
 
 	[Space]
 	[Header("UI")]
-	[SerializeField] Text HealthDeltaText;
+	[SerializeField] TextMesh HealthDeltaText;
 	[SerializeField] Animator PartAnimator;
 
 	public enum eBodyPartSlotType
