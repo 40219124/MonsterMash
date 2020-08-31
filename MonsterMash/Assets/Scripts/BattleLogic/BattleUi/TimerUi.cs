@@ -5,23 +5,23 @@ using System;
 
 public class TimerUi : MonoBehaviour
 {
-	[SerializeField] Slider ActionTimeSlider;
-	[SerializeField] Slider TimeUsedSlider;
+	// [SerializeField] Slider ActionTimeSlider;
+	// [SerializeField] Slider TimeUsedSlider;
 
-	void Awake()
-	{
+	// void Awake()
+	// {
 		
-	}
+	// }
 
-	void Update()
-	{
-		float maxTime = Settings.TurnTime;
-		float timeLeft = BattleController.Instance.TurnTimeLeft;
+	// void Update()
+	// {
+	// 	float maxTime = Settings.TurnTime;
+	// 	float timeLeft = BattleController.Instance.TurnTimeLeft;
 
-		float timeUsed = maxTime-timeLeft;
-		TimeUsedSlider.value = timeUsed/maxTime;
+	// 	float timeUsed = maxTime-timeLeft;
+	// 	TimeUsedSlider.value = timeUsed/maxTime;
 
-		float actionTime = timeUsed + BattleController.Instance.TimeLeftOfAction;
-		ActionTimeSlider.value = actionTime/maxTime;
-	}
+	// 	float actionTime = timeUsed + BattleController.Instance.TimeLeftOfAction;
+	// 	ActionTimeSlider.value = actionTime/maxTime;
+	// }
 }

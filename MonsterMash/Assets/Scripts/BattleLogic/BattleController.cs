@@ -196,6 +196,10 @@ public class BattleController : MonoBehaviour
 
 	IEnumerator DoVignetteFlash()
 	{
+		if (VignetteCurve != null)
+		{
+			yield break;
+		}
 		float flashTime = 0.1f;
 
 		Vignette.gameObject.SetActive(true);
