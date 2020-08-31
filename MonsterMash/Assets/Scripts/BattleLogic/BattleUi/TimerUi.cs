@@ -5,7 +5,6 @@ using System;
 
 public class TimerUi : MonoBehaviour
 {
-	[SerializeField] Text TimerText;
 	[SerializeField] Slider ActionTimeSlider;
 	[SerializeField] Slider TimeUsedSlider;
 
@@ -18,8 +17,6 @@ public class TimerUi : MonoBehaviour
 	{
 		float maxTime = Settings.TurnTime;
 		float timeLeft = BattleController.Instance.TurnTimeLeft;
-
-		TimerText.text = $"{Math.Round(timeLeft, 2)}s";
 
 		float timeUsed = maxTime-timeLeft;
 		TimeUsedSlider.value = timeUsed/maxTime;

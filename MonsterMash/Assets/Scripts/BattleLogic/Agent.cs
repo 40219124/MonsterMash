@@ -7,6 +7,35 @@ public class Agent : MonoBehaviour
 
 	public Body Body;
 	
+	public eControlType ControlType;
+	public enum eControlType
+	{
+		None,
+		Player,
+		Ai
+	}
+
+	void Update()
+	{
+		if (!CanDoAction())
+		{
+			return;
+		}
+
+		if (ControlType == eControlType.Player)
+		{
+			
+			
+		}
+		else if (ControlType == eControlType.Ai)
+		{
+			var attackLimb = Opponent.Body.LeftArmPart;
+			var targetBodyPart = Opponent.Body.TorsoPart;
+			var action = new Action(attackLimb, targetBodyPart);
+			BattleController.Instance.TryAction(action);
+		}
+	}
+	
 	public void OnGameStart(Agent opponent)
 	{
 		Opponent = opponent;

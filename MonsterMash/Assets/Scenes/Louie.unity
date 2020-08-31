@@ -2938,9 +2938,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960746792}
-  - component: {fileID: 1960746794}
   - component: {fileID: 1960746793}
   - component: {fileID: 1960746795}
+  - component: {fileID: 1960746794}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2998,10 +2998,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1960746791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aff673251a16c34b9ae565bb106dbba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fbe00a5b752eb643aea541886a99592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Body: {fileID: 1960746793}
+  ControlType: 2
 --- !u!95 &1960746795
 Animator:
   serializedVersion: 3
@@ -3030,9 +3031,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2030727887}
-  - component: {fileID: 2030727889}
   - component: {fileID: 2030727888}
   - component: {fileID: 2030727890}
+  - component: {fileID: 2030727889}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3090,10 +3091,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2030727886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aff673251a16c34b9ae565bb106dbba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fbe00a5b752eb643aea541886a99592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Body: {fileID: 2030727888}
+  ControlType: 2
 --- !u!95 &2030727890
 Animator:
   serializedVersion: 3
