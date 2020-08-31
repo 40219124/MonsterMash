@@ -14,6 +14,11 @@ public class Agent : MonoBehaviour
 		Player,
 		Ai
 	}
+	
+	public Body.eBodyPartType SelectedPart { get; private set;}
+
+	public Body.eBodyPartType LockedAttacker { get; private set;}
+	public Body.eBodyPartType LockedTarget { get; private set;}
 
 	void Update()
 	{
@@ -22,22 +27,59 @@ public class Agent : MonoBehaviour
 			return;
 		}
 
-		var attackerLimbType = Body.eBodyPartType.None;
-		var targetBodyPartType = Body.eBodyPartType.None;
 
 		if (ControlType == eControlType.Player)
 		{
-			
-			
+			float horizontalValue = Input.GetAxisRaw("Horizontal");
+			float verticalValue = Input.GetAxisRaw("Vertical");
+			float aButton = Input.GetAxisRaw("ButtonA");
+
+			if (horizontalValue > 0 && verticalValue == 0)
+			{
+				SelectedPart = Body.eBodyPartType.RightArm;
+			}
+			else if (horizontalValue < 0 && verticalValue == 0)
+			{
+				SelectedPart = Body.eBodyPartType.LeftArm;
+			}
+			else if (horizontalValue == 0 && verticalValue < 0)
+			{
+				SelectedPart = Body.eBodyPartType.Leg;
+			}
+			else if (horizontalValue == 0 && horizontalValue < 0 && LockedAttacker != Body.eBodyPartType.None)
+			{
+				SelectedPart = Body.eBodyPartType.Torso;
+			}
+
+			if (aButton > 0)
+			{
+				if (LockedAttacker == Body.eBodyPartType.None)
+				{
+					LockedAttacker = SelectedPart;
+				}
+				else
+				{
+					LockedTarget = SelectedPart;
+				}
+				SelectedPart = Body.eBodyPartType.None;
+			}
 		}
 		else if (ControlType == eControlType.Ai)
 		{
-			attackerLimbType = Body.eBodyPartType.LeftArm;
-			targetBodyPartType = Body.eBodyPartType.Torso;
+			LockedAttacker = Body.eBodyPartType.LeftArm;
+			LockedTarget = Body.eBodyPartType.Torso;
 		}
-
-		var action = new Action(Body, attackerLimbType, Opponent.Body, targetBodyPartType);
-		BattleController.Instance.TryAction(action);
+		
+		if (LockedAttacker != Body.eBodyPartType.None &&
+			LockedTarget != Body.eBodyPartType.None)
+		{
+			var action = new Action(Body, LockedAttacker, Opponent.Body, LockedTarget);
+			if (BattleController.Instance.TryAction(action))
+			{
+				LockedAttacker = Body.eBodyPartType.None;
+				LockedTarget = Body.eBodyPartType.None;
+			}
+		}
 	}
 	
 	public void OnGameStart(Agent opponent)
@@ -48,8 +90,9 @@ public class Agent : MonoBehaviour
 	public void OnTurnStart(bool isOurTurn)
 	{
 		IsOurTurn = isOurTurn;
+		LockedAttacker = Body.eBodyPartType.None;
+		LockedTarget = Body.eBodyPartType.None;
 	}
-
 
 	protected bool CanDoAction()
 	{

@@ -44,7 +44,7 @@ public class BattleController : MonoBehaviour
 		Debug.Log($"starting new Battle");
 		Player = player;
 		Enemy = enemy;
-		BattleState = eBattleState.PlayerTurn;
+		BattleState = eBattleState.EnemyTurn;
 		Player.OnGameStart(Enemy);
 		Enemy.OnGameStart(Player);
 		StartTurn();
