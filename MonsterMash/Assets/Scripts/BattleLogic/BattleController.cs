@@ -191,7 +191,7 @@ public class BattleController : MonoBehaviour
 		CurrentAction.TargetBodyPart.ApplyAttack(CurrentAction.AttackLimb.Damage);
 		CurrentAction = null;
 		CurrentAgent.Body.EndAttack();
-		StartCoroutine(DoVignetteFlash());
+		//StartCoroutine(DoVignetteFlash());
 	}
 
 	IEnumerator DoVignetteFlash()
