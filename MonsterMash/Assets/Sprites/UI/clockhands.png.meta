@@ -50,6 +50,48 @@ TextureImporter:
   - first:
       213: -9206873862816043998
     second: clockhands_15
+  - first:
+      213: -6549830400905607438
+    second: clockhands_0
+  - first:
+      213: -6095367904041251500
+    second: clockhands_1
+  - first:
+      213: -2206415786036920060
+    second: clockhands_2
+  - first:
+      213: 1753004807390495819
+    second: clockhands_3
+  - first:
+      213: -3291133476199981895
+    second: clockhands_4
+  - first:
+      213: 1909165163389878050
+    second: clockhands_5
+  - first:
+      213: -8983318620777897314
+    second: clockhands_6
+  - first:
+      213: 5245474976795380266
+    second: clockhands_7
+  - first:
+      213: 1354891050988320567
+    second: clockhands_8
+  - first:
+      213: -357715452678424944
+    second: clockhands_9
+  - first:
+      213: 1428106508008562988
+    second: clockhands_10
+  - first:
+      213: 8603464590683740464
+    second: clockhands_11
+  - first:
+      213: -9219406189382729684
+    second: clockhands_12
+  - first:
+      213: -3191151373163431964
+    second: clockhands_13
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d87572d7837433b0800000000000000
-      internalID: -5533671014942803759
+      spriteID: 2f687fee3f35a15a0800000000000000
+      internalID: -6549830400905607438
       vertices: []
       indices: 
       edges: []
@@ -184,8 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef21050a85e3b4910800000000000000
-      internalID: 1822619024569144062
+      spriteID: 45dcd489f27e86ba0800000000000000
+      internalID: -6095367904041251500
       vertices: []
       indices: 
       edges: []
@@ -205,8 +247,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98548273611e25720800000000000000
-      internalID: 2833574601100379529
+      spriteID: 401847e588c3161e0800000000000000
+      internalID: -2206415786036920060
       vertices: []
       indices: 
       edges: []
@@ -226,8 +268,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c965ca331c124ef0800000000000000
-      internalID: -125506970696980026
+      spriteID: b440012a59ce35810800000000000000
+      internalID: 1753004807390495819
       vertices: []
       indices: 
       edges: []
@@ -247,8 +289,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6711605c43d734500800000000000000
-      internalID: 379284459226534262
+      spriteID: 9bc14b26a8b8352d0800000000000000
+      internalID: -3291133476199981895
       vertices: []
       indices: 
       edges: []
@@ -268,8 +310,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4d93089708d00400800000000000000
-      internalID: 288467903278456141
+      spriteID: 22f7765d997be7a10800000000000000
+      internalID: 1909165163389878050
       vertices: []
       indices: 
       edges: []
@@ -289,8 +331,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ddf3ae0df32cba40800000000000000
-      internalID: 5385218824207597017
+      spriteID: e92a1606f47d45380800000000000000
+      internalID: -8983318620777897314
       vertices: []
       indices: 
       edges: []
@@ -310,8 +352,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9d013624602ca700800000000000000
-      internalID: 552852468769295774
+      spriteID: a2ac61e13bbabc840800000000000000
+      internalID: 5245474976795380266
       vertices: []
       indices: 
       edges: []
@@ -331,8 +373,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 339947bc8cd2e6940800000000000000
-      internalID: 5291216952637036851
+      spriteID: 737b38b7b3a8dc210800000000000000
+      internalID: 1354891050988320567
       vertices: []
       indices: 
       edges: []
@@ -352,8 +394,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d20b4ccb4a3ffa160800000000000000
-      internalID: 7039112631470567469
+      spriteID: 0963f68e0b3290bf0800000000000000
+      internalID: -357715452678424944
       vertices: []
       indices: 
       edges: []
@@ -373,8 +415,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8b4f77706a28d8d0800000000000000
-      internalID: -2821458572737557622
+      spriteID: c2126477d47a1d310800000000000000
+      internalID: 1428106508008562988
       vertices: []
       indices: 
       edges: []
@@ -394,8 +436,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e17507b3c9fb82d0800000000000000
-      internalID: -3275249684997377559
+      spriteID: 0391b5d4675a56770800000000000000
+      internalID: 8603464590683740464
       vertices: []
       indices: 
       edges: []
@@ -415,8 +457,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d32f9582657c74d0800000000000000
-      internalID: -3135502174547663913
+      spriteID: c200ec1dae61e0080800000000000000
+      internalID: -9219406189382729684
       vertices: []
       indices: 
       edges: []
@@ -436,8 +478,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11c31b0da16de9120800000000000000
-      internalID: 2422609060230675473
+      spriteID: 4e7f71acbb0c6b3d0800000000000000
+      internalID: -3191151373163431964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockhands_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 510c25320cbaff750800000000000000
+      internalID: 6340975642075643925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockhands_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22c650b700d9a3080800000000000000
+      internalID: -9206873862816043998
       vertices: []
       indices: 
       edges: []
