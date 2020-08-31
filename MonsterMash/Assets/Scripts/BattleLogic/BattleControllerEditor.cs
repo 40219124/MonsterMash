@@ -8,6 +8,8 @@ public class BattleControllerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+		DrawDefaultInspector();
+
 		if (BattleController.Instance == null)
 		{
 			EditorGUILayout.LabelField($"Game Not running");

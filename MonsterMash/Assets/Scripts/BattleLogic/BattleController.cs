@@ -1,9 +1,15 @@
-using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
 	public static BattleController Instance { get; private set;}
+
+	[SerializeField] RectTransform Vignette;
+	[SerializeField] AnimationCurve VignetteCurve;
+
 	
 	public eBattleState BattleState { get; private set;}
 	public enum eBattleState
@@ -185,5 +191,25 @@ public class BattleController : MonoBehaviour
 		CurrentAction.TargetBodyPart.ApplyAttack(CurrentAction.AttackLimb.Damage);
 		CurrentAction = null;
 		CurrentAgent.Body.EndAttack();
+		StartCoroutine(DoVignetteFlash());
+	}
+
+	IEnumerator DoVignetteFlash()
+	{
+		float flashTime = 0.2f;
+
+		Vignette.gameObject.SetActive(true);
+
+		float timer = 0f;
+		while (timer <= flashTime)
+		{
+			float size = VignetteCurve.Evaluate(timer/flashTime);
+			Vignette.sizeDelta = new Vector2(size,size);
+
+			yield return null;
+			timer += Time.deltaTime;
+		}
+
+		Vignette.gameObject.SetActive(false);
 	}
 }
