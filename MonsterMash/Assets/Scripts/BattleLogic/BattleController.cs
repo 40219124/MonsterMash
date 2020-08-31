@@ -9,6 +9,7 @@ public class BattleController : MonoBehaviour
 
 	[SerializeField] RectTransform Vignette;
 	[SerializeField] AnimationCurve VignetteCurve;
+	[SerializeField] CameraShake CameraShakeController;
 
 	
 	public eBattleState BattleState { get; private set;}
@@ -212,6 +213,7 @@ public class BattleController : MonoBehaviour
 		CurrentAction = null;
 		CurrentAgent.Body.EndAttack();
 		//StartCoroutine(DoVignetteFlash());
+		CameraShakeController.PlayShake(5f);
 	}
 
 	IEnumerator DoVignetteFlash()

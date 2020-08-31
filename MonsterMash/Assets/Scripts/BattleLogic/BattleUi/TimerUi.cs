@@ -10,11 +10,6 @@ public class TimerUi : MonoBehaviour
 
 	[SerializeField] Transform BarPerant;
 
-	void Awake()
-	{
-		
-	}
-
 	void Update()
 	{
 		var battleController = BattleController.Instance;
