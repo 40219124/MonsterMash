@@ -213,7 +213,7 @@ public class BattleController : MonoBehaviour
 		CurrentAction = null;
 		CurrentAgent.Body.EndAttack();
 		//StartCoroutine(DoVignetteFlash());
-		CameraShakeController.PlayShake(5f);
+		CameraShakeController.PlayShake(10f);
 	}
 
 	IEnumerator DoVignetteFlash()
