@@ -1,43 +1,31 @@
 fileFormatVersion: 2
-guid: c6cbe663aaed92542b0a3b54447635b1
+guid: 0c8c0fb1f460c5e438db44a5d8fd26ca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9176152296082577134
-    second: Table - Big_0
+      213: -261531382883650559
+    second: RiverEndBottom_0
   - first:
-      213: 57725866699430947
-    second: Table - Big_1
+      213: 270894313662726304
+    second: RiverEndBottom_1
   - first:
-      213: -2709915578677707015
-    second: Table - Big_2
+      213: -2670872055755174072
+    second: RiverEndBottom_2
   - first:
-      213: -307486201702034163
-    second: Table - Big_3
+      213: -4528294758710400137
+    second: RiverEndBottom_3
   - first:
-      213: 1483110242471205699
-    second: TableBig_0
+      213: -639081450825874341
+    second: RiverEndBottom_4
   - first:
-      213: -8270410097820686421
-    second: TableBig_1
+      213: 6080648553068015475
+    second: RiverEndBottom_5
   - first:
-      213: -1525080032021736215
-    second: TableBig_2
+      213: 3268394146263825130
+    second: RiverEndBottom_6
   - first:
-      213: -6526673397184446920
-    second: TableBig_3
-  - first:
-      213: -5993003207478394120
-    second: TableBig_0
-  - first:
-      213: 5207030163588994700
-    second: TableBig_1
-  - first:
-      213: 8939216648947721137
-    second: TableBig_2
-  - first:
-      213: -3488829172793802645
-    second: TableBig_3
+      213: 689567788159808947
+    second: RiverEndBottom_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -125,49 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TableBig_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f24978c55394dca0800000000000000
-      internalID: -5993003207478394120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TableBig_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c8657738856134840800000000000000
-      internalID: 5207030163588994700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TableBig_2
+      name: RiverEndBottom_0
       rect:
         serializedVersion: 2
         x: 0
@@ -181,14 +127,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b369c22e2a7e0c70800000000000000
-      internalID: 8939216648947721137
+      spriteID: 1047a99c79ade5cf0800000000000000
+      internalID: -261531382883650559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TableBig_3
+      name: RiverEndBottom_1
       rect:
         serializedVersion: 2
         x: 16
@@ -202,8 +148,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b600b991a50359fc0800000000000000
-      internalID: -3488829172793802645
+      spriteID: 0a04a8961f862c300800000000000000
+      internalID: 270894313662726304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RiverEndBottom_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f023424082fead0800000000000000
+      internalID: -2670872055755174072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RiverEndBottom_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77badcca8e34821c0800000000000000
+      internalID: -4528294758710400137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RiverEndBottom_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b548bf47ec68127f0800000000000000
+      internalID: -639081450825874341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RiverEndBottom_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37fac9174adc26450800000000000000
+      internalID: 6080648553068015475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RiverEndBottom_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aea750ac82bab5d20800000000000000
+      internalID: 3268394146263825130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RiverEndBottom_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b531d5ff36d19900800000000000000
+      internalID: 689567788159808947
       vertices: []
       indices: 
       edges: []
