@@ -34,17 +34,17 @@ public class Body : MonoBehaviour
 
 	public void StartAttack()
 	{
-		//if (BodyAnimator != null)
-		//{
-		//	BodyAnimator.SetBool("Doing Attack", true);
-		//}
+		if (BodyAnimator != null)
+		{
+			BodyAnimator.SetBool("Doing Attack", true);
+		}
 	}
 
 	public void EndAttack()
 	{
-		//if (BodyAnimator != null)
-		//{
-		//	BodyAnimator.SetBool("Doing Attack", false);
-		//}
+		if (BodyAnimator != null)
+		{
+			BodyAnimator.SetBool("Doing Attack", false);
+		}
 	}
 }
