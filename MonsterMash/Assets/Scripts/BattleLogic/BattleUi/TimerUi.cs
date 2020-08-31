@@ -17,12 +17,16 @@ public class TimerUi : MonoBehaviour
 
 	void Update()
 	{
+		var battleController = BattleController.Instance;
+
 		float maxTime = Settings.TurnTime;
-		float timeLeft = BattleController.Instance.TurnTimeLeft;
+		float timeLeft = battleController.TurnTimeLeft;
 
 		float timeUsed = maxTime-timeLeft;
 
-		float actionTime = timeUsed + BattleController.Instance.TimeLeftOfAction;
+		float actionTime = timeUsed + battleController.TimeLeftOfAction;
+
+		BarPerant.localScale = new Vector3(battleController.BattleState == BattleController.eBattleState.PlayerTurn? 1 : -1, 1, 1);
 
 		if (TimeUsedSlider != null)
 		{

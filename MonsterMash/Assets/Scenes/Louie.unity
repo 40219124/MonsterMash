@@ -882,9 +882,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionTimeSlider: {fileID: 1866259730}
-  TimeUsedSlider: {fileID: 0}
-  BarStartPoint: 0
-  BarEndPoint: 0
+  TimeUsedSlider: {fileID: 773675474}
+  BarPerant: {fileID: 1316208624}
 --- !u!1 &1316208623
 GameObject:
   m_ObjectHideFlags: 0
