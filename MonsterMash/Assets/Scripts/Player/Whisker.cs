@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EFourDirections { none = -1, up, right, down, left };
+
 public class Whisker : MonoBehaviour
 {
     [SerializeField]
@@ -11,14 +12,11 @@ public class Whisker : MonoBehaviour
 
     int TriggerCount = 0;
 
-    static Player Player;
+    OverworldAgent Agent;
     // Start is called before the first frame update
     void Start()
     {
-        if (Player == null)
-        {
-            Player = GetComponentInParent<Player>();
-        }
+        Agent = GetComponentInParent<OverworldAgent>();
 
         switch (Direction)
         {
@@ -42,17 +40,25 @@ public class Whisker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(++TriggerCount  == 1)
+        if (collision.tag == "Whisker")
         {
-            Player.DirectionPossible(Direction, false);
+            return;
+        }
+        if (++TriggerCount == 1)
+        {
+            Agent.SetDirectionPossible(Direction, false);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(--TriggerCount == 0)
+        if(collision.tag == "Whisker")
         {
-            Player.DirectionPossible(Direction, true);
+            return;
+        }
+        if (--TriggerCount == 0)
+        {
+            Agent.SetDirectionPossible(Direction, true);
         }
     }
 }
