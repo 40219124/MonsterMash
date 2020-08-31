@@ -196,7 +196,7 @@ public class BattleController : MonoBehaviour
 
 	IEnumerator DoVignetteFlash()
 	{
-		float flashTime = 0.2f;
+		float flashTime = 0.1f;
 
 		Vignette.gameObject.SetActive(true);
 
