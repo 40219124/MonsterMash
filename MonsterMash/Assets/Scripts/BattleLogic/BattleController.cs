@@ -28,8 +28,9 @@ public class BattleController : MonoBehaviour
 
 	//current action
 	public float TimeLeftOfAction { get; private set;}
-	Action CurrentAction;
-	Agent CurrentAgent;
+	public float TimeSinceActionStarted { get; private set;}
+	public Action CurrentAction { get; private set;}
+	public Agent CurrentAgent { get; private set;}
 
 	void Awake()
 	{
@@ -62,6 +63,7 @@ public class BattleController : MonoBehaviour
 
 		TurnTimeLeft -= Time.deltaTime;
 		TimeLeftOfAction -= Time.deltaTime;
+		TimeSinceActionStarted += Time.deltaTime;
 
 		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
@@ -96,6 +98,7 @@ public class BattleController : MonoBehaviour
 	{
 		TurnTimeLeft = Settings.TurnTime;
 		TimeLeftOfAction = 0;
+		TimeSinceActionStarted = 0;
 
 		switch (BattleState)
 		{
@@ -200,6 +203,7 @@ public class BattleController : MonoBehaviour
 		Debug.Log($"Doing Action: {action}");
 
 		TimeLeftOfAction = actionTime;
+		TimeSinceActionStarted = 0;
 		CurrentAction = action;
 		CurrentAgent.Body.StartAttack();
 		return true;

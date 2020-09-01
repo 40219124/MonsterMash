@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Agent : MonoBehaviour
 {
 	protected bool IsOurTurn { get; private set;}
-	protected Agent Opponent { get; private set;}
+	public Agent Opponent { get; private set;}
 
 	public Body Body;
 	
@@ -24,8 +24,6 @@ public class Agent : MonoBehaviour
 	void Update()
 	{
 		var battleController = BattleController.Instance;
-		Body.ShowStats(battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime, SelectedPart, true);
-
 		if (!(IsOurTurn && 
 			battleController.TimeLeftOfAction <= 0 &&
 			(battleController.BattleState == BattleController.eBattleState.PlayerTurn ||
@@ -73,7 +71,7 @@ public class Agent : MonoBehaviour
 		{
 			SelectedPart = Body.eBodyPartType.Leg;
 		}
-		else if (horizontalValue == 0 && horizontalValue < 0 && LockedAttacker != Body.eBodyPartType.None)
+		else if (horizontalValue == 0 && verticalValue > 0 && LockedAttacker != Body.eBodyPartType.None)
 		{
 			SelectedPart = Body.eBodyPartType.Torso;
 		}

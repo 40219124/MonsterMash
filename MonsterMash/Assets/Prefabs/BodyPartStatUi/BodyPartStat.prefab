@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8160843801207554153}
   - component: {fileID: 1806312188980469368}
   m_Layer: 0
-  m_Name: Root
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.16}
+  m_Size: {x: 2, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -182,6 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 943934444682916603}
   - component: {fileID: 88904421041475643}
+  - component: {fileID: 4118281713253926485}
   m_Layer: 0
   m_Name: BodyPartStat
   m_TagString: Untagged
@@ -216,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6450f6593c32194c8927e1484a6b3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StatAnimator: {fileID: 4118281713253926485}
   StatBoxRoot: {fileID: 796454282277017831}
   HealthIconGameObject: {fileID: 7600261838926731682}
   HealthNumber: {fileID: 1712867012128653068}
@@ -225,6 +227,25 @@ MonoBehaviour:
   ArmourNumber: {fileID: 3462413583397875427}
   TimeIconGameObject: {fileID: 4010525279471701876}
   TimeNumber: {fileID: 7231737320870470682}
+--- !u!95 &4118281713253926485
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290071017080220386}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b5cd76daa59c35a4db9005af41e704f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4010525279471701876
 GameObject:
   m_ObjectHideFlags: 0
