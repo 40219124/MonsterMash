@@ -13,7 +13,7 @@ public class NumberRender : MonoBehaviour
 		int number = inputNumber;
 		if (number < 0)
 		{
-			Debug.LogError($"NumberRender.SetNumber() call with {number} < 0");
+			Debug.LogError($"NumberRender.SetNumber() call with {number} < 0", this);
 			number *= -1;
 		}
 		
@@ -31,7 +31,7 @@ public class NumberRender : MonoBehaviour
 
 		if (number > 0)
 		{
-			Debug.LogError($"not enough NumberSpriteRenderers to display number: {number}");
+			Debug.LogError($"not enough NumberSpriteRenderers to display number: {inputNumber}", this);
 		}
 	}
 }

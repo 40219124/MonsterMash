@@ -24,7 +24,7 @@ public class Agent : MonoBehaviour
 	void Update()
 	{
 		var battleController = BattleController.Instance;
-		Body.ShowStats(battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime, SelectedPart, false);
+		Body.ShowStats(battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime, SelectedPart, true);
 
 		if (!(IsOurTurn && 
 			battleController.TimeLeftOfAction <= 0 &&

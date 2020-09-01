@@ -18,7 +18,7 @@ public class BodyPart : MonoBehaviour
 	
 	[Space]
 	[Header("Stat UI")]
-	[SerializeField] GameObject StatBox;
+	[SerializeField] BodyPartUi StatBox;
 
 	public enum eBodyPartSlotType
 	{
@@ -59,8 +59,13 @@ public class BodyPart : MonoBehaviour
 		return $"health: {CurrentHealth} / {MaxHealth}";
 	}
 
-	public void ShowStats(bool show, bool select)
+	public void ShowStats(bool show, bool selected)
 	{
-		StatBox.SetActive(show && !select && IsAlive);
+		bool shouldShow = show && !selected && IsAlive;
+		StatBox.SetHealthNumber(shouldShow, CurrentHealth);
+		StatBox.SetDamageNumber(false);
+		StatBox.SetArmourNumber(shouldShow, Armour);
+		StatBox.SetTimeNumber(false);
+		StatBox.Show(shouldShow, selected);
 	}
 }
