@@ -32,6 +32,7 @@ public class BodyPartUi : MonoBehaviour
 	{
 		StatBoxRoot.SetActive(show);
 		StatAnimator.SetBool("Complex", selected && !forceSimple);
+		StatAnimator.SetBool("Selected", selected);
 	}
 	public void SetHealthNumber(bool show, int value=69)
 	{
