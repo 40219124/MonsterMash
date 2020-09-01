@@ -1,48 +1,57 @@
 using UnityEngine;
+using System;
 
 
 //code from anthony
 public class CameraShake : MonoBehaviour
 {
-    public float duration = 0.5f;
-    public float speed = 1.0f;
-    public float magnitude = 0.1f;
+    public float Duration = 0.5f;
+    public float Speed = 1.0f;
+    public float Magnitude = 0.1f;
 
-    public AnimationCurve falloff;
+    public AnimationCurve Falloff;
 
-    private float elapsed;
-    private float intencity;
+    float Elapsed;
+    float Intensity;
+	Vector3 OriginalCamPos;
 
-    private void Start()
+    void Start()
     {
-        intencity = 0.0f;
-        elapsed = 1000000;
+        Intensity = 0.0f;
+        Elapsed = 1000000;
+		OriginalCamPos = transform.position;
     }
 
-    public void PlayShake(float _intencity)
+    public void PlayShake(float intensity)
     {
-        intencity = _intencity;
-        elapsed = 0;
+        Intensity = intensity;
+        Elapsed = 0;
     }
 
-    private void Update()
+    void Update()
     {
-        var originalCamPos = transform.position;
-        elapsed += Time.deltaTime;
+        Elapsed += Time.deltaTime;
 
-        float percentComplete = elapsed / duration;
-        percentComplete = falloff.Evaluate(percentComplete);
+        float percentComplete = Elapsed / Duration;
 
-        float damper = 1.0f - Mathf.Clamp(2.0f * percentComplete - 1.0f, 0.0f, 1.0f);
+		float x = OriginalCamPos.x;
+		float y = OriginalCamPos.y;
+		if (percentComplete <= 1)
+		{
+			percentComplete = Falloff.Evaluate(percentComplete);
 
-        float alpha = speed * percentComplete * intencity;
+			float damper = 1.0f - Mathf.Clamp(2.0f * percentComplete - 1.0f, 0.0f, 1.0f);
 
-        float x = Mathf.PerlinNoise(alpha, 0) * 2.0f - 1.0f;
-        float y = Mathf.PerlinNoise(0, alpha) * 2.0f - 1.0f;
+			float alpha = Speed * percentComplete * Intensity;
 
-        x *= magnitude * damper * intencity;
-        y *= magnitude * damper * intencity;
+			x = Mathf.PerlinNoise(alpha, 0) * 2.0f - 1.0f;
+			y = Mathf.PerlinNoise(0, alpha) * 2.0f - 1.0f;
 
-        transform.position = new Vector3(x, y, originalCamPos.z);
+			x *= Magnitude * damper * Intensity;
+			y *= Magnitude * damper * Intensity;
+
+		}
+
+		transform.position = new Vector3(x, y, OriginalCamPos.z);
     }
 }
