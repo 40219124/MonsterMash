@@ -4,6 +4,14 @@ using System;
 
 public class BattleUiController: MonoBehaviour
 {
+	[SerializeField] Animator BattleUiAnimator;
+	[SerializeField] Transform DPadTransform;
+
+	void Awake()
+	{
+		DPadTransform.gameObject.SetActive(false);
+	}
+
 	void Update()
 	{
 		var battleController = BattleController.Instance;
