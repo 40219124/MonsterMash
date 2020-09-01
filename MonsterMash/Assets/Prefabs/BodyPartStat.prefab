@@ -217,9 +217,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatBoxRoot: {fileID: 796454282277017831}
+  HealthIconGameObject: {fileID: 7600261838926731682}
   HealthNumber: {fileID: 1712867012128653068}
+  DamageIconGameObject: {fileID: 1848135854557328711}
   DamageNumber: {fileID: 2838152143560214751}
+  ArmourIconGameObject: {fileID: 4731316545623986562}
   ArmourNumber: {fileID: 3462413583397875427}
+  TimeIconGameObject: {fileID: 4010525279471701876}
   TimeNumber: {fileID: 7231737320870470682}
 --- !u!1 &4010525279471701876
 GameObject:
