@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3883670799996375839, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
+      propertyPath: MaxHealth
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3883670800562576764, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -514,7 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Body: {fileID: 227808269}
-  ControlType: 1
+  ControlType: 2
 --- !u!1 &773675473
 GameObject:
   m_ObjectHideFlags: 0

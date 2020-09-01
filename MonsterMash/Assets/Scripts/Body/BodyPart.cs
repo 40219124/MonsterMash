@@ -61,6 +61,6 @@ public class BodyPart : MonoBehaviour
 
 	public void ShowStats(bool show, bool select)
 	{
-		StatBox.SetActive(show && !select);
+		StatBox.SetActive(show && !select && IsAlive);
 	}
 }
