@@ -13,7 +13,7 @@ public class BodyPart : MonoBehaviour
 
 	[Space]
 	[Header("UI")]
-	[SerializeField] TextMesh HealthDeltaText;
+	[SerializeField] NumberRender HealthDeltaNumber;
 	[SerializeField] Animator PartAnimator;
 	
 	[Space]
@@ -44,13 +44,13 @@ public class BodyPart : MonoBehaviour
 		Debug.Log($"ApplyAttack({damage}) health: {preHealth} -> {CurrentHealth}");
 
 		//now trigger the UI
-		if (HealthDeltaText == null ||
+		if (HealthDeltaNumber == null ||
 			PartAnimator == null)
 		{
 			Debug.LogWarning("not all Ui is set up for body part", this);
 			return;
 		}
-		HealthDeltaText.text = $"-{healthDelta}";
+		HealthDeltaNumber.SetNumber(healthDelta);
 		PartAnimator.SetTrigger("ShowHealthDelta");
 	}
 
