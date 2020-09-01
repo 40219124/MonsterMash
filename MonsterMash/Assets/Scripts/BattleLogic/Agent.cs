@@ -22,11 +22,13 @@ public class Agent : MonoBehaviour
 
 	void Update()
 	{
+		var battleController = BattleController.Instance;
+		Body.ShowStats(battleController.TimeLeftOfAction <= 0, SelectedPart, false);
+
 		if (!CanDoAction())
 		{
 			return;
 		}
-
 
 		if (ControlType == eControlType.Player)
 		{
