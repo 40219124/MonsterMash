@@ -61,7 +61,7 @@ public class BodyPart : MonoBehaviour
 
 	public virtual void ShowStats(bool show, bool selected)
 	{
-		bool shouldShow = show && !selected && IsAlive;
+		bool shouldShow = show && IsAlive;
 		StatBox.Show(shouldShow, selected);
 	}
 }

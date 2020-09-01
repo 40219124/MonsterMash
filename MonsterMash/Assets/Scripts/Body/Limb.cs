@@ -8,8 +8,8 @@ public class Limb: BodyPart
 		base.ShowStats(show, selected);
 		StatBox.SetDamageNumber(show, Damage);
 		StatBox.SetTimeNumber(show, AttackTime);
-		
-		StatBox.SetHealthNumber(show, CurrentHealth);
-		StatBox.SetArmourNumber(show, Armour);
+
+		StatBox.SetHealthNumber(show && selected, CurrentHealth);
+		StatBox.SetArmourNumber(show && selected, Armour);
 	}
 }

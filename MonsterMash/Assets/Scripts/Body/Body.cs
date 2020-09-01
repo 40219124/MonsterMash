@@ -105,12 +105,19 @@ public class Body : MonoBehaviour
 		return bodyPart;
 	}
 
-	public void ShowStats(bool show, eBodyPartType selectedType=eBodyPartType.None, bool allowTorso=false)
+	public void ShowStats(bool show, eBodyPartType selectedType, bool isLocked, bool allowTorso=false)
 	{
-		TorsoPart.ShowStats(show && allowTorso, selectedType==eBodyPartType.Torso);
-		LeftArmPart.ShowStats(show, selectedType==eBodyPartType.LeftArm);
-		RightArmPart.ShowStats(show, selectedType==eBodyPartType.RightArm);
-		LegsPart.ShowStats(show, selectedType==eBodyPartType.Leg);
+		TorsoPart.ShowStats(show && allowTorso && (!isLocked || selectedType==eBodyPartType.Torso), 
+			selectedType==eBodyPartType.Torso);
+
+		LeftArmPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.LeftArm), 
+			selectedType==eBodyPartType.LeftArm);
+
+		RightArmPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.RightArm), 
+			selectedType==eBodyPartType.RightArm);
+
+		LegsPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Leg), 
+			selectedType==eBodyPartType.Leg);
 
 		DPadGameObject.SetActive(show);
 	}

@@ -4,6 +4,7 @@ using System;
 
 public class BodyPartUi : MonoBehaviour
 {
+	[SerializeField] Animator StatAnimator;
 	[SerializeField] GameObject StatBoxRoot;
 
 	[SerializeField] GameObject HealthIconGameObject;
@@ -27,9 +28,10 @@ public class BodyPartUi : MonoBehaviour
 		Show(false, false);
 	}
 
-	public void Show(bool show, bool selected)
+	public void Show(bool show, bool selected, bool forceSimple=false)
 	{
 		StatBoxRoot.SetActive(show);
+		StatAnimator.SetBool("Complex", selected && !forceSimple);
 	}
 	public void SetHealthNumber(bool show, int value=69)
 	{

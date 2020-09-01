@@ -246,6 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 324237993}
   - component: {fileID: 324237994}
+  - component: {fileID: 324237995}
   m_Layer: 0
   m_Name: BattleController
   m_TagString: Untagged
@@ -316,6 +317,18 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   CameraShakeController: {fileID: 499955522}
+--- !u!114 &324237995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324237992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3156b37e200334ebe3a63d8139110a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &400619756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3883670799717121704, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
@@ -518,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Body: {fileID: 227808269}
-  ControlType: 2
+  ControlType: 1
 --- !u!1 &773675473
 GameObject:
   m_ObjectHideFlags: 0
