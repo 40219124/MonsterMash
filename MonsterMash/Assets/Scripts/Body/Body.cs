@@ -19,6 +19,7 @@ public class Body : MonoBehaviour
 	[Space]
 	[Header("UI")]
 	[SerializeField] Animator BodyAnimator;
+	[SerializeField] GameObject DPadGameObject;
 
 	public bool IsAlive()
 	{
@@ -110,5 +111,7 @@ public class Body : MonoBehaviour
 		LeftArmPart.ShowStats(show, selectedType==eBodyPartType.LeftArm);
 		RightArmPart.ShowStats(show, selectedType==eBodyPartType.RightArm);
 		LegsPart.ShowStats(show, selectedType==eBodyPartType.Leg);
+
+		DPadGameObject.SetActive(show);
 	}
 }
