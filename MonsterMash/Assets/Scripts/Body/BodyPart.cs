@@ -13,8 +13,12 @@ public class BodyPart : MonoBehaviour
 
 	[Space]
 	[Header("UI")]
-	[SerializeField] TextMesh HealthDeltaText;
+	[SerializeField] NumberRender HealthDeltaNumber;
 	[SerializeField] Animator PartAnimator;
+	
+	[Space]
+	[Header("Stat UI")]
+	[SerializeField] GameObject StatBox;
 
 	public enum eBodyPartSlotType
 	{
@@ -40,18 +44,23 @@ public class BodyPart : MonoBehaviour
 		Debug.Log($"ApplyAttack({damage}) health: {preHealth} -> {CurrentHealth}");
 
 		//now trigger the UI
-		if (HealthDeltaText == null ||
+		if (HealthDeltaNumber == null ||
 			PartAnimator == null)
 		{
 			Debug.LogWarning("not all Ui is set up for body part", this);
 			return;
 		}
-		HealthDeltaText.text = $"-{healthDelta}";
+		HealthDeltaNumber.SetNumber(healthDelta);
 		PartAnimator.SetTrigger("ShowHealthDelta");
 	}
 
 	public override string ToString()
 	{
 		return $"health: {CurrentHealth} / {MaxHealth}";
+	}
+
+	public void ShowStats(bool show, bool select)
+	{
+		StatBox.SetActive(show && !select && IsAlive);
 	}
 }

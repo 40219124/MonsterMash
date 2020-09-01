@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3883670799996375839, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
+      propertyPath: MaxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3883670800562576764, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -896,10 +900,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 660642857}
     m_Modifications:
-    - target: {fileID: 791331838451688825, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3883670799717121710, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
       propertyPath: m_Name
       value: Battle Body
@@ -948,25 +948,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4406962279143351145, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4406962279143351145, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4406962279143351145, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
-      propertyPath: m_MotionVectors
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539041699309212365, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3883670801697919425, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
-    - {fileID: 3883670801697919426, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 391c320765b46124e8e48efda9bdc4de, type: 3}
 --- !u!4 &1131599003 stripped
 Transform:

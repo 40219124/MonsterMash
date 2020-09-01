@@ -103,4 +103,12 @@ public class Body : MonoBehaviour
 		}
 		return bodyPart;
 	}
+
+	public void ShowStats(bool show, eBodyPartType selectedType=eBodyPartType.None, bool allowTorso=false)
+	{
+		TorsoPart.ShowStats(show && allowTorso, selectedType==eBodyPartType.Torso);
+		LeftArmPart.ShowStats(show, selectedType==eBodyPartType.LeftArm);
+		RightArmPart.ShowStats(show, selectedType==eBodyPartType.RightArm);
+		LegsPart.ShowStats(show, selectedType==eBodyPartType.Leg);
+	}
 }
