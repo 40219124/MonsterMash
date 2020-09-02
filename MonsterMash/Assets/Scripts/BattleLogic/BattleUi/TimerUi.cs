@@ -5,6 +5,8 @@ using System;
 
 public class TimerUi : MonoBehaviour
 {
+	[SerializeField] NumberRender TimeLeftNumber;
+
 	[SerializeField] Transform ActionTimeSlider;
 	[SerializeField] Transform TimeUsedSlider;
 	[SerializeField] Transform BubbleVfx;
@@ -20,6 +22,8 @@ public class TimerUi : MonoBehaviour
 
 		float maxTime = Settings.TurnTime;
 		float timeLeft = battleController.TurnTimeLeft;
+
+		TimeLeftNumber.SetNumber((int)Math.Floor(timeLeft));
 
 		float timeUsed = maxTime-timeLeft;
 

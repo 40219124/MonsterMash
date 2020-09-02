@@ -45,11 +45,11 @@ public class Agent : MonoBehaviour
 			LockedTarget != Body.eBodyPartType.None)
 		{
 			var action = new Action(Body, LockedAttacker, Opponent.Body, LockedTarget);
-			if (BattleController.Instance.TryAction(action))
-			{
-				LockedAttacker = Body.eBodyPartType.None;
-				LockedTarget = Body.eBodyPartType.None;
-			}
+			BattleController.Instance.TryAction(action);
+			LockedAttacker = Body.eBodyPartType.None;
+			LockedTarget = Body.eBodyPartType.None;
+			AiPickedTarget = Body.eBodyPartType.None;
+			SelectedPart = Body.eBodyPartType.None;
 		}
 	}
 
@@ -106,7 +106,48 @@ public class Agent : MonoBehaviour
 		}
     }
 
+
+	Body.eBodyPartType AiPickedTarget;
+	float PickAttackerTime = 0;
+	float PickTargetTime = 0;
 	void GetAiAction()
+	{
+		if(AiPickedTarget == Body.eBodyPartType.None)
+		{
+			SelectedPart = CalBestAction();
+			if (SelectedPart == Body.eBodyPartType.None ||
+				AiPickedTarget == Body.eBodyPartType.None)
+			{
+				SelectedPart = Body.eBodyPartType.None;
+				AiPickedTarget = Body.eBodyPartType.None;
+			}
+			Debug.Log($"AI Picked action attacker: {SelectedPart} target {AiPickedTarget}");
+			PickAttackerTime = Random.Range(Settings.AiPickAttackerMinTime, Settings.AiPickAttackerMaxTime);
+			PickTargetTime = Random.Range(Settings.AiPickTargetMinTime, Settings.AiPickTargetMaxTime);
+		}
+		else
+		{
+			if (LockedAttacker == Body.eBodyPartType.None)
+			{
+				PickAttackerTime -= Time.deltaTime;
+				if(PickAttackerTime <= 0)
+				{
+					LockedAttacker = SelectedPart;
+					SelectedPart = AiPickedTarget;
+				}
+			}
+			else if (LockedTarget == Body.eBodyPartType.None)
+			{
+				PickTargetTime -= Time.deltaTime;
+				if(PickTargetTime <= 0)
+				{
+					LockedTarget = SelectedPart;
+				}
+			}
+		}
+	}
+
+	Body.eBodyPartType CalBestAction()
 	{
 		var attackLimbList = new List<(Limb, Body.eBodyPartType)>(3);
 		attackLimbList.Add((Body.LeftArmPart, Body.eBodyPartType.LeftArm));
@@ -123,6 +164,8 @@ public class Agent : MonoBehaviour
 		bodyPartPrioList.Add((Opponent.Body.LeftArmPart, Body.eBodyPartType.LeftArm));
 		bodyPartPrioList.Add((Opponent.Body.RightArmPart, Body.eBodyPartType.RightArm));
 		bodyPartPrioList.Add((Opponent.Body.LegsPart, Body.eBodyPartType.Leg));
+
+		var pickedAttacker = Body.eBodyPartType.None;
 		
 		foreach (var tBodyPart in bodyPartPrioList)
 		{
@@ -136,17 +179,17 @@ public class Agent : MonoBehaviour
 			{
 				if (tAttacker.Item1.Damage - tBodyPart.Item1.Armour >= tBodyPart.Item1.CurrentHealth)
 				{
-					LockedAttacker = tAttacker.Item2;
-					LockedTarget = tBodyPart.Item2;
+					pickedAttacker = tAttacker.Item2;
+					AiPickedTarget = tBodyPart.Item2;
 				}
 			}
-			if(LockedTarget != Body.eBodyPartType.None)
+			if(AiPickedTarget != Body.eBodyPartType.None)
 			{
 				break;
 			}
 		}
 
-		if(LockedTarget == Body.eBodyPartType.None)
+		if(AiPickedTarget == Body.eBodyPartType.None)
 		{
 			float lowestHealth = float.MaxValue;
 			int targetArmour = 0;
@@ -160,7 +203,7 @@ public class Agent : MonoBehaviour
 
 				if (tBodyPart.Item1.CurrentHealth < lowestHealth)
 				{
-					LockedTarget = tBodyPart.Item2;
+					AiPickedTarget = tBodyPart.Item2;
 					lowestHealth = tBodyPart.Item1.CurrentHealth;
 					targetArmour = tBodyPart.Item1.Armour;
 				}
@@ -178,11 +221,12 @@ public class Agent : MonoBehaviour
 				var dps = tAttacker.Item1.Damage * numAttacks;
 				if (dps > bestDps)
 				{
-					LockedAttacker = tAttacker.Item2;
+					pickedAttacker = tAttacker.Item2;
 					bestDps = dps;
 				}
 			}
 		}
+		return pickedAttacker;
 	}
 	
 	public void OnGameStart(Agent opponent)
@@ -193,7 +237,10 @@ public class Agent : MonoBehaviour
 	public void OnTurnStart(bool isOurTurn)
 	{
 		IsOurTurn = isOurTurn;
+
 		LockedAttacker = Body.eBodyPartType.None;
 		LockedTarget = Body.eBodyPartType.None;
+		AiPickedTarget = Body.eBodyPartType.None;
+		SelectedPart = Body.eBodyPartType.None;
 	}
 }

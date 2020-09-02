@@ -24,7 +24,7 @@ public class NumberRender : MonoBehaviour
 
 			int reminder = number % 10;
 
-			spriteRenderer.sprite = number == 0 ? null: NumberSpriteList[reminder];
+			spriteRenderer.sprite = number == 0 && loop != NumberSpriteRenderers.Count-1 ? null: NumberSpriteList[reminder];
 
 			number = number/10;
 		}

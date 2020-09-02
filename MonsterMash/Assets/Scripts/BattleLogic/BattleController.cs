@@ -168,13 +168,13 @@ public class BattleController : MonoBehaviour
 
 		if (attackerLimb == null)
 		{
-			Debug.LogError($"trying to do action with attackerLimb that is null");
+			Debug.LogError($"trying to do action with attackerLimb that is null: {action}");
 			return false;
 		}
 
 		if (targetBodyPart == null)
 		{
-			Debug.LogError($"trying to do action with targetBodyPart that is null");
+			Debug.LogError($"trying to do action with targetBodyPart that is null: {action}");
 			return false;
 		}
 

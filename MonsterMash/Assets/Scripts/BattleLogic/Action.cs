@@ -18,6 +18,6 @@ public class Action
 
 	public override string ToString()
 	{
-		return $"Attacker: {Attacker}, Target: {Target}";
+		return $"Attacker: type: {AttackerPartType}, Target: type: {TargetPartType}";
 	}
 }
