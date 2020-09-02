@@ -22,8 +22,8 @@ public class BattleController : MonoBehaviour
 		EnemyWon
 	}
 
-	public Agent Player { get; private set;}
-	public Agent Enemy { get; private set;}
+	public Agent Player;
+	public Agent Enemy;
 	public float TurnTimeLeft { get; private set;}
 
 	//current action
@@ -41,11 +41,9 @@ public class BattleController : MonoBehaviour
 		Instance = this;
 	}
 
-	public void SetupBattle(Agent player, Agent enemy)
+	public void SetupBattle()
 	{
 		Debug.Log($"starting new Battle");
-		Player = player;
-		Enemy = enemy;
 		BattleState = eBattleState.EnemyTurn;
 		Player.OnGameStart(Enemy);
 		Enemy.OnGameStart(Player);

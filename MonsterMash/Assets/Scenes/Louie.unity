@@ -552,6 +552,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   CameraShakeController: {fileID: 499955522}
+  Player: {fileID: 660642858}
+  Enemy: {fileID: 987915023}
 --- !u!114 &324237995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1767,9 +1769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769a178570bc49f4fb909bed7e37d134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 660642858}
-  Enemy: {fileID: 987915023}
-  WillLoopBattles: 0
 --- !u!4 &2044889854
 Transform:
   m_ObjectHideFlags: 0
