@@ -6,11 +6,26 @@ public enum EButtonState { none = -1, pressed, held, released };
 public enum EInput { none = -1, dpadUp, dpadRight, dpadDown, dpadLeft, A, B, start, select };
 public class SimpleInput : MonoBehaviour
 {
+    private static SimpleInput instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            enabled = false;
+        }
+    }
+
     public struct ButtonInfo
     {
         EInput button;
         EButtonState state;
         bool active;
+        bool isDpad;
 
         public EButtonState State
         {
@@ -31,6 +46,9 @@ public class SimpleInput : MonoBehaviour
             button = b;
             state = EButtonState.none;
             active = false;
+            isDpad = (button == EInput.dpadUp || button == EInput.dpadRight || button == EInput.dpadDown || button == EInput.dpadLeft);
+
+
         }
 
         public void SetActive(bool _active)
@@ -51,6 +69,10 @@ public class SimpleInput : MonoBehaviour
                 else
                 {
                     state = EButtonState.pressed;
+                    if(isDpad)
+                    {
+                        recentDpadInput = button;
+                    }
                 }
             }
             else
@@ -68,6 +90,8 @@ public class SimpleInput : MonoBehaviour
     }
 
     static List<ButtonInfo> Buttons = new List<ButtonInfo>();
+
+    static EInput recentDpadInput;
 
     List<string> AxisStrings = new List<string>() {
          "Vertical", "Horizontal" , "Vertical" ,"Horizontal" , "ButtonA", "ButtonB", "Submit", "Cancel" };
@@ -101,5 +125,10 @@ public class SimpleInput : MonoBehaviour
     public static bool GetInputActive(EInput input)
     {
         return Buttons[(int)input].Active;
+    }
+
+    public static EInput GetRecentDpad()
+    {
+        return recentDpadInput;
     }
 }
