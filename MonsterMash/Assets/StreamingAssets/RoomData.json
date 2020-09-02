@@ -1,1 +1,1 @@
-{"LatestRoomID":3,"AllRooms":[{"RoomId":1,"DoorPlaces":15,"IsBossRoom":false},{"RoomId":2,"DoorPlaces":4,"IsBossRoom":false},{"RoomId":3,"DoorPlaces":4,"IsBossRoom":false}]}
+{"LatestRoomID":5,"AllRooms":[{"RoomId":2,"DoorPlaces":4,"IsBossRoom":false},{"RoomId":3,"DoorPlaces":4,"IsBossRoom":true},{"RoomId":4,"DoorPlaces":2,"IsBossRoom":false},{"RoomId":5,"DoorPlaces":15,"IsBossRoom":true}]}

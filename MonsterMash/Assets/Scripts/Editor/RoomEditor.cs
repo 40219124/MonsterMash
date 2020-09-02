@@ -7,6 +7,7 @@ public class RoomEditor : EditorWindow
 {
     static AllRoomData AllRooms;
     static string jsonFile = "/RoomData.json";
+    Vector2 ScrollPos;
 
     string theText = "numnuts";
 
@@ -40,6 +41,8 @@ public class RoomEditor : EditorWindow
 
         GUILayout.EndHorizontal();
 
+        ScrollPos = EditorGUILayout.BeginScrollView(ScrollPos);
+
         if (AllRooms != null)
         {
             for (int i = 0; i < AllRooms.AllRooms.Count; ++i)
@@ -47,8 +50,15 @@ public class RoomEditor : EditorWindow
                 Room room = AllRooms.AllRooms[i];
                 ShowRoomData(ref room);
                 AllRooms.AllRooms[i] = room;
+
+                if (GUILayout.Button("Delete Room"))
+                {
+                    AllRooms.AllRooms.Remove(room);
+                }
             }
         }
+
+        EditorGUILayout.EndScrollView();
     }
 
     private void OnFocus()
