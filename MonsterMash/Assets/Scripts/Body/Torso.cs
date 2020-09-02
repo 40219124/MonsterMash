@@ -5,7 +5,7 @@ using System;
 public class Torso: BodyPart
 {
 	[SerializeField] SpriteRenderer HeadPartImage;
-	public override void ShowStats(bool show, bool selected, bool isOurTurn)
+	public override void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex)
 	{
 		bool shouldShow = show && IsAlive;
 		StatBox.Show(shouldShow, selected, showComplex:false, isOurTurn);

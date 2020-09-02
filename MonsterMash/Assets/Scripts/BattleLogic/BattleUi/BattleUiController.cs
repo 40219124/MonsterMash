@@ -19,13 +19,14 @@ public class BattleUiController: MonoBehaviour
 		var opponent = currentAgent.Opponent;
 
 		bool isPlayer = true || currentAgent.ControlType == Agent.eControlType.Player;
+		bool forceShowComplexStats = false; //todo
 
 		bool shouldPreShow = isPlayer && battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime;
 
 		bool shouldPostShow = battleController.TimeSinceActionStarted <= Settings.PostPickHangTime &&
 			battleController.CurrentAction != null;
 
-		bool showUi = (shouldPreShow || shouldPostShow) && isPlayer;
+		bool showUi = forceShowComplexStats || ((shouldPreShow || shouldPostShow) && isPlayer);
 
 		var attackerLocked = false;
 		var targetLocked = false;
@@ -57,7 +58,7 @@ public class BattleUiController: MonoBehaviour
 			}
 		}
 
-		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true);
-		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false);
+		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true, forceShowComplexStats);
+		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false, forceShowComplexStats);
 	}
 }

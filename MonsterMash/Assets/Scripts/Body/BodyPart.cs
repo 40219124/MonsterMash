@@ -61,7 +61,7 @@ public class BodyPart : MonoBehaviour
         return $"health: {CurrentHealth} / {PartData.HealthMaximum}";
     }
 
-    public virtual void ShowStats(bool show, bool selected, bool isOurTurn)
+    public virtual void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex)
     {
     }
 
