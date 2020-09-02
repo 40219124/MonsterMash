@@ -1,3 +1,5 @@
+
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -31,3 +33,4 @@ public class BattleControllerEditor : Editor
 
     }
 }
+#endif
