@@ -25,7 +25,7 @@ public class BattleUiController: MonoBehaviour
 		bool shouldPostShow = battleController.TimeSinceActionStarted <= Settings.PostPickHangTime &&
 			battleController.CurrentAction != null;
 
-		bool showUi = (shouldPreShow || shouldPostShow);
+		bool showUi = (shouldPreShow || shouldPostShow) && isPlayer;
 
 		var attackerLocked = false;
 		var targetLocked = false;
