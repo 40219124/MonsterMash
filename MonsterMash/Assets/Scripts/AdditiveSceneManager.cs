@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SimpleInput))]
 public class AdditiveSceneManager : MonoBehaviour
 {
     [SerializeField]
@@ -12,9 +13,9 @@ public class AdditiveSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(FindObjectOfType<MainManager>() != null)
+        if (FindObjectOfType<MainManager>() != null)
         {
-            foreach(Camera c in FindObjectsOfType<Camera>())
+            foreach (Camera c in FindObjectsOfType<Camera>())
             {
                 if (c.name == localCamera.name)
                 {
@@ -24,7 +25,6 @@ public class AdditiveSceneManager : MonoBehaviour
             }
             localCamera.gameObject.SetActive(false);
             localRenderTexture.gameObject.SetActive(false);
-
         }
     }
 }
