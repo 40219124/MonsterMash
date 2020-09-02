@@ -69,5 +69,6 @@ public class BodyPart : MonoBehaviour
     {
         PartData = data;
 		BodyPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(bodyPartType, data.MonsterType);
+		PartAnimator.SetBool("Dead", !IsAlive);
     }
 }
