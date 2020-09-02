@@ -6,9 +6,6 @@ using UnityEngine;
 public class BattleController : MonoBehaviour
 {
 	public static BattleController Instance { get; private set;}
-
-	[SerializeField] RectTransform Vignette;
-	[SerializeField] AnimationCurve VignetteCurve;
 	[SerializeField] CameraShake CameraShakeController;
 
 	
