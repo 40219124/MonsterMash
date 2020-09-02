@@ -19,6 +19,7 @@ public class Body : MonoBehaviour
 	[Space]
 	[Header("UI")]
 	[SerializeField] Animator BodyAnimator;
+	[SerializeField] BodyPartSpriteLookup BodyPartImageLookup;
 	public Transform DPadGameTransform;
 
 	public bool IsAlive()
@@ -122,9 +123,9 @@ public class Body : MonoBehaviour
 
 	public void SetProfileData(MonsterProfile profile)
     {
-		TorsoPart.SetBodyPartData(profile.Torso);
-		LeftArmPart.SetBodyPartData(profile.LeftArm);
-		RightArmPart.SetBodyPartData(profile.RightArm);
-		LegsPart.SetBodyPartData(profile.Legs);
+		TorsoPart.SetBodyPartData(BodyPartImageLookup, profile.Torso, eBodyPartType.Torso);
+		LeftArmPart.SetBodyPartData(BodyPartImageLookup, profile.LeftArm, eBodyPartType.LeftArm);
+		RightArmPart.SetBodyPartData(BodyPartImageLookup, profile.RightArm, eBodyPartType.RightArm);
+		LegsPart.SetBodyPartData(BodyPartImageLookup, profile.Legs, eBodyPartType.Leg);
     }
 }

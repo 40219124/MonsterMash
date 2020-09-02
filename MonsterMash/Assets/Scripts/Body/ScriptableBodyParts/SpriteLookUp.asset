@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bcf90daeb5ba84cbd4a0c900603473, type: 3}
+  m_Name: SpriteLookUp
+  m_EditorClassIdentifier: 
+  BodyPartSpriteLookupList:
+  - BodyPartType: 1
+    MonsterType: 0
+    BodyPartSprite: {fileID: -2095977445921195386, guid: 12ab61fc90479644e9ce8c762e9bd2a1, type: 3}
+  - BodyPartType: 2
+    MonsterType: 0
+    BodyPartSprite: {fileID: 3198969711310120822, guid: 12ab61fc90479644e9ce8c762e9bd2a1, type: 3}
+  - BodyPartType: 3
+    MonsterType: 0
+    BodyPartSprite: {fileID: -6185172043174387462, guid: 12ab61fc90479644e9ce8c762e9bd2a1, type: 3}
+  - BodyPartType: 4
+    MonsterType: 0
+    BodyPartSprite: {fileID: 5828870257162181156, guid: 12ab61fc90479644e9ce8c762e9bd2a1, type: 3}
+  - BodyPartType: 0
+    MonsterType: 0
+    BodyPartSprite: {fileID: 5623726388548158015, guid: 12ab61fc90479644e9ce8c762e9bd2a1, type: 3}
+  - BodyPartType: 1
+    MonsterType: 1
+    BodyPartSprite: {fileID: -3696198004357161869, guid: 20a7f8cb70c95324289acdef561b1cfa, type: 3}
+  - BodyPartType: 2
+    MonsterType: 1
+    BodyPartSprite: {fileID: 3071190682351419772, guid: 20a7f8cb70c95324289acdef561b1cfa, type: 3}
+  - BodyPartType: 3
+    MonsterType: 1
+    BodyPartSprite: {fileID: -3877300242492885960, guid: 20a7f8cb70c95324289acdef561b1cfa, type: 3}
+  - BodyPartType: 4
+    MonsterType: 1
+    BodyPartSprite: {fileID: -269734630662604234, guid: 20a7f8cb70c95324289acdef561b1cfa, type: 3}
+  - BodyPartType: 0
+    MonsterType: 1
+    BodyPartSprite: {fileID: 7275657834697195427, guid: 20a7f8cb70c95324289acdef561b1cfa, type: 3}

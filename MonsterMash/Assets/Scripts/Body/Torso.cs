@@ -1,5 +1,10 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+
 public class Torso: BodyPart
 {
+	[SerializeField] SpriteRenderer HeadPartImage;
 	public override void ShowStats(bool show, bool selected, bool isOurTurn)
 	{
 		bool shouldShow = show && IsAlive;
@@ -8,4 +13,10 @@ public class Torso: BodyPart
 		StatBox.SetHealthNumber(show, CurrentHealth);
 		StatBox.SetArmourNumber(show, Armour);
 	}
+
+	public override void SetBodyPartData(BodyPartSpriteLookup bodyPartImageLookup, BodyPartData data, Body.eBodyPartType bodyPartType)
+    {
+		base.SetBodyPartData(bodyPartImageLookup, data, bodyPartType);
+		HeadPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(Body.eBodyPartType.None, data.MonsterType);
+    }
 }

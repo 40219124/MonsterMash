@@ -5,17 +5,16 @@ using System;
 public class BodyPart : MonoBehaviour
 {
     public BodyPartData PartData { get; private set; }
-
-    public eBodyPartSlotType PartType { get { return PartData.BodyPartType; } }
     public int Armour { get { return PartData.Armour; } }
-    public int MaxHealth { get { return PartData.HealthMaximum; } }
     public int CurrentHealth
     {
         get { return PartData.HealthCurrent; }
         private set { PartData.HealthCurrent = value; }
     }
     public bool IsAlive { get { return CurrentHealth > 0; } }
+	
 
+	[SerializeField] SpriteRenderer BodyPartImage;
     [Space]
     [Header("UI")]
     [SerializeField] NumberRender HealthDeltaNumber;
@@ -58,7 +57,7 @@ public class BodyPart : MonoBehaviour
 
     public override string ToString()
     {
-        return $"health: {CurrentHealth} / {MaxHealth}";
+        return $"health: {CurrentHealth} / {PartData.HealthMaximum}";
     }
 
     public virtual void ShowStats(bool show, bool selected, bool isOurTurn)
@@ -67,8 +66,9 @@ public class BodyPart : MonoBehaviour
         StatBox.Show(shouldShow, selected, selected, !IsAlive);
     }
 
-    public virtual void SetBodyPartData(BodyPartData data)
+    public virtual void SetBodyPartData(BodyPartSpriteLookup bodyPartImageLookup, BodyPartData data, Body.eBodyPartType bodyPartType)
     {
         PartData = data;
+		BodyPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(bodyPartType, data.MonsterType);
     }
 }
