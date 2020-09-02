@@ -22,22 +22,28 @@ public class TimerUi : MonoBehaviour
 
 		float maxTime = Settings.TurnTime;
 		float timeLeft = battleController.TurnTimeLeft;
+		float timeUsed = maxTime-timeLeft;
+		float actionTime = timeUsed + battleController.TimeLeftOfAction;
+
+		if (battleController.BattleState == BattleController.eBattleState.TurnTransition)
+		{
+			maxTime = Settings.TurnTransitionTime;
+			timeLeft = battleController.TurnTransitionTimeLeft;
+			actionTime = 0;
+			timeUsed = timeLeft;
+		}
 
 		TimeLeftNumber.SetNumber((int)Math.Floor(timeLeft));
 
-		float timeUsed = maxTime-timeLeft;
-
-		float actionTime = timeUsed + battleController.TimeLeftOfAction;
-
 		float vfxProgress = timeUsed/maxTime;
-		if (battleController.BattleState == BattleController.eBattleState.PlayerTurn)
+		if (battleController.CurrentAgent == battleController.Player)
 		{
 			BarPerant.localScale = new Vector3(1, 1, 1);
 
 			TimeUsedSlider.position = new Vector3(StartPos, TimeUsedSlider.position.y, 0);
 			ActionTimeSlider.position = new Vector3(StartPos, ActionTimeSlider.position.y, 0);
 		}
-		else
+		else if (battleController.CurrentAgent == battleController.Enemy)
 		{
 			BarPerant.localScale = new Vector3(-1, 1, 1);
 			TimeUsedSlider.position = new Vector3(EndPos, TimeUsedSlider.position.y, 0);

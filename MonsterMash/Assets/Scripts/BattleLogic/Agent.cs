@@ -26,7 +26,8 @@ public class Agent : MonoBehaviour
 		var battleController = BattleController.Instance;
 		if (!IsOurTurn || 
 			!(battleController.BattleState == BattleController.eBattleState.PlayerTurn ||
-			battleController.BattleState == BattleController.eBattleState.EnemyTurn))
+			battleController.BattleState == BattleController.eBattleState.EnemyTurn ||
+			battleController.BattleState == BattleController.eBattleState.TurnTransition))
 		{
 			return;
 		}
