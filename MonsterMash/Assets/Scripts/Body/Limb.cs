@@ -5,7 +5,13 @@ public class Limb: BodyPart
 
 	public override void ShowStats(bool show, bool selected, bool isOurTurn)
 	{
-		base.ShowStats(show, selected, isOurTurn);
+		bool shouldShow = show && IsAlive;
+
+		bool disabled = !IsAlive || 
+			(BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness <= AttackTime &&
+			isOurTurn);
+
+        StatBox.Show(shouldShow, selected, selected, disabled);
 
 
 		StatBox.SetDamageNumber(show && (isOurTurn || selected), Damage);

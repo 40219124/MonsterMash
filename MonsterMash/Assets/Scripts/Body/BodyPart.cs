@@ -62,8 +62,6 @@ public class BodyPart : MonoBehaviour
 
     public virtual void ShowStats(bool show, bool selected, bool isOurTurn)
     {
-        bool shouldShow = show && IsAlive;
-        StatBox.Show(shouldShow, selected, selected, !IsAlive);
     }
 
     public virtual void SetBodyPartData(BodyPartSpriteLookup bodyPartImageLookup, BodyPartData data, Body.eBodyPartType bodyPartType)
