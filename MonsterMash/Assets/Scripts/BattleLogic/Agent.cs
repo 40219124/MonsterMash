@@ -53,21 +53,26 @@ public class Agent : MonoBehaviour
 		}
 	}
 
+	bool CanUseLimb(Limb limb)
+	{
+		return limb.IsAlive && limb.AttackTime < BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
+	}
+
 	void GetPlayerAction()
 	{
 		float horizontalValue = Input.GetAxisRaw("Horizontal");
 		float verticalValue = Input.GetAxisRaw("Vertical");
 		float aButton = Input.GetAxisRaw("ButtonA");
 
-		if (horizontalValue > 0 && verticalValue == 0)
+		if (horizontalValue > 0 && verticalValue == 0 && CanUseLimb(Body.RightArmPart))
 		{
 			SelectedPart = Body.eBodyPartType.RightArm;
 		}
-		else if (horizontalValue < 0 && verticalValue == 0)
+		else if (horizontalValue < 0 && verticalValue == 0 && CanUseLimb(Body.LeftArmPart))
 		{
 			SelectedPart = Body.eBodyPartType.LeftArm;
 		}
-		else if (horizontalValue == 0 && verticalValue < 0)
+		else if (horizontalValue == 0 && verticalValue < 0 && CanUseLimb(Body.LegsPart))
 		{
 			SelectedPart = Body.eBodyPartType.Leg;
 		}
