@@ -7,6 +7,8 @@ public class BattleController : MonoBehaviour
 {
 	public static BattleController Instance { get; private set;}
 
+	[SerializeField] RectTransform Vignette;
+	[SerializeField] AnimationCurve VignetteCurve;
 	[SerializeField] CameraShake CameraShakeController;
 
 	
@@ -63,12 +65,6 @@ public class BattleController : MonoBehaviour
 
 		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
-
-		if (TimeLeftOfAction <= 0 &&
-			CurrentAction != null)
-		{
-			FinishAction();
-		}
 
 		if (!Player.Body.IsAlive())
 		{
@@ -201,17 +197,27 @@ public class BattleController : MonoBehaviour
 		TimeLeftOfAction = actionTime;
 		TimeSinceActionStarted = 0;
 		CurrentAction = action;
-		CurrentAgent.Body.StartAttack();
+		StartCoroutine(DoAttack(actionTime, attackerLimb));
 		return true;
 	}
 
-	public void FinishAction()
+	IEnumerator DoAttack(int actionTime, Limb attackerLimb)
 	{
-		var attackerLimb = CurrentAction.Attacker.GetLimb(CurrentAction.AttackerPartType);
+		CurrentAgent.Body.StartAttack();
+
+		yield return new WaitForSeconds(actionTime/2);
+		
 		int damage = attackerLimb.Damage;
 		CurrentAction.Target.ApplyAttack(CurrentAction.TargetPartType, damage);
-		CurrentAction = null;
-		CurrentAgent.Body.EndAttack();
 		CameraShakeController.PlayShake(10f);
+
+		while (TimeLeftOfAction > 0)
+		{
+			yield return null;
+		}
+
+		CurrentAction = null;
+
+		CurrentAgent.Body.EndAttack();
 	}
 }
