@@ -46,6 +46,8 @@ public class BattleController : MonoBehaviour
 		Debug.Log($"starting new Battle");
 		Player.OnGameStart(Enemy, playerProfile);
 		Enemy.OnGameStart(Player, enemyProfile);
+
+		CurrentAgent = Player;
 		StartTurnTransition(true);
 	}
 
