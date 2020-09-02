@@ -18,7 +18,7 @@ public class BattleUiController: MonoBehaviour
 		var currentAgent = battleController.CurrentAgent;
 		var opponent = currentAgent.Opponent;
 
-		bool isPlayer = currentAgent.ControlType == Agent.eControlType.Player;
+		bool isPlayer = true || currentAgent.ControlType == Agent.eControlType.Player;
 
 		bool shouldPreShow = isPlayer && battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime;
 
