@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localCamera: {fileID: 947663874}
   localRenderTexture: {fileID: 955552883}
+  RequiredScenes: []
 --- !u!114 &165508021
 MonoBehaviour:
   m_ObjectHideFlags: 0
