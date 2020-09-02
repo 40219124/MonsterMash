@@ -209,7 +209,21 @@ public class BattleController : MonoBehaviour
 		
 		int damage = attackerLimb.Damage;
 		CurrentAction.Target.ApplyAttack(CurrentAction.TargetPartType, damage);
-		CameraShakeController.PlayShake(10f);
+
+		float shakePower = 0;
+		if (damage < 5f)
+		{
+			shakePower = 5f;
+		}
+		else if (damage >= 5f && damage < 15f)
+		{
+			shakePower = 10f;
+		}
+		else
+		{
+			shakePower = 15f;
+		}
+		CameraShakeController.PlayShake(shakePower);
 
 		while (TimeLeftOfAction > 0)
 		{
