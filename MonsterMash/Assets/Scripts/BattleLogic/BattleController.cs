@@ -6,9 +6,6 @@ using UnityEngine;
 public class BattleController : MonoBehaviour
 {
 	public static BattleController Instance { get; private set;}
-
-	[SerializeField] RectTransform Vignette;
-	[SerializeField] AnimationCurve VignetteCurve;
 	[SerializeField] CameraShake CameraShakeController;
 
 	
@@ -16,8 +13,10 @@ public class BattleController : MonoBehaviour
 	public enum eBattleState
 	{
 		NotInBattle,
+		BattleIntro,
 		PlayerTurn,
 		EnemyTurn,
+		TurnTransition,
 		PlayerWon,
 		EnemyWon
 	}
@@ -29,6 +28,7 @@ public class BattleController : MonoBehaviour
 	//current action
 	public float TimeLeftOfAction { get; private set;}
 	public float TimeSinceActionStarted { get; private set;}
+	public float TurnTransitionTimeLeft { get; private set;}
 	public Action CurrentAction { get; private set;}
 	public Agent CurrentAgent { get; private set;}
 
@@ -44,15 +44,26 @@ public class BattleController : MonoBehaviour
 	public void SetupBattle(MonsterProfile playerProfile, MonsterProfile enemyProfile)
 	{
 		Debug.Log($"starting new Battle");
-		BattleState = eBattleState.EnemyTurn;
 		Player.OnGameStart(Enemy, playerProfile);
 		Enemy.OnGameStart(Player, enemyProfile);
-		StartTurn();
+
+		CurrentAgent = Player;
+		StartTurnTransition(true);
 	}
 
 	void Update()
 	{
+		TimeSinceActionStarted += Time.deltaTime;
 
+		if (BattleState == eBattleState.TurnTransition)
+		{
+			TurnTransitionTimeLeft -= Time.deltaTime;
+			if (TurnTransitionTimeLeft <= 0)
+			{
+				StartTurn();
+			}
+		}
+		
 		if (BattleState != eBattleState.PlayerTurn &&
 			BattleState != eBattleState.EnemyTurn)
 		{
@@ -61,7 +72,6 @@ public class BattleController : MonoBehaviour
 
 		TurnTimeLeft -= Time.deltaTime;
 		TimeLeftOfAction -= Time.deltaTime;
-		TimeSinceActionStarted += Time.deltaTime;
 
 		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
@@ -82,8 +92,25 @@ public class BattleController : MonoBehaviour
 
 		if (TurnTimeLeft <= 0 && TimeLeftOfAction <= 0)
 		{
-			StartTurn();
+			StartTurnTransition();
 		}
+	}
+
+	void StartTurnTransition(bool isFirstMove=false)
+	{
+		if (CurrentAgent == Player)
+		{
+			CurrentAgent = Enemy;
+		}
+		else
+		{
+			CurrentAgent = Player;
+		}
+		Player.OnTurnStart(CurrentAgent == Player);
+		Enemy.OnTurnStart(CurrentAgent != Player);
+
+		TurnTransitionTimeLeft = isFirstMove ? 0 : Settings.TurnTransitionTime;
+		BattleState = eBattleState.TurnTransition;
 	}
 
 	void StartTurn()
@@ -92,29 +119,14 @@ public class BattleController : MonoBehaviour
 		TimeLeftOfAction = 0;
 		TimeSinceActionStarted = 0;
 
-		switch (BattleState)
+		if (CurrentAgent == Player)
 		{
-			case eBattleState.PlayerTurn:
-			{
-				BattleState = eBattleState.EnemyTurn;
-				CurrentAgent = Enemy;
-				break;
-			}
-			case eBattleState.EnemyTurn:
-			{
-				BattleState = eBattleState.PlayerTurn;
-				CurrentAgent = Player;
-				break;
-			}
-			default:
-			{
-				Debug.LogError($"not handled state: {BattleState}");
-				break;
-			}
+			BattleState = eBattleState.PlayerTurn;
 		}
-
-		Player.OnTurnStart(BattleState == eBattleState.PlayerTurn);
-		Enemy.OnTurnStart(BattleState == eBattleState.EnemyTurn);
+		else
+		{
+			BattleState = eBattleState.EnemyTurn;
+		}
 
 		Debug.Log($"starting new turn: {BattleState}");
 	}

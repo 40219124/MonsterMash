@@ -8,7 +8,8 @@ public class Limb: BodyPart
 		bool shouldShow = show && IsAlive;
 
 		bool disabled = !IsAlive || 
-			(BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness <= AttackTime &&
+			((BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness <= AttackTime &&
+			BattleController.Instance.BattleState != BattleController.eBattleState.TurnTransition) &&
 			isOurTurn);
 
         StatBox.Show(shouldShow, selected, selected, disabled);

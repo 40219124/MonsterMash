@@ -26,7 +26,8 @@ public class Agent : MonoBehaviour
 		var battleController = BattleController.Instance;
 		if (!IsOurTurn || 
 			!(battleController.BattleState == BattleController.eBattleState.PlayerTurn ||
-			battleController.BattleState == BattleController.eBattleState.EnemyTurn))
+			battleController.BattleState == BattleController.eBattleState.EnemyTurn ||
+			battleController.BattleState == BattleController.eBattleState.TurnTransition))
 		{
 			return;
 		}
@@ -61,7 +62,9 @@ public class Agent : MonoBehaviour
 
 	bool CanUseLimb(Limb limb)
 	{
-		return limb.IsAlive && limb.AttackTime < BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
+		return limb.IsAlive && 
+			(limb.AttackTime < BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness ||
+			BattleController.Instance.BattleState == BattleController.eBattleState.TurnTransition);
 	}
 
 	void GetPlayerAction()
