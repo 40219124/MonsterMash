@@ -41,12 +41,12 @@ public class BattleController : MonoBehaviour
 		Instance = this;
 	}
 
-	public void SetupBattle()
+	public void SetupBattle(MonsterProfile playerProfile, MonsterProfile enemyProfile)
 	{
 		Debug.Log($"starting new Battle");
 		BattleState = eBattleState.EnemyTurn;
-		Player.OnGameStart(Enemy);
-		Enemy.OnGameStart(Player);
+		Player.OnGameStart(Enemy, playerProfile);
+		Enemy.OnGameStart(Player, enemyProfile);
 		StartTurn();
 	}
 

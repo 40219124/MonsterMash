@@ -229,9 +229,10 @@ public class Agent : MonoBehaviour
 		return pickedAttacker;
 	}
 	
-	public void OnGameStart(Agent opponent)
+	public void OnGameStart(Agent opponent, MonsterProfile profile)
 	{
 		Opponent = opponent;
+		Body.SetProfileData(profile);
 	}
 
 	public void OnTurnStart(bool isOurTurn)

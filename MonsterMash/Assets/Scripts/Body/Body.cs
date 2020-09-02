@@ -119,4 +119,12 @@ public class Body : MonoBehaviour
 		LegsPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Leg), 
 			selectedType==eBodyPartType.Leg, isOurTurn);
 	}
+
+	public void SetProfileData(MonsterProfile profile)
+    {
+		TorsoPart.SetBodyPartData(profile.Torso);
+		LeftArmPart.SetBodyPartData(profile.LeftArm);
+		RightArmPart.SetBodyPartData(profile.RightArm);
+		LegsPart.SetBodyPartData(profile.Legs);
+    }
 }

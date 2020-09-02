@@ -4,64 +4,69 @@ using System;
 
 public class BodyPart : MonoBehaviour
 {
-	[Header("BattleStats")]
-	public eBodyPartSlotType PartType;
-	public int Armour;
-	public int MaxHealth;
-	public int CurrentHealth { get; private set;}
-	public bool IsAlive { get {return CurrentHealth > 0;}}
+    public BodyPartData PartData { get; private set; }
 
-	[Space]
-	[Header("UI")]
-	[SerializeField] NumberRender HealthDeltaNumber;
-	[SerializeField] Animator PartAnimator;
-	
-	[Space]
-	[Header("Stat UI")]
-	[SerializeField] protected BodyPartUi StatBox;
+    public eBodyPartSlotType PartType { get { return PartData.BodyPartType; } }
+    public int Armour { get { return PartData.Armour; } }
+    public int MaxHealth { get { return PartData.HealthMaximum; } }
+    public int CurrentHealth
+    {
+        get { return PartData.HealthCurrent; }
+        private set { PartData.HealthCurrent = value; }
+    }
+    public bool IsAlive { get { return CurrentHealth > 0; } }
 
-	public enum eBodyPartSlotType
-	{
-		None,
-		Arm,
-		Leg,
-		Torso,
-	}
+    [Space]
+    [Header("UI")]
+    [SerializeField] NumberRender HealthDeltaNumber;
+    [SerializeField] Animator PartAnimator;
 
-	void Awake()
-	{
-		CurrentHealth = MaxHealth;
-	}
+    [Space]
+    [Header("Stat UI")]
+    [SerializeField] protected BodyPartUi StatBox;
 
-	public void ApplyAttack(int damage)
-	{
-		int preHealth = CurrentHealth;
-		int healthDelta = damage - Armour;
-		
-		healthDelta = Math.Max(healthDelta, 0);
+    public enum eBodyPartSlotType
+    {
+        None,
+        Arm,
+        Leg,
+        Torso,
+    }
 
-		CurrentHealth -= healthDelta;
-		Debug.Log($"ApplyAttack({damage}) health: {preHealth} -> {CurrentHealth}");
+    public void ApplyAttack(int damage)
+    {
+        int preHealth = CurrentHealth;
+        int healthDelta = damage - Armour;
 
-		//now trigger the UI
-		if (HealthDeltaNumber == null ||
-			PartAnimator == null)
-		{
-			Debug.LogWarning("not all Ui is set up for body part", this);
-			return;
-		}
-		HealthDeltaNumber.SetNumber(healthDelta);
-		PartAnimator.SetTrigger("ShowHealthDelta");
-	}
+        healthDelta = Math.Max(healthDelta, 0);
 
-	public override string ToString()
-	{
-		return $"health: {CurrentHealth} / {MaxHealth}";
-	}
+        CurrentHealth -= healthDelta;
+        Debug.Log($"ApplyAttack({damage}) health: {preHealth} -> {CurrentHealth}");
 
-	public virtual void ShowStats(bool show, bool selected, bool isOurTurn)
-	{
-		bool shouldShow = show && IsAlive;
-		StatBox.Show(shouldShow, selected, selected, !IsAlive);
-	}
+        //now trigger the UI
+        if (HealthDeltaNumber == null ||
+            PartAnimator == null)
+        {
+            Debug.LogWarning("not all Ui is set up for body part", this);
+            return;
+        }
+        HealthDeltaNumber.SetNumber(healthDelta);
+        PartAnimator.SetTrigger("ShowHealthDelta");
+    }
+
+    public override string ToString()
+    {
+        return $"health: {CurrentHealth} / {MaxHealth}";
+    }
+
+    public virtual void ShowStats(bool show, bool selected, bool isOurTurn)
+    {
+        bool shouldShow = show && IsAlive;
+        StatBox.Show(shouldShow, selected, selected, !IsAlive);
+    }
+
+    public virtual void SetBodyPartData(BodyPartData data)
+    {
+        PartData = data;
+    }
 }

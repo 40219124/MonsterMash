@@ -1769,6 +1769,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769a178570bc49f4fb909bed7e37d134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player:
+    Torso:
+      BodyPartType: 3
+      MonsterType: 0
+      HealthMaximum: 60
+      HealthCurrent: 60
+      Armour: 2
+      Damage: 0
+      AttackTimer: 0
+    LeftArm:
+      BodyPartType: 1
+      MonsterType: 0
+      HealthMaximum: 15
+      HealthCurrent: 15
+      Armour: 0
+      Damage: 5
+      AttackTimer: 2
+    RightArm:
+      BodyPartType: 1
+      MonsterType: 0
+      HealthMaximum: 15
+      HealthCurrent: 15
+      Armour: 0
+      Damage: 5
+      AttackTimer: 2
+    Legs:
+      BodyPartType: 2
+      MonsterType: 0
+      HealthMaximum: 50
+      HealthCurrent: 50
+      Armour: 5
+      Damage: 12
+      AttackTimer: 5
+  Enemy:
+    Torso:
+      BodyPartType: 3
+      MonsterType: 1
+      HealthMaximum: 40
+      HealthCurrent: 40
+      Armour: 2
+      Damage: 0
+      AttackTimer: 0
+    LeftArm:
+      BodyPartType: 1
+      MonsterType: 1
+      HealthMaximum: 20
+      HealthCurrent: 20
+      Armour: 1
+      Damage: 6
+      AttackTimer: 3
+    RightArm:
+      BodyPartType: 1
+      MonsterType: 1
+      HealthMaximum: 23
+      HealthCurrent: 23
+      Armour: 0
+      Damage: 6
+      AttackTimer: 3
+    Legs:
+      BodyPartType: 2
+      MonsterType: 1
+      HealthMaximum: 30
+      HealthCurrent: 30
+      Armour: 3
+      Damage: 5
+      AttackTimer: 5
 --- !u!4 &2044889854
 Transform:
   m_ObjectHideFlags: 0
