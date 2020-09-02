@@ -1,7 +1,7 @@
 public class Limb: BodyPart
 {
-	public int AttackTime;
-	public int Damage;
+	public int AttackTime { get { return PartData.AttackTimer; } }
+	public int Damage { get { return PartData.Damage; } }
 
 	public override void ShowStats(bool show, bool selected, bool isOurTurn)
 	{
