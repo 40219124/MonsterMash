@@ -15,9 +15,15 @@ public class Player : OverworldAgent
 
     }
 
-    protected override void OnTransition()
+    protected override bool OnTransition()
     {
+        LockedMovement = true;
+        if (IsMoving())
+        {
+            return false;
+        }
         OverworldMemory.RecordPosition(transform.position);
         OverworldMemory.RecordProfile(Profile);
+        return true;
     }
 }

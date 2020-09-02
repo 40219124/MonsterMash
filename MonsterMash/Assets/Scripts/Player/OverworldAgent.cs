@@ -78,6 +78,8 @@ public class OverworldAgent : MonoBehaviour
     protected bool[] ValidDirections = { true, true, true, true };
     protected EFourDirections CurrentMoveDir = EFourDirections.none;
     protected EFourDirections CurrentFailDir = EFourDirections.none;
+    public Vector3 MoveTarget;
+    protected bool LockedMovement = false;
 
     public float AnimationTime = 0.5f;
     public int PixelsPerStep = 16;
@@ -95,20 +97,22 @@ public class OverworldAgent : MonoBehaviour
 
     protected void DoUpdate()
     {
-
-        if (TravelDirection != EAxisDirection.none)
+        if (!LockedMovement)
         {
-            if (MoveAllowed(out EFourDirections nextDir))
+            if (TravelDirection != EAxisDirection.none)
             {
-                CurrentMoveDir = nextDir;
-                StartCoroutine(AnimateSuccessfulMovement());
-            }
-            else
-            {
-                if (CurrentMoveDir == EFourDirections.none)
+                if (MoveAllowed(out EFourDirections nextDir))
                 {
                     CurrentMoveDir = nextDir;
-                    StartCoroutine(AnimateFailedMovement());
+                    StartCoroutine(AnimateSuccessfulMovement());
+                }
+                else
+                {
+                    if (CurrentMoveDir == EFourDirections.none)
+                    {
+                        CurrentMoveDir = nextDir;
+                        StartCoroutine(AnimateFailedMovement());
+                    }
                 }
             }
         }
@@ -191,6 +195,8 @@ public class OverworldAgent : MonoBehaviour
 
         Vector3 start = transform.position;
         Vector3 dir = DirFromEnum(CurrentMoveDir);
+        MoveTarget = start + dir;
+        MoveTarget = new Vector3(Mathf.Floor(MoveTarget.x + 0.5f), Mathf.Floor(MoveTarget.y + 0.5f), MoveTarget.z);
 
         Anim.SetInteger("Direction", (int)CurrentMoveDir);
         Anim.SetTrigger("Animate");
@@ -207,7 +213,7 @@ public class OverworldAgent : MonoBehaviour
 
             int progress = (int)(PixelsPerStep * timeElapsed / AnimationTime);
 
-            transform.position = start + (dir * ((float)progress / PixelsPerStep));
+            transform.position = MoveTarget - (dir * (1 - ((float)progress / PixelsPerStep)));
 
         }
         CurrentMoveDir = EFourDirections.none;
@@ -242,17 +248,32 @@ public class OverworldAgent : MonoBehaviour
 
     IEnumerator StartBattleRoutine(OverworldAgent opponent)
     {
-        while(CurrentMoveDir != EFourDirections.none)
-        {
-            yield return null;
-        }
         FindObjectOfType<OverworldManager>().DoTransitionToBattle();
+        yield return null;
         // ~~~ give monster profiles
     }
 
-    protected virtual void OnTransition()
+    // return true if ready
+    protected virtual bool OnTransition()
     {
+        if (IsMoving())
+        {
+            return false;
+        }
         OverworldMemory.RecordPosition(transform.position, transform.GetInstanceID());
         OverworldMemory.RecordProfile(Profile, transform.GetInstanceID());
+        return true;
+    }
+
+    protected bool IsMoving()
+    {
+        if (CurrentMoveDir == EFourDirections.none)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

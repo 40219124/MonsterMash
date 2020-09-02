@@ -664,6 +664,7 @@ MonoBehaviour:
   localRenderTexture: {fileID: 791549966434537682}
   RequiredScenes:
   - OverworldMemory
+  Transitioning: 0
 --- !u!114 &622669965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4976,8 +4977,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2709357638926835264, guid: 7c76fa3a5a51f8942be4f507406c1d02, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c76fa3a5a51f8942be4f507406c1d02, type: 3}
+--- !u!1 &2709357638957068449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2709357638926835327, guid: 7c76fa3a5a51f8942be4f507406c1d02, type: 3}
+  m_PrefabInstance: {fileID: 2709357638957068448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &2709357638957068450
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2709357638957068449}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!1001 &4216496406457566317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4987,6 +5010,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4216496406460835792, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216496406460835792, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4216496406460835795, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
