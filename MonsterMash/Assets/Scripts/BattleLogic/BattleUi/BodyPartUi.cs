@@ -25,14 +25,15 @@ public class BodyPartUi : MonoBehaviour
 		SetDamageNumber(false);
 		SetArmourNumber(false);
 		SetTimeNumber(false);
-		Show(false, false);
+		Show(false, false, true, false);
 	}
 
-	public void Show(bool show, bool selected, bool forceSimple=false)
+	public void Show(bool show, bool selected, bool showComplex, bool disabled)
 	{
 		StatBoxRoot.SetActive(show);
-		StatAnimator.SetBool("Complex", selected && !forceSimple);
+		StatAnimator.SetBool("Complex", showComplex);
 		StatAnimator.SetBool("Selected", selected);
+		StatAnimator.SetBool("Disabled", disabled);
 	}
 	public void SetHealthNumber(bool show, int value=69)
 	{

@@ -57,7 +57,7 @@ public class BattleUiController: MonoBehaviour
 			}
 		}
 
-		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, allowTorso:false);
-		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, allowTorso:true);
+		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true);
+		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false);
 	}
 }

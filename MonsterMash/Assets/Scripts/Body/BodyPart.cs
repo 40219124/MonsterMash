@@ -59,9 +59,9 @@ public class BodyPart : MonoBehaviour
 		return $"health: {CurrentHealth} / {MaxHealth}";
 	}
 
-	public virtual void ShowStats(bool show, bool selected)
+	public virtual void ShowStats(bool show, bool selected, bool isOurTurn)
 	{
 		bool shouldShow = show && IsAlive;
-		StatBox.Show(shouldShow, selected);
+		StatBox.Show(shouldShow, selected, selected, !IsAlive);
 	}
 }

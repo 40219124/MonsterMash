@@ -105,18 +105,18 @@ public class Body : MonoBehaviour
 		return bodyPart;
 	}
 
-	public void ShowStats(bool show, eBodyPartType selectedType, bool isLocked, bool allowTorso=false)
+	public void ShowStats(bool show, eBodyPartType selectedType, bool isLocked, bool isOurTurn=false)
 	{
-		TorsoPart.ShowStats(show && allowTorso && (!isLocked || selectedType==eBodyPartType.Torso), 
-			selectedType==eBodyPartType.Torso);
+		TorsoPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Torso), 
+			selectedType==eBodyPartType.Torso, isOurTurn);
 
 		LeftArmPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.LeftArm), 
-			selectedType==eBodyPartType.LeftArm);
+			selectedType==eBodyPartType.LeftArm, isOurTurn);
 
 		RightArmPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.RightArm), 
-			selectedType==eBodyPartType.RightArm);
+			selectedType==eBodyPartType.RightArm, isOurTurn);
 
 		LegsPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Leg), 
-			selectedType==eBodyPartType.Leg);
+			selectedType==eBodyPartType.Leg, isOurTurn);
 	}
 }
