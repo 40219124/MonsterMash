@@ -7,8 +7,6 @@ public class BattleController : MonoBehaviour
 {
 	public static BattleController Instance { get; private set;}
 
-	[SerializeField] RectTransform Vignette;
-	[SerializeField] AnimationCurve VignetteCurve;
 	[SerializeField] CameraShake CameraShakeController;
 
 	
@@ -214,30 +212,6 @@ public class BattleController : MonoBehaviour
 		CurrentAction.Target.ApplyAttack(CurrentAction.TargetPartType, damage);
 		CurrentAction = null;
 		CurrentAgent.Body.EndAttack();
-		//StartCoroutine(DoVignetteFlash());
 		CameraShakeController.PlayShake(10f);
-	}
-
-	IEnumerator DoVignetteFlash()
-	{
-		if (VignetteCurve != null)
-		{
-			yield break;
-		}
-		float flashTime = 0.1f;
-
-		Vignette.gameObject.SetActive(true);
-
-		float timer = 0f;
-		while (timer <= flashTime)
-		{
-			float size = VignetteCurve.Evaluate(timer/flashTime);
-			Vignette.sizeDelta = new Vector2(size,size);
-
-			yield return null;
-			timer += Time.deltaTime;
-		}
-
-		Vignette.gameObject.SetActive(false);
 	}
 }
