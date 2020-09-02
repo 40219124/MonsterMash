@@ -7,10 +7,19 @@ public class Limb: BodyPart
 	{
 		bool shouldShow = show && IsAlive;
 
-		bool disabled = !IsAlive || 
-			((BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness <= AttackTime &&
-			BattleController.Instance.BattleState != BattleController.eBattleState.TurnTransition) &&
-			isOurTurn);
+		float timeLeft = BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
+		if(BattleController.Instance.CurrentAction != null)
+		{
+			timeLeft -= BattleController.Instance.TimeLeftOfAction;
+		}
+
+		if (BattleController.Instance.BattleState == BattleController.eBattleState.TurnTransition)
+		{
+			timeLeft = Settings.TurnTime + BattleController.Instance.TurnTransitionTimeLeft;
+		}
+
+
+		bool disabled = !IsAlive || (timeLeft <= AttackTime && isOurTurn);
 
         StatBox.Show(shouldShow, selected, selected || forceComplex, disabled);
 

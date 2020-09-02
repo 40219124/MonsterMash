@@ -64,9 +64,18 @@ public class Agent : MonoBehaviour
 
 	bool CanUseLimb(Limb limb)
 	{
-		return limb.IsAlive && 
-			(limb.AttackTime < BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness ||
-			BattleController.Instance.BattleState == BattleController.eBattleState.TurnTransition);
+		float timeLeft = BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
+		if(BattleController.Instance.CurrentAction != null)
+		{
+			timeLeft -= BattleController.Instance.TimeLeftOfAction;
+		}
+
+		if (BattleController.Instance.BattleState == BattleController.eBattleState.TurnTransition)
+		{
+			timeLeft = Settings.TurnTime + BattleController.Instance.TurnTransitionTimeLeft;
+		}
+
+		return limb.IsAlive && limb.AttackTime < timeLeft;
 	}
 
 	void GetPlayerAction()
