@@ -52,6 +52,7 @@ public class BodyPart : MonoBehaviour
         }
         HealthDeltaNumber.SetNumber(healthDelta);
         PartAnimator.SetTrigger("ShowHealthDelta");
+		PartAnimator.SetTrigger("Hit");
 		PartAnimator.SetBool("Dead", !IsAlive);
     }
 
