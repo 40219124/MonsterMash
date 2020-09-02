@@ -53,6 +53,7 @@ public class BodyPart : MonoBehaviour
         }
         HealthDeltaNumber.SetNumber(healthDelta);
         PartAnimator.SetTrigger("ShowHealthDelta");
+		PartAnimator.SetBool("Dead", !IsAlive);
     }
 
     public override string ToString()

@@ -184,14 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529ab82464fabeb4c8de519d562e8474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PartType: 2
-  Armour: 1
-  MaxHealth: 99
   HealthDeltaNumber: {fileID: 3307482500878472201}
   PartAnimator: {fileID: 459294422718495349}
   StatBox: {fileID: 7613934255587150165}
-  AttackTime: 2
-  Damage: 5
 --- !u!95 &459294422718495349
 Animator:
   serializedVersion: 3
@@ -258,14 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529ab82464fabeb4c8de519d562e8474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PartType: 1
-  Armour: 1
-  MaxHealth: 99
   HealthDeltaNumber: {fileID: 6567659269125962751}
   PartAnimator: {fileID: 9212297805763593037}
   StatBox: {fileID: 9039598525090086264}
-  AttackTime: 2
-  Damage: 5
 --- !u!95 &9212297805763593037
 Animator:
   serializedVersion: 3
@@ -332,14 +322,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529ab82464fabeb4c8de519d562e8474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PartType: 1
-  Armour: 1
-  MaxHealth: 99
   HealthDeltaNumber: {fileID: 1896437116636196420}
   PartAnimator: {fileID: 7687792945327358652}
   StatBox: {fileID: 6533655803473443696}
-  AttackTime: 2
-  Damage: 5
 --- !u!95 &7687792945327358652
 Animator:
   serializedVersion: 3
@@ -370,7 +355,7 @@ GameObject:
   - component: {fileID: 3883670800562576755}
   - component: {fileID: 3883670800562576764}
   m_Layer: 0
-  m_Name: Left Arm Image
+  m_Name: BodyPart Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,11 +451,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3883670800592674202}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3883670800625243376}
-  m_RootOrder: 1
+  m_Father: {fileID: 3883670800869920187}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3883670800592674180
 SpriteRenderer:
@@ -635,7 +620,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3883670800869920187}
-  - {fileID: 3883670800592674203}
   - {fileID: 9056569038911536265}
   - {fileID: 935235064441259584}
   m_Father: {fileID: 3373608333159643646}
@@ -653,9 +637,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b10801051f4eb47a88d22c941fe493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PartType: 3
-  Armour: 2
-  MaxHealth: 99
   HealthDeltaNumber: {fileID: 7138729447838572002}
   PartAnimator: {fileID: 3883670800625243377}
   StatBox: {fileID: 61012105380619392}
@@ -690,7 +671,7 @@ GameObject:
   - component: {fileID: 3883670800869920165}
   - component: {fileID: 3883670800869920164}
   m_Layer: 0
-  m_Name: Torso Image
+  m_Name: BodyPart Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,7 +687,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3883670800592674203}
   m_Father: {fileID: 3883670800625243376}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -780,7 +762,7 @@ GameObject:
   - component: {fileID: 3883670800995702140}
   - component: {fileID: 3883670800995702141}
   m_Layer: 0
-  m_Name: Leg Image
+  m_Name: BodyPart Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,7 +926,7 @@ GameObject:
   - component: {fileID: 3883670801519844494}
   - component: {fileID: 3883670801519844495}
   m_Layer: 0
-  m_Name: Right Arm Image
+  m_Name: BodyPart Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1052,7 +1034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 943934444682916603, guid: 074bd78bc8e43c841a49f1b9c717696e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 943934444682916603, guid: 074bd78bc8e43c841a49f1b9c717696e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1151,7 +1133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8774630188449881776, guid: 7dfb397c88112b546b7663cd22135497, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8774630188449881776, guid: 7dfb397c88112b546b7663cd22135497, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

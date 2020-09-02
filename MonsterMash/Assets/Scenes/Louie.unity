@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Body: {fileID: 227808269}
-  ControlType: 2
+  ControlType: 1
 --- !u!1 &773675473
 GameObject:
   m_ObjectHideFlags: 0
