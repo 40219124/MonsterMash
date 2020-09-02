@@ -212,6 +212,10 @@ public class Agent : MonoBehaviour
 			float bestDps = 0;
 			foreach (var tAttacker in attackLimbList)
 			{
+				if (!tAttacker.Item1.IsAlive)
+				{
+					continue;
+				}
 				if (targetArmour >= tAttacker.Item1.Damage)
 				{
 					continue;

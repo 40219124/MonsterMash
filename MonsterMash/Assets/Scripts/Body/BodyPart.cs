@@ -41,6 +41,7 @@ public class BodyPart : MonoBehaviour
         healthDelta = Math.Max(healthDelta, 0);
 
         CurrentHealth -= healthDelta;
+		CurrentHealth = Math.Max(CurrentHealth, 0);
         Debug.Log($"ApplyAttack({damage}) health: {preHealth} -> {CurrentHealth}");
 
         //now trigger the UI
