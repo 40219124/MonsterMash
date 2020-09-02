@@ -24,25 +24,31 @@ public class Agent : MonoBehaviour
 	void Update()
 	{
 		var battleController = BattleController.Instance;
-		if (!(IsOurTurn && 
-			battleController.TimeLeftOfAction <= 0 &&
-			(battleController.BattleState == BattleController.eBattleState.PlayerTurn ||
-			battleController.BattleState == BattleController.eBattleState.EnemyTurn)))
+		if (!IsOurTurn || 
+			!(battleController.BattleState == BattleController.eBattleState.PlayerTurn ||
+			battleController.BattleState == BattleController.eBattleState.EnemyTurn))
 		{
 			return;
 		}
 
-		if (ControlType == eControlType.Player)
+		if ((LockedAttacker == Body.eBodyPartType.None ||
+			LockedTarget == Body.eBodyPartType.None) &&
+			battleController.TimeLeftOfAction <= Settings.PreQueueActionTime)
 		{
-			GetPlayerAction();
-		}
-		else if (ControlType == eControlType.Ai)
-		{
-			GetAiAction();
+			if (ControlType == eControlType.Player)
+			{
+				GetPlayerAction();
+			}
+			else if (ControlType == eControlType.Ai &&
+				battleController.TimeLeftOfAction <= 0)
+			{
+				GetAiAction();
+			}
 		}
 		
 		if (LockedAttacker != Body.eBodyPartType.None &&
-			LockedTarget != Body.eBodyPartType.None)
+			LockedTarget != Body.eBodyPartType.None &&
+			battleController.TimeLeftOfAction <= 0)
 		{
 			var action = new Action(Body, LockedAttacker, Opponent.Body, LockedTarget);
 			BattleController.Instance.TryAction(action);
