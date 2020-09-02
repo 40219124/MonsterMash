@@ -13,10 +13,15 @@ public class Whisker : MonoBehaviour
     int TriggerCount = 0;
 
     OverworldAgent Agent;
+    bool PlayerWhisker = false;
     // Start is called before the first frame update
     void Start()
     {
         Agent = GetComponentInParent<OverworldAgent>();
+        if (GetComponentInParent<Player>() != null)
+        {
+            PlayerWhisker = true;
+        }
 
         switch (Direction)
         {
@@ -40,9 +45,13 @@ public class Whisker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Whisker")
+        if (collision.tag.Equals("Whisker"))
         {
             return;
+        }
+        else if (PlayerWhisker && collision.tag.Equals("Enemy"))
+        {
+            Agent.StartBattle(collision.GetComponent<OverworldAgent>());
         }
         if (++TriggerCount == 1)
         {
@@ -52,7 +61,7 @@ public class Whisker : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == "Whisker")
+        if (collision.tag.Equals("Whisker"))
         {
             return;
         }

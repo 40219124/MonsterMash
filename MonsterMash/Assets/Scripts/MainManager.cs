@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
+    [SerializeField]
+    string OpeningScene;
+    [SerializeField]
+    float LoadDelay = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,14 +17,34 @@ public class MainManager : MonoBehaviour
 
     IEnumerator LoadOverworld()
     {
-        yield return new WaitForSeconds(2.0f);
-        string name = "Tim";
-        SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+        yield return new WaitForSeconds(LoadDelay);
+        SceneManager.LoadSceneAsync(OpeningScene, LoadSceneMode.Additive);
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator AddScene(string scene)
     {
+        if (!SceneManager.GetSceneByName(scene).isLoaded)
+        {
+            yield return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+        }
+    }
 
+    public IEnumerator SubtractScene(string scene)
+    {
+        if (SceneManager.GetSceneByName(scene).isLoaded)
+        {
+            yield return SceneManager.UnloadSceneAsync(scene);
+        }
+    }
+
+    public void TransOverworldToBattle()
+    {
+        StartCoroutine(TransOverworldToBattleCo());
+    }
+
+    private IEnumerator TransOverworldToBattleCo()
+    {
+        yield return StartCoroutine(SubtractScene("Tim"));
+        yield return StartCoroutine(AddScene("Louie"));
     }
 }

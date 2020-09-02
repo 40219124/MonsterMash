@@ -15,4 +15,9 @@ public class Player : OverworldAgent
 
     }
 
+    protected override void OnTransition()
+    {
+        OverworldMemory.RecordPosition(transform.position);
+        OverworldMemory.RecordProfile(Profile);
+    }
 }

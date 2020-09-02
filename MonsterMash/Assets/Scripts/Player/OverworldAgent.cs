@@ -84,11 +84,13 @@ public class OverworldAgent : MonoBehaviour
 
     protected Animator Anim;
 
+    public MonsterProfile Profile;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         Anim = GetComponentInChildren<Animator>();
+        FindObjectOfType<OverworldManager>().OnTransition += OnTransition;
     }
 
     protected void DoUpdate()
@@ -231,5 +233,26 @@ public class OverworldAgent : MonoBehaviour
     public void SetDirectionPossible(EFourDirections direction, bool state)
     {
         ValidDirections[(int)direction] = state;
+    }
+
+    public void StartBattle(OverworldAgent opponent)
+    {
+        StartCoroutine(StartBattleRoutine(opponent));
+    }
+
+    IEnumerator StartBattleRoutine(OverworldAgent opponent)
+    {
+        while(CurrentMoveDir != EFourDirections.none)
+        {
+            yield return null;
+        }
+        FindObjectOfType<OverworldManager>().DoTransitionToBattle();
+        // ~~~ give monster profiles
+    }
+
+    protected virtual void OnTransition()
+    {
+        OverworldMemory.RecordPosition(transform.position, transform.GetInstanceID());
+        OverworldMemory.RecordProfile(Profile, transform.GetInstanceID());
     }
 }
