@@ -64,15 +64,15 @@ public class Agent : MonoBehaviour
 		float verticalValue = Input.GetAxisRaw("Vertical");
 		float aButton = Input.GetAxisRaw("ButtonA");
 
-		if (horizontalValue > 0 && verticalValue == 0 && CanUseLimb(Body.RightArmPart))
+		if (horizontalValue > 0 && verticalValue == 0 && (CanUseLimb(Body.RightArmPart) || LockedAttacker != Body.eBodyPartType.None))
 		{
 			SelectedPart = Body.eBodyPartType.RightArm;
 		}
-		else if (horizontalValue < 0 && verticalValue == 0 && CanUseLimb(Body.LeftArmPart))
+		else if (horizontalValue < 0 && verticalValue == 0 && (CanUseLimb(Body.LeftArmPart) || LockedAttacker != Body.eBodyPartType.None))
 		{
 			SelectedPart = Body.eBodyPartType.LeftArm;
 		}
-		else if (horizontalValue == 0 && verticalValue < 0 && CanUseLimb(Body.LegsPart))
+		else if (horizontalValue == 0 && verticalValue < 0 && (CanUseLimb(Body.LegsPart) || LockedAttacker != Body.eBodyPartType.None))
 		{
 			SelectedPart = Body.eBodyPartType.Leg;
 		}
