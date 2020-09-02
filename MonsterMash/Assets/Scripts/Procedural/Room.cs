@@ -14,9 +14,23 @@ public class Room
         Right = 1 << 3
     }
 
+    public enum eArea
+    {
+        Outdoors,
+        Indoors
+    }
+
+    public enum eTiles
+    {
+        Wall,
+        Floor,
+    }
+
     public int RoomId;
     public eDoorPlaces DoorPlaces = eDoorPlaces.Left;
     public bool IsBossRoom;
+    public eArea Area;
+    public eTiles[] Tiles = new eTiles[80];
 
 
     public Room()
