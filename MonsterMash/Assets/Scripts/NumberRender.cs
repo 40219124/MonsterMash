@@ -7,7 +7,12 @@ public class NumberRender : MonoBehaviour
 {
 	[SerializeField] List<SpriteRenderer> NumberSpriteRenderers;
 	[SerializeField] List<Sprite> NumberSpriteList;
+
+	[SerializeField] List<Sprite> LargeNumberSpriteList;
 	
+
+	public bool UseLargeNumbers;
+
 	public void SetNumber(int inputNumber)
 	{
 		int number = inputNumber;
@@ -24,7 +29,7 @@ public class NumberRender : MonoBehaviour
 
 			int reminder = number % 10;
 
-			spriteRenderer.sprite = number == 0 && loop != NumberSpriteRenderers.Count-1 ? null: NumberSpriteList[reminder];
+			spriteRenderer.sprite = number == 0 && loop != NumberSpriteRenderers.Count-1 ? null: GetNumberSprite(reminder);
 
 			number = number/10;
 		}
@@ -33,5 +38,28 @@ public class NumberRender : MonoBehaviour
 		{
 			Debug.LogError($"not enough NumberSpriteRenderers to display number: {inputNumber}", this);
 		}
+	}
+
+	Sprite GetNumberSprite(int singleDigitNumber)
+	{
+		if (singleDigitNumber < 0)
+		{
+			Debug.LogError($"GetNumberSprite() call with {singleDigitNumber} < 0", this);
+			return null;
+		}
+		if (singleDigitNumber/10 != 0)
+		{
+			Debug.LogError($"GetNumberSprite() call with {singleDigitNumber} not singleDigitNumber", this);
+			return null;
+		}
+
+		var spriteList = NumberSpriteList;
+
+		if(UseLargeNumbers)
+		{
+			spriteList = LargeNumberSpriteList;
+		}
+
+		return spriteList[singleDigitNumber];
 	}
 }

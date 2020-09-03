@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkeletonLegs
   m_EditorClassIdentifier: 
   BodyPartType: 2
-  MonsterType: 0
+  MonsterType: 1
   HealthAvg: 30
   HealthVariation: 10
   ArmourAvg: 0

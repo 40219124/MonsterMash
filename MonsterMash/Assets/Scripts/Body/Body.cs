@@ -106,19 +106,19 @@ public class Body : MonoBehaviour
 		return bodyPart;
 	}
 
-	public void ShowStats(bool show, eBodyPartType selectedType, bool isLocked, bool isOurTurn=false)
+	public void ShowStats(bool show, eBodyPartType selectedType, bool isLocked, bool isOurTurn=false, bool forceComplex=false)
 	{
 		TorsoPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Torso), 
-			selectedType==eBodyPartType.Torso, isOurTurn);
+			selectedType==eBodyPartType.Torso, isOurTurn, forceComplex);
 
 		LeftArmPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.LeftArm), 
-			selectedType==eBodyPartType.LeftArm, isOurTurn);
+			selectedType==eBodyPartType.LeftArm, isOurTurn, forceComplex);
 
 		RightArmPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.RightArm), 
-			selectedType==eBodyPartType.RightArm, isOurTurn);
+			selectedType==eBodyPartType.RightArm, isOurTurn, forceComplex);
 
 		LegsPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Leg), 
-			selectedType==eBodyPartType.Leg, isOurTurn);
+			selectedType==eBodyPartType.Leg, isOurTurn, forceComplex);
 	}
 
 	public void SetProfileData(MonsterProfile profile)

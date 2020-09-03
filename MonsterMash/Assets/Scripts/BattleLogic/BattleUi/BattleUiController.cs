@@ -5,27 +5,38 @@ using System;
 public class BattleUiController: MonoBehaviour
 {
 	[SerializeField] Animator BattleUiAnimator;
-	[SerializeField] Transform DPadTransform;
+	[SerializeField] DpadAnimator DpadAnimatorContoller;
 
-	void Awake()
-	{
-		DPadTransform.gameObject.SetActive(false);
-	}
+	bool ForceShowComplexStats;
 
 	void Update()
 	{
 		var battleController = BattleController.Instance;
+
+		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
+		{
+			battleController.Player.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
+			battleController.Enemy.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
+			return;
+		}
+
+
 		var currentAgent = battleController.CurrentAgent;
 		var opponent = currentAgent.Opponent;
 
-		bool isPlayer = currentAgent.ControlType == Agent.eControlType.Player;
+		bool isPlayer = Settings.ShowStatsForAi || currentAgent.ControlType == Agent.eControlType.Player;
+
+		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Pressed)
+		{
+			ForceShowComplexStats = !ForceShowComplexStats;
+		}
 
 		bool shouldPreShow = isPlayer && battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime;
 
 		bool shouldPostShow = battleController.TimeSinceActionStarted <= Settings.PostPickHangTime &&
 			battleController.CurrentAction != null;
 
-		bool showUi = (shouldPreShow || shouldPostShow) && isPlayer;
+		bool showUi = ForceShowComplexStats || ((shouldPreShow || shouldPostShow) && isPlayer);
 
 		var attackerLocked = false;
 		var targetLocked = false;
@@ -57,7 +68,20 @@ public class BattleUiController: MonoBehaviour
 			}
 		}
 
-		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true);
-		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false);
+		DpadAnimatorContoller.SetShow(showUi);
+		if (showUi)
+		{
+			if (attackerLocked)
+			{
+				DpadAnimatorContoller.AnimateToPoint(opponent.Body.DPadGameTransform.position);
+			}
+			else
+			{
+				DpadAnimatorContoller.AnimateToPoint(currentAgent.Body.DPadGameTransform.position);
+			}
+		}
+
+		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true, ForceShowComplexStats);
+		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false, ForceShowComplexStats);
 	}
 }

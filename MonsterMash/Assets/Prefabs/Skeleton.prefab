@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 2709357638926835267}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -347,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2709357638926835327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: 9, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2709357637414373688}
@@ -392,8 +392,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d381248de8411d447b8b76a88cdaeeaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveTarget: {x: 0, y: 0, z: 0}
   AnimationTime: 0.5
   PixelsPerStep: 16
+  Profile:
+    Torso:
+      BodyPartType: 0
+      MonsterType: 0
+      HealthMaximum: 0
+      HealthCurrent: 0
+      Armour: 0
+      Damage: 0
+      AttackTimer: 0
+    LeftArm:
+      BodyPartType: 0
+      MonsterType: 0
+      HealthMaximum: 0
+      HealthCurrent: 0
+      Armour: 0
+      Damage: 0
+      AttackTimer: 0
+    RightArm:
+      BodyPartType: 0
+      MonsterType: 0
+      HealthMaximum: 0
+      HealthCurrent: 0
+      Armour: 0
+      Damage: 0
+      AttackTimer: 0
+    Legs:
+      BodyPartType: 0
+      MonsterType: 0
+      HealthMaximum: 0
+      HealthCurrent: 0
+      Armour: 0
+      Damage: 0
+      AttackTimer: 0
 --- !u!50 &2709357638926835267
 Rigidbody2D:
   serializedVersion: 4

@@ -16,6 +16,11 @@ public class TimerUi : MonoBehaviour
 	[SerializeField] float StartPos;
 	[SerializeField] float EndPos;
 
+	void Awake()
+	{
+		TimeLeftNumber.UseLargeNumbers = true;
+	}
+
 	void Update()
 	{
 		var battleController = BattleController.Instance;

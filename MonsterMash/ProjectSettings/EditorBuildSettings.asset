@@ -12,9 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Tim.unity
+    path: Assets/Scenes/Overworld.unity
     guid: 497eda9380d72964ebd06dbc6f67f0e8
   - enabled: 1
     path: Assets/Scenes/Louie.unity
     guid: 219a6aa1758bb9a409dc37bcfdbc6d71
+  - enabled: 1
+    path: Assets/Scenes/OverworldMemory.unity
+    guid: 4caa842476c1e7547a173bafa2aa09df
   m_configObjects: {}

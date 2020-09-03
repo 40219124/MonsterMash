@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2729953926520694391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8774630188449881776}
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5024825168629982687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalPosition: {x: 0.25, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8774630188449881776}
@@ -188,7 +188,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5115257805476336207}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -223,3 +223,15 @@ MonoBehaviour:
   - {fileID: 396241215753336735, guid: 628e008fa9f3cea48a03d0de39196f4f, type: 3}
   - {fileID: 3845720923341389424, guid: 628e008fa9f3cea48a03d0de39196f4f, type: 3}
   - {fileID: 5966370575965500985, guid: 628e008fa9f3cea48a03d0de39196f4f, type: 3}
+  LargeNumberSpriteList:
+  - {fileID: -816331212774027962, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: -5841647410445462630, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: 5006185828890935879, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: -4818596852380234829, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: 1864830151830511641, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: -2846930048617286197, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: 8428777085474801496, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: 8477477567262683527, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: -1583454236938428494, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  - {fileID: 4224273361377157930, guid: 178d806d6e13d2e449717d30f2dcde20, type: 3}
+  UseLargeNumbers: 0

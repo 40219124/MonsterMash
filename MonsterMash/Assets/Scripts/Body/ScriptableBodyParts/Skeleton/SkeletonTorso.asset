@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkeletonTorso
   m_EditorClassIdentifier: 
   BodyPartType: 3
-  MonsterType: 0
+  MonsterType: 1
   HealthAvg: 40
   HealthVariation: 15
   ArmourAvg: 2
