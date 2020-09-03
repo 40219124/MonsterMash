@@ -5,23 +5,42 @@ using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
+    public static MainManager Instance { get; private set; }
     [SerializeField]
     string OpeningScene;
     [SerializeField]
     float LoadDelay = 2.0f;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            enabled = false;
+            return;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(LoadOverworld());
     }
 
+    // ~~~ debug
     IEnumerator LoadOverworld()
     {
         yield return new WaitForSeconds(LoadDelay);
-        SceneManager.LoadSceneAsync(OpeningScene, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync((!OpeningScene.Equals("") ? OpeningScene : Settings.SceneOverworld), LoadSceneMode.Additive);
     }
 
-    public IEnumerator AddScene(string scene)
+    public void AddScene(string scene)
+    {
+        StartCoroutine(AddSceneCo(scene));
+    }
+    public IEnumerator AddSceneCo(string scene)
     {
         if (!SceneManager.GetSceneByName(scene).isLoaded)
         {
@@ -29,22 +48,15 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public IEnumerator SubtractScene(string scene)
+    public void SubtractScene(string scene)
+    {
+        StartCoroutine(SubtractSceneCo(scene));
+    }
+    public IEnumerator SubtractSceneCo(string scene)
     {
         if (SceneManager.GetSceneByName(scene).isLoaded)
         {
             yield return SceneManager.UnloadSceneAsync(scene);
         }
-    }
-
-    public void TransOverworldToBattle()
-    {
-        StartCoroutine(TransOverworldToBattleCo());
-    }
-
-    private IEnumerator TransOverworldToBattleCo()
-    {
-        yield return StartCoroutine(SubtractScene("Tim"));
-        yield return StartCoroutine(AddScene("Louie"));
     }
 }

@@ -249,8 +249,8 @@ public class OverworldAgent : MonoBehaviour
     IEnumerator StartBattleRoutine(OverworldAgent opponent)
     {
         FindObjectOfType<OverworldManager>().DoTransitionToBattle();
+        OverworldMemory.OpponentID = opponent.transform.GetInstanceID();
         yield return null;
-        // ~~~ give monster profiles
     }
 
     // return true if ready

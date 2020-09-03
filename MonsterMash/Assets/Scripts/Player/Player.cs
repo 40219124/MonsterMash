@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Player : OverworldAgent
 {
+    [SerializeField]
+    MonsterGenerator MGen;
+    private void Start()
+    {
+        // ~~~ do better later
+        Profile = MGen.GetMonster(EMonsterType.Frankenstein);
+        base.Start();
+    }
 
     // Update is called once per frame
     void Update()

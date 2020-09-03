@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkeletonArm
   m_EditorClassIdentifier: 
   BodyPartType: 1
-  MonsterType: 0
+  MonsterType: 1
   HealthAvg: 20
   HealthVariation: 5
   ArmourAvg: 0

@@ -15,4 +15,10 @@ public class Settings
 
 	public const float AiPickTargetMinTime = 0.1f;
 	public const float AiPickTargetMaxTime = 1f;
+
+	public const string SceneMain = "MainScene";
+	public const string SceneOverworld = "Overworld";
+	public const string SceneOverworldMemory = "OverworldMemory";
+	public const string SceneBattle = "Louie";
+	public const string SceneBodyPartPicker = "BodyPartPicker";
 }

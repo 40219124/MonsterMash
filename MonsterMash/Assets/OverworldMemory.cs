@@ -5,22 +5,19 @@ using UnityEngine;
 
 public class OverworldMemory : MonoBehaviour
 {
+
     static MonsterProfile PlayerProfile;
-    static Dictionary<int, MonsterProfile> EnemyProfiles;
+    static Dictionary<int, MonsterProfile> EnemyProfiles = new Dictionary<int, MonsterProfile>();
 
     static Vector3 PlayerPos;
-    static Dictionary<int, Vector3> EnemyPositions;
+    static Dictionary<int, Vector3> EnemyPositions = new Dictionary<int, Vector3>();
 
-    private void Awake()
-    {
-        EnemyProfiles = new Dictionary<int, MonsterProfile>();
-        EnemyPositions = new Dictionary<int, Vector3>();
-    }
+    static int opponentID;
 
     public static void RecordProfile(MonsterProfile profile, int id = -1)
     {
         // Set player profile
-        if(id == -1)
+        if (id == -1)
         {
             PlayerProfile = profile;
         }
@@ -40,7 +37,7 @@ public class OverworldMemory : MonoBehaviour
     public static void RecordPosition(Vector3 pos, int id = -1)
     {
         // Save player pos
-        if(id == -1)
+        if (id == -1)
         {
             PlayerPos = pos;
             return;
@@ -55,6 +52,24 @@ public class OverworldMemory : MonoBehaviour
         else
         {
             EnemyPositions[id] = pos;
+        }
+    }
+
+    public static int OpponentID
+    {
+        get { return opponentID; }
+        set { opponentID = value; }
+    }
+
+    public static MonsterProfile GetProfile(bool isPlayer)
+    {
+        if (isPlayer)
+        {
+            return PlayerProfile;
+        }
+        else
+        {
+            return EnemyProfiles[opponentID];
         }
     }
 }
