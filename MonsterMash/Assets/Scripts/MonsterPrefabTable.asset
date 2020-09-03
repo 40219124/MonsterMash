@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a46703700d1959948baf2af59efc0c17, type: 3}
-  m_Name: SkeletonTorso
+  m_Script: {fileID: 11500000, guid: 2462c026bdc687849b5aeaa8893d5657, type: 3}
+  m_Name: MonsterPrefabTable
   m_EditorClassIdentifier: 
-  BodyPartType: 3
-  MonsterType: 1
-  HealthAvg: 40
-  HealthVariation: 15
-  ArmourAvg: 2
-  ArmourVariation: 2
-  DamageAvg: 0
-  DamageVariation: 0
-  AttackTime: 0
+  Table:
+  - Type: 1
+    Prefab: {fileID: 2709357638926835265, guid: 7c76fa3a5a51f8942be4f507406c1d02, type: 3}
+  - Type: -1
+    Prefab: {fileID: 0}
+  - Type: -1
+    Prefab: {fileID: 0}

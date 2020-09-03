@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f79d160a6964e4bbcf0c5fded624c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpeningScene: Tim
+  OpeningScene: Overworld
   LoadDelay: 2
 --- !u!4 &305363893
 Transform:

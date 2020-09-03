@@ -44,7 +44,7 @@ public class MainManager : MonoBehaviour
 
     private IEnumerator TransOverworldToBattleCo()
     {
-        yield return StartCoroutine(SubtractScene("Tim"));
+        yield return StartCoroutine(SubtractScene("Overworld"));
         yield return StartCoroutine(AddScene("Louie"));
     }
 }

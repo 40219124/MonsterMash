@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78fa776a813af624d90ac863b3670bea, type: 3}
+  m_Name: MonsterGenerator
+  m_EditorClassIdentifier: 
+  Monsters:
+  - MonsterType: 0
+    BodyPartGenerators:
+    - Type: 3
+      Generator: {fileID: 11400000, guid: ec3d92816429af0418c8873e13c87d36, type: 2}
+    - Type: 1
+      Generator: {fileID: 11400000, guid: e4635e21cea6278488f20bdfe7699855, type: 2}
+    - Type: 2
+      Generator: {fileID: 11400000, guid: ac499dcb1fefca94789b7ff00dd20c04, type: 2}
+  - MonsterType: 1
+    BodyPartGenerators:
+    - Type: 3
+      Generator: {fileID: 11400000, guid: c20d5b4b1881a02449f32742c120ca22, type: 2}
+    - Type: 1
+      Generator: {fileID: 11400000, guid: 87fc3c9bcae1d1e4c9afd00bc6eb7f50, type: 2}
+    - Type: 2
+      Generator: {fileID: 11400000, guid: 00e1c78fec2e2e54c9470dab6a6c5803, type: 2}

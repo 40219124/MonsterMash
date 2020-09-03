@@ -11,6 +11,8 @@ public class OverworldMemory : MonoBehaviour
     static Vector3 PlayerPos;
     static Dictionary<int, Vector3> EnemyPositions;
 
+    static int opponentID;
+
     private void Awake()
     {
         EnemyProfiles = new Dictionary<int, MonsterProfile>();
@@ -56,5 +58,11 @@ public class OverworldMemory : MonoBehaviour
         {
             EnemyPositions[id] = pos;
         }
+    }
+
+    public static int OpponentID
+    {
+        get { return opponentID; }
+        set { opponentID = value; }
     }
 }
