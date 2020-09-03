@@ -24,12 +24,18 @@ public class Room
     {
         Wall,
         Floor,
+        Door,
+        Table,
+        Hole,
+        River,
+        Enemy,
+        Boss
     }
 
     public int RoomId;
     public eDoorPlaces DoorPlaces = eDoorPlaces.Left;
     public bool IsBossRoom;
-    public eArea Area;
+    public eArea Area = eArea.Outdoors;
     public eTiles[] Tiles = new eTiles[80];
 
 
