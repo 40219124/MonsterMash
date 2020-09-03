@@ -11,6 +11,8 @@ public class PartPickerUiController : MonoBehaviour
 	[SerializeField] Button DiscardButton;
 	[SerializeField] BodyPartSpriteLookup PartSpriteLookup;
 
+	[SerializeField] DpadAnimator DpadAnimatorContoller;
+
 
 	[Space]
     [Header("Debug")]
@@ -35,6 +37,11 @@ public class PartPickerUiController : MonoBehaviour
 		UseButton.SetSelected(false);
 		DiscardButton.SetSelected(false);
 		Button currentButton = null;
+
+		var dpadPos = new Vector2(0, UseButton.transform.position.y);
+		DpadAnimatorContoller.JumpToPoint(dpadPos);
+		DpadAnimatorContoller.SetShow(true);
+
 		while (!SimpleInput.GetInputActive(EInput.A) || currentButton == null)
 		{
 			if (SimpleInput.GetInputActive(EInput.dpadLeft))
@@ -63,6 +70,8 @@ public class PartPickerUiController : MonoBehaviour
 		else
 		{
 			Debug.Log($"wanting to use Body Part: {PickerBodyPart}");
+
+			DpadAnimatorContoller.AnimateBetweenPoints(dpadPos, PlayerBody.DPadGameTransform.position);
 
 			BodyPart currentBodyPart = null;
 			while (!SimpleInput.GetInputActive(EInput.A) || currentBodyPart == null)
