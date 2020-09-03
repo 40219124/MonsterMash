@@ -13,7 +13,7 @@ public class MainManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -33,7 +33,7 @@ public class MainManager : MonoBehaviour
     IEnumerator LoadOverworld()
     {
         yield return new WaitForSeconds(LoadDelay);
-        SceneManager.LoadSceneAsync(OpeningScene, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync((!OpeningScene.Equals("") ? OpeningScene : Settings.SceneOverworld), LoadSceneMode.Additive);
     }
 
     public void AddScene(string scene)

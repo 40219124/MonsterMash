@@ -15,8 +15,8 @@ public class FlowManager : MonoBehaviour
 
     private IEnumerator TransOverworldToBattleCo()
     {
-        yield return StartCoroutine(MainManager.Instance.SubtractSceneCo("Overworld"));
-        yield return StartCoroutine(MainManager.Instance.AddSceneCo("Louie"));
+        yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(Settings.SceneOverworld));
+        yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneBattle));
         yield return null;
         BattleController bc = FindObjectOfType<BattleController>();
         if (bc != null)
