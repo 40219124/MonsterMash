@@ -34,6 +34,6 @@ public class OverworldManager : AdditiveSceneManager
         }
 
         // ABSOLUTE LAST THING
-        FindObjectOfType<MainManager>().TransOverworldToBattle();
+        FindObjectOfType<FlowManager>().TransOverworldToBattle();
     }
 }
