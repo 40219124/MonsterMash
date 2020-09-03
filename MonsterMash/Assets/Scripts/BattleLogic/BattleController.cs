@@ -46,14 +46,25 @@ public class BattleController : MonoBehaviour
 		Debug.Log($"starting new Battle");
 		Player.OnGameStart(Enemy, playerProfile);
 		Enemy.OnGameStart(Player, enemyProfile);
-
-		CurrentAgent = Player;
-		StartTurnTransition(true);
+		BattleState = eBattleState.BattleIntro;
+		TimeSinceActionStarted = 0;
 	}
 
 	void Update()
 	{
 		TimeSinceActionStarted += Time.deltaTime;
+
+		if (BattleState == eBattleState.BattleIntro)
+		{	
+			if ((Player.ControlType == Agent.eControlType.Ai &&
+				Enemy.ControlType == Agent.eControlType.Ai &&
+				TimeSinceActionStarted > 2) ||
+				SimpleInput.GetInputActive(EInput.A))
+			{
+				CurrentAgent = Player;
+				StartTurnTransition(true);
+			}
+		}
 
 		if (BattleState == eBattleState.TurnTransition)
 		{
@@ -69,12 +80,22 @@ public class BattleController : MonoBehaviour
 		{
 			return;
 		}
-
-		TurnTimeLeft -= Time.deltaTime;
+		
 		TimeLeftOfAction -= Time.deltaTime;
-
-		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
+
+		var deltaTime = Time.deltaTime;
+		if (TimeLeftOfAction <= 0 && CurrentAction == null)
+		{
+			if (!CurrentAgent.Body.LeftArmPart.IsValidAttacker() &&
+				!CurrentAgent.Body.RightArmPart.IsValidAttacker() &&
+				!CurrentAgent.Body.LegsPart.IsValidAttacker())
+			{
+				deltaTime *= Settings.NoActionAvailableSpeedMultiplier;
+			}
+		}
+		TurnTimeLeft -= deltaTime;
+		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 
 		if (!Player.Body.IsAlive())
 		{

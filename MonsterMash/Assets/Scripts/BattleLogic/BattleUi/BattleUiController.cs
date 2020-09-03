@@ -7,6 +7,8 @@ public class BattleUiController: MonoBehaviour
 	[SerializeField] Animator BattleUiAnimator;
 	[SerializeField] Transform DPadTransform;
 
+	bool ForceShowComplexStats;
+
 	void Awake()
 	{
 		DPadTransform.gameObject.SetActive(false);
@@ -15,17 +17,31 @@ public class BattleUiController: MonoBehaviour
 	void Update()
 	{
 		var battleController = BattleController.Instance;
+
+		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
+		{
+			battleController.Player.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
+			battleController.Enemy.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
+			return;
+		}
+
+
 		var currentAgent = battleController.CurrentAgent;
 		var opponent = currentAgent.Opponent;
 
-		bool isPlayer = currentAgent.ControlType == Agent.eControlType.Player;
+		bool isPlayer = Settings.ShowStatsForAi || currentAgent.ControlType == Agent.eControlType.Player;
+
+		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Pressed)
+		{
+			ForceShowComplexStats = !ForceShowComplexStats;
+		}
 
 		bool shouldPreShow = isPlayer && battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime;
 
 		bool shouldPostShow = battleController.TimeSinceActionStarted <= Settings.PostPickHangTime &&
 			battleController.CurrentAction != null;
 
-		bool showUi = (shouldPreShow || shouldPostShow) && isPlayer;
+		bool showUi = ForceShowComplexStats || ((shouldPreShow || shouldPostShow) && isPlayer);
 
 		var attackerLocked = false;
 		var targetLocked = false;
@@ -57,7 +73,7 @@ public class BattleUiController: MonoBehaviour
 			}
 		}
 
-		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true);
-		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false);
+		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true, ForceShowComplexStats);
+		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false, ForceShowComplexStats);
 	}
 }

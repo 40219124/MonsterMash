@@ -3,22 +3,34 @@ public class Limb: BodyPart
 	public int AttackTime { get { return PartData.AttackTimer; } }
 	public int Damage { get { return PartData.Damage; } }
 
-	public override void ShowStats(bool show, bool selected, bool isOurTurn)
+	public override void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex)
 	{
 		bool shouldShow = show && IsAlive;
 
-		bool disabled = !IsAlive || 
-			((BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness <= AttackTime &&
-			BattleController.Instance.BattleState != BattleController.eBattleState.TurnTransition) &&
-			isOurTurn);
+		bool disabled = !IsAlive || (!IsValidAttacker() && isOurTurn);
 
-        StatBox.Show(shouldShow, selected, selected, disabled);
+        StatBox.Show(shouldShow, selected, selected || forceComplex, disabled);
 
 
-		StatBox.SetDamageNumber(show && (isOurTurn || selected), Damage);
-		StatBox.SetTimeNumber(show && (isOurTurn || selected), AttackTime);
+		StatBox.SetDamageNumber(show && (isOurTurn || selected || forceComplex), Damage);
+		StatBox.SetTimeNumber(show && (isOurTurn || selected || forceComplex), AttackTime);
 
-		StatBox.SetHealthNumber(show && (!isOurTurn || selected), CurrentHealth);
-		StatBox.SetArmourNumber(show && (!isOurTurn || selected), Armour);
+		StatBox.SetHealthNumber(show && (!isOurTurn || selected || forceComplex), CurrentHealth);
+		StatBox.SetArmourNumber(show && (!isOurTurn || selected || forceComplex), Armour);
+	}
+
+	public bool IsValidAttacker()
+	{
+		float timeLeft = BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
+		if(BattleController.Instance.CurrentAction != null)
+		{
+			timeLeft -= BattleController.Instance.TimeLeftOfAction;
+		}
+
+		if (BattleController.Instance.BattleState == BattleController.eBattleState.TurnTransition)
+		{
+			timeLeft = Settings.TurnTime + BattleController.Instance.TurnTransitionTimeLeft;
+		}
+		return IsAlive && timeLeft >= AttackTime;
 	}
 }

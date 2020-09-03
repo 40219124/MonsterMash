@@ -20,11 +20,12 @@ public class EnemyOA : OverworldAgent
     void Update()
     {
 
-        Vector3 diff = Target.transform.position - transform.position;
+        Vector3 diff = Target.MoveTarget - transform.position;
 
         EAxisDirection dir = EAxisDirection.none;
 
-        if (diff != Vector3.zero)
+
+        if (diff.sqrMagnitude != 1 && diff != Vector3.zero)
         {
             if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
             {
@@ -34,6 +35,8 @@ public class EnemyOA : OverworldAgent
             {
                 ProbeDirection(diff, EAxisDirection.vertical, out dir);
             }
+
+
         }
 
 
@@ -52,7 +55,6 @@ public class EnemyOA : OverworldAgent
                 VerticalValue = 0;
                 break;
         }
-
         DoUpdate();
 
     }
@@ -116,7 +118,7 @@ public class EnemyOA : OverworldAgent
                 break;
         }
 
-        if(outDir == EAxisDirection.none)
+        if (outDir == EAxisDirection.none)
         {
             outDir = priority;
         }

@@ -32,6 +32,20 @@ public class BodyPart : MonoBehaviour
         Torso,
     }
 
+	void Awake()
+	{
+		if (BodyPartImage == null ||
+			HealthDeltaNumber == null ||
+			StatBox == null ||
+            PartAnimator == null)
+        {
+            Debug.LogWarning("not all Ui is set up for body part", this);
+            return;
+        }
+
+		HealthDeltaNumber.UseLargeNumbers = true;
+	}
+
     public void ApplyAttack(int damage)
     {
         int preHealth = CurrentHealth;
@@ -43,14 +57,8 @@ public class BodyPart : MonoBehaviour
 		CurrentHealth = Math.Max(CurrentHealth, 0);
         Debug.Log($"ApplyAttack({damage}) health: {preHealth} -> {CurrentHealth}");
 
-        //now trigger the UI
-        if (HealthDeltaNumber == null ||
-            PartAnimator == null)
-        {
-            Debug.LogWarning("not all Ui is set up for body part", this);
-            return;
-        }
         HealthDeltaNumber.SetNumber(healthDelta);
+
         PartAnimator.SetTrigger("ShowHealthDelta");
 		PartAnimator.SetTrigger("Hit");
 		PartAnimator.SetBool("Dead", !IsAlive);
@@ -61,7 +69,7 @@ public class BodyPart : MonoBehaviour
         return $"health: {CurrentHealth} / {PartData.HealthMaximum}";
     }
 
-    public virtual void ShowStats(bool show, bool selected, bool isOurTurn)
+    public virtual void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex)
     {
     }
 
@@ -69,5 +77,6 @@ public class BodyPart : MonoBehaviour
     {
         PartData = data;
 		BodyPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(bodyPartType, data.MonsterType);
+		PartAnimator.SetBool("Dead", !IsAlive);
     }
 }
