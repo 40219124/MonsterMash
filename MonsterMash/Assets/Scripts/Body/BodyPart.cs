@@ -4,6 +4,7 @@ using System;
 
 public class BodyPart : MonoBehaviour
 {
+	public Body.eBodyPartType BodyPartType { get; private set; }
     public BodyPartData PartData { get; private set; }
     public int Armour { get { return PartData.Armour; } }
     public int CurrentHealth
@@ -75,6 +76,7 @@ public class BodyPart : MonoBehaviour
 
     public virtual void SetBodyPartData(BodyPartSpriteLookup bodyPartImageLookup, BodyPartData data, Body.eBodyPartType bodyPartType)
     {
+		BodyPartType = bodyPartType;
         PartData = data;
 		BodyPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(bodyPartType, data.MonsterType);
 		PartAnimator.SetBool("Dead", !IsAlive);

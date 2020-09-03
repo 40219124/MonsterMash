@@ -21,6 +21,10 @@ public class Limb: BodyPart
 
 	public bool IsValidAttacker()
 	{
+		if (BattleController.Instance == null)
+		{
+			return true;
+		}
 		float timeLeft = BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
 		if(BattleController.Instance.CurrentAction != null)
 		{

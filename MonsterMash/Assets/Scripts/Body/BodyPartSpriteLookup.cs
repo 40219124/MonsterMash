@@ -15,6 +15,34 @@ public class BodyPartSpriteLookup : ScriptableObject
 
 	public List<BodyPartSpriteData> BodyPartSpriteLookupList;
 
+	public Sprite GetBodyPartSprite(BodyPart.eBodyPartSlotType bodyPartSlotType, EMonsterType monsterType)
+	{
+		Body.eBodyPartType bodyPartType = Body.eBodyPartType.None;
+		switch (bodyPartSlotType)
+		{
+			case (BodyPart.eBodyPartSlotType.Torso):
+			{
+				bodyPartType = Body.eBodyPartType.Torso;
+				break;
+			}
+			case (BodyPart.eBodyPartSlotType.Arm):
+			{
+				bodyPartType = Body.eBodyPartType.LeftArm;
+				break;
+			}
+			case (BodyPart.eBodyPartSlotType.Leg):
+			{
+				bodyPartType = Body.eBodyPartType.Leg;
+				break;
+			}
+			default:
+			{
+				Debug.LogError($"Unexpected enum type: {bodyPartSlotType}");
+				break;
+			}
+		}
+		return GetBodyPartSprite(bodyPartType, monsterType);
+	}
 	public Sprite GetBodyPartSprite(Body.eBodyPartType bodyPartType, EMonsterType monsterType)
 	{
 		foreach (var bodyPartSpriteLookup in BodyPartSpriteLookupList)
