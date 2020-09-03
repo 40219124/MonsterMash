@@ -5,14 +5,9 @@ using System;
 public class BattleUiController: MonoBehaviour
 {
 	[SerializeField] Animator BattleUiAnimator;
-	[SerializeField] Transform DPadTransform;
+	[SerializeField] DpadAnimator DpadAnimatorContoller;
 
 	bool ForceShowComplexStats;
-
-	void Awake()
-	{
-		DPadTransform.gameObject.SetActive(false);
-	}
 
 	void Update()
 	{
@@ -20,6 +15,7 @@ public class BattleUiController: MonoBehaviour
 
 		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
 		{
+			DpadAnimatorContoller.SetShow(false);
 			battleController.Player.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
 			battleController.Enemy.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
 			return;
@@ -70,6 +66,19 @@ public class BattleUiController: MonoBehaviour
 					selectedTarget = currentAgent.LockedTarget;
 					targetLocked = true;
 				}
+			}
+		}
+
+		DpadAnimatorContoller.SetShow(showUi);
+		if (showUi)
+		{
+			if (attackerLocked)
+			{
+				DpadAnimatorContoller.AnimateToPoint(opponent.Body.DPadGameTransform.position);
+			}
+			else
+			{
+				DpadAnimatorContoller.AnimateToPoint(currentAgent.Body.DPadGameTransform.position);
 			}
 		}
 
