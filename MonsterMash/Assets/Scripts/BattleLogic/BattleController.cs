@@ -47,6 +47,7 @@ public class BattleController : MonoBehaviour
 		Player.OnGameStart(Enemy, playerProfile);
 		Enemy.OnGameStart(Player, enemyProfile);
 		BattleState = eBattleState.BattleIntro;
+		TimeSinceActionStarted = 0;
 	}
 
 	void Update()
@@ -54,8 +55,11 @@ public class BattleController : MonoBehaviour
 		TimeSinceActionStarted += Time.deltaTime;
 
 		if (BattleState == eBattleState.BattleIntro)
-		{
-			if (SimpleInput.GetInputActive(EInput.A))
+		{	
+			if ((Player.ControlType == Agent.eControlType.Ai &&
+				Enemy.ControlType == Agent.eControlType.Ai &&
+				TimeSinceActionStarted > 2) ||
+				SimpleInput.GetInputActive(EInput.A))
 			{
 				CurrentAgent = Player;
 				StartTurnTransition(true);
