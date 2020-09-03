@@ -4,6 +4,7 @@ using System;
 
 public class BodyPart : MonoBehaviour
 {
+	public Body.eBodyPartType BodyPartType { get; private set; }
     public BodyPartData PartData { get; private set; }
     public int Armour { get { return PartData.Armour; } }
     public int CurrentHealth
@@ -69,14 +70,27 @@ public class BodyPart : MonoBehaviour
         return $"health: {CurrentHealth} / {PartData.HealthMaximum}";
     }
 
-    public virtual void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex)
+    public virtual void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex, bool forceDisable=false)
     {
     }
 
     public virtual void SetBodyPartData(BodyPartSpriteLookup bodyPartImageLookup, BodyPartData data, Body.eBodyPartType bodyPartType)
     {
+		BodyPartType = bodyPartType;
         PartData = data;
-		BodyPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(bodyPartType, data.MonsterType);
+
+		SetSprite(bodyPartImageLookup);
+
 		PartAnimator.SetBool("Dead", !IsAlive);
     }
+
+	public void SetSprite(BodyPartSpriteLookup partSpriteLookup, EMonsterType monsterType=EMonsterType.none)
+	{
+		if (monsterType == EMonsterType.none)
+		{
+			monsterType = PartData.MonsterType;
+		}
+
+		BodyPartImage.sprite = partSpriteLookup.GetBodyPartSprite(BodyPartType, monsterType);
+	}
 }

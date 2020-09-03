@@ -3,11 +3,11 @@ public class Limb: BodyPart
 	public int AttackTime { get { return PartData.AttackTimer; } }
 	public int Damage { get { return PartData.Damage; } }
 
-	public override void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex)
+	public override void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex, bool forceDisable=false)
 	{
 		bool shouldShow = show && IsAlive;
 
-		bool disabled = !IsAlive || (!IsValidAttacker() && isOurTurn);
+		bool disabled = !IsAlive || (!IsValidAttacker() && isOurTurn) || forceDisable;
 
         StatBox.Show(shouldShow, selected, selected || forceComplex, disabled);
 
@@ -21,6 +21,10 @@ public class Limb: BodyPart
 
 	public bool IsValidAttacker()
 	{
+		if (BattleController.Instance == null)
+		{
+			return true;
+		}
 		float timeLeft = BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
 		if(BattleController.Instance.CurrentAction != null)
 		{
