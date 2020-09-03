@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Root: {fileID: 7709030025587192826}
+  Animator: {fileID: 6543258710490889494}
 --- !u!95 &6543258710490889494
 Animator:
   serializedVersion: 3

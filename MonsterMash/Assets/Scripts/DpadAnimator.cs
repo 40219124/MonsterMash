@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DpadAnimator : MonoBehaviour
 {
-	const float AnimationTime = 0.25f;
+	const float Speed = 15f; //UnitsPerSecond
 
 	[SerializeField] Transform Root;
+	[SerializeField] Animator Animator;
 
+	float AnimationTime;
 	float TimeAccumulator;
 
 	Vector2 StartPos;
@@ -25,13 +27,6 @@ public class DpadAnimator : MonoBehaviour
 		EndPos = pos;
 	}
 
-    public void AnimateBetweenPoints(Vector2 startPos, Vector2 endPos)
-	{
-		TimeAccumulator = 0;
-		StartPos = startPos;
-		EndPos = endPos;
-	}
-
 	public void AnimateToPoint(Vector2 pos)
 	{
 		if (pos != EndPos)
@@ -39,6 +34,8 @@ public class DpadAnimator : MonoBehaviour
 			TimeAccumulator = 0;
 			StartPos = EndPos;
 			EndPos = pos;
+			var distance = (EndPos-StartPos).magnitude;
+			AnimationTime = distance/Speed;
 		}
 	}
 
