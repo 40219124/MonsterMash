@@ -13,6 +13,10 @@ public class SimpleInput : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+			for (int i = 0; i <= (int)EInput.Select; ++i)
+			{
+				Buttons.Add(new ButtonInfo((EInput)i));
+			}
         }
         else
         {
@@ -87,14 +91,6 @@ public class SimpleInput : MonoBehaviour
 
     List<string> AxisStrings = new List<string>() {
          "Vertical", "Horizontal" , "Vertical" ,"Horizontal" , "ButtonA", "ButtonB", "Start", "Select" };
-    // Start is called before the first frame update
-    void Start()
-    {
-        for (int i = 0; i <= (int)EInput.Select; ++i)
-        {
-            Buttons.Add(new ButtonInfo((EInput)i));
-        }
-    }
 
     // Update is called once per frame
     void Update()
