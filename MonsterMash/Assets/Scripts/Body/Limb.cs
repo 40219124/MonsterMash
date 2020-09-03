@@ -7,6 +7,20 @@ public class Limb: BodyPart
 	{
 		bool shouldShow = show && IsAlive;
 
+		bool disabled = !IsAlive || (!IsValidAttacker() && isOurTurn);
+
+        StatBox.Show(shouldShow, selected, selected || forceComplex, disabled);
+
+
+		StatBox.SetDamageNumber(show && (isOurTurn || selected || forceComplex), Damage);
+		StatBox.SetTimeNumber(show && (isOurTurn || selected || forceComplex), AttackTime);
+
+		StatBox.SetHealthNumber(show && (!isOurTurn || selected || forceComplex), CurrentHealth);
+		StatBox.SetArmourNumber(show && (!isOurTurn || selected || forceComplex), Armour);
+	}
+
+	public bool IsValidAttacker()
+	{
 		float timeLeft = BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
 		if(BattleController.Instance.CurrentAction != null)
 		{
@@ -17,17 +31,6 @@ public class Limb: BodyPart
 		{
 			timeLeft = Settings.TurnTime + BattleController.Instance.TurnTransitionTimeLeft;
 		}
-
-
-		bool disabled = !IsAlive || (timeLeft <= AttackTime && isOurTurn);
-
-        StatBox.Show(shouldShow, selected, selected || forceComplex, disabled);
-
-
-		StatBox.SetDamageNumber(show && (isOurTurn || selected || forceComplex), Damage);
-		StatBox.SetTimeNumber(show && (isOurTurn || selected || forceComplex), AttackTime);
-
-		StatBox.SetHealthNumber(show && (!isOurTurn || selected || forceComplex), CurrentHealth);
-		StatBox.SetArmourNumber(show && (!isOurTurn || selected || forceComplex), Armour);
+		return IsAlive && timeLeft >= AttackTime;
 	}
 }

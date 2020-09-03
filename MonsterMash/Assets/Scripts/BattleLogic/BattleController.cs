@@ -69,12 +69,22 @@ public class BattleController : MonoBehaviour
 		{
 			return;
 		}
-
-		TurnTimeLeft -= Time.deltaTime;
+		
 		TimeLeftOfAction -= Time.deltaTime;
-
-		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
+
+		var deltaTime = Time.deltaTime;
+		if (TimeLeftOfAction <= 0 && CurrentAction == null)
+		{
+			if (!CurrentAgent.Body.LeftArmPart.IsValidAttacker() &&
+				!CurrentAgent.Body.RightArmPart.IsValidAttacker() &&
+				!CurrentAgent.Body.LegsPart.IsValidAttacker())
+			{
+				deltaTime *= Settings.NoActionAvailableSpeedMultiplier;
+			}
+		}
+		TurnTimeLeft -= deltaTime;
+		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 
 		if (!Player.Body.IsAlive())
 		{

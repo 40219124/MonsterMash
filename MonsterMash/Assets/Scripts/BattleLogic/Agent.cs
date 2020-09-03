@@ -62,22 +62,6 @@ public class Agent : MonoBehaviour
 		}
 	}
 
-	bool CanUseLimb(Limb limb)
-	{
-		float timeLeft = BattleController.Instance.TurnTimeLeft + Settings.ActionTimeForgiveness;
-		if(BattleController.Instance.CurrentAction != null)
-		{
-			timeLeft -= BattleController.Instance.TimeLeftOfAction;
-		}
-
-		if (BattleController.Instance.BattleState == BattleController.eBattleState.TurnTransition)
-		{
-			timeLeft = Settings.TurnTime + BattleController.Instance.TurnTransitionTimeLeft;
-		}
-
-		return limb.IsAlive && limb.AttackTime < timeLeft;
-	}
-
 	void GetPlayerAction()
 	{
 		var mostRecentDpad = SimpleInput.GetRecentDpad();
@@ -97,7 +81,7 @@ public class Agent : MonoBehaviour
 				}
 				case (EInput.dpadLeft):
 				{
-					if (CanUseLimb(Body.LeftArmPart) || LockedAttacker != Body.eBodyPartType.None)
+					if (Body.LeftArmPart.IsValidAttacker() || LockedAttacker != Body.eBodyPartType.None)
 					{
 						SelectedPart = Body.eBodyPartType.LeftArm;
 					}
@@ -105,7 +89,7 @@ public class Agent : MonoBehaviour
 				}
 				case (EInput.dpadRight):
 				{
-					if (CanUseLimb(Body.RightArmPart) || LockedAttacker != Body.eBodyPartType.None)
+					if (Body.RightArmPart.IsValidAttacker() || LockedAttacker != Body.eBodyPartType.None)
 					{
 						SelectedPart = Body.eBodyPartType.RightArm;
 					}
@@ -113,7 +97,7 @@ public class Agent : MonoBehaviour
 				}
 				case (EInput.dpadDown):
 				{
-					if (CanUseLimb(Body.LegsPart) || LockedAttacker != Body.eBodyPartType.None)
+					if (Body.LegsPart.IsValidAttacker() || LockedAttacker != Body.eBodyPartType.None)
 					{
 						SelectedPart = Body.eBodyPartType.Leg;
 					}
