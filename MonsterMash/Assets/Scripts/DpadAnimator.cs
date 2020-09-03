@@ -9,11 +9,11 @@ public class DpadAnimator : MonoBehaviour
 	[SerializeField] Transform Root;
 	[SerializeField] Animator Animator;
 
-	float AnimationTime;
-	float TimeAccumulator;
+	float AnimationTime = 1;
+	float TimeAccumulator = 1;
 
-	Vector2 StartPos;
-	Vector2 EndPos;
+	Vector3 StartPos = Vector3.zero;
+	Vector3 EndPos = Vector3.zero;
 
 	void Awake()
 	{
@@ -21,13 +21,13 @@ public class DpadAnimator : MonoBehaviour
 		SetShow(false);
 	}
 
-	public void JumpToPoint(Vector2 pos)
+	public void JumpToPoint(Vector3 pos)
 	{
 		TimeAccumulator = AnimationTime;
 		EndPos = pos;
 	}
 
-	public void AnimateToPoint(Vector2 pos)
+	public void AnimateToPoint(Vector3 pos)
 	{
 		if (pos != EndPos)
 		{
@@ -41,13 +41,20 @@ public class DpadAnimator : MonoBehaviour
 
 	void Update()
 	{
-		TimeAccumulator += Time.deltaTime;
-		TimeAccumulator = Mathf.Min(TimeAccumulator, AnimationTime);
-		
-		float progress = TimeAccumulator/AnimationTime;
-		float newX = StartPos.x + ( EndPos.x - StartPos.x ) * progress;
-		float newY = StartPos.y + ( EndPos.y - StartPos.y ) * progress;
-		Root.position = new Vector3(newX, newY, Root.position.z);
+		if (gameObject.active)
+		{
+			TimeAccumulator += Time.deltaTime;
+			TimeAccumulator = Mathf.Min(TimeAccumulator, AnimationTime);
+			
+			float progress = TimeAccumulator/AnimationTime;
+			float newX = StartPos.x + ( EndPos.x - StartPos.x ) * progress;
+			float newY = StartPos.y + ( EndPos.y - StartPos.y ) * progress;
+			Root.position = new Vector3(newX, newY, Root.position.z);
+		}
+		else
+		{
+			Root.position = EndPos;
+		}
 	}
 
 	public void SetShow(bool show)
