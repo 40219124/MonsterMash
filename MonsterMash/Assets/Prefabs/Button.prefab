@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 1053892697173177424}
   - component: {fileID: 7860666593948399620}
   m_Layer: 0
-  m_Name: Root
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
