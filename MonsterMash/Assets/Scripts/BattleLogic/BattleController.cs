@@ -46,14 +46,21 @@ public class BattleController : MonoBehaviour
 		Debug.Log($"starting new Battle");
 		Player.OnGameStart(Enemy, playerProfile);
 		Enemy.OnGameStart(Player, enemyProfile);
-
-		CurrentAgent = Player;
-		StartTurnTransition(true);
+		BattleState = eBattleState.BattleIntro;
 	}
 
 	void Update()
 	{
 		TimeSinceActionStarted += Time.deltaTime;
+
+		if (BattleState == eBattleState.BattleIntro)
+		{
+			if (SimpleInput.GetInputActive(EInput.A))
+			{
+				CurrentAgent = Player;
+				StartTurnTransition(true);
+			}
+		}
 
 		if (BattleState == eBattleState.TurnTransition)
 		{

@@ -17,6 +17,15 @@ public class BattleUiController: MonoBehaviour
 	void Update()
 	{
 		var battleController = BattleController.Instance;
+
+		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
+		{
+			battleController.Player.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
+			battleController.Enemy.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
+			return;
+		}
+
+
 		var currentAgent = battleController.CurrentAgent;
 		var opponent = currentAgent.Opponent;
 
