@@ -15,6 +15,7 @@ public class BattleUiController: MonoBehaviour
 
 		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
 		{
+			DpadAnimatorContoller.SetShow(false);
 			battleController.Player.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
 			battleController.Enemy.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
 			return;
