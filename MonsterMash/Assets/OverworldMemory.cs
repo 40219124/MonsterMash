@@ -14,15 +14,17 @@ public class OverworldMemory : MonoBehaviour
 
     static int opponentID;
 
+    // Profiles
     public static void RecordProfile(MonsterProfile profile, int id = -1)
     {
         // Set player profile
         if (id == -1)
         {
             PlayerProfile = profile;
+            return;
         }
-
-
+        
+        
         // Set enemy profile
         if (!EnemyProfiles.ContainsKey(id))
         {
@@ -34,6 +36,30 @@ public class OverworldMemory : MonoBehaviour
         }
     }
 
+    public static MonsterProfile GetEnemyProfile(int id)
+    {
+        return EnemyProfiles[id];
+    }
+
+    public static Dictionary<int, MonsterProfile> GetEnemyProfiles()
+    {
+        return EnemyProfiles;
+    }
+
+    // Get profiles for combat
+    public static MonsterProfile GetCombatProfile(bool isPlayer)
+    {
+        if (isPlayer)
+        {
+            return PlayerProfile;
+        }
+        else
+        {
+            return EnemyProfiles[opponentID];
+        }
+    }
+
+    // Positions
     public static void RecordPosition(Vector3 pos, int id = -1)
     {
         // Save player pos
@@ -55,21 +81,53 @@ public class OverworldMemory : MonoBehaviour
         }
     }
 
+    public static Vector3 GetEnemyPosition(int id)
+    {
+        return EnemyPositions[id];
+    }
+
+    public static Dictionary<int, Vector3> GetEnemyPositions()
+    {
+        return EnemyPositions;
+    }
+
+    // Update enemy id's after re-creation
+    public static void UpdateID(int oldID, int newID)
+    {
+        // Change key position
+        EnemyPositions.Add(newID, EnemyPositions[oldID]);
+        EnemyPositions.Remove(oldID);
+
+        // Change key profile
+        EnemyProfiles.Add(newID, EnemyProfiles[oldID]);
+        EnemyProfiles.Remove(oldID);
+    }
+
+
+    // Player position
+    public static Vector3 GetPlayerPosition()
+    {
+        return PlayerPos;
+    }
+
+    // Opponent for combat
     public static int OpponentID
     {
         get { return opponentID; }
         set { opponentID = value; }
     }
 
-    public static MonsterProfile GetProfile(bool isPlayer)
+    public static void OpponentBeaten()
     {
-        if (isPlayer)
-        {
-            return PlayerProfile;
-        }
-        else
-        {
-            return EnemyProfiles[opponentID];
-        }
+        EnemyPositions.Remove(OpponentID);
+        EnemyProfiles.Remove(OpponentID);
+    }
+
+    // To clear info // ~~~ change once spawning supplies id's instead of distruction
+    public static void ClearEnemies()
+    {
+        EnemyPositions.Clear();
+        EnemyProfiles.Clear();
+        opponentID = 0;
     }
 }

@@ -33,7 +33,7 @@ public class MainManager : MonoBehaviour
     IEnumerator LoadOverworld()
     {
         yield return new WaitForSeconds(LoadDelay);
-        SceneManager.LoadSceneAsync((!OpeningScene.Equals("") ? OpeningScene : Settings.SceneOverworld), LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync((!OpeningScene.Equals("") ? OpeningScene : Settings.SceneOverworldMemory), LoadSceneMode.Additive);
     }
 
     public void AddScene(string scene)
