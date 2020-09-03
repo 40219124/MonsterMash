@@ -7,6 +7,8 @@ public class BattleUiController: MonoBehaviour
 	[SerializeField] Animator BattleUiAnimator;
 	[SerializeField] Transform DPadTransform;
 
+	bool ForceShowComplexStats;
+
 	void Awake()
 	{
 		DPadTransform.gameObject.SetActive(false);
@@ -20,14 +22,17 @@ public class BattleUiController: MonoBehaviour
 
 		bool isPlayer = Settings.ShowStatsForAi || currentAgent.ControlType == Agent.eControlType.Player;
 
-		bool forceShowComplexStats = false; //todo
+		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Pressed)
+		{
+			ForceShowComplexStats = !ForceShowComplexStats;
+		}
 
 		bool shouldPreShow = isPlayer && battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime;
 
 		bool shouldPostShow = battleController.TimeSinceActionStarted <= Settings.PostPickHangTime &&
 			battleController.CurrentAction != null;
 
-		bool showUi = forceShowComplexStats || ((shouldPreShow || shouldPostShow) && isPlayer);
+		bool showUi = ForceShowComplexStats || ((shouldPreShow || shouldPostShow) && isPlayer);
 
 		var attackerLocked = false;
 		var targetLocked = false;
@@ -59,7 +64,7 @@ public class BattleUiController: MonoBehaviour
 			}
 		}
 
-		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true, forceShowComplexStats);
-		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false, forceShowComplexStats);
+		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true, ForceShowComplexStats);
+		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false, ForceShowComplexStats);
 	}
 }

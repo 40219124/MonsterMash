@@ -84,7 +84,7 @@ public class SimpleInput : MonoBehaviour
     static EInput recentDpadInput;
 
     List<string> AxisStrings = new List<string>() {
-         "Vertical", "Horizontal" , "Vertical" ,"Horizontal" , "ButtonA", "ButtonB", "Submit", "Cancel" };
+         "Vertical", "Horizontal" , "Vertical" ,"Horizontal" , "ButtonA", "ButtonB", "Start", "Select" };
     // Start is called before the first frame update
     void Start()
     {
