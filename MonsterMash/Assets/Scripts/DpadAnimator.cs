@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DpadAnimator : MonoBehaviour
 {
-	const float AnimationTime = 1;
+	const float AnimationTime = 0.25f;
 
 	[SerializeField] Transform Root;
 
@@ -30,6 +30,16 @@ public class DpadAnimator : MonoBehaviour
 		TimeAccumulator = 0;
 		StartPos = startPos;
 		EndPos = endPos;
+	}
+
+	public void AnimateToPoint(Vector2 pos)
+	{
+		if (pos != EndPos)
+		{
+			TimeAccumulator = 0;
+			StartPos = EndPos;
+			EndPos = pos;
+		}
 	}
 
 	void Update()
