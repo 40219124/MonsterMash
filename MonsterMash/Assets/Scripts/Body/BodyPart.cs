@@ -70,7 +70,7 @@ public class BodyPart : MonoBehaviour
         return $"health: {CurrentHealth} / {PartData.HealthMaximum}";
     }
 
-    public virtual void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex)
+    public virtual void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex, bool forceDisable=false)
     {
     }
 
@@ -78,7 +78,19 @@ public class BodyPart : MonoBehaviour
     {
 		BodyPartType = bodyPartType;
         PartData = data;
-		BodyPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(bodyPartType, data.MonsterType);
+
+		SetSprite(bodyPartImageLookup);
+
 		PartAnimator.SetBool("Dead", !IsAlive);
     }
+
+	public void SetSprite(BodyPartSpriteLookup partSpriteLookup, EMonsterType monsterType=EMonsterType.none)
+	{
+		if (monsterType == EMonsterType.none)
+		{
+			monsterType = PartData.MonsterType;
+		}
+
+		BodyPartImage.sprite = partSpriteLookup.GetBodyPartSprite(BodyPartType, monsterType);
+	}
 }
