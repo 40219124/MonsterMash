@@ -20,6 +20,8 @@ public class SimpleInput : MonoBehaviour
         }
     }
 
+    private float DeadZone = 0.5f;
+
     public class ButtonInfo
     {
         EInput button;
@@ -97,10 +99,10 @@ public class SimpleInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Buttons[(int)EInput.dpadUp].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadUp]) > 0);
-        Buttons[(int)EInput.dpadRight].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadRight]) > 0);
-        Buttons[(int)EInput.dpadDown].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadDown]) < 0);
-        Buttons[(int)EInput.dpadLeft].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadLeft]) < 0);
+        Buttons[(int)EInput.dpadUp].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadUp]) > DeadZone);
+        Buttons[(int)EInput.dpadRight].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadRight]) > DeadZone);
+        Buttons[(int)EInput.dpadDown].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadDown]) < -DeadZone);
+        Buttons[(int)EInput.dpadLeft].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadLeft]) < -DeadZone);
         for (int i = (int)EInput.A; i <= (int)EInput.Select; ++i)
         {
             Buttons[i].SetActive(Input.GetButton(AxisStrings[i]));
