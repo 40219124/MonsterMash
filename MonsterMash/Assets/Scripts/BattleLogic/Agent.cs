@@ -80,28 +80,54 @@ public class Agent : MonoBehaviour
 
 	void GetPlayerAction()
 	{
-		float horizontalValue = Input.GetAxisRaw("Horizontal");
-		float verticalValue = Input.GetAxisRaw("Vertical");
-		float aButton = Input.GetAxisRaw("ButtonA");
+		var mostRecentDpad = SimpleInput.GetRecentDpad();
 
-		if (horizontalValue > 0 && verticalValue == 0 && (CanUseLimb(Body.RightArmPart) || LockedAttacker != Body.eBodyPartType.None))
+		if (SimpleInput.GetInputActive(mostRecentDpad))
 		{
-			SelectedPart = Body.eBodyPartType.RightArm;
-		}
-		else if (horizontalValue < 0 && verticalValue == 0 && (CanUseLimb(Body.LeftArmPart) || LockedAttacker != Body.eBodyPartType.None))
-		{
-			SelectedPart = Body.eBodyPartType.LeftArm;
-		}
-		else if (horizontalValue == 0 && verticalValue < 0 && (CanUseLimb(Body.LegsPart) || LockedAttacker != Body.eBodyPartType.None))
-		{
-			SelectedPart = Body.eBodyPartType.Leg;
-		}
-		else if (horizontalValue == 0 && verticalValue > 0 && LockedAttacker != Body.eBodyPartType.None)
-		{
-			SelectedPart = Body.eBodyPartType.Torso;
+
+			switch (mostRecentDpad)
+			{
+				case (EInput.dpadUp):
+				{
+					if (LockedAttacker != Body.eBodyPartType.None)
+					{
+						SelectedPart = Body.eBodyPartType.Torso;
+					}
+					break;
+				}
+				case (EInput.dpadLeft):
+				{
+					if (CanUseLimb(Body.LeftArmPart) || LockedAttacker != Body.eBodyPartType.None)
+					{
+						SelectedPart = Body.eBodyPartType.LeftArm;
+					}
+					break;
+				}
+				case (EInput.dpadRight):
+				{
+					if (CanUseLimb(Body.RightArmPart) || LockedAttacker != Body.eBodyPartType.None)
+					{
+						SelectedPart = Body.eBodyPartType.RightArm;
+					}
+					break;
+				}
+				case (EInput.dpadDown):
+				{
+					if (CanUseLimb(Body.LegsPart) || LockedAttacker != Body.eBodyPartType.None)
+					{
+						SelectedPart = Body.eBodyPartType.Leg;
+					}
+					break;
+				}
+				default:
+				{
+					Debug.LogError($" unexpected button: {mostRecentDpad}");
+					return;
+				}
+			}
 		}
 
-		if (aButton > 0)
+		if (SimpleInput.GetInputState(EInput.A) == EButtonState.Pressed)
 		{
 			if (LockedAttacker == Body.eBodyPartType.None)
 			{
