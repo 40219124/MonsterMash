@@ -310,14 +310,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerBody: {fileID: 292994621}
-  PickerBodyPart: {fileID: 143721773}
+  PickerBodyParts:
+  - {fileID: 143721773}
   UseButton: {fileID: 1640384626}
   DiscardButton: {fileID: 77366998}
   PartSpriteLookup: {fileID: 11400000, guid: fbbda82cfb39b6041b6c369878752a10, type: 2}
   DpadAnimatorContoller: {fileID: 84214294}
-  profileData:
+  ProfileData:
     Torso:
-      BodyPartType: 3
+      BodyPartType: 0
       MonsterType: 0
       HealthMaximum: 10
       HealthCurrent: 10
@@ -325,15 +326,15 @@ MonoBehaviour:
       Damage: 0
       AttackTimer: 0
     LeftArm:
-      BodyPartType: 1
+      BodyPartType: 0
       MonsterType: 0
-      HealthMaximum: 10
-      HealthCurrent: 10
+      HealthMaximum: 0
+      HealthCurrent: 0
       Armour: 0
       Damage: 0
       AttackTimer: 0
     RightArm:
-      BodyPartType: 1
+      BodyPartType: 0
       MonsterType: 0
       HealthMaximum: 10
       HealthCurrent: 10
@@ -341,21 +342,21 @@ MonoBehaviour:
       Damage: 0
       AttackTimer: 0
     Legs:
-      BodyPartType: 2
+      BodyPartType: 0
       MonsterType: 0
       HealthMaximum: 10
       HealthCurrent: 10
       Armour: 0
       Damage: 0
       AttackTimer: 0
-  BodyPartData:
-    BodyPartType: 1
+  BodyPartsData:
+  - BodyPartType: 1
     MonsterType: 1
     HealthMaximum: 10
     HealthCurrent: 10
-    Armour: 10
-    Damage: 10
-    AttackTimer: 10
+    Armour: 0
+    Damage: 0
+    AttackTimer: 0
 --- !u!1001 &254524589
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PartPickerUiController : MonoBehaviour
 {
     [SerializeField] Body PlayerBody;
-	[SerializeField] PickerBodyPartUi PickerBodyPart;
+	[SerializeField] List<PickerBodyPartUi> PickerBodyParts;
 
 	[SerializeField] Button UseButton;
 	[SerializeField] Button DiscardButton;
@@ -16,24 +16,67 @@ public class PartPickerUiController : MonoBehaviour
 
 	[Space]
     [Header("Debug")]
-	[SerializeField] MonsterProfile profileData;
-	[SerializeField] BodyPartData BodyPartData;
+	[SerializeField] MonsterProfile ProfileData;
+	[SerializeField] List<BodyPartData> BodyPartsData;
 	
 
 	void Start()
 	{
-		StartCoroutine(FlowController());
+		Setup(ProfileData, BodyPartsData);
 	}
 
-	IEnumerator FlowController()
+	public void Setup(MonsterProfile profileData, List<BodyPartData> bodyPartsDataList)
 	{
 		PlayerBody.SetProfileData(profileData);
+		StartCoroutine(FlowController(bodyPartsDataList));
+	}
+
+	IEnumerator FlowController(List<BodyPartData> bodyPartsDataList)
+	{
 		PlayerBody.ShowStats(true, Body.eBodyPartType.None, false, false, true);
-		PickerBodyPart.SetupData(BodyPartData, PartSpriteLookup);
+
+		int loop = 0;
+		foreach (var pickerBodyPart in PickerBodyParts)
+		{
+
+			pickerBodyPart.SetupData(loop < bodyPartsDataList.Count? bodyPartsDataList[loop] : null , PartSpriteLookup);
+			loop += 1;
+		}
+
+		if (loop < bodyPartsDataList.Count)
+		{
+			Debug.LogError($"not enough PickerBodyParts setup (num setup: {PickerBodyParts.Count}) num neeed: {bodyPartsDataList.Count}");
+		}
 		
 
+		foreach (var pickerBodyPart in PickerBodyParts)
+		{
+			if (pickerBodyPart.gameObject.active)
+			{
+				yield return StartCoroutine(PickPartUse(pickerBodyPart));
+			}
+		}
+		Debug.Log("Finished picking use of parts");
+
+		UseButton.SetSelected(false);
+		DiscardButton.SetSelected(false);
+		PlayerBody.ShowStats(true, Body.eBodyPartType.None, false, false, true);
+
+		while  (SimpleInput.GetInputState(EInput.A) != EButtonState.Pressed &&
+				SimpleInput.GetInputState(EInput.B) != EButtonState.Pressed &&
+				SimpleInput.GetInputState(EInput.Select) != EButtonState.Pressed)
+		{
+			yield return null;
+		}
+	}
+
+	IEnumerator PickPartUse(PickerBodyPartUi pickerBodyPart)
+	{
 		UseButton.SetShow(true);
 		DiscardButton.SetShow(true);
+		UseButton.SetButtonSize(true);
+		DiscardButton.SetButtonSize(true);
+
 		UseButton.SetSelected(false);
 		DiscardButton.SetSelected(false);
 		Button currentButton = null;
@@ -42,7 +85,7 @@ public class PartPickerUiController : MonoBehaviour
 		DpadAnimatorContoller.JumpToPoint(dpadPos);
 		DpadAnimatorContoller.SetShow(true);
 
-		while (!SimpleInput.GetInputActive(EInput.A) || currentButton == null)
+		while (SimpleInput.GetInputState(EInput.A) != EButtonState.Pressed || currentButton == null)
 		{
 			if (SimpleInput.GetInputActive(EInput.dpadLeft))
 			{
@@ -64,24 +107,21 @@ public class PartPickerUiController : MonoBehaviour
 
 		if (currentButton == DiscardButton)
 		{
-			Debug.Log($"Discard Body Part: {PickerBodyPart}");
-			yield break;
+			Debug.Log($"Discard Body Part: {pickerBodyPart}");
 		}
 		else
 		{
-			Debug.Log($"wanting to use Body Part: {PickerBodyPart}");
+			Debug.Log($"wanting to use Body Part: {pickerBodyPart}");
 
-			yield return StartCoroutine(SwapBodyPart(BodyPartData));
+			yield return StartCoroutine(SwapBodyPart(pickerBodyPart));
 		}
-
-		while (!SimpleInput.GetInputActive(EInput.A))
-		{
-			yield return null;
-		}
+		pickerBodyPart.gameObject.SetActive(false);
 	}
 
-	IEnumerator SwapBodyPart(BodyPartData bodyPartData)
+	IEnumerator SwapBodyPart(PickerBodyPartUi pickerBodyPart)
 	{
+		var bodyPartData = pickerBodyPart.PartData;
+
 		if (bodyPartData.BodyPartType == BodyPart.eBodyPartSlotType.Torso)
 		{
 			PlayerBody.TorsoPart.SetBodyPartData(PartSpriteLookup, bodyPartData, Body.eBodyPartType.Torso);
@@ -92,54 +132,66 @@ public class PartPickerUiController : MonoBehaviour
 			PlayerBody.LegsPart.SetBodyPartData(PartSpriteLookup, bodyPartData, Body.eBodyPartType.Leg);
 			yield break;
 		}
-		
-		DpadAnimatorContoller.AnimateToPoint(PlayerBody.DPadGameTransform.position);
-
-		BodyPart currentBodyPart = null;
-		while (!SimpleInput.GetInputActive(EInput.A) || currentBodyPart == null)
+		else if (!PlayerBody.LeftArmPart.IsAlive)
 		{
-			PlayerBody.TorsoPart.ShowStats(true, false, true, true, true);
-
-			PlayerBody.LeftArmPart.ShowStats(true, PlayerBody.LeftArmPart == currentBodyPart, false, true);
-			PlayerBody.LeftArmPart.SetSprite(PartSpriteLookup, 
-				PlayerBody.LeftArmPart == currentBodyPart? bodyPartData.MonsterType: EMonsterType.none);
-
-			PlayerBody.RightArmPart.ShowStats(true, PlayerBody.RightArmPart == currentBodyPart, false, true);
-			PlayerBody.RightArmPart.SetSprite(PartSpriteLookup, 
-				PlayerBody.RightArmPart == currentBodyPart? bodyPartData.MonsterType: EMonsterType.none);
-
-			PlayerBody.LegsPart.ShowStats(true, false, true, true, true);
-
-			
-			yield return null;
-
-			var mostRecentDpad = SimpleInput.GetRecentDpad();
-
-			if (!SimpleInput.GetInputActive(mostRecentDpad))
-			{
-				continue;
-			}
-
-			switch (mostRecentDpad)
-			{
-				case (EInput.dpadLeft):
-				{
-					currentBodyPart = PlayerBody.LeftArmPart;
-					break;
-				}
-				case (EInput.dpadRight):
-				{
-					currentBodyPart = PlayerBody.RightArmPart;
-					break;
-				}
-				default:
-				{
-					Debug.LogError($" unexpected button: {mostRecentDpad}");
-					break;
-				}
-			}
+			PlayerBody.LeftArmPart.SetBodyPartData(PartSpriteLookup, bodyPartData, Body.eBodyPartType.LeftArm);
+			yield break;
 		}
+		else if (!PlayerBody.RightArmPart.IsAlive)
+		{
+			PlayerBody.RightArmPart.SetBodyPartData(PartSpriteLookup, bodyPartData, Body.eBodyPartType.RightArm);
+			yield break;
+		}
+		else
+		{
+			DpadAnimatorContoller.AnimateToPoint(PlayerBody.DPadGameTransform.position);
 
-		currentBodyPart.SetBodyPartData(PartSpriteLookup, bodyPartData, currentBodyPart.BodyPartType);
+			BodyPart currentBodyPart = null;
+			while (SimpleInput.GetInputState(EInput.A) != EButtonState.Pressed || currentBodyPart == null)
+			{
+				PlayerBody.TorsoPart.ShowStats(true, false, true, true, true);
+
+				PlayerBody.LeftArmPart.ShowStats(true, PlayerBody.LeftArmPart == currentBodyPart, false, true);
+				PlayerBody.LeftArmPart.SetSprite(PartSpriteLookup, 
+					PlayerBody.LeftArmPart == currentBodyPart? bodyPartData.MonsterType: EMonsterType.none);
+
+				PlayerBody.RightArmPart.ShowStats(true, PlayerBody.RightArmPart == currentBodyPart, false, true);
+				PlayerBody.RightArmPart.SetSprite(PartSpriteLookup, 
+					PlayerBody.RightArmPart == currentBodyPart? bodyPartData.MonsterType: EMonsterType.none);
+
+				PlayerBody.LegsPart.ShowStats(true, false, true, true, true);
+
+				
+				yield return null;
+
+				var mostRecentDpad = SimpleInput.GetRecentDpad();
+
+				if (!SimpleInput.GetInputActive(mostRecentDpad))
+				{
+					continue;
+				}
+
+				switch (mostRecentDpad)
+				{
+					case (EInput.dpadLeft):
+					{
+						currentBodyPart = PlayerBody.LeftArmPart;
+						break;
+					}
+					case (EInput.dpadRight):
+					{
+						currentBodyPart = PlayerBody.RightArmPart;
+						break;
+					}
+					default:
+					{
+						Debug.LogError($" unexpected button: {mostRecentDpad}");
+						break;
+					}
+				}
+			}
+			currentBodyPart.SetBodyPartData(PartSpriteLookup, bodyPartData, currentBodyPart.BodyPartType);
+		}
+		pickerBodyPart.gameObject.SetActive(false);
 	}
 }
