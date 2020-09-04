@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MantisAnimController
+  m_Controller: {fileID: 9100000, guid: a9374f58fcba90b4baba4589f6bc05c5, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 9e338e09a0a2ed44cadff4f3a88e03c0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a80f25cd0051fc44a8ae1bf7dfc273b6, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2ec233cb93ddb4846942700cbdb6c0b4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8b66d8d50ab22324b92157356d0d8b0a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a39dcca4fcf1cd8438c63804346894cc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b4b14ebb0534ac14397eb1a353d814cd, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 318a8c1d693822a469693da93911999c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1c260098b79f6fd4c8596dd1db469b22, type: 2}

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a46703700d1959948baf2af59efc0c17, type: 3}
-  m_Name: MentisArm
+  m_Name: MantisTorso
   m_EditorClassIdentifier: 
-  BodyPartType: 1
+  BodyPartType: 3
   MonsterType: 2
-  HealthAvg: 20
-  HealthVariation: 5
-  ArmourAvg: 0
-  ArmourVariation: 1
-  DamageAvg: 6
-  DamageVariation: 2
-  AttackTime: 3
+  HealthAvg: 40
+  HealthVariation: 15
+  ArmourAvg: 2
+  ArmourVariation: 2
+  DamageAvg: 0
+  DamageVariation: 0
+  AttackTime: 0
