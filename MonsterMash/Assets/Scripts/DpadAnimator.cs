@@ -17,13 +17,14 @@ public class DpadAnimator : MonoBehaviour
 	float AnimationTime = 1;
 	float TimeAccumulator = 1;
 
-	Vector3 StartPos = Vector3.zero;
-	Vector3 EndPos = Vector3.zero;
+	Vector3 StartPos;
+	Vector3 EndPos;
 
 	void Awake()
 	{
 		TimeAccumulator = AnimationTime;
-		SetShow(false);
+		StartPos = Root.position;
+		EndPos = Root.position;
 	}
 
 	public void JumpToPoint(Vector3 pos)
