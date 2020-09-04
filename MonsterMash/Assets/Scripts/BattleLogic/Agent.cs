@@ -124,6 +124,19 @@ public class Agent : MonoBehaviour
 			}
 			SelectedPart = Body.eBodyPartType.None;
 		}
+
+		if (SimpleInput.GetInputState(EInput.B) == EButtonState.Pressed)
+		{
+			if (LockedTarget != Body.eBodyPartType.None)
+			{
+				LockedTarget = Body.eBodyPartType.None;
+			}
+			else
+			{
+				LockedAttacker = Body.eBodyPartType.None;
+			}
+			SelectedPart = Body.eBodyPartType.None;
+		}
 	}
 
 	Body.eBodyPartType AiPickedTarget;
