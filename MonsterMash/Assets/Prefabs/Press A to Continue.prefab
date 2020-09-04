@@ -81,7 +81,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415458109}
-  m_Text: Press Button
+  m_Text: 'Press '
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7472859265247561669, guid: 6142db07b96df0c4d83b33c94684b695, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 1.49
       objectReference: {fileID: 0}
     - target: {fileID: 7472859265247561669, guid: 6142db07b96df0c4d83b33c94684b695, type: 3}
       propertyPath: m_LocalPosition.y

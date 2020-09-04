@@ -156,7 +156,7 @@ MonoBehaviour:
   localCamera: {fileID: 944662823}
   localRenderTexture: {fileID: 1250219996}
   RequiredScenes: []
-  ButtonPrompt: {fileID: 965847678}
+  AButton: {fileID: 680981191}
 --- !u!4 &305363893
 Transform:
   m_ObjectHideFlags: 0
@@ -265,6 +265,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &680981191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5039106353536181087, guid: 8c5e95d983ac98b4c8762359c3f60831, type: 3}
+  m_PrefabInstance: {fileID: 965847676}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63812ea5f3c8e6d448607554b10af7b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &702360141
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Press A to Continue
       objectReference: {fileID: 0}
+    - target: {fileID: 3763704598378532886, guid: 8c5e95d983ac98b4c8762359c3f60831, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7717986973322943451, guid: 8c5e95d983ac98b4c8762359c3f60831, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -472,11 +487,6 @@ PrefabInstance:
 --- !u!4 &965847677 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7717986973322943451, guid: 8c5e95d983ac98b4c8762359c3f60831, type: 3}
-  m_PrefabInstance: {fileID: 965847676}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &965847678 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3763704598378532886, guid: 8c5e95d983ac98b4c8762359c3f60831, type: 3}
   m_PrefabInstance: {fileID: 965847676}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1250219995
