@@ -14,6 +14,11 @@ public class Button : MonoBehaviour
 		ButtonAnimator.SetBool("Selected", selected);
 	}
 
+	public void SetButtonSize(bool isLarge)
+	{
+		ButtonAnimator.SetBool("Complex", isLarge);
+	}
+
 	public void SetShow(bool show)
 	{
 		Root.SetActive(show);

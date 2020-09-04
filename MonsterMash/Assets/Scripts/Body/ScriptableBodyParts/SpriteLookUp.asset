@@ -43,3 +43,18 @@ MonoBehaviour:
   - BodyPartType: 0
     MonsterType: 1
     BodyPartSprite: {fileID: 7275657834697195427, guid: 20a7f8cb70c95324289acdef561b1cfa, type: 3}
+  - BodyPartType: 1
+    MonsterType: 2
+    BodyPartSprite: {fileID: 1314981167618769584, guid: 0ffa15c87727f8e4ea32ed4eea7e9305, type: 3}
+  - BodyPartType: 2
+    MonsterType: 2
+    BodyPartSprite: {fileID: 8841433378751868349, guid: 0ffa15c87727f8e4ea32ed4eea7e9305, type: 3}
+  - BodyPartType: 3
+    MonsterType: 2
+    BodyPartSprite: {fileID: 7840331836967051296, guid: 0ffa15c87727f8e4ea32ed4eea7e9305, type: 3}
+  - BodyPartType: 4
+    MonsterType: 2
+    BodyPartSprite: {fileID: 703125925706152189, guid: 0ffa15c87727f8e4ea32ed4eea7e9305, type: 3}
+  - BodyPartType: 0
+    MonsterType: 2
+    BodyPartSprite: {fileID: -2096317628245743753, guid: 0ffa15c87727f8e4ea32ed4eea7e9305, type: 3}

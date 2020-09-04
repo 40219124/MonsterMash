@@ -29,3 +29,11 @@ MonoBehaviour:
       Generator: {fileID: 11400000, guid: 87fc3c9bcae1d1e4c9afd00bc6eb7f50, type: 2}
     - Type: 2
       Generator: {fileID: 11400000, guid: 00e1c78fec2e2e54c9470dab6a6c5803, type: 2}
+  - MonsterType: 2
+    BodyPartGenerators:
+    - Type: 3
+      Generator: {fileID: 11400000, guid: 099f9ff97b599634081c5bc02f60f86b, type: 2}
+    - Type: 1
+      Generator: {fileID: 11400000, guid: 06b2fa6223177fc4bb29bcbbf7787748, type: 2}
+    - Type: 2
+      Generator: {fileID: 11400000, guid: cb542197c40e9e1479a875502233d8d1, type: 2}

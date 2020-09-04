@@ -5,8 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(OverworldMemory))]
 public class FlowManager : MonoBehaviour
 {
+    public enum ERoomApproach { none = -1, FirstTime, FromBattle };
+    private ERoomApproach approach = ERoomApproach.none;
     private void Start()
     {
+        approach = ERoomApproach.FirstTime;
+        TransToOverworld("");
     }
     public void TransOverworldToBattle()
     {
@@ -21,7 +25,31 @@ public class FlowManager : MonoBehaviour
         BattleController bc = FindObjectOfType<BattleController>();
         if (bc != null)
         {
-            bc.SetupBattle(OverworldMemory.GetProfile(true), OverworldMemory.GetProfile(false));
+            bc.SetupBattle(OverworldMemory.GetCombatProfile(true), OverworldMemory.GetCombatProfile(false));
+        }
+    }
+
+    // transition to overworld from unknown scene
+    public void TransToOverworld(string sceneFrom)
+    {
+        StartCoroutine(TransToOverworldCo(sceneFrom));
+    }
+
+    private IEnumerator TransToOverworldCo(string sceneFrom)
+    {
+        if (!sceneFrom.Equals(""))
+        {
+            approach = ERoomApproach.FromBattle;
+            yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
+        }
+        yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
+        yield return null;
+        FindObjectOfType<EnemySpawner>().SpawnEnemies(approach != ERoomApproach.FirstTime); // ~~~ spawn based on ERoomApproach
+        if (approach == ERoomApproach.FromBattle)
+        {
+            Player p = FindObjectOfType<Player>();
+            p.transform.position = OverworldMemory.GetPlayerPosition();
+            p.Profile = OverworldMemory.GetCombatProfile(true);
         }
     }
 }

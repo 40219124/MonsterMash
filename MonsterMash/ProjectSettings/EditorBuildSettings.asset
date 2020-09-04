@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OverworldMemory.unity
     guid: 4caa842476c1e7547a173bafa2aa09df
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 5e0a50bbbba34224a86447c3a070af99
   m_configObjects: {}

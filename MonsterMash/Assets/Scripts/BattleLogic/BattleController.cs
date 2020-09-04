@@ -101,6 +101,7 @@ public class BattleController : MonoBehaviour
 		{
 			BattleState = eBattleState.EnemyWon;
 			Debug.Log($"game over {BattleState}");
+			FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle); // ~~~ Avoid find later mayber // ~~~ also death screen not the overworld
 			return;
 		}
 
@@ -108,6 +109,9 @@ public class BattleController : MonoBehaviour
 		{
 			BattleState = eBattleState.PlayerWon;
 			Debug.Log($"game over {BattleState}");
+			// Remove enemy from memory // ~~~ move after limb stealing though
+			OverworldMemory.OpponentBeaten();
+			FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle); // ~~~ Avoid find later mayber
 			return;
 		}
 
