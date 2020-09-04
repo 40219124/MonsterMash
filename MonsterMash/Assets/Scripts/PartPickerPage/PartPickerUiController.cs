@@ -185,11 +185,6 @@ public class PartPickerUiController : MonoBehaviour
 						currentBodyPart = PlayerBody.RightArmPart;
 						break;
 					}
-					default:
-					{
-						Debug.LogError($" unexpected button: {mostRecentDpad}");
-						break;
-					}
 				}
 			}
 			currentBodyPart.SetBodyPartData(PartSpriteLookup, bodyPartData, currentBodyPart.BodyPartType);
