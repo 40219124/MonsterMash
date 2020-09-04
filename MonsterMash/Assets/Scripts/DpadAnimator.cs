@@ -9,6 +9,11 @@ public class DpadAnimator : MonoBehaviour
 	[SerializeField] Transform Root;
 	[SerializeField] Animator Animator;
 
+	[SerializeField] GameObject ArrowIconUp;
+	[SerializeField] GameObject ArrowIconRight;
+	[SerializeField] GameObject ArrowIconDown;
+	[SerializeField] GameObject ArrowIconLeft;
+
 	float AnimationTime = 1;
 	float TimeAccumulator = 1;
 
@@ -55,6 +60,10 @@ public class DpadAnimator : MonoBehaviour
 		{
 			Root.position = EndPos;
 		}
+		ArrowIconUp.SetActive(SimpleInput.GetInputActive(EInput.dpadUp));
+		ArrowIconRight.SetActive(SimpleInput.GetInputActive(EInput.dpadRight));
+		ArrowIconDown.SetActive(SimpleInput.GetInputActive(EInput.dpadDown));
+		ArrowIconLeft.SetActive(SimpleInput.GetInputActive(EInput.dpadLeft));
 	}
 
 	public void SetShow(bool show)
