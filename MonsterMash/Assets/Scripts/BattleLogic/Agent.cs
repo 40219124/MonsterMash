@@ -110,8 +110,9 @@ public class Agent : MonoBehaviour
 				}
 			}
 		}
-
-		if (SimpleInput.GetInputState(EInput.A) == EButtonState.Pressed)
+		
+		if ((!Settings.DpadOnlyCombat && SimpleInput.GetInputState(EInput.A) == EButtonState.Pressed) ||
+			(Settings.DpadOnlyCombat && SimpleInput.GetInputState(mostRecentDpad) == EButtonState.Released))
 		{
 			if (LockedAttacker == Body.eBodyPartType.None)
 			{
