@@ -59,7 +59,7 @@ public class BattleController : MonoBehaviour
 			if ((Player.ControlType == Agent.eControlType.Ai &&
 				Enemy.ControlType == Agent.eControlType.Ai &&
 				TimeSinceActionStarted > 2) ||
-				SimpleInput.GetInputActive(EInput.A))
+				SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
 			{
 				CurrentAgent = Player;
 				StartTurnTransition(true);

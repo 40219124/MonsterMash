@@ -6,12 +6,15 @@ public class BattleUiController: MonoBehaviour
 {
 	[SerializeField] Animator BattleUiAnimator;
 	[SerializeField] DpadAnimator DpadAnimatorContoller;
+	[SerializeField] GameObject ButtonAPrompt;
 
 	bool ForceShowComplexStats;
 
 	void Update()
 	{
 		var battleController = BattleController.Instance;
+		
+		ButtonAPrompt.SetActive(battleController.BattleState == BattleController.eBattleState.BattleIntro);
 
 		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
 		{
