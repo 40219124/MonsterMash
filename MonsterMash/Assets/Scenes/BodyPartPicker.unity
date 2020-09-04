@@ -351,7 +351,7 @@ MonoBehaviour:
       AttackTimer: 0
   BodyPartsData:
   - BodyPartType: 2
-    MonsterType: 1
+    MonsterType: 2
     HealthMaximum: 10
     HealthCurrent: 10
     Armour: 0
