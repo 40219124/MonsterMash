@@ -11,6 +11,15 @@ public class OverworldManager : AdditiveSceneManager
 
     public bool Transitioning = false;
 
+	[SerializeField] ButtonAnimator BButton;
+	[SerializeField] ButtonAnimator AButton;
+
+	void Awake()
+	{
+		BButton.SetHighlight(false);
+		AButton.SetHighlight(false);
+	}
+
     public void DoTransitionToBattle()
     {
         if (!Transitioning)
