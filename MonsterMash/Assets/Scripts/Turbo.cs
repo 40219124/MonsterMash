@@ -43,7 +43,7 @@ public class TurboWindow : EditorWindow
 		}
 		if (GUILayout.Button("10X Turbo"))
 		{
-			SetTime(4f);
+			SetTime(10f);
 		}
 		EditorGUILayout.EndHorizontal();
 
