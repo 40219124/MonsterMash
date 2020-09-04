@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class TitleManager : AdditiveSceneManager
 {
+	[SerializeField] ButtonAnimator AButton;
     float timeElapsed = 0.0f;
     bool triggered = false;
-    // Update is called once per frame
+
+	void Awake()
+	{
+		AButton.SetHighlight(true);
+	}
+
     void Update()
     {
         timeElapsed += Time.deltaTime;
