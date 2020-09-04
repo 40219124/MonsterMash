@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -55,3 +56,4 @@ public class TurboWindow : EditorWindow
 		Time.timeScale = time;
 	}
 }
+#endif
