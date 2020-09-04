@@ -1,25 +1,31 @@
 fileFormatVersion: 2
-guid: 4036a903699fb3542b2f0e6ae623d839
+guid: ae3bec3d29f6abd4590e52c49686caca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -728488644960612398
-    second: HealthPotion_0
+      213: -1954953058819580251
+    second: DoorTreeTop_0
   - first:
-      213: 6568769548595372064
-    second: HealthPotion_1
+      213: -5256212681923115326
+    second: DoorTreeTop_1
   - first:
-      213: 1696578853263515179
-    second: HealthPotion_2
+      213: 3088644452836198618
+    second: DoorTreeRight_0
   - first:
-      213: 6725426836128359962
-    second: HealthPotion_3
+      213: -8475797244996327744
+    second: DoorTreeRight_1
   - first:
-      213: 4017597706057619578
-    second: HealthPotion_4
+      213: -430647666459038049
+    second: DoorTreeDown_0
   - first:
-      213: -2231715841441770108
-    second: HealthPotion_5
+      213: 5088187503808522128
+    second: DoorTreeDown_1
+  - first:
+      213: 1679477310455180346
+    second: DoorTreeLeft_0
+  - first:
+      213: 129071862062118963
+    second: DoorTreeLeft_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -107,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HealthPotion_0
+      name: DoorTreeTop_0
       rect:
         serializedVersion: 2
         x: 0
@@ -121,14 +127,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2df8736ef63e3e5f0800000000000000
-      internalID: -728488644960612398
+      spriteID: 5aede700d8c9ed4e0800000000000000
+      internalID: -1954953058819580251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthPotion_1
+      name: DoorTreeTop_1
       rect:
         serializedVersion: 2
         x: 16
@@ -142,14 +148,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0202e630a15f82b50800000000000000
-      internalID: 6568769548595372064
+      spriteID: 2c6c1161a6e2e07b0800000000000000
+      internalID: -5256212681923115326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthPotion_2
+      name: DoorTreeRight_0
       rect:
         serializedVersion: 2
         x: 32
@@ -163,14 +169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2e163a6a757b8710800000000000000
-      internalID: 1696578853263515179
+      spriteID: ad848c8f3c11dda20800000000000000
+      internalID: 3088644452836198618
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthPotion_3
+      name: DoorTreeRight_1
       rect:
         serializedVersion: 2
         x: 48
@@ -184,14 +190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a166f4a1314855d50800000000000000
-      internalID: 6725426836128359962
+      spriteID: 0c662c7ff4bef5a80800000000000000
+      internalID: -8475797244996327744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthPotion_4
+      name: DoorTreeDown_0
       rect:
         serializedVersion: 2
         x: 64
@@ -205,14 +211,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a781df7d3df51c730800000000000000
-      internalID: 4017597706057619578
+      spriteID: f9eab51aa38060af0800000000000000
+      internalID: -430647666459038049
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HealthPotion_5
+      name: DoorTreeDown_1
       rect:
         serializedVersion: 2
         x: 80
@@ -226,8 +232,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 485504f244a5701e0800000000000000
-      internalID: -2231715841441770108
+      spriteID: 097a61b839fdc9640800000000000000
+      internalID: 5088187503808522128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoorTreeLeft_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3c620237b3be4710800000000000000
+      internalID: 1679477310455180346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoorTreeLeft_1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 338f5b8bc2e8ac100800000000000000
+      internalID: 129071862062118963
       vertices: []
       indices: 
       edges: []
