@@ -1,6 +1,6 @@
 public class Settings
 {
-	public const bool ShowStatsForAi = true;
+	public const bool ShowStatsForAi = false;
 	public const float ActionTimeForgiveness = 0.2f;
 	public const float TurnTime = 10.0f;
 	public const float TurnTransitionTime = 1.0f;
