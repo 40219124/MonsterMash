@@ -58,6 +58,7 @@ public class PartPickerUiController : MonoBehaviour
 		}
 		Debug.Log("Finished picking use of parts");
 
+		DpadAnimatorContoller.SetShow(false);
 		UseButton.SetSelected(false);
 		DiscardButton.SetSelected(false);
 		PlayerBody.ShowStats(true, Body.eBodyPartType.None, false, false, true);
@@ -72,6 +73,7 @@ public class PartPickerUiController : MonoBehaviour
 
 	IEnumerator PickPartUse(PickerBodyPartUi pickerBodyPart)
 	{
+		Debug.Log($"picking use of part: {pickerBodyPart}");
 		UseButton.SetShow(true);
 		DiscardButton.SetShow(true);
 		UseButton.SetButtonSize(true);

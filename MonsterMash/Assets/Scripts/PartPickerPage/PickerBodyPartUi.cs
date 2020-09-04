@@ -29,4 +29,9 @@ public class PickerBodyPartUi : MonoBehaviour
 			StatBox.SetArmourNumber(true, PartData.Armour);
 		}
 	}
+
+	public override string ToString()
+	{
+		return $"PickerBodyPartUi({PartData})";
+	} 
 }

@@ -14,6 +14,11 @@ public class BodyPartData
     public int Damage;
     public int AttackTimer;
 
+	public override string ToString()
+	{
+		return $"BodyPartType: {BodyPartType}, MonsterType: {MonsterType}, health:{HealthCurrent}";
+	} 
+
     private BodyPartData() { }
     public BodyPartData(BodyPart.eBodyPartSlotType _bodyPartType, EMonsterType _monsterType, int _health, int _armour, int _damage, int _attackTimer)
     {
