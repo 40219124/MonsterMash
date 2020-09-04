@@ -30,6 +30,12 @@ public class PickerBodyPartUi : MonoBehaviour
 		}
 	}
 
+	public void SetSelected(bool selected)
+	{
+		StatBox.Show(true, selected, PartData.BodyPartType != BodyPart.eBodyPartSlotType.Torso, false);
+		PartAnimator.SetBool("Selected", selected);
+	}
+
 	public override string ToString()
 	{
 		return $"PickerBodyPartUi({PartData})";

@@ -78,6 +78,7 @@ public class PartPickerUiController : MonoBehaviour
 		DiscardButton.SetShow(true);
 		UseButton.SetButtonSize(true);
 		DiscardButton.SetButtonSize(true);
+		pickerBodyPart.SetSelected(true);
 
 		UseButton.SetSelected(false);
 		DiscardButton.SetSelected(false);
