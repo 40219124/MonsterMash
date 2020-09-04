@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 1317643412}
   - component: {fileID: 1317643411}
   m_Layer: 0
-  m_Name: BattleSceneManager
+  m_Name: GameOverManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1317643410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 860ffd09d729f1c4f9e9a3421ec90aef, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f66f8224d9e28742a4a047dfd64a96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   localCamera: {fileID: 1011259098}

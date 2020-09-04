@@ -101,7 +101,7 @@ public class BattleController : MonoBehaviour
 		{
 			BattleState = eBattleState.EnemyWon;
 			Debug.Log($"game over {BattleState}");
-			FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle); // ~~~ Avoid find later mayber // ~~~ also death screen not the overworld
+			FindObjectOfType<FlowManager>().TransToGameOver(Settings.SceneBattle); // ~~~ Avoid find later mayber 
 			return;
 		}
 

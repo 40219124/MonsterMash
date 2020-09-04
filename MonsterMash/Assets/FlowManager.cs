@@ -10,7 +10,7 @@ public class FlowManager : MonoBehaviour
     private void Start()
     {
         approach = ERoomApproach.FirstTime;
-        TransToOverworld("");
+        TransToOverworld();
     }
     public void TransOverworldToBattle()
     {
@@ -30,7 +30,7 @@ public class FlowManager : MonoBehaviour
     }
 
     // transition to overworld from unknown scene
-    public void TransToOverworld(string sceneFrom)
+    public void TransToOverworld(string sceneFrom = "")
     {
         StartCoroutine(TransToOverworldCo(sceneFrom));
     }
@@ -51,5 +51,32 @@ public class FlowManager : MonoBehaviour
             p.transform.position = OverworldMemory.GetPlayerPosition();
             p.Profile = OverworldMemory.GetCombatProfile(true);
         }
+    }
+
+    public void TransToGameOver(string sceneFrom)
+    {
+        StartCoroutine(TransToGameOverCo(sceneFrom));
+    }
+
+    private IEnumerator TransToGameOverCo(string sceneFrom)
+    {
+        if (!sceneFrom.Equals(""))
+        {
+            yield return MainManager.Instance.SubtractSceneCo(sceneFrom);
+        }
+        yield return MainManager.Instance.AddSceneCo(Settings.SceneGameOver);
+    }
+    public void TransToTitle(string sceneFrom)
+    {
+        StartCoroutine(TransToTitleCo(sceneFrom));
+    }
+
+    private IEnumerator TransToTitleCo(string sceneFrom)
+    {
+        if (!sceneFrom.Equals(""))
+        {
+            yield return MainManager.Instance.SubtractSceneCo(sceneFrom);
+        }
+        MainManager.Instance.GoToTitle();
     }
 }
