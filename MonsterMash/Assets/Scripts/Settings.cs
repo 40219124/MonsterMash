@@ -4,7 +4,7 @@ public class Settings
 	public const bool ShowStatsForAi = false;
 	public const bool DpadOnlyCombat = true;
 	public const float ActionTimeForgiveness = 0.2f;
-	public const float TurnTime = 10.0f;
+	public const float TurnTime = 6.0f;
 	public const float TurnTransitionTime = 1.0f;
 	public const float PreShowBattleUiTime = 2f;
 	public const float PreQueueActionTime = 2f;
