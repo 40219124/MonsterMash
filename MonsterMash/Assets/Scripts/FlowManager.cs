@@ -37,34 +37,47 @@ public class FlowManager : MonoBehaviour
 
     private IEnumerator TransToOverworldCo(string sceneFrom)
     {
-        if (!sceneFrom.Equals(""))
-        {
-            approach = ERoomApproach.FromBattle;
-            yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
-        }
-        yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
-        yield return null;
-        FindObjectOfType<EnemySpawner>().SpawnEnemies(approach != ERoomApproach.FirstTime); // ~~~ spawn based on ERoomApproach
-        if (approach == ERoomApproach.FromBattle)
-        {
-            Player p = FindObjectOfType<Player>();
-            p.transform.position = OverworldMemory.GetPlayerPosition();
-            p.Profile = OverworldMemory.GetCombatProfile(true);
-        }
+		if (!sceneFrom.Equals(""))
+		{
+			approach = ERoomApproach.FromBattle;
+			yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
+		}
+
+		var loadEnemyFromMemory = approach != ERoomApproach.FirstTime;
+
+		if(loadEnemyFromMemory &&
+			OverworldMemory.GetEnemyPositions().Count == 0)
+		{
+			TransToGameOver("", true);
+		}
+		else
+		{
+			yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
+			yield return null;
+			FindObjectOfType<EnemySpawner>().SpawnEnemies(loadEnemyFromMemory); // ~~~ spawn based on ERoomApproach
+			if (approach == ERoomApproach.FromBattle)
+			{
+				Player p = FindObjectOfType<Player>();
+				p.transform.position = OverworldMemory.GetPlayerPosition();
+				p.Profile = OverworldMemory.GetCombatProfile(true);
+			}
+		}
     }
 
-    public void TransToGameOver(string sceneFrom)
+    public void TransToGameOver(string sceneFrom, bool wonTheGame)
     {
-        StartCoroutine(TransToGameOverCo(sceneFrom));
+        StartCoroutine(TransToGameOverCo(sceneFrom, wonTheGame));
     }
 
-    private IEnumerator TransToGameOverCo(string sceneFrom)
+    private IEnumerator TransToGameOverCo(string sceneFrom, bool wonTheGame)
     {
         if (!sceneFrom.Equals(""))
         {
             yield return MainManager.Instance.SubtractSceneCo(sceneFrom);
         }
         yield return MainManager.Instance.AddSceneCo(Settings.SceneGameOver);
+		yield return null;
+        FindObjectOfType<GameOverManager>().Setup(wonTheGame);
     }
     public void TransToTitle(string sceneFrom)
     {

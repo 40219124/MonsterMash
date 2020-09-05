@@ -6,7 +6,12 @@ public class GameOverManager : AdditiveSceneManager
 {
     float timeElapsed = 0.0f;
     bool triggered = false;
-    // Update is called once per frame
+
+	public void Setup(bool wonTheGame)
+	{
+		Debug.Log($"GameOver wonTheGame: {wonTheGame}");
+	}
+
     void Update()
     {
         timeElapsed += Time.deltaTime;

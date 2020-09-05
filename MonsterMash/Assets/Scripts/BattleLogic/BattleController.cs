@@ -107,7 +107,7 @@ public class BattleController : MonoBehaviour
 		{
 			BattleState = eBattleState.EnemyWon;
 			Debug.Log($"game over {BattleState}");
-			FindObjectOfType<FlowManager>().TransToGameOver(Settings.SceneBattle); // ~~~ Avoid find later mayber 
+			FindObjectOfType<FlowManager>().TransToGameOver(Settings.SceneBattle, false); // ~~~ Avoid find later mayber 
 			return;
 		}
 
