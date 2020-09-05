@@ -160,8 +160,10 @@ public class Agent : MonoBehaviour
 			else
 			{
 				Debug.Log($"AI Picked action attacker: \"{SelectedPart}\" target \"{AiPickedTarget}\"");
-				PickAttackerTime = Random.Range(Settings.AiPickAttackerMinTime, Settings.AiPickAttackerMaxTime);
-				PickTargetTime = Random.Range(Settings.AiPickTargetMinTime, Settings.AiPickTargetMaxTime);
+
+
+				PickAttackerTime = Random.Range(Settings.AiPickAttackerMinTime/Settings.AiTurnTimeSpeedMultiplier, Settings.AiPickAttackerMaxTime/Settings.AiTurnTimeSpeedMultiplier);
+				PickTargetTime = Random.Range(Settings.AiPickTargetMinTime/Settings.AiTurnTimeSpeedMultiplier, Settings.AiPickTargetMaxTime/Settings.AiTurnTimeSpeedMultiplier);
 			}
 		}
 		else
