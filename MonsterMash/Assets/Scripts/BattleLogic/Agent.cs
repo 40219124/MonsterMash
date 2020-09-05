@@ -73,7 +73,7 @@ public class Agent : MonoBehaviour
 			{
 				case (EInput.dpadUp):
 				{
-					if (LockedAttacker != Body.eBodyPartType.None && Body.TorsoPart.IsAlive)
+					if (LockedAttacker != Body.eBodyPartType.None && Opponent.Body.TorsoPart.IsAlive)
 					{
 						SelectedPart = Body.eBodyPartType.Torso;
 					}
@@ -82,7 +82,7 @@ public class Agent : MonoBehaviour
 				case (EInput.dpadLeft):
 				{
 					if ((LockedAttacker == Body.eBodyPartType.None && Body.LeftArmPart.IsValidAttacker()) || 
-						(LockedAttacker != Body.eBodyPartType.None && Body.LeftArmPart.IsAlive))
+						(LockedAttacker != Body.eBodyPartType.None && Opponent.Body.LeftArmPart.IsAlive))
 					{
 						SelectedPart = Body.eBodyPartType.LeftArm;
 					}
@@ -91,7 +91,7 @@ public class Agent : MonoBehaviour
 				case (EInput.dpadRight):
 				{
 					if ((LockedAttacker == Body.eBodyPartType.None && Body.RightArmPart.IsValidAttacker()) || 
-						(LockedAttacker != Body.eBodyPartType.None && Body.RightArmPart.IsAlive))
+						(LockedAttacker != Body.eBodyPartType.None && Opponent.Body.RightArmPart.IsAlive))
 					{
 						SelectedPart = Body.eBodyPartType.RightArm;
 					}
@@ -100,7 +100,7 @@ public class Agent : MonoBehaviour
 				case (EInput.dpadDown):
 				{
 					if ((LockedAttacker == Body.eBodyPartType.None && Body.LegsPart.IsValidAttacker()) || 
-						(LockedAttacker != Body.eBodyPartType.None && Body.LegsPart.IsAlive))
+						(LockedAttacker != Body.eBodyPartType.None && Opponent.Body.LegsPart.IsAlive))
 					{
 						SelectedPart = Body.eBodyPartType.Leg;
 					}
