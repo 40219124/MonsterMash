@@ -16,17 +16,20 @@ public class PartPickerUiController : MonoBehaviour
 
 	[Space]
     [Header("Debug")]
-	[SerializeField] MonsterProfile ProfileData;
+	[SerializeField] MonsterProfile DebugProfileData;
 	[SerializeField] List<BodyPartData> BodyPartsData;
 	
 
+	MonsterProfile ProfileData;
+
 	void Start()
 	{
-		Setup(ProfileData, BodyPartsData);
+		Setup(DebugProfileData, BodyPartsData);
 	}
 
 	public void Setup(MonsterProfile profileData, List<BodyPartData> bodyPartsDataList)
 	{
+		ProfileData = profileData;
 		PlayerBody.SetProfileData(profileData);
 		StartCoroutine(FlowController(bodyPartsDataList));
 	}
@@ -128,22 +131,22 @@ public class PartPickerUiController : MonoBehaviour
 
 		if (bodyPartData.BodyPartType == BodyPart.eBodyPartSlotType.Torso)
 		{
-			PlayerBody.TorsoPart.SetBodyPartData(PartSpriteLookup, bodyPartData, Body.eBodyPartType.Torso);
+			SwapPart(PlayerBody.TorsoPart, bodyPartData);
 			yield break;
 		}
 		else if (bodyPartData.BodyPartType == BodyPart.eBodyPartSlotType.Leg)
 		{
-			PlayerBody.LegsPart.SetBodyPartData(PartSpriteLookup, bodyPartData, Body.eBodyPartType.Leg);
+			SwapPart(PlayerBody.LegsPart, bodyPartData);
 			yield break;
 		}
 		else if (!PlayerBody.LeftArmPart.IsAlive)
 		{
-			PlayerBody.LeftArmPart.SetBodyPartData(PartSpriteLookup, bodyPartData, Body.eBodyPartType.LeftArm);
+			SwapPart(PlayerBody.LeftArmPart, bodyPartData);
 			yield break;
 		}
 		else if (!PlayerBody.RightArmPart.IsAlive)
 		{
-			PlayerBody.RightArmPart.SetBodyPartData(PartSpriteLookup, bodyPartData, Body.eBodyPartType.RightArm);
+			SwapPart(PlayerBody.RightArmPart, bodyPartData);
 			yield break;
 		}
 		else
@@ -189,8 +192,41 @@ public class PartPickerUiController : MonoBehaviour
 					}
 				}
 			}
-			currentBodyPart.SetBodyPartData(PartSpriteLookup, bodyPartData, currentBodyPart.BodyPartType);
+			SwapPart(currentBodyPart, bodyPartData);
 		}
 		pickerBodyPart.gameObject.SetActive(false);
+	}
+
+	void SwapPart(BodyPart bodyPartToOverWrite, BodyPartData dataToWrite)
+	{
+		switch (bodyPartToOverWrite.BodyPartType)
+		{
+			case (Body.eBodyPartType.Torso):
+			{
+				ProfileData.Torso = dataToWrite;
+				break;
+			}
+			case (Body.eBodyPartType.LeftArm):
+			{
+				ProfileData.LeftArm = dataToWrite;
+				break;
+			}
+			case (Body.eBodyPartType.RightArm):
+			{
+				ProfileData.RightArm = dataToWrite;
+				break;
+			}
+			case (Body.eBodyPartType.Leg):
+			{
+				ProfileData.Legs = dataToWrite;
+				break;
+			}
+			default:
+			{
+				Debug.LogError($"unexpected eBodyPartType: {bodyPartToOverWrite.BodyPartType}");
+				break;
+			}
+		}
+		bodyPartToOverWrite.SetBodyPartData(PartSpriteLookup, dataToWrite, bodyPartToOverWrite.BodyPartType);
 	}
 }
