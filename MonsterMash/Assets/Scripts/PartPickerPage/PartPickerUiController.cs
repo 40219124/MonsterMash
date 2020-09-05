@@ -88,7 +88,7 @@ public class PartPickerUiController : MonoBehaviour
 		DpadAnimatorContoller.JumpToPoint(dpadPos);
 		DpadAnimatorContoller.SetShow(true);
 
-		while (SimpleInput.GetInputState(EInput.A) != EButtonState.Pressed || currentButton == null)
+		while (SimpleInput.GetInputState(EInput.A) != EButtonState.Released || currentButton == null)
 		{
 			if (SimpleInput.GetInputActive(EInput.dpadLeft))
 			{
@@ -150,7 +150,7 @@ public class PartPickerUiController : MonoBehaviour
 			DpadAnimatorContoller.AnimateToPoint(PlayerBody.DPadGameTransform.position);
 
 			BodyPart currentBodyPart = null;
-			while (SimpleInput.GetInputState(EInput.A) != EButtonState.Pressed || currentBodyPart == null)
+			while (SimpleInput.GetInputState(EInput.A) != EButtonState.Released || currentBodyPart == null)
 			{
 				PlayerBody.TorsoPart.ShowStats(true, false, true, true, true);
 
