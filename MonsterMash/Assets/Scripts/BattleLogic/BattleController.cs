@@ -81,10 +81,16 @@ public class BattleController : MonoBehaviour
 			return;
 		}
 
-		TimeLeftOfAction -= Time.deltaTime;
+		var deltaTime = Time.deltaTime;
+
+		if (CurrentAgent.ControlType != Agent.eControlType.Player)
+		{
+			deltaTime *= Settings.AiTurnTimeSpeedMultiplier;
+		}
+
+		TimeLeftOfAction -= deltaTime;
 		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
 
-		var deltaTime = Time.deltaTime;
 		if (TimeLeftOfAction <= 0 && CurrentAction == null)
 		{
 			if (!CurrentAgent.Body.LeftArmPart.IsValidAttacker() &&
