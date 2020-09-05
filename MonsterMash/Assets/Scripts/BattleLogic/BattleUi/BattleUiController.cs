@@ -19,7 +19,7 @@ public class BattleUiController: MonoBehaviour
 		ButtonAPrompt.SetActive(battleController.BattleState == BattleController.eBattleState.BattleIntro);
 
 		var currentAgent = battleController.CurrentAgent;
-		
+
 		TurnArrow.position = currentAgent.Body.Root.position;
 
 		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
@@ -77,7 +77,7 @@ public class BattleUiController: MonoBehaviour
 		}
 
 		var showDpad = currentAgent.ControlType == Agent.eControlType.Player &&
-						(!attackerLocked || !targetLocked);
+						(!attackerLocked || !targetLocked) && shouldPreShow;
 						
 		DpadAnimatorContoller.SetShow(showDpad);
 		if (showDpad)
