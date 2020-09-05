@@ -76,14 +76,13 @@ public class BattleUiController: MonoBehaviour
 		DpadAnimatorContoller.SetShow(showDpad);
 		if (showDpad)
 		{
+			Vector2 targetPos = currentAgent.Body.DPadGameTransform.position;
+
 			if (attackerLocked)
 			{
-				DpadAnimatorContoller.AnimateToPoint(opponent.Body.DPadGameTransform.position);
+				targetPos = opponent.Body.DPadGameTransform.position;
 			}
-			else
-			{
-				DpadAnimatorContoller.AnimateToPoint(currentAgent.Body.DPadGameTransform.position);
-			}
+			DpadAnimatorContoller.JumpToPoint(targetPos);
 		}
 
 		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true, ForceShowComplexStats);
