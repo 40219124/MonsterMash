@@ -261,6 +261,7 @@ public class BattleController : MonoBehaviour
 			shakePower = 15f;
 		}
 		CameraShakeController.PlayShake(shakePower);
+		CurrentAgent.Body.EndAttack();
 
 		while (TimeLeftOfAction > 0)
 		{
@@ -268,7 +269,5 @@ public class BattleController : MonoBehaviour
 		}
 
 		CurrentAction = null;
-
-		CurrentAgent.Body.EndAttack();
 	}
 }

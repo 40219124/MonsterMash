@@ -10,7 +10,7 @@ public class GameOverManager : AdditiveSceneManager
     void Update()
     {
         timeElapsed += Time.deltaTime;
-        if(!triggered && timeElapsed > 1.0f && SimpleInput.GetInputActive(EInput.A))
+        if(!triggered && timeElapsed > 1.0f && SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
         {
             FindObjectOfType<FlowManager>().TransToTitle(Settings.SceneGameOver);
             triggered = true;

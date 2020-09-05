@@ -73,7 +73,7 @@ public class Agent : MonoBehaviour
 			{
 				case (EInput.dpadUp):
 				{
-					if (LockedAttacker != Body.eBodyPartType.None)
+					if (LockedAttacker != Body.eBodyPartType.None && Body.LeftArmPart.IsAlive)
 					{
 						SelectedPart = Body.eBodyPartType.Torso;
 					}
@@ -81,7 +81,8 @@ public class Agent : MonoBehaviour
 				}
 				case (EInput.dpadLeft):
 				{
-					if (Body.LeftArmPart.IsValidAttacker() || LockedAttacker != Body.eBodyPartType.None)
+					if ((LockedAttacker == Body.eBodyPartType.None && Body.LeftArmPart.IsValidAttacker()) || 
+						(LockedAttacker != Body.eBodyPartType.None && Body.LeftArmPart.IsAlive))
 					{
 						SelectedPart = Body.eBodyPartType.LeftArm;
 					}
@@ -89,7 +90,8 @@ public class Agent : MonoBehaviour
 				}
 				case (EInput.dpadRight):
 				{
-					if (Body.RightArmPart.IsValidAttacker() || LockedAttacker != Body.eBodyPartType.None)
+					if ((LockedAttacker == Body.eBodyPartType.None && Body.RightArmPart.IsValidAttacker()) || 
+						(LockedAttacker != Body.eBodyPartType.None && Body.RightArmPart.IsAlive))
 					{
 						SelectedPart = Body.eBodyPartType.RightArm;
 					}
@@ -97,7 +99,8 @@ public class Agent : MonoBehaviour
 				}
 				case (EInput.dpadDown):
 				{
-					if (Body.LegsPart.IsValidAttacker() || LockedAttacker != Body.eBodyPartType.None)
+					if ((LockedAttacker == Body.eBodyPartType.None && Body.LegsPart.IsValidAttacker()) || 
+						(LockedAttacker != Body.eBodyPartType.None && Body.LegsPart.IsAlive))
 					{
 						SelectedPart = Body.eBodyPartType.Leg;
 					}
@@ -110,8 +113,9 @@ public class Agent : MonoBehaviour
 				}
 			}
 		}
-
-		if (SimpleInput.GetInputState(EInput.A) == EButtonState.Pressed)
+		
+		if ((!Settings.DpadOnlyCombat && SimpleInput.GetInputState(EInput.A) == EButtonState.Pressed) ||
+			(Settings.DpadOnlyCombat && SimpleInput.GetInputState(mostRecentDpad) == EButtonState.Released))
 		{
 			if (LockedAttacker == Body.eBodyPartType.None)
 			{
@@ -120,6 +124,19 @@ public class Agent : MonoBehaviour
 			else
 			{
 				LockedTarget = SelectedPart;
+			}
+			SelectedPart = Body.eBodyPartType.None;
+		}
+
+		if (SimpleInput.GetInputState(EInput.B) == EButtonState.Pressed)
+		{
+			if (LockedTarget != Body.eBodyPartType.None)
+			{
+				LockedTarget = Body.eBodyPartType.None;
+			}
+			else
+			{
+				LockedAttacker = Body.eBodyPartType.None;
 			}
 			SelectedPart = Body.eBodyPartType.None;
 		}

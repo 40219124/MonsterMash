@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -42,7 +43,7 @@ public class TurboWindow : EditorWindow
 		}
 		if (GUILayout.Button("10X Turbo"))
 		{
-			SetTime(4f);
+			SetTime(10f);
 		}
 		EditorGUILayout.EndHorizontal();
 
@@ -55,3 +56,4 @@ public class TurboWindow : EditorWindow
 		Time.timeScale = time;
 	}
 }
+#endif
