@@ -24,7 +24,7 @@ public class AdditiveSceneManager : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         if (FindObjectOfType<MainManager>() != null)
         {

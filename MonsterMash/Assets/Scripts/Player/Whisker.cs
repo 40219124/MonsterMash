@@ -6,68 +6,43 @@ public enum EFourDirections { none = -1, up, right, down, left };
 
 public class Whisker : MonoBehaviour
 {
-    [SerializeField]
-    EFourDirections Direction;
-    Vector3 DirectionVector;
-
-    int TriggerCount = 0;
-
     OverworldAgent Agent;
-    bool PlayerWhisker = false;
+    [SerializeField]
+    EFourDirections WhiskerLocation = EFourDirections.none;
+
+    Dictionary<string, int> Interactions = new Dictionary<string, int>();
     // Start is called before the first frame update
     void Start()
     {
-        Agent = GetComponentInParent<OverworldAgent>();
-        if (GetComponentInParent<Player>() != null)
-        {
-            PlayerWhisker = true;
-        }
+        StartCoroutine(FindAgent());
+    }
 
-        switch (Direction)
+    private IEnumerator FindAgent()
+    {
+        while (Agent == null)
         {
-            case EFourDirections.up:
-                DirectionVector = Vector3.up;
-                break;
-            case EFourDirections.right:
-                DirectionVector = Vector3.right;
-                break;
-            case EFourDirections.down:
-                DirectionVector = Vector3.down;
-                break;
-            case EFourDirections.left:
-                DirectionVector = Vector3.left;
-                break;
-            default:
-                DirectionVector = Vector3.up;
-                break;
+            Agent = GetComponentInParent<OverworldAgent>();
+            yield return null;
         }
+        Agent.SetWhiskerInfo(WhiskerLocation, Interactions);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Whisker"))
+        ChangeInteraction(collision.tag, 1);
+    }
+
+    private void ChangeInteraction(string tag, int change)
+    {
+        if (!Interactions.ContainsKey(tag))
         {
-            return;
+            Interactions.Add(tag, 0);
         }
-        else if (PlayerWhisker && collision.tag.Equals("Enemy"))
-        {
-            Agent.StartBattle(collision.GetComponent<OverworldAgent>());
-        }
-        if (++TriggerCount == 1)
-        {
-            Agent.SetDirectionPossible(Direction, false);
-        }
+        Interactions[tag] += change;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Whisker"))
-        {
-            return;
-        }
-        if (--TriggerCount == 0)
-        {
-            Agent.SetDirectionPossible(Direction, true);
-        }
+        ChangeInteraction(collision.tag, -1);
     }
 }

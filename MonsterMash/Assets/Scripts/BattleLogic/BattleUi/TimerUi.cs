@@ -5,6 +5,7 @@ using System;
 
 public class TimerUi : MonoBehaviour
 {
+	[SerializeField] Animator TimerAnimator;
 	[SerializeField] NumberRender TimeLeftNumber;
 
 	[SerializeField] Transform ActionTimeSlider;
@@ -16,12 +17,14 @@ public class TimerUi : MonoBehaviour
 	[SerializeField] float StartPos;
 	[SerializeField] float EndPos;
 
+	float LastVfxProgress = -1;
+
 	void Awake()
 	{
 		TimeLeftNumber.UseLargeNumbers = true;
 	}
 
-	void Update()
+	void LateUpdate()
 	{
 		var battleController = BattleController.Instance;
 
@@ -30,7 +33,15 @@ public class TimerUi : MonoBehaviour
 		float timeUsed = maxTime-timeLeft;
 		float actionTime = timeUsed + battleController.TimeLeftOfAction;
 
-		if (battleController.BattleState == BattleController.eBattleState.TurnTransition)
+		if (battleController.BattleState == BattleController.eBattleState.BattleIntro &&
+			Settings.BattleIntroMaxTime >= 0)
+		{
+			maxTime = Settings.BattleIntroMaxTime;
+			actionTime = 0;
+			timeLeft = Settings.BattleIntroMaxTime - battleController.TimeSinceActionStarted;
+			timeUsed = battleController.TimeSinceActionStarted;
+		}
+		else if (battleController.BattleState == BattleController.eBattleState.TurnTransition)
 		{
 			maxTime = Settings.TurnTransitionTime;
 			timeLeft = battleController.TurnTransitionTimeLeft;
@@ -58,6 +69,12 @@ public class TimerUi : MonoBehaviour
 
 		TimeUsedSlider.localScale = new Vector3(timeUsed/maxTime, 1, 1);
 		ActionTimeSlider.localScale = new Vector3(actionTime/maxTime, 1, 1);
+
+		TimerAnimator.SetBool("GamePlaying", vfxProgress != LastVfxProgress);
+
+		//TimerAnimator.SetBool("BarMoving", vfxProgress != LastVfxProgress);
+		TimerAnimator.SetBool("BarMoving", false);
+		LastVfxProgress = vfxProgress;
 
 
 		if (BubbleVfx != null)

@@ -26,11 +26,11 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(LoadOverworld());
+        StartCoroutine(GoToTitleCo());
     }
 
     // ~~~ debug
-    IEnumerator LoadOverworld()
+    IEnumerator LoadFirstScene()
     {
         yield return new WaitForSeconds(LoadDelay);
         SceneManager.LoadSceneAsync((!OpeningScene.Equals("") ? OpeningScene : Settings.SceneOverworldMemory), LoadSceneMode.Additive);
@@ -58,5 +58,28 @@ public class MainManager : MonoBehaviour
         {
             yield return SceneManager.UnloadSceneAsync(scene);
         }
+    }
+
+    public void GoToTitle()
+    {
+        StartCoroutine(GoToTitleCo());
+    }
+    public IEnumerator GoToTitleCo()
+    {
+        if (SceneManager.GetSceneByName(Settings.SceneOverworldMemory).isLoaded)
+        {
+            yield return StartCoroutine(SubtractSceneCo(Settings.SceneOverworldMemory));
+        }
+        yield return StartCoroutine(AddSceneCo(Settings.SceneTitle));
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(StartGameCo());
+    }
+    public IEnumerator StartGameCo()
+    {
+        yield return StartCoroutine(SubtractSceneCo(Settings.SceneTitle));
+        yield return StartCoroutine(AddSceneCo(Settings.SceneOverworldMemory));
     }
 }

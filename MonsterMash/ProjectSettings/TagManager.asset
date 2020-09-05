@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Whisker
   - Enemy
+  - Environment
   layers:
   - Default
   - TransparentFX

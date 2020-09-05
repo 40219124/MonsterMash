@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
-	public static BattleController Instance { get; private set;}
+	public static BattleController Instance { get; private set; }
 	[SerializeField] CameraShake CameraShakeController;
 
-	
-	public eBattleState BattleState { get; private set;}
+
+	public eBattleState BattleState { get; private set; }
 	public enum eBattleState
 	{
 		NotInBattle,
@@ -23,14 +23,14 @@ public class BattleController : MonoBehaviour
 
 	public Agent Player;
 	public Agent Enemy;
-	public float TurnTimeLeft { get; private set;}
+	public float TurnTimeLeft { get; private set; }
 
 	//current action
-	public float TimeLeftOfAction { get; private set;}
-	public float TimeSinceActionStarted { get; private set;}
-	public float TurnTransitionTimeLeft { get; private set;}
-	public Action CurrentAction { get; private set;}
-	public Agent CurrentAgent { get; private set;}
+	public float TimeLeftOfAction { get; private set; }
+	public float TimeSinceActionStarted { get; private set; }
+	public float TurnTransitionTimeLeft { get; private set; }
+	public Action CurrentAction { get; private set; }
+	public Agent CurrentAgent { get; private set; }
 
 	void Awake()
 	{
@@ -48,6 +48,8 @@ public class BattleController : MonoBehaviour
 		Enemy.OnGameStart(Player, enemyProfile);
 		BattleState = eBattleState.BattleIntro;
 		TimeSinceActionStarted = 0;
+
+		CurrentAgent = UnityEngine.Random.Range(0, 2) == 1? Player : Enemy;
 	}
 
 	void Update()
@@ -55,14 +57,19 @@ public class BattleController : MonoBehaviour
 		TimeSinceActionStarted += Time.deltaTime;
 
 		if (BattleState == eBattleState.BattleIntro)
-		{	
-			if ((Player.ControlType == Agent.eControlType.Ai &&
-				Enemy.ControlType == Agent.eControlType.Ai &&
-				TimeSinceActionStarted > 2) ||
-				SimpleInput.GetInputActive(EInput.A))
+		{
+			float introMaxTime = Settings.BattleIntroMaxTime;
+
+			if (Player.ControlType == Agent.eControlType.Ai &&
+				Enemy.ControlType == Agent.eControlType.Ai)
 			{
-				CurrentAgent = Player;
-				StartTurnTransition(true);
+				introMaxTime = 2.0f;
+			}
+
+			if ( (introMaxTime >= 0 && TimeSinceActionStarted >= introMaxTime) ||
+				SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
+			{
+				StartTurnTransition();
 			}
 		}
 
@@ -74,17 +81,23 @@ public class BattleController : MonoBehaviour
 				StartTurn();
 			}
 		}
-		
+
 		if (BattleState != eBattleState.PlayerTurn &&
 			BattleState != eBattleState.EnemyTurn)
 		{
 			return;
 		}
-		
-		TimeLeftOfAction -= Time.deltaTime;
-		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
 
 		var deltaTime = Time.deltaTime;
+
+		if (CurrentAgent.ControlType != Agent.eControlType.Player)
+		{
+			deltaTime *= Settings.AiTurnTimeSpeedMultiplier;
+		}
+
+		TimeLeftOfAction -= deltaTime;
+		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
+
 		if (TimeLeftOfAction <= 0 && CurrentAction == null)
 		{
 			if (!CurrentAgent.Body.LeftArmPart.IsValidAttacker() &&
@@ -101,17 +114,26 @@ public class BattleController : MonoBehaviour
 		{
 			BattleState = eBattleState.EnemyWon;
 			Debug.Log($"game over {BattleState}");
-			FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle); // ~~~ Avoid find later mayber // ~~~ also death screen not the overworld
+			FindObjectOfType<FlowManager>().TransToGameOver(Settings.SceneBattle, false); // ~~~ Avoid find later mayber 
 			return;
 		}
 
-		if(!Enemy.Body.IsAlive())
+		if (!Enemy.Body.IsAlive())
 		{
 			BattleState = eBattleState.PlayerWon;
 			Debug.Log($"game over {BattleState}");
-			// Remove enemy from memory // ~~~ move after limb stealing though
-			OverworldMemory.OpponentBeaten();
-			FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle); // ~~~ Avoid find later mayber
+			// Remove enemy from memory 
+			var dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < 0.75f;// ~~~ drop chance
+			OverworldMemory.OpponentBeaten(dropLoot);
+
+			if(dropLoot || Settings.AlwaysGoToPickerPostBattle)
+			{
+				FindObjectOfType<FlowManager>().TransToPicker(Settings.SceneBattle); // ~~~ Avoid find later mayber
+			}
+			else
+			{
+				FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle);
+			}
 			return;
 		}
 
@@ -121,20 +143,23 @@ public class BattleController : MonoBehaviour
 		}
 	}
 
-	void StartTurnTransition(bool isFirstMove=false)
+	void StartTurnTransition()
 	{
-		if (CurrentAgent == Player)
+		if (BattleState != eBattleState.BattleIntro)
 		{
-			CurrentAgent = Enemy;
-		}
-		else
-		{
-			CurrentAgent = Player;
+			if (CurrentAgent == Player)
+			{
+				CurrentAgent = Enemy;
+			}
+			else
+			{
+				CurrentAgent = Player;
+			}
 		}
 		Player.OnTurnStart(CurrentAgent == Player);
 		Enemy.OnTurnStart(CurrentAgent != Player);
 
-		TurnTransitionTimeLeft = isFirstMove ? 0 : Settings.TurnTransitionTime;
+		TurnTransitionTimeLeft = Settings.TurnTransitionTime;
 		BattleState = eBattleState.TurnTransition;
 	}
 
@@ -242,8 +267,8 @@ public class BattleController : MonoBehaviour
 	{
 		CurrentAgent.Body.StartAttack();
 
-		yield return new WaitForSeconds(actionTime/2);
-		
+		yield return new WaitForSeconds(actionTime / 2);
+
 		int damage = attackerLimb.Damage;
 		CurrentAction.Target.ApplyAttack(CurrentAction.TargetPartType, damage);
 
@@ -261,6 +286,7 @@ public class BattleController : MonoBehaviour
 			shakePower = 15f;
 		}
 		CameraShakeController.PlayShake(shakePower);
+		CurrentAgent.Body.EndAttack();
 
 		while (TimeLeftOfAction > 0)
 		{
@@ -268,7 +294,5 @@ public class BattleController : MonoBehaviour
 		}
 
 		CurrentAction = null;
-
-		CurrentAgent.Body.EndAttack();
 	}
 }

@@ -9,7 +9,11 @@ public class Player : OverworldAgent
     private void Start()
     {
         // ~~~ do better later
-        Profile = MGen.GetMonster(EMonsterType.Frankenstein);
+        if (OverworldMemory.GetCombatProfile(true) == null)
+        {
+            Profile = MGen.GetMonster(EMonsterType.Frankenstein);
+            OverworldMemory.RecordProfile(Profile);
+        }
         base.Start();
     }
 

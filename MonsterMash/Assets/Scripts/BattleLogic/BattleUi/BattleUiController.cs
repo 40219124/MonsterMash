@@ -6,12 +6,21 @@ public class BattleUiController: MonoBehaviour
 {
 	[SerializeField] Animator BattleUiAnimator;
 	[SerializeField] DpadAnimator DpadAnimatorContoller;
+	[SerializeField] GameObject ButtonAPrompt;
+
+	[SerializeField] Transform TurnArrow;
 
 	bool ForceShowComplexStats;
 
-	void Update()
+	void LateUpdate()
 	{
 		var battleController = BattleController.Instance;
+		
+		ButtonAPrompt.SetActive(battleController.BattleState == BattleController.eBattleState.BattleIntro);
+
+		var currentAgent = battleController.CurrentAgent;
+
+		TurnArrow.position = currentAgent.Body.Root.position;
 
 		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
 		{
@@ -21,8 +30,6 @@ public class BattleUiController: MonoBehaviour
 			return;
 		}
 
-
-		var currentAgent = battleController.CurrentAgent;
 		var opponent = currentAgent.Opponent;
 
 		bool isPlayer = Settings.ShowStatsForAi || currentAgent.ControlType == Agent.eControlType.Player;
@@ -69,18 +76,19 @@ public class BattleUiController: MonoBehaviour
 			}
 		}
 
-		var showDpad = currentAgent.ControlType == Agent.eControlType.Player;
+		var showDpad = currentAgent.ControlType == Agent.eControlType.Player &&
+						(!attackerLocked || !targetLocked) && shouldPreShow;
+						
 		DpadAnimatorContoller.SetShow(showDpad);
 		if (showDpad)
 		{
+			Vector2 targetPos = currentAgent.Body.DPadGameTransform.position;
+
 			if (attackerLocked)
 			{
-				DpadAnimatorContoller.AnimateToPoint(opponent.Body.DPadGameTransform.position);
+				targetPos = opponent.Body.DPadGameTransform.position;
 			}
-			else
-			{
-				DpadAnimatorContoller.AnimateToPoint(currentAgent.Body.DPadGameTransform.position);
-			}
+			DpadAnimatorContoller.JumpToPoint(targetPos);
 		}
 
 		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true, ForceShowComplexStats);
