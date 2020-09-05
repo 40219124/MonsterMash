@@ -11,7 +11,7 @@ public class Settings
 	public const float PostPickHangTime = 0.5f;
 
 	public const float NoActionAvailableSpeedMultiplier = 5f;
-	public const float AiTurnTimeSpeedMultiplier = 2f;
+	public const float AiTurnTimeSpeedMultiplier = 1f;
 
 	public const float AiPickAttackerMinTime = 0.1f;
 	public const float AiPickAttackerMaxTime = 1f;
