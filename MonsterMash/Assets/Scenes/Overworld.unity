@@ -592,6 +592,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonBAnimator
       objectReference: {fileID: 0}
+    - target: {fileID: 4621938037877644891, guid: 25bc9d29fb5019048bd83dae287804bd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7472859265247561669, guid: 25bc9d29fb5019048bd83dae287804bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.75
@@ -648,6 +652,10 @@ PrefabInstance:
     - target: {fileID: 4621938037877644891, guid: 6142db07b96df0c4d83b33c94684b695, type: 3}
       propertyPath: m_Name
       value: ButtonAAnimator
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621938037877644891, guid: 6142db07b96df0c4d83b33c94684b695, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7472859265247561669, guid: 6142db07b96df0c4d83b33c94684b695, type: 3}
       propertyPath: m_LocalPosition.x
