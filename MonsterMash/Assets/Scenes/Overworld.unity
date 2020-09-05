@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 67561378}
   m_Layer: 0
   m_Name: Foreground
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 530558292}
   m_Layer: 0
   m_Name: Indoors
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -848,7 +848,7 @@ GameObject:
   - component: {fileID: 724844986}
   m_Layer: 0
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2179,7 +2179,7 @@ GameObject:
   - component: {fileID: 749847251}
   m_Layer: 0
   m_Name: Decoration
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2699,7 +2699,7 @@ GameObject:
   - component: {fileID: 996551260}
   m_Layer: 0
   m_Name: Detail
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3329,7 +3329,7 @@ GameObject:
   - component: {fileID: 1592381423}
   m_Layer: 0
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4712,7 +4712,7 @@ GameObject:
   - component: {fileID: 1689259967}
   m_Layer: 0
   m_Name: Outdoors
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4792,7 +4792,7 @@ GameObject:
   - component: {fileID: 2037878807}
   m_Layer: 0
   m_Name: Foreground
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5245,6 +5245,14 @@ PrefabInstance:
       propertyPath: MGen
       value: 
       objectReference: {fileID: 11400000, guid: 93666616f9b606a4488354f8293c1af1, type: 2}
+    - target: {fileID: 4216496406460835794, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
+      propertyPath: BlockingTags.Array.data[0]
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216496406460835794, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
+      propertyPath: BlockingTags.Array.data[1]
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 4216496406460835795, guid: e59480741823e0d47a628b115bc73ab5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
