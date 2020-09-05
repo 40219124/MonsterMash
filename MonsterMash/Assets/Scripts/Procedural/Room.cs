@@ -55,6 +55,11 @@ public class Room
         return RoomId == room.RoomId;
     }
 
+
+    public bool DoorsMatch(eDoorPlaces required)
+    {
+        return (required & DoorPlaces) == required;
+    }
 }
 
 [Serializable]
@@ -72,5 +77,20 @@ public class AllRoomData
     public void Save()
     {
         LatestRoomID = StaticRoomID;
+    }
+
+    public List<Room> ValidRooms(Room.eDoorPlaces required, Room.eArea area)
+    {
+        List<Room> outRooms = new List<Room>();
+
+        for(int i = 0; i < AllRooms.Count; ++i)
+        {
+            if (AllRooms[i].Area == area && AllRooms[i].DoorsMatch(required))
+            {
+                outRooms.Add(AllRooms[i]);
+            }
+        }
+
+        return outRooms;
     }
 }
