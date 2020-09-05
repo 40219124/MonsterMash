@@ -62,7 +62,7 @@ public class BattleController : MonoBehaviour
 				SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
 			{
 				CurrentAgent = Player;
-				StartTurnTransition(true);
+				StartTurnTransition();
 			}
 		}
 
@@ -136,7 +136,7 @@ public class BattleController : MonoBehaviour
 		}
 	}
 
-	void StartTurnTransition(bool isFirstMove = false)
+	void StartTurnTransition()
 	{
 		if (CurrentAgent == Player)
 		{
@@ -149,7 +149,7 @@ public class BattleController : MonoBehaviour
 		Player.OnTurnStart(CurrentAgent == Player);
 		Enemy.OnTurnStart(CurrentAgent != Player);
 
-		TurnTransitionTimeLeft = isFirstMove ? 0 : Settings.TurnTransitionTime;
+		TurnTransitionTimeLeft = Settings.TurnTransitionTime;
 		BattleState = eBattleState.TurnTransition;
 	}
 
