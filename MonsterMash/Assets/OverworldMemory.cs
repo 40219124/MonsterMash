@@ -151,6 +151,7 @@ public class OverworldMemory : MonoBehaviour
 
     public static void ClearAll()
     {
+		PlayerProfile = null;
         EnemyProfiles.Clear();
         EnemyPositions.Clear();
         PlayerPos = Vector3.zero;
