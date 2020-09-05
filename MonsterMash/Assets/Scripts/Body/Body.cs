@@ -21,6 +21,7 @@ public class Body : MonoBehaviour
 	[SerializeField] Animator BodyAnimator;
 	[SerializeField] BodyPartSpriteLookup BodyPartImageLookup;
 	public Transform DPadGameTransform;
+	public Transform Root;
 
 	public bool IsAlive()
 	{

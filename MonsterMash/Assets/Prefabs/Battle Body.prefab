@@ -119,6 +119,7 @@ MonoBehaviour:
   BodyAnimator: {fileID: 8146293413818025135}
   BodyPartImageLookup: {fileID: 11400000, guid: fbbda82cfb39b6041b6c369878752a10, type: 2}
   DPadGameTransform: {fileID: 6859213488809015673}
+  Root: {fileID: 3373608333159643646}
 --- !u!95 &8146293413818025135
 Animator:
   serializedVersion: 3
