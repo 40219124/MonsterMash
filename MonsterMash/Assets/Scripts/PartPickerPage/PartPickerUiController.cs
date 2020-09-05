@@ -13,12 +13,8 @@ public class PartPickerUiController : MonoBehaviour
 
 	[SerializeField] DpadAnimator DpadAnimatorContoller;
 
+	[SerializeField] GameObject PressButtonPrompt;
 
-	[Space]
-    [Header("Debug")]
-	[SerializeField] MonsterProfile DebugProfileData;
-	[SerializeField] List<BodyPartData> BodyPartsData;
-	
 
 	MonsterProfile ProfileData;
 
@@ -31,9 +27,8 @@ public class PartPickerUiController : MonoBehaviour
 
 	IEnumerator FlowController(List<BodyPartData> bodyPartsDataList)
 	{
+		PressButtonPrompt.SetActive(false);
 		PlayerBody.ShowStats(true, Body.eBodyPartType.None, false, false, true);
-		UseButton.SetButtonSize(true);
-		DiscardButton.SetButtonSize(true);
 
 		int loop = 0;
 		foreach (var pickerBodyPart in PickerBodyParts)
@@ -62,6 +57,10 @@ public class PartPickerUiController : MonoBehaviour
 		UseButton.SetSelected(false);
 		DiscardButton.SetSelected(false);
 		PlayerBody.ShowStats(true, Body.eBodyPartType.None, false, false, true);
+
+		UseButton.SetShow(false);
+		DiscardButton.SetShow(false);
+		PressButtonPrompt.SetActive(true);
 
 		while  (SimpleInput.GetInputState(EInput.A) != EButtonState.Pressed &&
 				SimpleInput.GetInputState(EInput.B) != EButtonState.Pressed &&
