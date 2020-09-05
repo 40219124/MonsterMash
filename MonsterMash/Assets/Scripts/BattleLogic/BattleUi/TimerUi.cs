@@ -5,6 +5,7 @@ using System;
 
 public class TimerUi : MonoBehaviour
 {
+	[SerializeField] Animator TimerAnimator;
 	[SerializeField] NumberRender TimeLeftNumber;
 
 	[SerializeField] Transform ActionTimeSlider;
@@ -15,6 +16,8 @@ public class TimerUi : MonoBehaviour
 
 	[SerializeField] float StartPos;
 	[SerializeField] float EndPos;
+
+	float LastVfxProgress = -1;
 
 	void Awake()
 	{
@@ -58,6 +61,13 @@ public class TimerUi : MonoBehaviour
 
 		TimeUsedSlider.localScale = new Vector3(timeUsed/maxTime, 1, 1);
 		ActionTimeSlider.localScale = new Vector3(actionTime/maxTime, 1, 1);
+
+		TimerAnimator.SetBool("GamePlaying", battleController.BattleState != BattleController.eBattleState.BattleIntro &&
+											battleController.BattleState != BattleController.eBattleState.EnemyWon &&
+											battleController.BattleState != BattleController.eBattleState.PlayerWon);
+
+		TimerAnimator.SetBool("BarMoving", vfxProgress != LastVfxProgress);
+		LastVfxProgress = vfxProgress;
 
 
 		if (BubbleVfx != null)

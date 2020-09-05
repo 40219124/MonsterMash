@@ -1362,6 +1362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6787d9d8d303c1c4b8d9aa746b6f1f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimerAnimator: {fileID: 1242440739}
   TimeLeftNumber: {fileID: 316906358}
   ActionTimeSlider: {fileID: 1866259730}
   TimeUsedSlider: {fileID: 773675474}
@@ -1473,7 +1474,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
-  m_Sprite: {fileID: 5291216952637036851, guid: 6a50ec70c2da5854da213ded0af314a6, type: 3}
+  m_Sprite: {fileID: 7039112631470567469, guid: 6a50ec70c2da5854da213ded0af314a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

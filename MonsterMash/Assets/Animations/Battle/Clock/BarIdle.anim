@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BarMoving
+  m_Name: BarIdle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,7 +22,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -36,22 +36,7 @@ AnimationClip:
     path: TimeBar/Bubbles
     classID: 1
     script: {fileID: 0}
-  m_PPtrCurves:
-  - curve:
-    - time: 0
-      value: {fileID: 1649192393020575799, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    - time: 0.3
-      value: {fileID: 436068532722222212, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    - time: 0.6
-      value: {fileID: 4446514367426954430, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    - time: 0.9
-      value: {fileID: 2895248461379961665, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    - time: 1.2
-      value: {fileID: -1131802689570784725, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    attribute: m_Sprite
-    path: TimeBar/Bubbles
-    classID: 212
-    script: {fileID: 0}
+  m_PPtrCurves: []
   m_SampleRate: 10
   m_WrapMode: 0
   m_Bounds:
@@ -66,25 +51,13 @@ AnimationClip:
       typeID: 1
       customType: 0
       isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 746350985
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 1649192393020575799, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    - {fileID: 436068532722222212, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    - {fileID: 4446514367426954430, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    - {fileID: 2895248461379961665, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
-    - {fileID: -1131802689570784725, guid: ef68ffdddbda6e641b3625f1fdde2907, type: 3}
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.3000001
+    m_StopTime: 0
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -105,7 +78,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
