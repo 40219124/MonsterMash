@@ -34,7 +34,7 @@ public class TimerUi : MonoBehaviour
 		{
 			maxTime = Settings.TurnTransitionTime;
 			timeLeft = battleController.TurnTransitionTimeLeft;
-			actionTime = 0;
+			actionTime = maxTime;
 			timeUsed = timeLeft;
 		}
 
