@@ -82,4 +82,10 @@ public class BodyPartData
         Damage = data.Damage;
         AttackTimer = data.AttackTimer;
     }
+
+    public void RestoreHealth()
+    {
+        Debug.Log($"restore health on {this}");
+        HealthCurrent = HealthMaximum;
+    }
 }

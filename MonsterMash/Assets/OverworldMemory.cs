@@ -120,7 +120,6 @@ public class OverworldMemory : MonoBehaviour
 
     public static void OpponentBeaten(bool getLoot)
     {
-        Debug.LogError(getLoot);
         EnemyPositions.Remove(OpponentID);
         if (getLoot)
         {
