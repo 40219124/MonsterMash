@@ -9,6 +9,8 @@ public class PlayerProfile: MonsterProfile
 	public float TimeProfileCreated;
 	public float TimePlayed;
 
+	public float TurnsPlayedInBattle;
+
 	public int NumberOfBattlesPlayed;
 	public int NumberOfRoomsCompleted;
 	public int NumberOfBodyPartsSwapped {get 
@@ -26,4 +28,6 @@ public class PlayerProfile: MonsterProfile
 	public int TotalIncomingDamageBlocked;
 	public int TotalOutGoingDamageBlocked;
 	public int TotalHealthHealed;
+
+	public float DistanceWalkedInOverWorld;
 }
