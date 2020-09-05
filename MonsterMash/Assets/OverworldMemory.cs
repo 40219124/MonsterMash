@@ -21,7 +21,7 @@ public class OverworldMemory : MonoBehaviour
         // Set player profile
         if (id == -1)
         {
-			if (PlayerProfile != null)
+			if (PlayerProfile == null)
 			{
             	PlayerProfile = profile;
 			}

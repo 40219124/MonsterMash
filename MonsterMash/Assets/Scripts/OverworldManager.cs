@@ -24,8 +24,7 @@ public class OverworldManager : AdditiveSceneManager
 	{
 		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Pressed && !Transitioning)
 		{
-			Transitioning = true;
-			FindObjectOfType<FlowManager>().TransToPicker(Settings.SceneOverworld);
+            DoTransitionToPicker();
 		}
 	}
 
@@ -40,6 +39,30 @@ public class OverworldManager : AdditiveSceneManager
 
     private IEnumerator DoTransToBattleCo()
     {
+        yield return WaitForActors();
+        // ABSOLUTE LAST THING
+        FindObjectOfType<FlowManager>().TransOverworldToBattle();
+    }
+
+    public void DoTransitionToPicker()
+    {
+        if (!Transitioning)
+        {
+            Transitioning = true;
+            StartCoroutine(DoTransToPickerCo());
+        }
+    }
+
+    private IEnumerator DoTransToPickerCo()
+    {
+        yield return WaitForActors();
+        // ABSOLUTE LAST THING
+        FindObjectOfType<FlowManager>().TransToPicker(Settings.SceneOverworld);
+    }
+
+
+    private IEnumerator WaitForActors()
+    {
         bool notReady = true;
         while (notReady)
         {
@@ -50,8 +73,5 @@ public class OverworldManager : AdditiveSceneManager
             }
             yield return null;
         }
-
-        // ABSOLUTE LAST THING
-        FindObjectOfType<FlowManager>().TransOverworldToBattle();
     }
 }
