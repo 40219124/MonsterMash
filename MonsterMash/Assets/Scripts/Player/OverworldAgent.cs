@@ -75,7 +75,11 @@ public class OverworldAgent : MonoBehaviour
 
     protected const float MoveCD = 1.0f;
 
-    protected bool[] ValidDirections = { true, true, true, true };
+    protected List<string> BlockingTags = new List<string>() { "Player", "Enemy", "Environment" };
+    protected int WhiskerCount = 0;
+    protected Dictionary<string, int>[] WhiskerInfo = new Dictionary<string, int>[] {
+        new Dictionary<string, int>(), new Dictionary<string, int>(),
+        new Dictionary<string, int>(), new Dictionary<string, int>()};
     protected EFourDirections CurrentMoveDir = EFourDirections.none;
     protected EFourDirections CurrentFailDir = EFourDirections.none;
     public Vector3 MoveTarget;
@@ -93,6 +97,8 @@ public class OverworldAgent : MonoBehaviour
     {
         Anim = GetComponentInChildren<Animator>();
         FindObjectOfType<OverworldManager>().OnTransition += OnTransition;
+        LockedMovement = true;
+        MoveTarget = transform.position;
     }
 
     protected void DoUpdate()
@@ -118,7 +124,7 @@ public class OverworldAgent : MonoBehaviour
         }
     }
 
-    private bool MoveAllowed(out EFourDirections dir)
+    protected bool MoveAllowed(out EFourDirections dir)
     {
         bool outBool = false;
         dir = EFourDirections.none;
@@ -133,7 +139,7 @@ public class OverworldAgent : MonoBehaviour
             if (HorizontalValue < 0)
             {
                 dir = EFourDirections.left;
-                if (ValidDirections[(int)EFourDirections.left])
+                if (ValidDirection(EFourDirections.left))
                 {
                     outBool = true;
                 }
@@ -141,7 +147,7 @@ public class OverworldAgent : MonoBehaviour
             else if (HorizontalValue > 0)
             {
                 dir = EFourDirections.right;
-                if (ValidDirections[(int)EFourDirections.right])
+                if (ValidDirection(EFourDirections.right))
                 {
                     outBool = true;
                 }
@@ -152,7 +158,7 @@ public class OverworldAgent : MonoBehaviour
             if (VerticalValue < 0)
             {
                 dir = EFourDirections.down;
-                if (ValidDirections[(int)EFourDirections.down])
+                if (ValidDirection(EFourDirections.down))
                 {
                     outBool = true;
                 }
@@ -160,7 +166,7 @@ public class OverworldAgent : MonoBehaviour
             else if (VerticalValue > 0)
             {
                 dir = EFourDirections.up;
-                if (ValidDirections[(int)EFourDirections.up])
+                if (ValidDirection(EFourDirections.up))
                 {
                     outBool = true;
                 }
@@ -171,7 +177,7 @@ public class OverworldAgent : MonoBehaviour
     }
 
 
-    IEnumerator AnimateFailedMovement()
+    protected IEnumerator AnimateFailedMovement()
     {
         if (CurrentMoveDir == CurrentFailDir)
         {
@@ -189,7 +195,7 @@ public class OverworldAgent : MonoBehaviour
 
         CurrentFailDir = EFourDirections.none;
     }
-    IEnumerator AnimateSuccessfulMovement()
+    protected IEnumerator AnimateSuccessfulMovement()
     {
         float timeElapsed = 0.0f;
 
@@ -219,7 +225,7 @@ public class OverworldAgent : MonoBehaviour
         CurrentMoveDir = EFourDirections.none;
         yield return null;
     }
-    Vector3 DirFromEnum(EFourDirections dir)
+    protected Vector3 DirFromEnum(EFourDirections dir)
     {
         switch (dir)
         {
@@ -236,9 +242,33 @@ public class OverworldAgent : MonoBehaviour
         }
     }
 
-    public void SetDirectionPossible(EFourDirections direction, bool state)
+    public void SetWhiskerInfo(EFourDirections direction, Dictionary<string, int> info)
     {
-        ValidDirections[(int)direction] = state;
+        WhiskerInfo[(int)direction] = info;
+        if (++WhiskerCount == 4)
+        {
+            LockedMovement = false;
+        }
+    }
+
+    protected bool ValidDirection(EFourDirections dir)
+    {
+        foreach (var p in WhiskerInfo[(int)dir])
+        {
+            // For any tags currently there
+            if (p.Value > 0)
+            {
+                if (BlockingTags.Contains(p.Key))
+                {
+                    return false;
+                }
+                else if (p.Key.Equals("Whiskers"))
+                {
+                    // ~~~ avoid other persons destination
+                }
+            }
+        }
+        return true;
     }
 
     public void StartBattle(OverworldAgent opponent)
@@ -246,11 +276,11 @@ public class OverworldAgent : MonoBehaviour
         StartCoroutine(StartBattleRoutine(opponent));
     }
 
-    IEnumerator StartBattleRoutine(OverworldAgent opponent)
+    protected IEnumerator StartBattleRoutine(OverworldAgent opponent)
     {
         FindObjectOfType<OverworldManager>().DoTransitionToBattle();
         OverworldMemory.OpponentID = opponent.transform.GetInstanceID();
-        yield return null;
+        yield return null; // ~~~
     }
 
     // return true if ready

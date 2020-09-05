@@ -19,6 +19,16 @@ public class EnemyOA : OverworldAgent
     // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < (int)EFourDirections.left; ++i)
+        {
+            foreach (var p in WhiskerInfo[i])
+            {
+                if (p.Key.Equals("Player"))
+                {
+                    StartBattle(this);
+                }
+            }
+        }
 
         Vector3 diff = Target.MoveTarget - transform.position;
 
@@ -72,7 +82,7 @@ public class EnemyOA : OverworldAgent
         {
             smallDirH = EFourDirections.right;
         }
-        if (smallDirH != EFourDirections.none && !ValidDirections[(int)smallDirH])
+        if (smallDirH != EFourDirections.none && !ValidDirection(smallDirH))
         {
             smallDirH = EFourDirections.none;
         }
@@ -86,7 +96,7 @@ public class EnemyOA : OverworldAgent
         {
             smallDirV = EFourDirections.up;
         }
-        if (smallDirV != EFourDirections.none && !ValidDirections[(int)smallDirV])
+        if (smallDirV != EFourDirections.none && !ValidDirection(smallDirV))
         {
             smallDirV = EFourDirections.none;
         }
