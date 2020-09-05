@@ -701,7 +701,7 @@ MonoBehaviour:
   localCamera: {fileID: 1011259098}
   localRenderTexture: {fileID: 1049742135}
   RequiredScenes: []
-  GameOverAnimator: {fileID: 0}
+  GameOverAnimator: {fileID: 2128101330}
 --- !u!114 &1317643412
 MonoBehaviour:
   m_ObjectHideFlags: 0
