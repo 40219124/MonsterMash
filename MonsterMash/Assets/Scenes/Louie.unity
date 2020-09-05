@@ -278,6 +278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NumberRender
       objectReference: {fileID: 0}
+    - target: {fileID: 7456560995653124059, guid: 7dfb397c88112b546b7663cd22135497, type: 3}
+      propertyPath: NumberAnimator
+      value: 
+      objectReference: {fileID: 1604135485}
     - target: {fileID: 8774630188449881776, guid: 7dfb397c88112b546b7663cd22135497, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -1485,6 +1489,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1604135485 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3096200169567099404, guid: 7dfb397c88112b546b7663cd22135497, type: 3}
+  m_PrefabInstance: {fileID: 316906357}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1669640077 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3763704598378532886, guid: 8c5e95d983ac98b4c8762359c3f60831, type: 3}
