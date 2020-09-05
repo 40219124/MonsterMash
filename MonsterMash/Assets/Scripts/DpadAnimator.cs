@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DpadAnimator : MonoBehaviour
 {
-	const float Speed = 15f; //UnitsPerSecond
+	const float Speed = 25f; //UnitsPerSecond
 
 	[SerializeField] Transform Root;
 	[SerializeField] Animator Animator;
