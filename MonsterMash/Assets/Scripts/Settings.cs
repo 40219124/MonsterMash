@@ -13,11 +13,11 @@ public class Settings
 	public const float NoActionAvailableSpeedMultiplier = 5f;
 	public const float AiTurnTimeSpeedMultiplier = 1.5f;
 
-	public const float AiPickAttackerMinTime = 0.1f;
-	public const float AiPickAttackerMaxTime = 1f;
+	public const float AiPickAttackerMinTime = 0f;
+	public const float AiPickAttackerMaxTime = 0.5f;
 
-	public const float AiPickTargetMinTime = 0.1f;
-	public const float AiPickTargetMaxTime = 1f;
+	public const float AiPickTargetMinTime = 0f;
+	public const float AiPickTargetMaxTime = 0.5f;
 
 
 	public const string SceneMain = "MainScene";
