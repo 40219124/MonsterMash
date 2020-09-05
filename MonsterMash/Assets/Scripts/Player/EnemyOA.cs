@@ -19,7 +19,7 @@ public class EnemyOA : OverworldAgent
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < (int)EFourDirections.left; ++i)
+        for (int i = 0; i <= (int)EFourDirections.left; ++i)
         {
             foreach (var p in WhiskerInfo[i])
             {
