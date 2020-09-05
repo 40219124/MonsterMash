@@ -14,16 +14,15 @@ public class BodyPartData
     public int Damage;
     public int AttackTimer;
 
-	public override string ToString()
-	{
-		return $"BodyPartType: {BodyPartType}, MonsterType: {MonsterType}, health:{HealthCurrent}";
-	} 
+    public override string ToString()
+    {
+        return $"BodyPartType: {BodyPartType}, MonsterType: {MonsterType}, health:{HealthCurrent}";
+    }
 
-    private BodyPartData() { }
     public BodyPartData(BodyPart.eBodyPartSlotType _bodyPartType, EMonsterType _monsterType, int _health, int _armour, int _damage, int _attackTimer)
     {
         //Body part type
-        if(_bodyPartType == BodyPart.eBodyPartSlotType.None)
+        if (_bodyPartType == BodyPart.eBodyPartSlotType.None)
         {
             Debug.LogError("Body part type not given.");
             return;
@@ -70,5 +69,17 @@ public class BodyPartData
             Debug.LogWarning($"Attack timer supplied too high: {_attackTimer}");
         }
         AttackTimer = Mathf.Clamp(_attackTimer, 1, (int)Settings.TurnTime - 1);
+    }
+
+    public BodyPartData(BodyPartData data)
+    {
+        BodyPartType = data.BodyPartType;
+        MonsterType = data.MonsterType;
+
+        HealthMaximum = data.HealthMaximum;
+        HealthCurrent = data.HealthCurrent;
+        Armour = data.Armour;
+        Damage = data.Damage;
+        AttackTimer = data.AttackTimer;
     }
 }
