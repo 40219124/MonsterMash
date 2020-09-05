@@ -9,7 +9,7 @@ public class Settings
 	public const float TurnTransitionTime = 1.5f;
 	public const float PreShowBattleUiTime = 1.5f;
 	public const float PreQueueActionTime = 1.5f;
-	public const float PostPickHangTime = 0.5f;
+	public const float PostPickHangTime = 0.25f;
 
 	public const float NoActionAvailableSpeedMultiplier = 5f;
 	public const float AiTurnTimeSpeedMultiplier = 1.5f;

@@ -45,7 +45,7 @@ public class TimerUi : MonoBehaviour
 		{
 			maxTime = Settings.TurnTransitionTime;
 			timeLeft = battleController.TurnTransitionTimeLeft;
-			actionTime = maxTime;
+			actionTime = 0;
 			timeUsed = timeLeft;
 		}
 
@@ -72,7 +72,8 @@ public class TimerUi : MonoBehaviour
 
 		TimerAnimator.SetBool("GamePlaying", vfxProgress != LastVfxProgress);
 
-		TimerAnimator.SetBool("BarMoving", vfxProgress != LastVfxProgress);
+		//TimerAnimator.SetBool("BarMoving", vfxProgress != LastVfxProgress);
+		TimerAnimator.SetBool("BarMoving", false);
 		LastVfxProgress = vfxProgress;
 
 
