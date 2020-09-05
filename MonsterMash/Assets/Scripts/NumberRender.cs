@@ -9,12 +9,20 @@ public class NumberRender : MonoBehaviour
 	[SerializeField] List<Sprite> NumberSpriteList;
 
 	[SerializeField] List<Sprite> LargeNumberSpriteList;
+
+	[SerializeField] Animator NumberAnimator;
 	
 
 	public bool UseLargeNumbers;
+	
+	void Update()
+	{
+		NumberAnimator.SetBool("Small", !UseLargeNumbers);
+	}
 
 	public void SetNumber(int inputNumber)
 	{
+		
 		int number = inputNumber;
 		if (number < 0)
 		{

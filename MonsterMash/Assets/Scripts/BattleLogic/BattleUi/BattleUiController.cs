@@ -8,6 +8,8 @@ public class BattleUiController: MonoBehaviour
 	[SerializeField] DpadAnimator DpadAnimatorContoller;
 	[SerializeField] GameObject ButtonAPrompt;
 
+	[SerializeField] Transform TurnArrow;
+
 	bool ForceShowComplexStats;
 
 	void LateUpdate()
@@ -15,6 +17,10 @@ public class BattleUiController: MonoBehaviour
 		var battleController = BattleController.Instance;
 		
 		ButtonAPrompt.SetActive(battleController.BattleState == BattleController.eBattleState.BattleIntro);
+
+		var currentAgent = battleController.CurrentAgent;
+		
+		TurnArrow.position = currentAgent.Body.Root.position;
 
 		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
 		{
@@ -24,8 +30,6 @@ public class BattleUiController: MonoBehaviour
 			return;
 		}
 
-
-		var currentAgent = battleController.CurrentAgent;
 		var opponent = currentAgent.Opponent;
 
 		bool isPlayer = Settings.ShowStatsForAi || currentAgent.ControlType == Agent.eControlType.Player;

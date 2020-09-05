@@ -48,6 +48,8 @@ public class BattleController : MonoBehaviour
 		Enemy.OnGameStart(Player, enemyProfile);
 		BattleState = eBattleState.BattleIntro;
 		TimeSinceActionStarted = 0;
+
+		CurrentAgent = UnityEngine.Random.Range(0, 2) == 1? Player : Enemy;
 	}
 
 	void Update()
@@ -144,13 +146,16 @@ public class BattleController : MonoBehaviour
 
 	void StartTurnTransition()
 	{
-		if (CurrentAgent == Player)
+		if (BattleState != eBattleState.BattleIntro)
 		{
-			CurrentAgent = Enemy;
-		}
-		else
-		{
-			CurrentAgent = Player;
+			if (CurrentAgent == Player)
+			{
+				CurrentAgent = Enemy;
+			}
+			else
+			{
+				CurrentAgent = Player;
+			}
 		}
 		Player.OnTurnStart(CurrentAgent == Player);
 		Enemy.OnTurnStart(CurrentAgent != Player);
