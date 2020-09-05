@@ -39,11 +39,11 @@ public class PartPickerUiController : MonoBehaviour
 		foreach (var pickerBodyPart in PickerBodyParts)
 		{
 
-			pickerBodyPart.SetupData(loop < bodyPartsDataList.Count? bodyPartsDataList[loop] : null , PartSpriteLookup);
+			pickerBodyPart.SetupData((bodyPartsDataList != null && loop < bodyPartsDataList.Count)? bodyPartsDataList[loop] : null , PartSpriteLookup);
 			loop += 1;
 		}
 
-		if (loop < bodyPartsDataList.Count)
+		if (bodyPartsDataList != null && loop < bodyPartsDataList.Count)
 		{
 			Debug.LogError($"not enough PickerBodyParts setup (num setup: {PickerBodyParts.Count}) num neeed: {bodyPartsDataList.Count}");
 		}
@@ -51,7 +51,7 @@ public class PartPickerUiController : MonoBehaviour
 
 		foreach (var pickerBodyPart in PickerBodyParts)
 		{
-			if (pickerBodyPart.gameObject.active)
+			if (pickerBodyPart.gameObject.activeSelf)
 			{
 				yield return StartCoroutine(PickPartUse(pickerBodyPart));
 			}
@@ -69,6 +69,7 @@ public class PartPickerUiController : MonoBehaviour
 		{
 			yield return null;
 		}
+		FindObjectOfType<PartPickerManager>().LeavePicker();
 	}
 
 	IEnumerator PickPartUse(PickerBodyPartUi pickerBodyPart)

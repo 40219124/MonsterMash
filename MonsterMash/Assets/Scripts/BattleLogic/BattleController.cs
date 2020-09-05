@@ -5,270 +5,270 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
-	public static BattleController Instance { get; private set;}
-	[SerializeField] CameraShake CameraShakeController;
+    public static BattleController Instance { get; private set; }
+    [SerializeField] CameraShake CameraShakeController;
 
-	
-	public eBattleState BattleState { get; private set;}
-	public enum eBattleState
-	{
-		NotInBattle,
-		BattleIntro,
-		PlayerTurn,
-		EnemyTurn,
-		TurnTransition,
-		PlayerWon,
-		EnemyWon
-	}
 
-	public Agent Player;
-	public Agent Enemy;
-	public float TurnTimeLeft { get; private set;}
+    public eBattleState BattleState { get; private set; }
+    public enum eBattleState
+    {
+        NotInBattle,
+        BattleIntro,
+        PlayerTurn,
+        EnemyTurn,
+        TurnTransition,
+        PlayerWon,
+        EnemyWon
+    }
 
-	//current action
-	public float TimeLeftOfAction { get; private set;}
-	public float TimeSinceActionStarted { get; private set;}
-	public float TurnTransitionTimeLeft { get; private set;}
-	public Action CurrentAction { get; private set;}
-	public Agent CurrentAgent { get; private set;}
+    public Agent Player;
+    public Agent Enemy;
+    public float TurnTimeLeft { get; private set; }
 
-	void Awake()
-	{
-		if (Instance != null)
-		{
-			Debug.LogError($"Instance already set");
-		}
-		Instance = this;
-	}
+    //current action
+    public float TimeLeftOfAction { get; private set; }
+    public float TimeSinceActionStarted { get; private set; }
+    public float TurnTransitionTimeLeft { get; private set; }
+    public Action CurrentAction { get; private set; }
+    public Agent CurrentAgent { get; private set; }
 
-	public void SetupBattle(MonsterProfile playerProfile, MonsterProfile enemyProfile)
-	{
-		Debug.Log($"starting new Battle");
-		Player.OnGameStart(Enemy, playerProfile);
-		Enemy.OnGameStart(Player, enemyProfile);
-		BattleState = eBattleState.BattleIntro;
-		TimeSinceActionStarted = 0;
-	}
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError($"Instance already set");
+        }
+        Instance = this;
+    }
 
-	void Update()
-	{
-		TimeSinceActionStarted += Time.deltaTime;
+    public void SetupBattle(MonsterProfile playerProfile, MonsterProfile enemyProfile)
+    {
+        Debug.Log($"starting new Battle");
+        Player.OnGameStart(Enemy, playerProfile);
+        Enemy.OnGameStart(Player, enemyProfile);
+        BattleState = eBattleState.BattleIntro;
+        TimeSinceActionStarted = 0;
+    }
 
-		if (BattleState == eBattleState.BattleIntro)
-		{	
-			if ((Player.ControlType == Agent.eControlType.Ai &&
-				Enemy.ControlType == Agent.eControlType.Ai &&
-				TimeSinceActionStarted > 2) ||
-				SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
-			{
-				CurrentAgent = Player;
-				StartTurnTransition(true);
-			}
-		}
+    void Update()
+    {
+        TimeSinceActionStarted += Time.deltaTime;
 
-		if (BattleState == eBattleState.TurnTransition)
-		{
-			TurnTransitionTimeLeft -= Time.deltaTime;
-			if (TurnTransitionTimeLeft <= 0)
-			{
-				StartTurn();
-			}
-		}
-		
-		if (BattleState != eBattleState.PlayerTurn &&
-			BattleState != eBattleState.EnemyTurn)
-		{
-			return;
-		}
-		
-		TimeLeftOfAction -= Time.deltaTime;
-		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
+        if (BattleState == eBattleState.BattleIntro)
+        {
+            if ((Player.ControlType == Agent.eControlType.Ai &&
+                Enemy.ControlType == Agent.eControlType.Ai &&
+                TimeSinceActionStarted > 2) ||
+                SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
+            {
+                CurrentAgent = Player;
+                StartTurnTransition(true);
+            }
+        }
 
-		var deltaTime = Time.deltaTime;
-		if (TimeLeftOfAction <= 0 && CurrentAction == null)
-		{
-			if (!CurrentAgent.Body.LeftArmPart.IsValidAttacker() &&
-				!CurrentAgent.Body.RightArmPart.IsValidAttacker() &&
-				!CurrentAgent.Body.LegsPart.IsValidAttacker())
-			{
-				deltaTime *= Settings.NoActionAvailableSpeedMultiplier;
-			}
-		}
-		TurnTimeLeft -= deltaTime;
-		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
+        if (BattleState == eBattleState.TurnTransition)
+        {
+            TurnTransitionTimeLeft -= Time.deltaTime;
+            if (TurnTransitionTimeLeft <= 0)
+            {
+                StartTurn();
+            }
+        }
 
-		if (!Player.Body.IsAlive())
-		{
-			BattleState = eBattleState.EnemyWon;
-			Debug.Log($"game over {BattleState}");
-			FindObjectOfType<FlowManager>().TransToGameOver(Settings.SceneBattle); // ~~~ Avoid find later mayber 
-			return;
-		}
+        if (BattleState != eBattleState.PlayerTurn &&
+            BattleState != eBattleState.EnemyTurn)
+        {
+            return;
+        }
 
-		if(!Enemy.Body.IsAlive())
-		{
-			BattleState = eBattleState.PlayerWon;
-			Debug.Log($"game over {BattleState}");
-			// Remove enemy from memory // ~~~ move after limb stealing though
-			OverworldMemory.OpponentBeaten();
-			FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle); // ~~~ Avoid find later mayber
-			return;
-		}
+        TimeLeftOfAction -= Time.deltaTime;
+        TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
 
-		if (TurnTimeLeft <= 0 && TimeLeftOfAction <= 0)
-		{
-			StartTurnTransition();
-		}
-	}
+        var deltaTime = Time.deltaTime;
+        if (TimeLeftOfAction <= 0 && CurrentAction == null)
+        {
+            if (!CurrentAgent.Body.LeftArmPart.IsValidAttacker() &&
+                !CurrentAgent.Body.RightArmPart.IsValidAttacker() &&
+                !CurrentAgent.Body.LegsPart.IsValidAttacker())
+            {
+                deltaTime *= Settings.NoActionAvailableSpeedMultiplier;
+            }
+        }
+        TurnTimeLeft -= deltaTime;
+        TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 
-	void StartTurnTransition(bool isFirstMove=false)
-	{
-		if (CurrentAgent == Player)
-		{
-			CurrentAgent = Enemy;
-		}
-		else
-		{
-			CurrentAgent = Player;
-		}
-		Player.OnTurnStart(CurrentAgent == Player);
-		Enemy.OnTurnStart(CurrentAgent != Player);
+        if (!Player.Body.IsAlive())
+        {
+            BattleState = eBattleState.EnemyWon;
+            Debug.Log($"game over {BattleState}");
+            FindObjectOfType<FlowManager>().TransToGameOver(Settings.SceneBattle); // ~~~ Avoid find later mayber 
+            return;
+        }
 
-		TurnTransitionTimeLeft = isFirstMove ? 0 : Settings.TurnTransitionTime;
-		BattleState = eBattleState.TurnTransition;
-	}
+        if (!Enemy.Body.IsAlive())
+        {
+            BattleState = eBattleState.PlayerWon;
+            Debug.Log($"game over {BattleState}");
+            // Remove enemy from memory 
+            OverworldMemory.OpponentBeaten(UnityEngine.Random.Range(0.0f, 1.0f) < 0.75f); // ~~~ drop chance
+            FindObjectOfType<FlowManager>().TransToPicker(Settings.SceneBattle); // ~~~ Avoid find later mayber
+            return;
+        }
 
-	void StartTurn()
-	{
-		TurnTimeLeft = Settings.TurnTime;
-		TimeLeftOfAction = 0;
-		TimeSinceActionStarted = 0;
+        if (TurnTimeLeft <= 0 && TimeLeftOfAction <= 0)
+        {
+            StartTurnTransition();
+        }
+    }
 
-		if (CurrentAgent == Player)
-		{
-			BattleState = eBattleState.PlayerTurn;
-		}
-		else
-		{
-			BattleState = eBattleState.EnemyTurn;
-		}
+    void StartTurnTransition(bool isFirstMove = false)
+    {
+        if (CurrentAgent == Player)
+        {
+            CurrentAgent = Enemy;
+        }
+        else
+        {
+            CurrentAgent = Player;
+        }
+        Player.OnTurnStart(CurrentAgent == Player);
+        Enemy.OnTurnStart(CurrentAgent != Player);
 
-		Debug.Log($"starting new turn: {BattleState}");
-	}
+        TurnTransitionTimeLeft = isFirstMove ? 0 : Settings.TurnTransitionTime;
+        BattleState = eBattleState.TurnTransition;
+    }
 
-	public bool TryAction(Action action)
-	{
-		if (BattleState != eBattleState.PlayerTurn &&
-			BattleState != eBattleState.EnemyTurn)
-		{
-			Debug.LogError($"trying to do action while BattleState not a player turn: {BattleState}");
-			return false;
-		}
+    void StartTurn()
+    {
+        TurnTimeLeft = Settings.TurnTime;
+        TimeLeftOfAction = 0;
+        TimeSinceActionStarted = 0;
 
-		if (TimeLeftOfAction > 0 && CurrentAction != null)
-		{
-			Debug.LogError($"trying to do action while still doing the last one TimeLeftOfAction: {TimeLeftOfAction}, CurrentAction {CurrentAction}");
-			return false;
-		}
+        if (CurrentAgent == Player)
+        {
+            BattleState = eBattleState.PlayerTurn;
+        }
+        else
+        {
+            BattleState = eBattleState.EnemyTurn;
+        }
 
-		if (action == null)
-		{
-			Debug.LogError($"trying to do action with action that is null");
-			return false;
-		}
+        Debug.Log($"starting new turn: {BattleState}");
+    }
 
-		var attacker = action.Attacker;
-		var target = action.Target;
+    public bool TryAction(Action action)
+    {
+        if (BattleState != eBattleState.PlayerTurn &&
+            BattleState != eBattleState.EnemyTurn)
+        {
+            Debug.LogError($"trying to do action while BattleState not a player turn: {BattleState}");
+            return false;
+        }
 
-		if (attacker == null)
-		{
-			Debug.LogError($"trying to do action with action.Attacker that is null");
-			return false;
-		}
+        if (TimeLeftOfAction > 0 && CurrentAction != null)
+        {
+            Debug.LogError($"trying to do action while still doing the last one TimeLeftOfAction: {TimeLeftOfAction}, CurrentAction {CurrentAction}");
+            return false;
+        }
 
-		if (target == null)
-		{
-			Debug.LogError($"trying to do action with action.Target that is null");
-			return false;
-		}
+        if (action == null)
+        {
+            Debug.LogError($"trying to do action with action that is null");
+            return false;
+        }
 
-		var attackerLimb = action.Attacker.GetLimb(action.AttackerPartType);
-		var targetBodyPart = action.Target.GetBodyPart(action.TargetPartType);
+        var attacker = action.Attacker;
+        var target = action.Target;
 
-		if (attackerLimb == null)
-		{
-			Debug.LogError($"trying to do action with attackerLimb that is null: {action}");
-			return false;
-		}
+        if (attacker == null)
+        {
+            Debug.LogError($"trying to do action with action.Attacker that is null");
+            return false;
+        }
 
-		if (targetBodyPart == null)
-		{
-			Debug.LogError($"trying to do action with targetBodyPart that is null: {action}");
-			return false;
-		}
+        if (target == null)
+        {
+            Debug.LogError($"trying to do action with action.Target that is null");
+            return false;
+        }
 
-		if (!attackerLimb.IsAlive)
-		{
-			Debug.LogError($"trying to do action with attack limb({attackerLimb}) that not Alive");
-			return false;
-		}
+        var attackerLimb = action.Attacker.GetLimb(action.AttackerPartType);
+        var targetBodyPart = action.Target.GetBodyPart(action.TargetPartType);
 
-		if (!targetBodyPart.IsAlive)
-		{
-			Debug.LogError($"trying to do action with TargetBodyPart({targetBodyPart}) that not Alive");
-			return false;
-		}
+        if (attackerLimb == null)
+        {
+            Debug.LogError($"trying to do action with attackerLimb that is null: {action}");
+            return false;
+        }
 
-		//todo check that body part if part of the correct body
+        if (targetBodyPart == null)
+        {
+            Debug.LogError($"trying to do action with targetBodyPart that is null: {action}");
+            return false;
+        }
 
-		int actionTime = attackerLimb.AttackTime;
-		if (TurnTimeLeft + Settings.ActionTimeForgiveness <= actionTime)
-		{
-			Debug.Log($"not enough time to do action: {TurnTimeLeft} + {Settings.ActionTimeForgiveness} <= {actionTime}");
-			return false;
-		}
+        if (!attackerLimb.IsAlive)
+        {
+            Debug.LogError($"trying to do action with attack limb({attackerLimb}) that not Alive");
+            return false;
+        }
 
-		//this is a valid action so lets do it yay!
-		Debug.Log($"Doing Action: {action}");
+        if (!targetBodyPart.IsAlive)
+        {
+            Debug.LogError($"trying to do action with TargetBodyPart({targetBodyPart}) that not Alive");
+            return false;
+        }
 
-		TimeLeftOfAction = actionTime;
-		TimeSinceActionStarted = 0;
-		CurrentAction = action;
-		StartCoroutine(DoAttack(actionTime, attackerLimb));
-		return true;
-	}
+        //todo check that body part if part of the correct body
 
-	IEnumerator DoAttack(int actionTime, Limb attackerLimb)
-	{
-		CurrentAgent.Body.StartAttack();
+        int actionTime = attackerLimb.AttackTime;
+        if (TurnTimeLeft + Settings.ActionTimeForgiveness <= actionTime)
+        {
+            Debug.Log($"not enough time to do action: {TurnTimeLeft} + {Settings.ActionTimeForgiveness} <= {actionTime}");
+            return false;
+        }
 
-		yield return new WaitForSeconds(actionTime/2);
-		
-		int damage = attackerLimb.Damage;
-		CurrentAction.Target.ApplyAttack(CurrentAction.TargetPartType, damage);
+        //this is a valid action so lets do it yay!
+        Debug.Log($"Doing Action: {action}");
 
-		float shakePower = 0;
-		if (damage < 5f)
-		{
-			shakePower = 5f;
-		}
-		else if (damage >= 5f && damage < 15f)
-		{
-			shakePower = 10f;
-		}
-		else
-		{
-			shakePower = 15f;
-		}
-		CameraShakeController.PlayShake(shakePower);
+        TimeLeftOfAction = actionTime;
+        TimeSinceActionStarted = 0;
+        CurrentAction = action;
+        StartCoroutine(DoAttack(actionTime, attackerLimb));
+        return true;
+    }
 
-		while (TimeLeftOfAction > 0)
-		{
-			yield return null;
-		}
+    IEnumerator DoAttack(int actionTime, Limb attackerLimb)
+    {
+        CurrentAgent.Body.StartAttack();
 
-		CurrentAction = null;
+        yield return new WaitForSeconds(actionTime / 2);
 
-		CurrentAgent.Body.EndAttack();
-	}
+        int damage = attackerLimb.Damage;
+        CurrentAction.Target.ApplyAttack(CurrentAction.TargetPartType, damage);
+
+        float shakePower = 0;
+        if (damage < 5f)
+        {
+            shakePower = 5f;
+        }
+        else if (damage >= 5f && damage < 15f)
+        {
+            shakePower = 10f;
+        }
+        else
+        {
+            shakePower = 15f;
+        }
+        CameraShakeController.PlayShake(shakePower);
+
+        while (TimeLeftOfAction > 0)
+        {
+            yield return null;
+        }
+
+        CurrentAction = null;
+
+        CurrentAgent.Body.EndAttack();
+    }
 }

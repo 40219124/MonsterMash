@@ -79,4 +79,19 @@ public class FlowManager : MonoBehaviour
         }
         MainManager.Instance.GoToTitle();
     }
+
+    public void TransToPicker(string sceneFrom)
+    {
+        StartCoroutine(TransToPickerCo(sceneFrom));
+    }
+
+    private IEnumerator TransToPickerCo(string sceneFrom)
+    {
+        if (!sceneFrom.Equals("")) {
+            yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
+        }
+        yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneBodyPartPicker));
+        yield return null;
+        FindObjectOfType<PartPickerManager>().Setup();
+    }
 }

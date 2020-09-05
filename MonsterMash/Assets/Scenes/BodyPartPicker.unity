@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 165508021}
   - component: {fileID: 165508020}
   m_Layer: 0
-  m_Name: BattleSceneManager
+  m_Name: PickerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 165508019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 860ffd09d729f1c4f9e9a3421ec90aef, type: 3}
+  m_Script: {fileID: 11500000, guid: 7714f58142829aa4d8a5f6577f612cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   localCamera: {fileID: 947663874}

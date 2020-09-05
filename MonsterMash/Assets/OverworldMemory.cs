@@ -13,6 +13,7 @@ public class OverworldMemory : MonoBehaviour
     static Dictionary<int, Vector3> EnemyPositions = new Dictionary<int, Vector3>();
 
     static int opponentID;
+    static MonsterProfile opponentLoot;
 
     // Profiles
     public static void RecordProfile(MonsterProfile profile, int id = -1)
@@ -117,10 +118,25 @@ public class OverworldMemory : MonoBehaviour
         set { opponentID = value; }
     }
 
-    public static void OpponentBeaten()
+    public static void OpponentBeaten(bool getLoot)
     {
+        Debug.LogError(getLoot);
         EnemyPositions.Remove(OpponentID);
+        if (getLoot)
+        {
+            opponentLoot = EnemyProfiles[opponentID];
+        }
         EnemyProfiles.Remove(OpponentID);
+    }
+
+    public static MonsterProfile GetLootProfile()
+    {
+        return opponentLoot;
+    }
+
+    public static void ClearLoot()
+    {
+        opponentLoot = null;
     }
 
     // To clear info // ~~~ change once spawning supplies id's instead of distruction
