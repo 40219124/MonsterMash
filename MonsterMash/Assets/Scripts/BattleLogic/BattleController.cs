@@ -56,9 +56,15 @@ public class BattleController : MonoBehaviour
 
 		if (BattleState == eBattleState.BattleIntro)
 		{
-			if ((Player.ControlType == Agent.eControlType.Ai &&
-				Enemy.ControlType == Agent.eControlType.Ai &&
-				TimeSinceActionStarted > 2) ||
+			float introMaxTime = Settings.BattleIntroMaxTime;
+
+			if (Player.ControlType == Agent.eControlType.Ai &&
+				Enemy.ControlType == Agent.eControlType.Ai)
+			{
+				introMaxTime = 2.0f;
+			}
+
+			if ( (introMaxTime >= 0 && TimeSinceActionStarted >= introMaxTime) ||
 				SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
 			{
 				CurrentAgent = Player;

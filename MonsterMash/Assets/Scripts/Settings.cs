@@ -5,6 +5,7 @@ public class Settings
 	public const bool DpadOnlyCombat = true;
 	public const float ActionTimeForgiveness = 0.2f;
 	public const float TurnTime = 6.0f;
+	public const float BattleIntroMaxTime = 30.0f;
 	public const float TurnTransitionTime = 1.5f;
 	public const float PreShowBattleUiTime = 1.5f;
 	public const float PreQueueActionTime = 1.5f;
