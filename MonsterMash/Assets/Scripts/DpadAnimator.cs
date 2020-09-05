@@ -45,9 +45,9 @@ public class DpadAnimator : MonoBehaviour
 		}
 	}
 
-	void Update()
+	void LateUpdate()
 	{
-		if (gameObject.active)
+		if (gameObject.activeSelf)
 		{
 			TimeAccumulator += Time.deltaTime;
 			TimeAccumulator = Mathf.Min(TimeAccumulator, AnimationTime);

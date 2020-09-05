@@ -72,7 +72,9 @@ public class BattleUiController: MonoBehaviour
 			}
 		}
 
-		var showDpad = currentAgent.ControlType == Agent.eControlType.Player;
+		var showDpad = currentAgent.ControlType == Agent.eControlType.Player &&
+						(!attackerLocked || !targetLocked);
+						
 		DpadAnimatorContoller.SetShow(showDpad);
 		if (showDpad)
 		{
