@@ -6,6 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerProfile: MonsterProfile
 {
+	public float TimeProfileCreated;
+	public float TimePlayed;
+
 	public int NumberOfBattlesPlayed;
 	public int NumberOfRoomsCompleted;
 	public int NumberOfBodyPartsSwapped {get 

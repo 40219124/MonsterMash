@@ -22,11 +22,6 @@ public class PartPickerUiController : MonoBehaviour
 
 	MonsterProfile ProfileData;
 
-	void Start()
-	{
-		Setup(DebugProfileData, BodyPartsData);
-	}
-
 	public void Setup(MonsterProfile profileData, List<BodyPartData> bodyPartsDataList)
 	{
 		ProfileData = profileData;
@@ -37,6 +32,8 @@ public class PartPickerUiController : MonoBehaviour
 	IEnumerator FlowController(List<BodyPartData> bodyPartsDataList)
 	{
 		PlayerBody.ShowStats(true, Body.eBodyPartType.None, false, false, true);
+		UseButton.SetButtonSize(true);
+		DiscardButton.SetButtonSize(true);
 
 		int loop = 0;
 		foreach (var pickerBodyPart in PickerBodyParts)
