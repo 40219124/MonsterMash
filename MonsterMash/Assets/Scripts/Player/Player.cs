@@ -10,6 +10,7 @@ public class Player : OverworldAgent
     {
         // ~~~ do better later
         Profile = MGen.GetMonster(EMonsterType.Frankenstein);
+		OverworldMemory.RecordProfile(Profile);
         base.Start();
     }
 

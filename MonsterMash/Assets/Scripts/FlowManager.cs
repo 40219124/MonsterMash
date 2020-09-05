@@ -101,7 +101,8 @@ public class FlowManager : MonoBehaviour
 
     private IEnumerator TransToPickerCo(string sceneFrom)
     {
-        if (!sceneFrom.Equals("")) {
+        if (!sceneFrom.Equals(""))
+		{
             yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
         }
         yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneBodyPartPicker));
