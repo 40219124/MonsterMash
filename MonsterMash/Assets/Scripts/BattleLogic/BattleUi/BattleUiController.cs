@@ -10,7 +10,7 @@ public class BattleUiController: MonoBehaviour
 
 	bool ForceShowComplexStats;
 
-	void Update()
+	void LateUpdate()
 	{
 		var battleController = BattleController.Instance;
 		

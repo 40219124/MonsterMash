@@ -24,7 +24,7 @@ public class TimerUi : MonoBehaviour
 		TimeLeftNumber.UseLargeNumbers = true;
 	}
 
-	void Update()
+	void LateUpdate()
 	{
 		var battleController = BattleController.Instance;
 
