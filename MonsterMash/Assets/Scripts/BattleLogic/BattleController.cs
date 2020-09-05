@@ -116,8 +116,17 @@ public class BattleController : MonoBehaviour
 			BattleState = eBattleState.PlayerWon;
 			Debug.Log($"game over {BattleState}");
 			// Remove enemy from memory 
-			OverworldMemory.OpponentBeaten(UnityEngine.Random.Range(0.0f, 1.0f) < 0.75f); // ~~~ drop chance
-			FindObjectOfType<FlowManager>().TransToPicker(Settings.SceneBattle); // ~~~ Avoid find later mayber
+			var dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < 0.75f;// ~~~ drop chance
+			OverworldMemory.OpponentBeaten(dropLoot);
+
+			if(dropLoot || Settings.AlwaysGoToPickerPostBattle)
+			{
+				FindObjectOfType<FlowManager>().TransToPicker(Settings.SceneBattle); // ~~~ Avoid find later mayber
+			}
+			else
+			{
+				FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle);
+			}
 			return;
 		}
 

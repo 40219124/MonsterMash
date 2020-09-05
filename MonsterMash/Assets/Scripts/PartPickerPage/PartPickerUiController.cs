@@ -62,9 +62,9 @@ public class PartPickerUiController : MonoBehaviour
 		DiscardButton.SetShow(false);
 		PressButtonPrompt.SetActive(true);
 
-		while  (SimpleInput.GetInputState(EInput.A) != EButtonState.Pressed &&
-				SimpleInput.GetInputState(EInput.B) != EButtonState.Pressed &&
-				SimpleInput.GetInputState(EInput.Select) != EButtonState.Pressed)
+		while  (SimpleInput.GetInputState(EInput.A) != EButtonState.Released &&
+				SimpleInput.GetInputState(EInput.B) != EButtonState.Released &&
+				SimpleInput.GetInputState(EInput.Select) != EButtonState.Released)
 		{
 			yield return null;
 		}

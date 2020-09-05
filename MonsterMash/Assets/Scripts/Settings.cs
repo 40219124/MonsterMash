@@ -1,5 +1,6 @@
 public class Settings
 {
+	public const bool AlwaysGoToPickerPostBattle = false;
 	public const bool ShowStatsForAi = false;
 	public const bool DpadOnlyCombat = true;
 	public const float ActionTimeForgiveness = 0.2f;
@@ -17,6 +18,7 @@ public class Settings
 
 	public const float AiPickTargetMinTime = 0.1f;
 	public const float AiPickTargetMaxTime = 1f;
+
 
 	public const string SceneMain = "MainScene";
 	public const string SceneOverworld = "Overworld";
