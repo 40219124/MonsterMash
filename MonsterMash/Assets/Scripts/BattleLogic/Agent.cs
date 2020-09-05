@@ -73,7 +73,7 @@ public class Agent : MonoBehaviour
 			{
 				case (EInput.dpadUp):
 				{
-					if (LockedAttacker != Body.eBodyPartType.None && Body.LeftArmPart.IsAlive)
+					if (LockedAttacker != Body.eBodyPartType.None && Body.TorsoPart.IsAlive)
 					{
 						SelectedPart = Body.eBodyPartType.Torso;
 					}
