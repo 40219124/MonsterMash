@@ -14,10 +14,14 @@ public class NumberRender : MonoBehaviour
 	
 
 	public bool UseLargeNumbers;
+	
+	void Update()
+	{
+		NumberAnimator.SetBool("Small", !UseLargeNumbers);
+	}
 
 	public void SetNumber(int inputNumber)
 	{
-		NumberAnimator.SetBool("Small", !UseLargeNumbers);
 		
 		int number = inputNumber;
 		if (number < 0)
