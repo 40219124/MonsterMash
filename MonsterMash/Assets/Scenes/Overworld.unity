@@ -779,6 +779,8 @@ MonoBehaviour:
     pos: {x: 8, y: 5, z: 0}
   - type: 1
     pos: {x: 4, y: 5, z: 0}
+  - type: 2
+    pos: {x: 6, y: 7, z: 0}
 --- !u!4 &622669963
 Transform:
   m_ObjectHideFlags: 0

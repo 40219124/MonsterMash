@@ -145,4 +145,13 @@ public class OverworldMemory : MonoBehaviour
         EnemyProfiles.Clear();
         opponentID = 0;
     }
+
+    public static void ClearAll()
+    {
+        EnemyProfiles.Clear();
+        EnemyPositions.Clear();
+        PlayerPos = Vector3.zero;
+        opponentID = 0;
+        opponentLoot = null;
+    }
 }

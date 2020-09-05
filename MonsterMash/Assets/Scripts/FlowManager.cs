@@ -77,6 +77,7 @@ public class FlowManager : MonoBehaviour
         {
             yield return MainManager.Instance.SubtractSceneCo(sceneFrom);
         }
+        OverworldMemory.ClearAll();
         MainManager.Instance.GoToTitle();
     }
 
