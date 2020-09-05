@@ -69,7 +69,6 @@ public class BattleController : MonoBehaviour
 			if ( (introMaxTime >= 0 && TimeSinceActionStarted >= introMaxTime) ||
 				SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
 			{
-				CurrentAgent = Player;
 				StartTurnTransition();
 			}
 		}
