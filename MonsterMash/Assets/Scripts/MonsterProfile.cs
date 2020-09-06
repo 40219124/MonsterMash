@@ -12,12 +12,12 @@ public class MonsterProfile
     public BodyPartData RightArm;
     public BodyPartData Legs;
 
-	public void HealToMax()
+	public void HealToMax(bool restoreDead)
 	{
 		Debug.Log("Healing player to max");
-		Torso.RestoreHealth();
-		LeftArm.RestoreHealth();
-		RightArm.RestoreHealth();
-		Legs.RestoreHealth();
+		Torso.RestoreHealth(restoreDead);
+		LeftArm.RestoreHealth(restoreDead);
+		RightArm.RestoreHealth(restoreDead);
+		Legs.RestoreHealth(restoreDead);
 	}
 }

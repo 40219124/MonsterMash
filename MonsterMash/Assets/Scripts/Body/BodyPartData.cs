@@ -83,9 +83,12 @@ public class BodyPartData
         AttackTimer = data.AttackTimer;
     }
 
-    public void RestoreHealth()
+    public void RestoreHealth(bool restoreDead)
     {
-        Debug.Log($"restore health on {this}");
-        HealthCurrent = HealthMaximum;
+		if(restoreDead || HealthCurrent > 0)
+		{
+			Debug.Log($"restore health on {this}");
+			HealthCurrent = HealthMaximum;
+		}
     }
 }

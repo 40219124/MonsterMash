@@ -17,7 +17,7 @@ public class PickerBodyPartUi : MonoBehaviour
 		}
 		else
 		{
-			partData.RestoreHealth();
+			partData.RestoreHealth(true);
 			PartData = partData;
 			BodyPartImage.sprite = partSpriteLookup.GetBodyPartSprite(PartData.BodyPartType, PartData.MonsterType);
 

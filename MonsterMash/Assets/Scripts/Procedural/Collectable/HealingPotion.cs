@@ -19,6 +19,6 @@ public class HealingPotion : CollectableItem
 		}
 
 		base.PickUp();
-		profile.HealToMax();
+		profile.HealToMax(false);
 	}
 }
