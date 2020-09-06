@@ -18,22 +18,23 @@ public class PartPickerManager : AdditiveSceneManager
         if (monPro != null)
         {
             List<BodyPartData> parts = new List<BodyPartData>();
+			
+			var toPickFrom = new List<BodyPartData>();
+			if(monPro.LeftArm != null)
+			{
+				toPickFrom.Add(monPro.LeftArm);
+			}
+			if(monPro.RightArm != null)
+			{
+				toPickFrom.Add(monPro.RightArm);
+			}
+			if(monPro.Legs != null)
+			{
+				toPickFrom.Add(monPro.Legs);
+			}
 
-            int bodyPart = Random.Range(0, 3);
-            switch (bodyPart)
-            {
-                case 0:
-                    parts.Add(monPro.LeftArm);
-                    break;
-                case 1:
-                    parts.Add(monPro.RightArm);
-                    break;
-                case 2:
-                    parts.Add(monPro.Legs);
-                    break;
-                default:
-                    break;
-            }
+			int bodyPart = Random.Range(0, toPickFrom.Count);
+			parts.Add(toPickFrom[bodyPart]);
             // ~~~ 25% chance of second limb
 
             picker.Setup(OverworldMemory.GetCombatProfile(true), parts);
