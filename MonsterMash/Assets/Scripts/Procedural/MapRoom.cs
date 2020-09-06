@@ -21,4 +21,11 @@ public class MapRoom
 		UsedDoorPlaces = usedDoorPlaces;
 		MapPosition = mapPosition;
 	}
+
+	public bool PositionIsDoor(Vector2Int pos)
+    {
+		bool outBool = false;
+
+		return outBool;
+    }
 }

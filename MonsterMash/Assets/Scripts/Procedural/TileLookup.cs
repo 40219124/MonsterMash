@@ -19,6 +19,8 @@ public class TileLookup : ScriptableObject
     public List<EnumToTile> IndoorTileList = new List<EnumToTile>();
     public RuleTile OutdoorBase;
     public RuleTile IndoorBase;
+
+    public List<Tile> OutdoorDoors = new List<Tile>();
     // Start is called before the first frame update
     void Start()
     {
