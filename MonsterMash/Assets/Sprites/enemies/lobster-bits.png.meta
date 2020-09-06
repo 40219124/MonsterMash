@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 5d45c26897c3d9a468b33a567f98e01b
+guid: 10b74e608eaa3af46a11e1f30c6edb3a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6694567029359311830
-    second: shrimp-bits_0
+      213: 3085508807869680983
+    second: lobster-bits_0
   - first:
-      213: 6298515254241408552
-    second: shrimp-bits_1
+      213: 1703919232716760764
+    second: lobster-bits_1
   - first:
-      213: 5786828276753209726
-    second: shrimp-bits_2
+      213: -7878408339880006008
+    second: lobster-bits_2
   - first:
-      213: 7555279910521919275
-    second: shrimp-bits_3
+      213: -3745143350680822808
+    second: lobster-bits_3
   - first:
-      213: 6884740454561413755
-    second: shrimp-bits_4
+      213: 3004339488555139453
+    second: lobster-bits_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shrimp-bits_0
+      name: lobster-bits_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6dbf00e6e31e7ec50800000000000000
-      internalID: 6694567029359311830
+      spriteID: 75d496cb9ede1da20800000000000000
+      internalID: 3085508807869680983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shrimp-bits_1
+      name: lobster-bits_1
       rect:
         serializedVersion: 2
         x: 64
@@ -151,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8263075b042d86750800000000000000
-      internalID: 6298515254241408552
+      spriteID: cb6e900b38985a710800000000000000
+      internalID: 1703919232716760764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shrimp-bits_2
+      name: lobster-bits_2
       rect:
         serializedVersion: 2
         x: 128
@@ -172,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e799f0468a1fe4050800000000000000
-      internalID: 5786828276753209726
+      spriteID: 88e2af14b554aa290800000000000000
+      internalID: -7878408339880006008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shrimp-bits_3
+      name: lobster-bits_3
       rect:
         serializedVersion: 2
         x: 192
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b27dd4d8c0fb9d860800000000000000
-      internalID: 7555279910521919275
+      spriteID: 8ebd0c517f3960cc0800000000000000
+      internalID: -3745143350680822808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shrimp-bits_4
+      name: lobster-bits_4
       rect:
         serializedVersion: 2
         x: 256
@@ -214,8 +214,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7af4ec67f28b8f50800000000000000
-      internalID: 6884740454561413755
+      spriteID: d710200e8de81b920800000000000000
+      internalID: 3004339488555139453
       vertices: []
       indices: 
       edges: []

@@ -58,3 +58,33 @@ MonoBehaviour:
   - BodyPartType: 0
     MonsterType: 2
     BodyPartSprite: {fileID: -2096317628245743753, guid: 0ffa15c87727f8e4ea32ed4eea7e9305, type: 3}
+  - BodyPartType: 1
+    MonsterType: 3
+    BodyPartSprite: {fileID: 3004339488555139453, guid: 10b74e608eaa3af46a11e1f30c6edb3a, type: 3}
+  - BodyPartType: 2
+    MonsterType: 3
+    BodyPartSprite: {fileID: -3745143350680822808, guid: 10b74e608eaa3af46a11e1f30c6edb3a, type: 3}
+  - BodyPartType: 3
+    MonsterType: 3
+    BodyPartSprite: {fileID: 1703919232716760764, guid: 10b74e608eaa3af46a11e1f30c6edb3a, type: 3}
+  - BodyPartType: 4
+    MonsterType: 3
+    BodyPartSprite: {fileID: 3085508807869680983, guid: 10b74e608eaa3af46a11e1f30c6edb3a, type: 3}
+  - BodyPartType: 0
+    MonsterType: 3
+    BodyPartSprite: {fileID: -7878408339880006008, guid: 10b74e608eaa3af46a11e1f30c6edb3a, type: 3}
+  - BodyPartType: 1
+    MonsterType: 4
+    BodyPartSprite: {fileID: 7555279910521919275, guid: 5d45c26897c3d9a468b33a567f98e01b, type: 3}
+  - BodyPartType: 2
+    MonsterType: 4
+    BodyPartSprite: {fileID: 6884740454561413755, guid: 5d45c26897c3d9a468b33a567f98e01b, type: 3}
+  - BodyPartType: 3
+    MonsterType: 4
+    BodyPartSprite: {fileID: 6298515254241408552, guid: 5d45c26897c3d9a468b33a567f98e01b, type: 3}
+  - BodyPartType: 4
+    MonsterType: 4
+    BodyPartSprite: {fileID: 6694567029359311830, guid: 5d45c26897c3d9a468b33a567f98e01b, type: 3}
+  - BodyPartType: 0
+    MonsterType: 4
+    BodyPartSprite: {fileID: 5786828276753209726, guid: 5d45c26897c3d9a468b33a567f98e01b, type: 3}
