@@ -22,7 +22,7 @@ public class OverworldManager : AdditiveSceneManager
 
 	void Update()
 	{
-		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Pressed && !Transitioning)
+		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Released && !Transitioning)
 		{
             DoTransitionToPicker();
 		}

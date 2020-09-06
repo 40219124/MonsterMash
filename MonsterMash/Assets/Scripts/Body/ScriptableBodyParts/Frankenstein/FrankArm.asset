@@ -18,6 +18,6 @@ MonoBehaviour:
   HealthVariation: 0
   ArmourAvg: 0
   ArmourVariation: 0
-  DamageAvg: 90
-  DamageVariation: 0
+  DamageAvg: 12
+  DamageVariation: 2
   AttackTime: 2
