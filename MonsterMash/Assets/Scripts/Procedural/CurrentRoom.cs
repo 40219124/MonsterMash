@@ -208,8 +208,8 @@ public class CurrentRoom : MonoBehaviour
     {
 
         float potionChance = 25.0f * (tileType == Room.eTiles.Table ? 1 : 0);
-        float flowerChance = 4.0f * (tileType == Room.eTiles.Floor ? 1 : 0) + potionChance;
-        float grassChance = 6.0f * (tileType == Room.eTiles.Floor ? 1 : 0) + flowerChance;
+        float flowerChance = 4.0f * ((tileType == Room.eTiles.Floor && ThisRoom.RoomData.Area == Room.eArea.Outdoors) ? 1 : 0) + potionChance;
+        float grassChance = 6.0f * ((tileType == Room.eTiles.Floor && ThisRoom.RoomData.Area == Room.eArea.Outdoors) ? 1 : 0) + flowerChance;
 
         if (grassChance == 0.0f)
         {
