@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
+using System.Xml.Serialization;
 
 public class CurrentRoom : MonoBehaviour
 {
@@ -115,11 +116,12 @@ public class CurrentRoom : MonoBehaviour
                     break;
                 case Room.eTiles.Door:
                     {
+                        List<Tile> doorList = (ThisRoom.RoomData.Area == Room.eArea.Indoors ? TileTable.IndoorDoorsClosed : TileTable.OutdoorDoorsClosed);
                         if (ThisRoom.PositionIsDoor(index))
                         {
                             DoorLocs.Add(pos);
                             type = ETileContentType.Door;
-                            BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoorsClosed[(int)EnumFromVector(pos)]);
+                            BaseDecoration.SetTile((Vector3Int)pos, doorList[(int)EnumFromVector(pos)]);
                         }
                         else
                         {
@@ -170,33 +172,37 @@ public class CurrentRoom : MonoBehaviour
                     break;
             }
             TileContent[pos.x, pos.y] = type;
-            BaseLayer.SetTile((Vector3Int)pos, (ThisRoom.RoomData.Area == Room.eArea.Outdoors ? TileTable.OutdoorBase: TileTable.IndoorBase));
+            BaseLayer.SetTile((Vector3Int)pos, (ThisRoom.RoomData.Area == Room.eArea.Outdoors ? TileTable.OutdoorBase : TileTable.IndoorBase));
 
             PlaceRandomDecoration(type, pos, tile);
-			TryAddCollectableItems(type, pos, tile);
+            TryAddCollectableItems(type, pos, tile);
 
             index++;
+        }
+        if (ThisRoom.RoomData.Area == Room.eArea.Outdoors)
+        {
+            PlaceTreeFluff();
         }
         //BaseLayer.RefreshAllTiles();
         //BaseLayer.SetTile(Vector3Int.up * 8, null);
     }
 
-	void TryAddCollectableItems(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
-	{
-		if (ThisRoom.CollectableItems.Count > 0 ||
-			tileType != Room.eTiles.Floor ||
-			ThisRoom.IsStartingRoom)
-		{
-			return;
-		}
+    void TryAddCollectableItems(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
+    {
+        if (ThisRoom.CollectableItems.Count > 0 ||
+            tileType != Room.eTiles.Floor ||
+            ThisRoom.IsStartingRoom)
+        {
+            return;
+        }
 
-		if(UnityEngine.Random.Range(0f, 100f) <= Settings.ChanceOfHealingPotion)
-		{
-			var healingPotion = new HealingPotion(pos);
+        if (UnityEngine.Random.Range(0f, 100f) <= Settings.ChanceOfHealingPotion)
+        {
+            var healingPotion = new HealingPotion(pos);
 
-			ThisRoom.CollectableItems.Add(healingPotion);
-		}
-	}
+            ThisRoom.CollectableItems.Add(healingPotion);
+        }
+    }
 
     private void PlaceRandomDecoration(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
     {
@@ -277,13 +283,98 @@ public class CurrentRoom : MonoBehaviour
     }
     public void PlaceDoors()
     {
+        List<Tile> doorList = (ThisRoom.RoomData.Area == Room.eArea.Indoors ? TileTable.IndoorDoorsOpen : TileTable.OutdoorDoorsOpen);
         ThisRoom.RoomState = ERoomState.Completed;
         foreach (Vector2Int pos in DoorLocs)
         {
-            BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoorsOpen[(int)EnumFromVector(pos)]);
+            BaseDecoration.SetTile((Vector3Int)pos, doorList[(int)EnumFromVector(pos)]);
         }
     }
 
+    public void PlaceTreeFluff()
+    {
+        int xMin = 1;
+        int xMax = Room.GameWidth - 2;
+        int yMin = 1;
+        int yMax = Room.GameHeight - 2;
+        for (int y = yMin; y <= yMax; ++y)
+        {
+            for (int x = xMin; x <= xMax; ++x)
+            {
+                EEightDirections dir = GetEightDirections(new Vector2Int(x, y), xMin, xMax, yMin, yMax);
+                if (!IsNextToDoor(new Vector2Int(x,y)) && dir != EEightDirections.none)
+                {
+                    DecorationForeground.SetTile(new Vector3Int(x, y, 0), TileTable.TreeFluff.Find(t => t.Direction == dir).TileTile);
+                }
+            }
+        }
+    }
+
+    public bool IsNextToDoor(Vector2Int pos)
+    {
+
+        Room.eDoorPlaces places = ThisRoom.UsedDoorPlaces;
+
+        if (places.HasFlag(Room.eDoorPlaces.Top) && (pos == new Vector2Int(4, 7) || pos == new Vector2Int(5, 7)))
+        {
+            return true;
+        }
+        if (places.HasFlag(Room.eDoorPlaces.Right) && (pos == new Vector2Int(8, 4) || pos == new Vector2Int(8, 5)))
+        {
+            return true;
+        }
+        if (places.HasFlag(Room.eDoorPlaces.Bottom) && (pos == new Vector2Int(4, 1) || pos == new Vector2Int(5, 1)))
+        {
+            return true;
+        }
+        if(places.HasFlag(Room.eDoorPlaces.Left) && (pos == new Vector2Int(1, 4) || pos == new Vector2Int(1, 5)))
+        {
+            return true;
+        }
+
+
+        return false;
+    }
+
+    public EEightDirections GetEightDirections(Vector2Int pos, int xMin, int xMax, int yMin, int yMax)
+    {
+        if(!((pos.x == xMin || pos.x == xMax) || (pos.y == yMin || pos.y == yMax))){
+            return EEightDirections.none;
+        }
+        if(pos.x == xMin && pos.y == yMin)
+        {
+            return EEightDirections.SW;
+        }
+        else if (pos.x == xMin && pos.y == yMax)
+        {
+            return EEightDirections.NW;
+        }
+        else if (pos.x == xMax && pos.y == yMin)
+        {
+            return EEightDirections.SE;
+        }
+        else if (pos.x == xMax && pos.y == yMax)
+        {
+            return EEightDirections.NE;
+        }
+        else if (pos.x == xMin)
+        {
+            return EEightDirections.W;
+        }
+        else if (pos.x == xMax)
+        {
+            return EEightDirections.E;
+        }
+        else if (pos.y == yMin)
+        {
+            return EEightDirections.S;
+        }
+        else if (pos.y == yMax)
+        {
+            return EEightDirections.N;
+        }
+        return EEightDirections.none;
+    }
     public void PlaceCollectableItems()
     {
         HealPotion.gameObject.SetActive(false);
@@ -309,11 +400,11 @@ public class CurrentRoom : MonoBehaviour
         }
     }
 
-	public void TryCollectItems(Vector3 playerPos)
-	{
-		HealPotion.PickUp(playerPos);
-		BossReward.PickUp(playerPos);
-	}
+    public void TryCollectItems(Vector3 playerPos)
+    {
+        HealPotion.PickUp(playerPos);
+        BossReward.PickUp(playerPos);
+    }
 
     private EDoorPos EnumFromVector(Vector2Int pos)
     {

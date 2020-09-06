@@ -72,3 +72,20 @@ MonoBehaviour:
   - Decoration: 5
     DecTile: {fileID: 11400000, guid: c476d36a71bece44b8c3a3f8db1146eb, type: 2}
   Hole: {fileID: 11400000, guid: fec5354bc53098d45a9c1296b6c901ef, type: 2}
+  TreeFluff:
+  - Direction: 0
+    TileTile: {fileID: 11400000, guid: 48aefaf57a1de8f4e910257feb8b09ee, type: 2}
+  - Direction: 1
+    TileTile: {fileID: 11400000, guid: e4c6523cc8463124ea0aa8f19107e7f6, type: 2}
+  - Direction: 2
+    TileTile: {fileID: 11400000, guid: c03a14060f8324d4591907ba1b8d0fd6, type: 2}
+  - Direction: 3
+    TileTile: {fileID: 11400000, guid: f198d7ecf7a317c4d965be6b6a023aec, type: 2}
+  - Direction: 4
+    TileTile: {fileID: 11400000, guid: 6de653d538fb2244ca14a92d3f4cbdc8, type: 2}
+  - Direction: 5
+    TileTile: {fileID: 11400000, guid: fe7a4a398c492d246b65162786cf01da, type: 2}
+  - Direction: 6
+    TileTile: {fileID: 11400000, guid: d2e90aab5b7f3ef4183d2f0d0a86ae82, type: 2}
+  - Direction: 7
+    TileTile: {fileID: 11400000, guid: accabd7f526d85d4eba4034d8093065e, type: 2}

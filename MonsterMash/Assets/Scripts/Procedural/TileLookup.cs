@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public enum EEightDirections { none = -1, N, NE, E, SE, S, SW, W, NW }
+
 [CreateAssetMenu(fileName = "TileLookup", menuName = "ScriptableObjects/TileLookup")]
 public class TileLookup : ScriptableObject
 {
@@ -19,6 +21,12 @@ public class TileLookup : ScriptableObject
         public ERoomDecoration Decoration;
         public Tile DecTile;
     }
+    [System.Serializable]
+    public class EightDToTile
+    {
+        public EEightDirections Direction;
+        public Tile TileTile;
+    }
 
     public List<EnumToTile> TileList = new List<EnumToTile>();
     public List<EnumToTile> OutdoorTileList = new List<EnumToTile>();
@@ -28,6 +36,8 @@ public class TileLookup : ScriptableObject
 
     public List<Tile> OutdoorDoorsOpen = new List<Tile>();
     public List<Tile> OutdoorDoorsClosed = new List<Tile>();
+    public List<Tile> IndoorDoorsOpen = new List<Tile>();
+    public List<Tile> IndoorDoorsClosed = new List<Tile>();
 
     public AnimatedTile RiverTop;
     public AnimatedTile River;
@@ -39,15 +49,6 @@ public class TileLookup : ScriptableObject
     public List<EnumToDecoration> Decorations = new List<EnumToDecoration>();
 
     public Tile Hole;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public List<EightDToTile> TreeFluff = new List<EightDToTile>();
 }
