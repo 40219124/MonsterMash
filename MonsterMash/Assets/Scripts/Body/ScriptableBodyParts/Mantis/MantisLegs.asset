@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BodyPartType: 2
   MonsterType: 2
-  HealthAvg: 30
-  HealthVariation: 10
-  ArmourAvg: 0
-  ArmourVariation: 1
-  DamageAvg: 3
+  HealthAvg: 5
+  HealthVariation: 2
+  ArmourAvg: 10
+  ArmourVariation: 3
+  DamageAvg: 2
   DamageVariation: 1
-  AttackTime: 5
+  AttackTime: 1
