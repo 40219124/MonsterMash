@@ -53,6 +53,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c0af10f2c633aa845abc6e36521d63e6, type: 2}
   - {fileID: 11400000, guid: 0d7dc9b6436579244ba7b4e62b9f9a04, type: 2}
   - {fileID: 11400000, guid: 8b58d47c91f2d4e48a67fa54fdf45bc4, type: 2}
+  IndoorDoorsOpen:
+  - {fileID: 11400000, guid: 4ba505804bdafd041b12f9d3021ad4ac, type: 2}
+  - {fileID: 11400000, guid: 150df573e238cef40bcae7abd1c1c818, type: 2}
+  - {fileID: 11400000, guid: 977de2b92f5b3fd46b5bbcac8404859e, type: 2}
+  - {fileID: 11400000, guid: 17ac0785d2dd22042a02ef36a4bbe6fa, type: 2}
+  - {fileID: 11400000, guid: 0c3a0855bb113ac489d3caa9b69fec23, type: 2}
+  - {fileID: 11400000, guid: 0d7366c290a6b1f43a60e46521dcf611, type: 2}
+  - {fileID: 11400000, guid: f2a3271011891da45ac1b25ac0bd663d, type: 2}
+  - {fileID: 11400000, guid: 2db466ec5f2a222459f12e7854b3a8a3, type: 2}
+  IndoorDoorsClosed:
+  - {fileID: 11400000, guid: f3f1f470ea919b74fa7bd6ee88275350, type: 2}
+  - {fileID: 11400000, guid: 8a6c9726f730b3c42b3bd4f88659706f, type: 2}
+  - {fileID: 11400000, guid: 504965881590b92448052f32fd003168, type: 2}
+  - {fileID: 11400000, guid: d7de9f5068aa1834fb420273ab66b0c8, type: 2}
+  - {fileID: 11400000, guid: ed120e0dca413d749b4ec535ab717755, type: 2}
+  - {fileID: 11400000, guid: af6b18220868fb34980c0559e44ae51b, type: 2}
+  - {fileID: 11400000, guid: 5cf15af7ffa4a5644868c0b8fccd9d69, type: 2}
+  - {fileID: 11400000, guid: bd20082447b88c54095f87831aa72f25, type: 2}
   RiverTop: {fileID: 11400000, guid: bdcb9577c79b90f4187e5a9c428724fd, type: 2}
   River: {fileID: 11400000, guid: d2761c43488913e4199101baa8946db8, type: 2}
   RiverBottom: {fileID: 11400000, guid: 7499f9c5911e779488bfc8212f6f106b, type: 2}
