@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum ERoomState { NotSeen, Seen, Completed };
+
 [Serializable]
 public class MapRoom
 {
     public Room RoomData;
 
-    public bool IsCompleted = false;
+    public ERoomState RoomState;
 	public bool IsStartingRoom = false;
 
     public Vector2Int MapPosition;

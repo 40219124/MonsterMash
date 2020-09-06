@@ -40,8 +40,29 @@ public class CurrentRoom : MonoBehaviour
     private void Start()
     {
         EnemySpawn = GetComponent<EnemySpawner>();
+
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
         SetRoom(mapRoom);
+
+		if (ThisRoom.RoomState != ERoomState.NotSeen)
+		{
+			Player p = FindObjectOfType<Player>();
+			p.transform.position = OverworldMemory.GetPlayerPosition();
+			p.Profile = OverworldMemory.GetCombatProfile(true);
+		}
+
+		if (ThisRoom.RoomState != ERoomState.Completed &&
+			!ThisRoom.IsStartingRoom)
+		{
+			EnemySpawn.SpawnEnemies(ThisRoom.RoomState != ERoomState.NotSeen);
+		}
+
+		ThisRoom.RoomState = ERoomState.Seen;
+
+		if (OverworldMemory.GetEnemyProfiles().Count == 0)
+		{
+			PlaceDoors();
+		}
     }
     public void SetRoom(MapRoom room)
     {
@@ -108,7 +129,7 @@ public class CurrentRoom : MonoBehaviour
 
     public void PlaceDoors()
     {
-		ThisRoom.IsCompleted = true;
+		ThisRoom.RoomState = ERoomState.Completed;
         foreach (Vector2Int pos in DoorLocs)
         {
             BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoors[(int)EnumFromVector(pos)]);

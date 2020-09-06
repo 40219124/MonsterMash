@@ -5,11 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(OverworldMemory))]
 public class FlowManager : MonoBehaviour
 {
-    public enum ERoomApproach { none = -1, FirstTime, FromBattle };
-    private ERoomApproach approach = ERoomApproach.none;
     private void Start()
     {
-        approach = ERoomApproach.FirstTime;
         TransToOverworld();
     }
     public void TransOverworldToBattle()
@@ -39,25 +36,10 @@ public class FlowManager : MonoBehaviour
     {
 		if (!sceneFrom.Equals(""))
 		{
-			approach = ERoomApproach.FromBattle;
 			yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
 		}
 
-		var loadEnemyFromMemory = approach != ERoomApproach.FirstTime;
-
 		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
-		yield return null;
-		FindObjectOfType<EnemySpawner>().SpawnEnemies(loadEnemyFromMemory); // ~~~ spawn based on ERoomApproach
-		if (OverworldMemory.GetEnemyProfiles().Count == 0)
-		{
-			FindObjectOfType<CurrentRoom>().PlaceDoors();
-		}
-		if (approach == ERoomApproach.FromBattle)
-		{
-			Player p = FindObjectOfType<Player>();
-			p.transform.position = OverworldMemory.GetPlayerPosition();
-			p.Profile = OverworldMemory.GetCombatProfile(true);
-		}
     }
 
     public void TransToGameOver(string sceneFrom, bool wonTheGame)
