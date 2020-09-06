@@ -5,13 +5,25 @@ using System.IO;
 
 public class ProceduralDungeon : MonoBehaviour
 {
+	public static ProceduralDungeon Instance;
+
 	public MapRoom[,] DungeonMap = new MapRoom[Settings.MapSize, Settings.MapSize];
 	public Vector2Int StartingRoom;
+	public Vector2Int CurrentRoom;
 	public AllRoomData AllRoomsData;
 
 	void Awake()
 	{
-		GenerateMap();
+		if (Instance == null)
+		{
+			Instance = this;
+			GenerateMap();
+		}
+	}
+
+	public MapRoom GetCurrentRoom()
+	{
+		return DungeonMap[CurrentRoom.x,CurrentRoom.y];
 	}
 
 	void GenerateMap()
@@ -21,6 +33,7 @@ public class ProceduralDungeon : MonoBehaviour
 		AllRoomsData = JsonUtility.FromJson<AllRoomData>(roomData);
 
 		StartingRoom = new Vector2Int(Random.Range(0, Settings.MapSize), Random.Range(0, Settings.MapSize));
+		CurrentRoom = StartingRoom;
 		var roughMap = MakeRoughMap(StartingRoom);
 		Debug.Log($"Built roughMap: {ArrayToString(roughMap)}");
 
@@ -85,7 +98,7 @@ public class ProceduralDungeon : MonoBehaviour
 		return neededDoors;
 	}
 
-	bool[,] MakeRoughMap(Vector2Int startPos, bool[,] roughMap=null)
+	bool[,] MakeRoughMap(Vector2Int startPos, bool[,] roughMap=null, int numberRoomsMade=1)
 	{
 		if (roughMap == null)
 		{
@@ -95,7 +108,6 @@ public class ProceduralDungeon : MonoBehaviour
 
 		var roomTodoList = new Queue<Vector2Int>();
 		roomTodoList.Enqueue(startPos);
-		int numberRoomsMade = 1;
 
 		while (roomTodoList.Count != 0 && numberRoomsMade < Settings.MaxRooms)
 		{
@@ -105,7 +117,7 @@ public class ProceduralDungeon : MonoBehaviour
 			var allowedRooms = GetAllowedRooms(roughMap, currentRoomPos);
 
 			int numAllowRooms = allowedRooms.Count;
-			numAllowRooms = Mathf.Min(numAllowRooms, Settings.MaxRooms-(numberRoomsMade + roomTodoList.Count));
+			numAllowRooms = Mathf.Min(numAllowRooms, Settings.MaxRooms-numberRoomsMade);
 
 			int minRooms = 0;
 			if (roomTodoList.Count == 0)
@@ -132,7 +144,7 @@ public class ProceduralDungeon : MonoBehaviour
 				{
 					if (!roughMap[x, y])
 					{
-						roughMap = MakeRoughMap(new Vector2Int(x, y), roughMap);
+						roughMap = MakeRoughMap(new Vector2Int(x, y), roughMap, numberRoomsMade);
 					}
 				}
 			}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System;
 
 public class CurrentRoom : MonoBehaviour
 {
@@ -15,15 +16,57 @@ public class CurrentRoom : MonoBehaviour
     [SerializeField]
     private MapRoom ThisRoom;
 
+	[Flags]
+	public enum ETileContentType 
+	{ Clear = 1, blocked=2, Door=4, Player=8, PlayerDestination=16, Enemy=32, EnemyDestination=64}
+
+	public ETileContentType[,] TileContent;
+
     private void Start()
     {
-        AssignTiles();
+		var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
+        SetRoom(mapRoom);
     }
     public void SetRoom(MapRoom room)
     {
         ThisRoom = room;
         AssignTiles();
+		BuildTileContent();
     }
+
+	void BuildTileContent()
+	{
+		var tiles = ThisRoom.RoomData.Tiles;
+		TileContent = new ETileContentType[Settings.MapSize, Settings.MapSize];
+
+		for (int x = 0; x < Settings.MapSize; x++)
+		{
+			for (int y = 0; y < Settings.MapSize; y++)
+			{
+				int index = (9-y)*Settings.MapSize + x;
+				ETileContentType type = ETileContentType.Clear;
+				switch (tiles[index])
+				{
+					case Room.eTiles.Wall:
+						type = ETileContentType.blocked;
+						break;
+					case Room.eTiles.Hole:
+						type = ETileContentType.blocked;
+						break;
+					case Room.eTiles.River:
+						type = ETileContentType.blocked;
+						break;
+					case Room.eTiles.Table:
+						type = ETileContentType.blocked;
+						break;
+					default:
+						type = ETileContentType.Clear;
+						break;
+				}
+				TileContent[x,y] = type;
+			}
+		}
+	}
 
     private void AssignTiles()
     {
