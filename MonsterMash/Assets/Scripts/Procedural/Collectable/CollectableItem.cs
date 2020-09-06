@@ -7,10 +7,9 @@ public class CollectableItem
 	public Vector2Int Postion;
 	public bool IsCollectAble = true;
 
-	public CollectableItem()
+	public CollectableItem(Vector2Int pos)
 	{
-		//todo make this random
-		Postion = new Vector2Int(5,5);
+		Postion = pos;
 	}
 
 	public virtual void PickUp()

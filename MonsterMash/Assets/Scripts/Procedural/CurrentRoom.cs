@@ -173,6 +173,7 @@ public class CurrentRoom : MonoBehaviour
             BaseLayer.SetTile((Vector3Int)pos, TileTable.OutdoorBase);
 
             PlaceRandomDecoration(type, pos, tile);
+			TryAddCollectableItems(type, pos, tile);
 
             index++;
         }
@@ -180,12 +181,24 @@ public class CurrentRoom : MonoBehaviour
         //BaseLayer.SetTile(Vector3Int.up * 8, null);
     }
 
+	void TryAddCollectableItems(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
+	{
+		if (ThisRoom.CollectableItems.Count > 0 ||
+			tileType != Room.eTiles.Floor)
+		{
+			return;
+		}
+
+		if(UnityEngine.Random.Range(0f, 100f) <= Settings.ChanceOfHealingPotion)
+		{
+			var healingPotion = new HealingPotion(pos);
+
+			ThisRoom.CollectableItems.Add(healingPotion);
+		}
+	}
+
     private void PlaceRandomDecoration(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
     {
-        //if (type != ETileContentType.Clear)
-        //{
-        //    return;
-        //}
 
         float potionChance = 25.0f * (tileType == Room.eTiles.Table ? 1 : 0);
         float flowerChance = 4.0f * (tileType == Room.eTiles.Floor ? 1 : 0) + potionChance;
@@ -292,6 +305,12 @@ public class CurrentRoom : MonoBehaviour
             }
         }
     }
+
+	public void TryCollectItems(Vector3 playerPos)
+	{
+		HealPotion.PickUp(playerPos);
+		BossReward.PickUp(playerPos);
+	}
 
     private EDoorPos EnumFromVector(Vector2Int pos)
     {

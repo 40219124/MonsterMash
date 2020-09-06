@@ -25,6 +25,8 @@ public class Player : OverworldAgent
 
         DoUpdate();
 
+		CurrentRoom.Instance.TryCollectItems(transform.position);
+
         if (CurrentRoom.Instance.TileContent[(int)MoveTarget.x, (int)MoveTarget.y].HasFlag(CurrentRoom.ETileContentType.Door))
         {
             // ~~~ Lifespan of 1 game jam

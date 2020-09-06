@@ -6,8 +6,9 @@ public class CollectableObject : MonoBehaviour
 {
 	CollectableItem ItemData;
 
-	public void Setup(CollectableItem ItemData)
+	public void Setup(CollectableItem itemData)
 	{
+		ItemData = itemData;
 		transform.position = new Vector3(ItemData.Postion.x, ItemData.Postion.y, 0);
 		gameObject.SetActive(ItemData.IsCollectAble);
 	}

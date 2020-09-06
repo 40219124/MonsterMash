@@ -30,7 +30,7 @@ public class MapRoom
 		if(!IsBossRoom)
 		{
 			IsBossRoom = true;
-			var bossPrize = new BossPrize();
+			var bossPrize = new BossPrize(new Vector2Int(5,5));
 
 			CollectableItems.Add(bossPrize);
 		}
@@ -41,13 +41,6 @@ public class MapRoom
 		RoomData = roomData;
 		UsedDoorPlaces = usedDoorPlaces;
 		MapPosition = mapPosition;
-
-		if(UnityEngine.Random.Range(0f, 100f) <= Settings.ChanceOfHealingPotion)
-		{
-			var healingPotion = new HealingPotion();
-
-			CollectableItems.Add(healingPotion);
-		}
 	}
 
     public bool PositionIsDoor(int index)
