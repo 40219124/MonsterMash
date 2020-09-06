@@ -80,9 +80,35 @@ public class OverworldAgent : MonoBehaviour
     protected Dictionary<string, int>[] WhiskerInfo = new Dictionary<string, int>[] {
         new Dictionary<string, int>(), new Dictionary<string, int>(),
         new Dictionary<string, int>(), new Dictionary<string, int>()};
-    protected EFourDirections CurrentMoveDir = EFourDirections.none;
+    protected EFourDirections HiddenCurMoveDir = EFourDirections.none;
+    protected EFourDirections CurrentMoveDir
+    {
+        get { return HiddenCurMoveDir; }
+        set
+        {
+            if (value == EFourDirections.none)
+            {
+                CurrentRoom.Instance.SetAsActorPos(transform.position);
+            }
+            else if(value != EFourDirections.none && HiddenCurMoveDir == EFourDirections.none)
+            {
+                CurrentRoom.Instance.MoveActorFrom(transform.position);
+            }
+            HiddenCurMoveDir = value;
+        }
+    }
     protected EFourDirections CurrentFailDir = EFourDirections.none;
-    public Vector3 MoveTarget;
+
+    protected Vector3 HiddenMoveTarget;
+    public Vector3 MoveTarget
+    {
+        get { return HiddenMoveTarget; }
+        set
+        {
+            CurrentRoom.Instance.SetAsMoveTarget(value);
+            HiddenMoveTarget = value;
+        }
+    }
     protected bool LockedMovement = false;
 
     public float AnimationTime = 0.5f;
@@ -121,16 +147,17 @@ public class OverworldAgent : MonoBehaviour
                 }
             }
         }
-		else if (MoveTarget != transform.position)
-		{
-			HorizontalValue = MoveTarget.x - transform.position.x;
-			VerticalValue = MoveTarget.y - transform.position.y;
-			if (MoveAllowed(out EFourDirections nextDir))
-			{
-				CurrentMoveDir = nextDir;
-				StartCoroutine(AnimateSuccessfulMovement());
-			}
-		}
+        else if (MoveTarget != transform.position)
+        {
+            HorizontalValue = MoveTarget.x - transform.position.x;
+            VerticalValue = MoveTarget.y - transform.position.y;
+            if (CurrentMoveDir == EFourDirections.none)
+            {
+                MoveAllowed(out EFourDirections nextDir);
+                CurrentMoveDir = nextDir;
+                StartCoroutine(AnimateSuccessfulMovement());
+            }
+        }
     }
 
     protected bool MoveAllowed(out EFourDirections dir)
@@ -262,32 +289,32 @@ public class OverworldAgent : MonoBehaviour
 
     protected bool ValidDirection(EFourDirections dir)
     {
-		int x = (int)transform.position.x;
-		int y = (int)transform.position.y;
+        int x = (int)transform.position.x;
+        int y = (int)transform.position.y;
 
-		switch (dir)
-		{
-			case EFourDirections.up:
-				y += 1;
-				break;
-			case EFourDirections.down:
-				y -= 1;
-				break;
-			case EFourDirections.right:
-				x += 1;
-				break;
-			case EFourDirections.left:
-				x -= 1;
-				break;
-		}
-		if (x >= Room.GameWidth || x < 0 ||
-			y >= Room.GameHeight || y < 0)
-		{
-			return false;
-		}
+        switch (dir)
+        {
+            case EFourDirections.up:
+                y += 1;
+                break;
+            case EFourDirections.down:
+                y -= 1;
+                break;
+            case EFourDirections.right:
+                x += 1;
+                break;
+            case EFourDirections.left:
+                x -= 1;
+                break;
+        }
+        if (x >= Room.GameWidth || x < 0 ||
+            y >= Room.GameHeight || y < 0)
+        {
+            return false;
+        }
 
-		var contentType = CurrentRoom.Instance.TileContent[x,y];
-		return (OverworldMemory.GetEnemyProfiles().Count > 0 && (contentType == CurrentRoom.ETileContentType.Clear)
+        var contentType = CurrentRoom.Instance.TileContent[x, y];
+        return (OverworldMemory.GetEnemyProfiles().Count > 0 && (contentType == CurrentRoom.ETileContentType.Clear)
             || (OverworldMemory.GetEnemyProfiles().Count == 0 && (contentType & CurrentRoom.ETileContentType.Impassable) == CurrentRoom.ETileContentType.Clear));
     }
 

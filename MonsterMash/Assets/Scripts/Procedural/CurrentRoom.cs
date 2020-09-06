@@ -237,7 +237,23 @@ public class CurrentRoom : MonoBehaviour
         }
     }
 
-
+    public void SetAsMoveTarget(Vector3 target, bool IsPlayer = false)
+    {
+        ETileContentType state = (IsPlayer ? ETileContentType.PlayerDestination : ETileContentType.EnemyDestination);
+        TileContent[(int)target.x, (int)target.y] |= state;
+    }
+    public void SetAsActorPos(Vector3 target, bool IsPlayer = false)
+    {
+        ETileContentType dest = (IsPlayer ? ETileContentType.PlayerDestination : ETileContentType.EnemyDestination);
+        ETileContentType pos = (IsPlayer ? ETileContentType.Player : ETileContentType.Enemy);
+        TileContent[(int)target.x, (int)target.y] &= ~dest;
+        TileContent[(int)target.x, (int)target.y] |= pos;
+    }
+    public void MoveActorFrom(Vector3 pos, bool IsPlayer = false)
+    {
+        ETileContentType posE = (IsPlayer ? ETileContentType.Player : ETileContentType.Enemy);
+        TileContent[(int)pos.x, (int)pos.y] &= ~posE;
+    }
     public void PlaceDoors()
     {
         ThisRoom.RoomState = ERoomState.Completed;
