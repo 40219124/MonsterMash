@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class MonsterGenerator : ScriptableObject
     public class DefaultMonsterData
     {
         [System.Serializable]
-        public struct TypeToGenerator
+        public class TypeToGenerator
         {
             public BodyPart.eBodyPartSlotType Type;
             public BodyPartDataGenerator Generator;
@@ -29,10 +30,10 @@ public class MonsterGenerator : ScriptableObject
         DefaultMonsterData data = Monsters.Find(d => d.MonsterType == type);
 
 		mp.HeadType = type;
-        mp.Torso = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Torso).Generator.GenerateBodyPartData();
-        mp.LeftArm = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Arm).Generator.GenerateBodyPartData();
-        mp.RightArm = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Arm).Generator.GenerateBodyPartData();
-        mp.Legs = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Leg).Generator.GenerateBodyPartData();
+        mp.Torso = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Torso)?.Generator.GenerateBodyPartData();
+        mp.LeftArm = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Arm)?.Generator.GenerateBodyPartData();
+        mp.RightArm = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Arm)?.Generator.GenerateBodyPartData();
+        mp.Legs = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Leg)?.Generator.GenerateBodyPartData();
 
         return mp;
     }

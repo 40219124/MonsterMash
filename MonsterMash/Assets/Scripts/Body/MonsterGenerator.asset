@@ -37,3 +37,25 @@ MonoBehaviour:
       Generator: {fileID: 11400000, guid: 06b2fa6223177fc4bb29bcbbf7787748, type: 2}
     - Type: 2
       Generator: {fileID: 11400000, guid: cb542197c40e9e1479a875502233d8d1, type: 2}
+  - MonsterType: 3
+    BodyPartGenerators:
+    - Type: 3
+      Generator: {fileID: 11400000, guid: 6aa5fb1bb56ed324196f9b4e1f041314, type: 2}
+    - Type: 1
+      Generator: {fileID: 11400000, guid: 9129a50fd7a857c44ae165f32a35e0a7, type: 2}
+    - Type: 2
+      Generator: {fileID: 11400000, guid: 35f25410b297b5a4bacc09830b31320b, type: 2}
+  - MonsterType: 4
+    BodyPartGenerators:
+    - Type: 3
+      Generator: {fileID: 11400000, guid: e937cb3722ac3f14f82c3fcee1432269, type: 2}
+    - Type: 1
+      Generator: {fileID: 11400000, guid: 1235779323349cc4b80aa7cb984a6c6a, type: 2}
+    - Type: 2
+      Generator: {fileID: 11400000, guid: a896f7cd9e4f9bb4ab893e3693662158, type: 2}
+  - MonsterType: 5
+    BodyPartGenerators:
+    - Type: 3
+      Generator: {fileID: 11400000, guid: e8d3a5f7efb48434bb67186edd4c124c, type: 2}
+    - Type: 2
+      Generator: {fileID: 11400000, guid: 855fed4aad49ad441a8254700f2748c5, type: 2}
