@@ -91,7 +91,7 @@ public class CurrentRoom : MonoBehaviour
                     break;
                 case Room.eTiles.Door:
                     // ~~~ help
-                    Vector2Int pos = new Vector2Int(index % 10, index / 10);
+                    Vector2Int pos = new Vector2Int(index % 10, 9 - index / 10);
                     if (ThisRoom.PositionIsDoor(pos))
                     {
                         DoorLocs.Add(pos);
