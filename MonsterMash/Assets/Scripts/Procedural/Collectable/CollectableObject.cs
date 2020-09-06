@@ -21,6 +21,7 @@ public class CollectableObject : MonoBehaviour
 
 		if(collected)
 		{
+			ItemData.PickUp();
 			gameObject.SetActive(false);
 		}
 

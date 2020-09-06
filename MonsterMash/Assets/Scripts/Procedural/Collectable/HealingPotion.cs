@@ -12,7 +12,13 @@ public class HealingPotion : CollectableItem
 	public override void PickUp()
 	{
 		//todo heal the player
-		base.PickUp();
+		var profile = OverworldMemory.GetCombatProfile(true);
+		if(profile == null)
+		{
+			Debug.LogError($"couldn't get profile");
+		}
 
+		base.PickUp();
+		profile.HealToMax();
 	}
 }
