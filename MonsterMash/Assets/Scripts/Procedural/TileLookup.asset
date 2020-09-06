@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d3534649569cd4fae43442471a6fb5, type: 3}
+  m_Name: TileLookup
+  m_EditorClassIdentifier: 
+  TileList:
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  OutdoorTileList:
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  - EnumTile: 0
+    TileTile: {fileID: 0}
+  IndoorTileList: []
+  OutdoorBase: {fileID: 11400000, guid: 7f30d35068d57f242806890c25f79038, type: 2}
+  IndoorBase: {fileID: 0}

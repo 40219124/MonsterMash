@@ -36,17 +36,17 @@ public class RoomEditor : EditorWindow
     Texture2D Hole;
     Texture2D River;
 
-    const int GameHeight = 8;
+    const int GameHeight = 9;
     const int GameWidth = 10;
     const int DoorPlaceTop1 = 0 * GameWidth + 4;
     const int DoorPlaceTop2 = 0 * GameWidth + 5;
-    const int DoorPlaceBottom1 = 7 * GameWidth + 4;
-    const int DoorPlaceBottom2 = 7 * GameWidth + 5;
+    const int DoorPlaceBottom1 = 8 * GameWidth + 4;
+    const int DoorPlaceBottom2 = 8 * GameWidth + 5;
     const int DoorPlaceLeft1 = 4 * GameWidth + 0;
     const int DoorPlaceLeft2 = 3 * GameWidth + 0;
     const int DoorPlaceRight1 = 4 * GameWidth + 9;
     const int DoorPlaceRight2 = 3 * GameWidth + 9;
-
+     
     static Room.eTiles PlacingTile = Room.eTiles.Floor;
 
     [MenuItem("MonsterMash/Room Editor")]
