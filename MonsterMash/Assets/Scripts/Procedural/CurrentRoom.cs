@@ -269,8 +269,10 @@ public class CurrentRoom : MonoBehaviour
     }
     public void MoveActorFrom(Vector3 pos, bool IsPlayer = false)
     {
+        ETileContentType dest = (IsPlayer ? ETileContentType.PlayerDestination : ETileContentType.EnemyDestination);
         ETileContentType posE = (IsPlayer ? ETileContentType.Player : ETileContentType.Enemy);
         TileContent[(int)pos.x, (int)pos.y] &= ~posE;
+        TileContent[(int)pos.x, (int)pos.y] &= ~dest;
     }
     public void PlaceDoors()
     {
