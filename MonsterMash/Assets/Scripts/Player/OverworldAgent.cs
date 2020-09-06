@@ -278,7 +278,8 @@ public class OverworldAgent : MonoBehaviour
 		}
 
 		var contentType = CurrentRoom.Instance.TileContent[x,y];
-		return (contentType & CurrentRoom.ETileContentType.Impassable) == CurrentRoom.ETileContentType.Clear;
+		return (OverworldMemory.GetEnemyProfiles().Count > 0 && (contentType == CurrentRoom.ETileContentType.Clear)
+            || (OverworldMemory.GetEnemyProfiles().Count == 0 && (contentType & CurrentRoom.ETileContentType.Impassable) == CurrentRoom.ETileContentType.Clear));
     }
 
     public void StartBattle(OverworldAgent opponent)

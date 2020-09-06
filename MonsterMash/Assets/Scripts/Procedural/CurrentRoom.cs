@@ -6,7 +6,7 @@ using System;
 
 public class CurrentRoom : MonoBehaviour
 {
-	public static CurrentRoom Instance;
+    public static CurrentRoom Instance;
     public enum EDoorPos { none = -1, TopLeft, TopRight, RightTop, RightBottom, BottomRight, BottomLeft, LeftBottom, LeftTop }
     public enum ETileLayer { none = -1, Base, Decoration, Foreground }
     public Tilemap BaseLayer;
@@ -20,10 +20,10 @@ public class CurrentRoom : MonoBehaviour
 
     [Flags]
     public enum ETileContentType
-    { 
-		Clear = 0, Blocked = 1, Door = 2, Player = 4, PlayerDestination = 8, Enemy = 16, EnemyDestination = 32, 
-		Impassable = Blocked|Player|PlayerDestination|Enemy|EnemyDestination
-	}
+    {
+        Clear = 0, Blocked = 1, Door = 2, Player = 4, PlayerDestination = 8, Enemy = 16, EnemyDestination = 32,
+        Impassable = Blocked | Player | PlayerDestination | Enemy | EnemyDestination
+    }
 
 
     public ETileContentType[,] TileContent;
@@ -32,10 +32,10 @@ public class CurrentRoom : MonoBehaviour
 
     private List<Vector2Int> DoorLocs = new List<Vector2Int>();
 
-	void Awake()
-	{
-		Instance = this;
-	}
+    void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -123,35 +123,35 @@ public class CurrentRoom : MonoBehaviour
         {
             outEnum = EDoorPos.TopLeft;
         }
-        else if(index == Room.DoorPlaceTop2)
+        else if (index == Room.DoorPlaceTop2)
         {
             outEnum = EDoorPos.TopRight;
         }
-        else if(index == Room.DoorPlaceRight2)
+        else if (index == Room.DoorPlaceRight2)
         {
             outEnum = EDoorPos.RightTop;
         }
-        else if(index == Room.DoorPlaceRight1)
+        else if (index == Room.DoorPlaceRight1)
         {
             outEnum = EDoorPos.RightBottom;
         }
-        else if(index == Room.DoorPlaceBottom2)
+        else if (index == Room.DoorPlaceBottom2)
         {
             outEnum = EDoorPos.BottomRight;
         }
-        else if(index == Room.DoorPlaceBottom1)
+        else if (index == Room.DoorPlaceBottom1)
         {
             outEnum = EDoorPos.BottomLeft;
         }
-        else if(index == Room.DoorPlaceLeft1)
+        else if (index == Room.DoorPlaceLeft1)
         {
             outEnum = EDoorPos.LeftBottom;
         }
-        else if(index == Room.DoorPlaceLeft2)
+        else if (index == Room.DoorPlaceLeft2)
         {
             outEnum = EDoorPos.LeftTop;
         }
 
-            return outEnum;
+        return outEnum;
     }
 }
