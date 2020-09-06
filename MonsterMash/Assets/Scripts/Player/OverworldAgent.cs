@@ -98,7 +98,6 @@ public class OverworldAgent : MonoBehaviour
         Anim = GetComponentInChildren<Animator>();
         FindObjectOfType<OverworldManager>().OnTransition += OnTransition;
         LockedMovement = true;
-        MoveTarget = transform.position;
     }
 
     protected void DoUpdate()
@@ -122,6 +121,16 @@ public class OverworldAgent : MonoBehaviour
                 }
             }
         }
+		else if (MoveTarget != transform.position)
+		{
+			HorizontalValue = MoveTarget.x - transform.position.x;
+			VerticalValue = MoveTarget.y - transform.position.y;
+			if (MoveAllowed(out EFourDirections nextDir))
+			{
+				CurrentMoveDir = nextDir;
+				StartCoroutine(AnimateSuccessfulMovement());
+			}
+		}
     }
 
     protected bool MoveAllowed(out EFourDirections dir)

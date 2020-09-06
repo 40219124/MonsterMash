@@ -48,15 +48,20 @@ public class CurrentRoom : MonoBehaviour
 		p.Profile = OverworldMemory.GetCombatProfile(true);
 
 		var playerPos = new Vector3(5,4,0);
+		var targetPos = playerPos;
 		if(loadedFromAnotherRoom)
 		{
 			playerPos = ProceduralDungeon.Instance.EnterPos;
+			targetPos = ProceduralDungeon.Instance.EnterMoveTargetPos;
 		}
 		else if (!ThisRoom.IsStartingRoom)
 		{
 			playerPos = OverworldMemory.GetPlayerPosition();
+			targetPos = playerPos;
 		}
 		p.transform.position = playerPos;
+		p.MoveTarget = targetPos;
+
 
 		if (ThisRoom.RoomState != ERoomState.Completed &&
 			!ThisRoom.IsStartingRoom)

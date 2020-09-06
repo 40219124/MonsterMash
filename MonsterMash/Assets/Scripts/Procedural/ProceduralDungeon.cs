@@ -10,6 +10,7 @@ public class ProceduralDungeon : MonoBehaviour
 	public MapRoom[,] DungeonMap = new MapRoom[Settings.MapSize, Settings.MapSize];
 	public Vector2Int CurrentRoom;
 	public Vector3 EnterPos;
+	public Vector3 EnterMoveTargetPos;
 	public AllRoomData AllRoomsData;
 	bool DungeonGotBossRoom = false;
 
@@ -35,13 +36,8 @@ public class ProceduralDungeon : MonoBehaviour
 		var xPos = (Room.GameWidth-1)-playerPos.x;
 		var yPos = (Room.GameHeight-1) - playerPos.y;
 
-		xPos = Mathf.Min(xPos, Room.GameWidth-2);
-		xPos = Mathf.Max(xPos, 1);
-
-		yPos = Mathf.Min(yPos, Room.GameHeight-2);
-		yPos = Mathf.Max(yPos, 1);
-
 		EnterPos = new Vector3(xPos, yPos);
+		EnterMoveTargetPos = EnterPos + (Vector3Int)roomDirection;
 	}
 
 	public bool IsDungeonCompleted()
