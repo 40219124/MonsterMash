@@ -82,19 +82,19 @@ public class CurrentRoom : MonoBehaviour
 
     private void AssignTiles()
     {
-		TileContent = new ETileContentType[Room.GameWidth, Room.GameHeight];
+        TileContent = new ETileContentType[Room.GameWidth, Room.GameHeight];
         EnemySpawn.SpawnLocations.Clear();
         int index = 0;
         foreach (Room.eTiles tile in ThisRoom.RoomData.Tiles)
         {
             Vector2Int pos = new Vector2Int(index % 10, 8 - index / 10);
 
-			ETileContentType type = ETileContentType.Clear;
+            ETileContentType type = ETileContentType.Clear;
             switch (tile)
             {
                 case Room.eTiles.Wall:
                     // Every tile places a wall :shrug:
-					type = ETileContentType.Blocked;
+                    type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.Floor:
                     // As above :double_shrug:
@@ -104,21 +104,49 @@ public class CurrentRoom : MonoBehaviour
                     if (ThisRoom.PositionIsDoor(index))
                     {
                         DoorLocs.Add(pos);
-						type = ETileContentType.Door;
+                        type = ETileContentType.Door;
+                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoorsClosed[(int)EnumFromVector(pos)]);
                     }
-					else
-					{
-						type = ETileContentType.Blocked;
-					}
+                    else
+                    {
+                        type = ETileContentType.Blocked;
+                    }
                     break;
                 case Room.eTiles.Table:
-					type = ETileContentType.Blocked;
-                    break;
+                    {
+                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.Table);
+                        type = ETileContentType.Blocked;
+                        int upIndex = index - Room.GameWidth;
+                        if (ThisRoom.RoomData.Tiles[upIndex] != Room.eTiles.Table)
+                        {
+                            Tile tableTile;
+                            Vector2Int upPos = pos + Vector2Int.up;
+
+                            if (ThisRoom.RoomData.Tiles[index + 1] != Room.eTiles.Table)
+                            {
+                                tableTile = TileTable.TableTR;
+                            }
+                            else if (ThisRoom.RoomData.Tiles[index - 1] != Room.eTiles.Table)
+                            {
+                                tableTile = TileTable.TableTR;
+                            }
+                            else
+                            {
+                                tableTile = TileTable.TableTC;
+                            }
+
+                            BaseDecoration.SetTile((Vector3Int)upPos, TileTable.Table);
+                            Foreground.SetTile((Vector3Int)upPos, TileTable.TableTopSide);
+                        }
+                        break;
+                    }
                 case Room.eTiles.Hole:
-					type = ETileContentType.Blocked;
+                    BaseDecoration.SetTile((Vector3Int)pos, TileTable.Hole);
+                    type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.River:
-					type = ETileContentType.Blocked;
+                    BaseDecoration.SetTile((Vector3Int)pos, TileTable.River);
+                    type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.Enemy:
                     // ~~~ add random chance for variation
@@ -129,7 +157,7 @@ public class CurrentRoom : MonoBehaviour
                 default:
                     break;
             }
-			TileContent[pos.x, pos.y] = type;
+            TileContent[pos.x, pos.y] = type;
             BaseLayer.SetTile((Vector3Int)pos, TileTable.OutdoorBase);
             index++;
         }
@@ -142,7 +170,7 @@ public class CurrentRoom : MonoBehaviour
 		ThisRoom.RoomState = ERoomState.Completed;
         foreach (Vector2Int pos in DoorLocs)
         {
-            BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoors[(int)EnumFromVector(pos)]);
+            BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoorsOpen[(int)EnumFromVector(pos)]);
         }
     }
 

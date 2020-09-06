@@ -35,7 +35,7 @@ MonoBehaviour:
   IndoorTileList: []
   OutdoorBase: {fileID: 11400000, guid: 7f30d35068d57f242806890c25f79038, type: 2}
   IndoorBase: {fileID: 0}
-  OutdoorDoors:
+  OutdoorDoorsOpen:
   - {fileID: 11400000, guid: baa2b37c90d6e154691947ab3dbc5210, type: 2}
   - {fileID: 11400000, guid: 4fda79252b9f3d747a502cd098da888b, type: 2}
   - {fileID: 11400000, guid: 636ced67f2bd8424bbf9eff30d9e72c3, type: 2}
@@ -44,3 +44,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 70210d7b0990f3a4495eaf5b5b619735, type: 2}
   - {fileID: 11400000, guid: 53de7d640514d604e8ed4175b112169b, type: 2}
   - {fileID: 11400000, guid: ea1293e8fc020eb4e89f15502fd064f5, type: 2}
+  OutdoorDoorsClosed:
+  - {fileID: 11400000, guid: 22d3fbab05292394c98a111ebdb4f871, type: 2}
+  - {fileID: 11400000, guid: 6ecd79688dc758243802d2fde6a616ee, type: 2}
+  - {fileID: 11400000, guid: d4199264ef4627d439a640c1e4c4d3c6, type: 2}
+  - {fileID: 11400000, guid: a9f6a855cc0bbe14086addaa67cd4107, type: 2}
+  - {fileID: 11400000, guid: d7f91ff8fa3b45d4caadaf26b20208d3, type: 2}
+  - {fileID: 11400000, guid: c0af10f2c633aa845abc6e36521d63e6, type: 2}
+  - {fileID: 11400000, guid: 0d7dc9b6436579244ba7b4e62b9f9a04, type: 2}
+  - {fileID: 11400000, guid: 8b58d47c91f2d4e48a67fa54fdf45bc4, type: 2}
+  River: {fileID: 11400000, guid: d2761c43488913e4199101baa8946db8, type: 2}
+  RiverBottom: {fileID: 11400000, guid: 7499f9c5911e779488bfc8212f6f106b, type: 2}
+  Table: {fileID: 11400000, guid: 6b9550da4d553c347b017a45e78e3b0b, type: 2}
+  TableTL: {fileID: 11400000, guid: 6a45283c888d33c4bbb6dfe02c0b5b4e, type: 2}
+  TableTC: {fileID: 11400000, guid: 6b0dfa809f0b4e84896912dbcdbc726e, type: 2}
+  TableTR: {fileID: 11400000, guid: f5f9fe8531fc4ec4d8cd3b32a18517b7, type: 2}
+  TableTopSide: {fileID: 11400000, guid: 979892689a6bb194aa2112c9da37c55b, type: 2}
+  Hole: {fileID: 11400000, guid: fec5354bc53098d45a9c1296b6c901ef, type: 2}

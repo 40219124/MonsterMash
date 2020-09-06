@@ -20,7 +20,19 @@ public class TileLookup : ScriptableObject
     public RuleTile OutdoorBase;
     public RuleTile IndoorBase;
 
-    public List<Tile> OutdoorDoors = new List<Tile>();
+    public List<Tile> OutdoorDoorsOpen = new List<Tile>();
+    public List<Tile> OutdoorDoorsClosed = new List<Tile>();
+
+    public AnimatedTile River;
+    public AnimatedTile RiverBottom;
+
+    public RuleTile Table;
+    public Tile TableTL;
+    public Tile TableTC;
+    public Tile TableTR;
+    public RuleTile TableTopSide;
+
+    public Tile Hole;
     // Start is called before the first frame update
     void Start()
     {
