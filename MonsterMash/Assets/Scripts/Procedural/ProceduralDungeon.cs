@@ -20,7 +20,7 @@ public class ProceduralDungeon : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			GenerateMap(Room.eArea.Indoors); // ~~~ revert this to outdoors
+			GenerateMap(Room.eArea.Outdoors);
 		}
 	}
 
