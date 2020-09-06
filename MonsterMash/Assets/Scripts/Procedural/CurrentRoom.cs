@@ -184,7 +184,8 @@ public class CurrentRoom : MonoBehaviour
 	void TryAddCollectableItems(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
 	{
 		if (ThisRoom.CollectableItems.Count > 0 ||
-			tileType != Room.eTiles.Floor)
+			tileType != Room.eTiles.Floor ||
+			ThisRoom.IsStartingRoom)
 		{
 			return;
 		}
@@ -298,12 +299,12 @@ public class CurrentRoom : MonoBehaviour
             if (item is HealingPotion)
             {
                 Debug.Log($"added HealingPotion: {item}");
-                HealPotion.Setup(item);
+                HealPotion.Setup(item, ThisRoom.RoomState != ERoomState.Completed);
             }
             else if (item is BossPrize)
             {
                 Debug.Log($"added HealingPotion: {item}");
-                BossReward.Setup(item);
+                BossReward.Setup(item, ThisRoom.RoomState != ERoomState.Completed);
             }
         }
     }
