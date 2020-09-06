@@ -13,6 +13,7 @@ public class MapRoom
 
     public ERoomState RoomState;
 	public bool IsStartingRoom = false;
+	public bool IsBossRoom;
 
     public Vector2Int MapPosition;
 

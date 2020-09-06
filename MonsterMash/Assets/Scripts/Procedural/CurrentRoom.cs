@@ -62,6 +62,16 @@ public class CurrentRoom : MonoBehaviour
 		if (OverworldMemory.GetEnemyProfiles().Count == 0)
 		{
 			PlaceDoors();
+			if (ProceduralDungeon.Instance.IsDungeonCompleted())
+			{
+				ProceduralDungeon.Instance.MarkRoomAsBoss();
+				PlaceRoomPrize();
+			}
+
+			if (ThisRoom.IsBossRoom)
+			{
+				PlaceRoomPrize();
+			}
 		}
     }
     public void SetRoom(MapRoom room)
@@ -134,6 +144,11 @@ public class CurrentRoom : MonoBehaviour
         {
             BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoors[(int)EnumFromVector(pos)]);
         }
+    }
+
+	public void PlaceRoomPrize()
+    {
+		ProceduralDungeon.Instance.MarkRoomAsBoss();
     }
 
     private EDoorPos EnumFromVector(Vector2Int pos)

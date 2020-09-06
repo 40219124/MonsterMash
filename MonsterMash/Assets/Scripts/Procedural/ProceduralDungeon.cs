@@ -11,6 +11,7 @@ public class ProceduralDungeon : MonoBehaviour
 	public Vector2Int StartingRoom;
 	public Vector2Int CurrentRoom;
 	public AllRoomData AllRoomsData;
+	bool DungeonGotBossRoom = false;
 
 	void Awake()
 	{
@@ -30,6 +31,29 @@ public class ProceduralDungeon : MonoBehaviour
 	{
 		CurrentRoom += roomDirection;
 		Debug.Log($"Moved To room {CurrentRoom}");
+	}
+
+	public bool IsDungeonCompleted()
+	{
+		foreach (var mapRoom in DungeonMap)
+		{
+			if (mapRoom != null && mapRoom.RoomState != ERoomState.Completed)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void MarkRoomAsBoss()
+	{
+		Debug.Log($"Trying to mark room {CurrentRoom} as boss room. DungeonGotBossRoom: {DungeonGotBossRoom}");
+		if (!DungeonGotBossRoom)
+		{
+			DungeonMap[CurrentRoom.x, CurrentRoom.y].IsBossRoom = true;
+			DungeonGotBossRoom = true;
+			Debug.Log("WELL DONE YOU FOUND THE BOSS ROOM!");
+		}
 	}
 
 	void GenerateMap()

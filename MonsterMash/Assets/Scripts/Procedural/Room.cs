@@ -45,7 +45,7 @@ public class Room
 
     public int RoomId;
     public eDoorPlaces DoorPlaces = eDoorPlaces.Left;
-    public bool IsBossRoom;
+    public bool IsBossRoom;//this isn't used yet
     public eArea Area = eArea.Outdoors;
     public eTiles[] Tiles = new eTiles[90];
 
