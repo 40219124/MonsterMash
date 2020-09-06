@@ -124,7 +124,7 @@ public class Body : MonoBehaviour
 
 	public void SetProfileData(MonsterProfile profile)
     {
-		TorsoPart.SetBodyPartData(BodyPartImageLookup, profile.Torso, eBodyPartType.Torso);
+		TorsoPart.SetBodyPartData(BodyPartImageLookup, profile.Torso, eBodyPartType.Torso, profile.HeadType);
 		LeftArmPart.SetBodyPartData(BodyPartImageLookup, profile.LeftArm, eBodyPartType.LeftArm);
 		RightArmPart.SetBodyPartData(BodyPartImageLookup, profile.RightArm, eBodyPartType.RightArm);
 		LegsPart.SetBodyPartData(BodyPartImageLookup, profile.Legs, eBodyPartType.Leg);

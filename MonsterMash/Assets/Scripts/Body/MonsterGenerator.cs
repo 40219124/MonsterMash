@@ -28,6 +28,7 @@ public class MonsterGenerator : ScriptableObject
 
         DefaultMonsterData data = Monsters.Find(d => d.MonsterType == type);
 
+		mp.HeadType = type;
         mp.Torso = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Torso).Generator.GenerateBodyPartData();
         mp.LeftArm = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Arm).Generator.GenerateBodyPartData();
         mp.RightArm = data.BodyPartGenerators.Find(g => g.Type == BodyPart.eBodyPartSlotType.Arm).Generator.GenerateBodyPartData();

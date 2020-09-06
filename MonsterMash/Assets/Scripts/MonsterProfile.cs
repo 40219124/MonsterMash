@@ -7,6 +7,7 @@ public enum EMonsterType { none = -1, Frankenstein, skeleton, mantis, lobster, s
 [System.Serializable]
 public class MonsterProfile
 {
+	public EMonsterType HeadType;
     public BodyPartData Torso;
     public BodyPartData LeftArm;
     public BodyPartData RightArm;

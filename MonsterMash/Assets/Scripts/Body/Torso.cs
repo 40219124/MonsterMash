@@ -14,9 +14,9 @@ public class Torso: BodyPart
 		StatBox.SetArmourNumber(show, Armour);
 	}
 
-	public override void SetBodyPartData(BodyPartSpriteLookup bodyPartImageLookup, BodyPartData data, Body.eBodyPartType bodyPartType)
+	public void SetBodyPartData(BodyPartSpriteLookup bodyPartImageLookup, BodyPartData data, Body.eBodyPartType bodyPartType, EMonsterType headType)
     {
 		base.SetBodyPartData(bodyPartImageLookup, data, bodyPartType);
-		HeadPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(Body.eBodyPartType.None, data.MonsterType);
+		HeadPartImage.sprite = bodyPartImageLookup.GetBodyPartSprite(Body.eBodyPartType.None, headType);
     }
 }
