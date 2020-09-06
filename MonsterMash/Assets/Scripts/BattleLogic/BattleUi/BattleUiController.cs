@@ -4,13 +4,26 @@ using System;
 
 public class BattleUiController: MonoBehaviour
 {
-	[SerializeField] Animator BattleUiAnimator;
+	[SerializeField] GameObject OutSideBackground;
+	[SerializeField] GameObject InSideBackground;
+
 	[SerializeField] DpadAnimator DpadAnimatorContoller;
 	[SerializeField] GameObject ButtonAPrompt;
 
 	[SerializeField] Transform TurnArrow;
 
 	bool ForceShowComplexStats;
+
+	void Awake()
+	{
+		var roomType = Room.eArea.Indoors;
+		if(ProceduralDungeon.Instance != null)
+		{
+			roomType = ProceduralDungeon.Instance.CurrentAreaType;
+		}
+		OutSideBackground.SetActive(roomType == Room.eArea.Outdoors);
+		InSideBackground.SetActive(roomType == Room.eArea.Indoors);
+	}
 
 	void LateUpdate()
 	{

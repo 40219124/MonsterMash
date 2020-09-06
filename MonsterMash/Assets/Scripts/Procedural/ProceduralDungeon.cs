@@ -8,6 +8,7 @@ public class ProceduralDungeon : MonoBehaviour
 	public static ProceduralDungeon Instance;
 
 	public MapRoom[,] DungeonMap = new MapRoom[Settings.MapSize, Settings.MapSize];
+	public Room.eArea CurrentAreaType;
 	public Vector2Int CurrentRoom;
 	public Vector3 EnterPos;
 	public Vector3 EnterMoveTargetPos;
@@ -65,6 +66,7 @@ public class ProceduralDungeon : MonoBehaviour
 
 	void GenerateMap(Room.eArea area)
 	{
+		CurrentAreaType = area;
 		string path = Application.streamingAssetsPath + "/RoomData.json";
 		var roomData = File.ReadAllText(path);
 		AllRoomsData = JsonUtility.FromJson<AllRoomData>(roomData);
