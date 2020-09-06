@@ -56,8 +56,18 @@ MonoBehaviour:
   River: {fileID: 11400000, guid: d2761c43488913e4199101baa8946db8, type: 2}
   RiverBottom: {fileID: 11400000, guid: 7499f9c5911e779488bfc8212f6f106b, type: 2}
   Table: {fileID: 11400000, guid: 6b9550da4d553c347b017a45e78e3b0b, type: 2}
-  TableTL: {fileID: 11400000, guid: 6a45283c888d33c4bbb6dfe02c0b5b4e, type: 2}
-  TableTC: {fileID: 11400000, guid: 6b0dfa809f0b4e84896912dbcdbc726e, type: 2}
-  TableTR: {fileID: 11400000, guid: f5f9fe8531fc4ec4d8cd3b32a18517b7, type: 2}
   TableTopSide: {fileID: 11400000, guid: 979892689a6bb194aa2112c9da37c55b, type: 2}
+  Decorations:
+  - Decoration: 0
+    DecTile: {fileID: 11400000, guid: d94e22bcb316c424aa08142131209b46, type: 2}
+  - Decoration: 1
+    DecTile: {fileID: 11400000, guid: bd40890dc0fb44647b909278acc14300, type: 2}
+  - Decoration: 2
+    DecTile: {fileID: 11400000, guid: e9e433e5e22bdde46b4879de43e764cd, type: 2}
+  - Decoration: 3
+    DecTile: {fileID: 11400000, guid: bb65f31f7c283014aa55fa8be8ab4d5c, type: 2}
+  - Decoration: 4
+    DecTile: {fileID: 11400000, guid: 1292fb38a1f8b464494953a3f0ae1909, type: 2}
+  - Decoration: 5
+    DecTile: {fileID: 11400000, guid: c476d36a71bece44b8c3a3f8db1146eb, type: 2}
   Hole: {fileID: 11400000, guid: fec5354bc53098d45a9c1296b6c901ef, type: 2}

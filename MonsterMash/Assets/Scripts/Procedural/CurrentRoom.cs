@@ -11,6 +11,7 @@ public class CurrentRoom : MonoBehaviour
     public enum ETileLayer { none = -1, Base, Decoration, Foreground }
     public Tilemap BaseLayer;
     public Tilemap BaseDecoration;
+    public Tilemap DecorationForeground;
     public Tilemap Foreground;
 
     public TileLookup TileTable;
@@ -131,21 +132,7 @@ public class CurrentRoom : MonoBehaviour
                         int upIndex = index - Room.GameWidth;
                         if (ThisRoom.RoomData.Tiles[upIndex] != Room.eTiles.Table)
                         {
-                            Tile tableTile;
                             Vector2Int upPos = pos + Vector2Int.up;
-
-                            if (ThisRoom.RoomData.Tiles[index + 1] != Room.eTiles.Table)
-                            {
-                                tableTile = TileTable.TableTR;
-                            }
-                            else if (ThisRoom.RoomData.Tiles[index - 1] != Room.eTiles.Table)
-                            {
-                                tableTile = TileTable.TableTR;
-                            }
-                            else
-                            {
-                                tableTile = TileTable.TableTC;
-                            }
 
                             BaseDecoration.SetTile((Vector3Int)upPos, TileTable.Table);
                             Foreground.SetTile((Vector3Int)upPos, TileTable.TableTopSide);
@@ -157,7 +144,14 @@ public class CurrentRoom : MonoBehaviour
                     type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.River:
-                    BaseDecoration.SetTile((Vector3Int)pos, TileTable.River);
+                    if (ThisRoom.RoomData.Tiles[index + Room.GameWidth] == Room.eTiles.River)
+                    {
+                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.River);
+                    }
+                    else
+                    {
+                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.RiverBottom);
+                    }
                     type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.Enemy:
@@ -171,24 +165,90 @@ public class CurrentRoom : MonoBehaviour
             }
             TileContent[pos.x, pos.y] = type;
             BaseLayer.SetTile((Vector3Int)pos, TileTable.OutdoorBase);
+
+            PlaceRandomDecoration(type, pos, tile);
+
             index++;
         }
         //BaseLayer.RefreshAllTiles();
         //BaseLayer.SetTile(Vector3Int.up * 8, null);
     }
 
+    private void PlaceRandomDecoration(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
+    {
+        //if (type != ETileContentType.Clear)
+        //{
+        //    return;
+        //}
+
+        float potionChance = 25.0f * (tileType == Room.eTiles.Table ? 1 : 0);
+        float flowerChance = 4.0f * (tileType == Room.eTiles.Floor ? 1 : 0) + potionChance;
+        float grassChance = 6.0f * (tileType == Room.eTiles.Floor ? 1 : 0) + flowerChance;
+
+        if(grassChance == 0.0f)
+        {
+            return;
+        }
+
+        float rand = UnityEngine.Random.Range(0, 100.0f);
+
+        ERoomDecoration decoration = ERoomDecoration.None;
+        if (rand < potionChance)
+        {
+            switch (UnityEngine.Random.Range(0, 2))
+            {
+                case 0:
+                    decoration = ERoomDecoration.Potion1;
+                    break;
+                case 1:
+                    decoration = ERoomDecoration.Potions2;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (rand < flowerChance)
+        {
+            decoration = ERoomDecoration.Flowers;
+        }
+        else if (rand < grassChance)
+        {
+            switch (UnityEngine.Random.Range(0, 3))
+            {
+                case 0:
+                    decoration = ERoomDecoration.BrownGrass1;
+                    break;
+                case 1:
+                    decoration = ERoomDecoration.BrownGrass2;
+                    break;
+                case 2:
+                    decoration = ERoomDecoration.BrownGrass3;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        Tile tile = TileTable.Decorations.Find(d => d.Decoration == decoration)?.DecTile;
+        if (tile != null)
+        {
+            DecorationForeground.SetTile((Vector3Int)pos, tile);
+        }
+    }
+
+
     public void PlaceDoors()
     {
-		ThisRoom.RoomState = ERoomState.Completed;
+        ThisRoom.RoomState = ERoomState.Completed;
         foreach (Vector2Int pos in DoorLocs)
         {
             BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoorsOpen[(int)EnumFromVector(pos)]);
         }
     }
 
-	public void PlaceRoomPrize()
+    public void PlaceRoomPrize()
     {
-		ProceduralDungeon.Instance.MarkRoomAsBoss();
+        ProceduralDungeon.Instance.MarkRoomAsBoss();
     }
 
     private EDoorPos EnumFromVector(Vector2Int pos)

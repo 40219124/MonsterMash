@@ -13,6 +13,12 @@ public class TileLookup : ScriptableObject
         public Room.eTiles EnumTile;
         public Tile TileTile;
     }
+    [System.Serializable]
+    public class EnumToDecoration
+    {
+        public ERoomDecoration Decoration;
+        public Tile DecTile;
+    }
 
     public List<EnumToTile> TileList = new List<EnumToTile>();
     public List<EnumToTile> OutdoorTileList = new List<EnumToTile>();
@@ -27,10 +33,9 @@ public class TileLookup : ScriptableObject
     public AnimatedTile RiverBottom;
 
     public RuleTile Table;
-    public Tile TableTL;
-    public Tile TableTC;
-    public Tile TableTR;
     public RuleTile TableTopSide;
+
+    public List<EnumToDecoration> Decorations = new List<EnumToDecoration>();
 
     public Tile Hole;
     // Start is called before the first frame update
