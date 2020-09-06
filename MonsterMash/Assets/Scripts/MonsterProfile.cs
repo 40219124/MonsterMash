@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EMonsterType { none = -1, Frankenstein, skeleton, mantis, lobster, shrimp };
+public enum EMonsterType { none = -1, Frankenstein, skeleton, mantis, lobster, shrimp, slug};
 
 [System.Serializable]
 public class MonsterProfile
