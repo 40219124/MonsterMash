@@ -29,9 +29,10 @@ public class CurrentRoom : MonoBehaviour
 
     private void Start()
     {
-		EnemySpawn = GetComponent<EnemySpawner>();
+        EnemySpawn = GetComponent<EnemySpawner>();
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
-        SetRoom(mapRoom);
+        //SetRoom(mapRoom);
+        AssignTiles();
     }
     public void SetRoom(MapRoom room)
     {
@@ -80,6 +81,7 @@ public class CurrentRoom : MonoBehaviour
         int index = 0;
         foreach (Room.eTiles tile in ThisRoom.RoomData.Tiles)
         {
+            Vector2Int pos = new Vector2Int(index % 10, 8 - index / 10);
             switch (tile)
             {
                 case Room.eTiles.Wall:
@@ -90,7 +92,6 @@ public class CurrentRoom : MonoBehaviour
                     break;
                 case Room.eTiles.Door:
                     // ~~~ help
-                    Vector2Int pos = new Vector2Int(index % 10, 9 - index / 10);
                     if (ThisRoom.PositionIsDoor(pos))
                     {
                         DoorLocs.Add(pos);
@@ -105,14 +106,14 @@ public class CurrentRoom : MonoBehaviour
                     break;
                 case Room.eTiles.Enemy:
                     // ~~~ add random chance for variation
-                    EnemySpawn.SpawnLocations.Add(new EnemySpawner.MonsterPosition() { type = ThisRoom.RoomData.Area == Room.eArea.Outdoors ? EMonsterType.mantis : EMonsterType.skeleton });
+                    EnemySpawn.SpawnLocations.Add(new EnemySpawner.MonsterPosition() { type = ThisRoom.RoomData.Area == Room.eArea.Outdoors ? EMonsterType.mantis : EMonsterType.skeleton, pos = (Vector3Int)pos });
                     break;
                 case Room.eTiles.Boss:
                     break;
                 default:
                     break;
             }
-            BaseLayer.SetTile(new Vector3Int(index % 10, 8 - (index / 10), 0), TileTable.OutdoorBase);
+            BaseLayer.SetTile((Vector3Int)pos, TileTable.OutdoorBase);
             index++;
         }
         //BaseLayer.RefreshAllTiles();
