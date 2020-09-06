@@ -4,6 +4,17 @@ using System.Collections.Generic;
 [Serializable]
 public class Room
 {
+	public const int GameHeight = 9;
+	public const int GameWidth = 10;
+	public const int DoorPlaceTop1 = 0 * GameWidth + 4;
+    public const int DoorPlaceTop2 = 0 * GameWidth + 5;
+    public const int DoorPlaceBottom1 = (GameHeight-1) * GameWidth + 4;
+    public const int DoorPlaceBottom2 = (GameHeight-1) * GameWidth + 5;
+    public const int DoorPlaceLeft1 = 4 * GameWidth + 0;
+    public const int DoorPlaceLeft2 = 3 * GameWidth + 0;
+    public const int DoorPlaceRight1 = 4 * GameWidth + (GameWidth-1);
+    public const int DoorPlaceRight2 = 3 * GameWidth + (GameWidth-1);
+
     [Flags]
     public enum eDoorPlaces
     {

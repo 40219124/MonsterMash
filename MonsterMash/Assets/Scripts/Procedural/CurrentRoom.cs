@@ -92,7 +92,7 @@ public class CurrentRoom : MonoBehaviour
                     break;
                 case Room.eTiles.Door:
                     // ~~~ help
-                    if (ThisRoom.PositionIsDoor(pos))
+                    if (ThisRoom.PositionIsDoor(index))
                     {
                         DoorLocs.Add(pos);
                     }

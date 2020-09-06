@@ -22,10 +22,22 @@ public class MapRoom
 		MapPosition = mapPosition;
 	}
 
-	public bool PositionIsDoor(Vector2Int pos)
+	public bool PositionIsDoor(int index)
     {
-		bool outBool = false;
+		return (index ==  Room.DoorPlaceTop1 ||
+				index == Room.DoorPlaceTop2) &&
+				UsedDoorPlaces.HasFlag(Room.eDoorPlaces.Top) ||
 
-		return outBool;
+				(index ==  Room.DoorPlaceBottom1 ||
+				index == Room.DoorPlaceBottom2) &&
+				UsedDoorPlaces.HasFlag(Room.eDoorPlaces.Bottom) ||
+
+				(index ==  Room.DoorPlaceLeft1 ||
+				index == Room.DoorPlaceLeft2) &&
+				UsedDoorPlaces.HasFlag(Room.eDoorPlaces.Left) ||
+
+				(index ==  Room.DoorPlaceRight1 ||
+				index == Room.DoorPlaceRight2) &&
+				UsedDoorPlaces.HasFlag(Room.eDoorPlaces.Right);
     }
 }

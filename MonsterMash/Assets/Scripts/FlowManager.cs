@@ -45,22 +45,15 @@ public class FlowManager : MonoBehaviour
 
 		var loadEnemyFromMemory = approach != ERoomApproach.FirstTime;
 
-		if(loadEnemyFromMemory &&
-			OverworldMemory.GetEnemyPositions().Count == 0)
+		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
+		yield return null;
+		FindObjectOfType<CurrentRoom>().PlaceDoors();
+		FindObjectOfType<EnemySpawner>().SpawnEnemies(loadEnemyFromMemory); // ~~~ spawn based on ERoomApproach
+		if (approach == ERoomApproach.FromBattle)
 		{
-			TransToGameOver("", true);
-		}
-		else
-		{
-			yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
-			yield return null;
-			FindObjectOfType<EnemySpawner>().SpawnEnemies(loadEnemyFromMemory); // ~~~ spawn based on ERoomApproach
-			if (approach == ERoomApproach.FromBattle)
-			{
-				Player p = FindObjectOfType<Player>();
-				p.transform.position = OverworldMemory.GetPlayerPosition();
-				p.Profile = OverworldMemory.GetCombatProfile(true);
-			}
+			Player p = FindObjectOfType<Player>();
+			p.transform.position = OverworldMemory.GetPlayerPosition();
+			p.Profile = OverworldMemory.GetCombatProfile(true);
 		}
     }
 
