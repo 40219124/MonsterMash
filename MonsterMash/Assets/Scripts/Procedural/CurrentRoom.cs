@@ -47,55 +47,23 @@ public class CurrentRoom : MonoBehaviour
     {
         ThisRoom = room;
         AssignTiles();
-        BuildTileContent();
-    }
-
-    void BuildTileContent()
-    {
-        var tiles = ThisRoom.RoomData.Tiles;
-        TileContent = new ETileContentType[Room.GameWidth, Room.GameHeight];
-
-        for (int x = 0; x < Room.GameWidth; x++)
-        {
-            for (int y = 0; y < Room.GameHeight; y++)
-            {
-                int index = ((Room.GameHeight-1) - y) * Room.GameWidth + x;
-
-                ETileContentType type = ETileContentType.Clear;
-                switch (tiles[index])
-                {
-                    case Room.eTiles.Wall:
-                        type = ETileContentType.Blocked;
-                        break;
-                    case Room.eTiles.Hole:
-                        type = ETileContentType.Blocked;
-                        break;
-                    case Room.eTiles.River:
-                        type = ETileContentType.Blocked;
-                        break;
-                    case Room.eTiles.Table:
-                        type = ETileContentType.Blocked;
-                        break;
-                    default:
-                        type = ETileContentType.Clear;
-                        break;
-                }
-                TileContent[x, y] = type;
-            }
-        }
     }
 
     private void AssignTiles()
     {
+		TileContent = new ETileContentType[Room.GameWidth, Room.GameHeight];
         EnemySpawn.SpawnLocations.Clear();
         int index = 0;
         foreach (Room.eTiles tile in ThisRoom.RoomData.Tiles)
         {
             Vector2Int pos = new Vector2Int(index % 10, 8 - index / 10);
+
+			ETileContentType type = ETileContentType.Clear;
             switch (tile)
             {
                 case Room.eTiles.Wall:
                     // Every tile places a wall :shrug:
+					type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.Floor:
                     // As above :double_shrug:
@@ -105,14 +73,21 @@ public class CurrentRoom : MonoBehaviour
                     if (ThisRoom.PositionIsDoor(index))
                     {
                         DoorLocs.Add(pos);
+						type = ETileContentType.Door;
                     }
+					else
+					{
+						type = ETileContentType.Blocked;
+					}
                     break;
                 case Room.eTiles.Table:
-
+					type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.Hole:
+					type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.River:
+					type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.Enemy:
                     // ~~~ add random chance for variation
@@ -123,6 +98,7 @@ public class CurrentRoom : MonoBehaviour
                 default:
                     break;
             }
+			TileContent[pos.x, pos.y] = type;
             BaseLayer.SetTile((Vector3Int)pos, TileTable.OutdoorBase);
             index++;
         }
