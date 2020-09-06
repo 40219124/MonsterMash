@@ -78,22 +78,22 @@ public class ProceduralDungeon : MonoBehaviour
 
 		if(pos.y+1 < Settings.MapSize && roughMap[pos.x, pos.y+1])
 		{
-			neededDoors &= Room.eDoorPlaces.Top;
+			neededDoors |= Room.eDoorPlaces.Top;
 		}
 
 		if(pos.y-1 >= 0 && roughMap[pos.x, pos.y-1])
 		{
-			neededDoors &= Room.eDoorPlaces.Bottom;
+			neededDoors |= Room.eDoorPlaces.Bottom;
 		}
 
 		if(pos.x+1 < Settings.MapSize && roughMap[pos.x+1, pos.y])
 		{
-			neededDoors &= Room.eDoorPlaces.Right;
+			neededDoors |= Room.eDoorPlaces.Right;
 		}
 
 		if(pos.x-1 >= 0 && roughMap[pos.x-1, pos.y])
 		{
-			neededDoors &= Room.eDoorPlaces.Left;
+			neededDoors |= Room.eDoorPlaces.Left;
 		}
 		return neededDoors;
 	}

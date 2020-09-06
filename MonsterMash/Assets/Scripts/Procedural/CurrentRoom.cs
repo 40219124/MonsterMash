@@ -31,8 +31,8 @@ public class CurrentRoom : MonoBehaviour
     {
         EnemySpawn = GetComponent<EnemySpawner>();
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
-        //SetRoom(mapRoom);
-        AssignTiles();
+        SetRoom(mapRoom);
+        //AssignTiles();
     }
     public void SetRoom(MapRoom room)
     {
@@ -126,5 +126,46 @@ public class CurrentRoom : MonoBehaviour
         {
             BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoors[(int)EDoorPos.TopLeft]);
         }
+    }
+
+    private EDoorPos EnumFromVector(Vector2Int pos)
+    {
+        EDoorPos outEnum = EDoorPos.none;
+        int index = pos.x + pos.y * Room.GameWidth;
+
+        if (index == Room.DoorPlaceTop1)
+        {
+            outEnum = EDoorPos.TopLeft;
+        }
+        else if(index == Room.DoorPlaceTop2)
+        {
+            outEnum = EDoorPos.TopRight;
+        }
+        else if(index == Room.DoorPlaceRight2)
+        {
+            outEnum = EDoorPos.RightTop;
+        }
+        else if(index == Room.DoorPlaceRight1)
+        {
+            outEnum = EDoorPos.RightBottom;
+        }
+        else if(index == Room.DoorPlaceBottom2)
+        {
+            outEnum = EDoorPos.BottomRight;
+        }
+        else if(index == Room.DoorPlaceBottom1)
+        {
+            outEnum = EDoorPos.BottomLeft;
+        }
+        else if(index == Room.DoorPlaceLeft1)
+        {
+            outEnum = EDoorPos.LeftBottom;
+        }
+        else if(index == Room.DoorPlaceLeft2)
+        {
+            outEnum = EDoorPos.LeftTop;
+        }
+
+            return outEnum;
     }
 }
