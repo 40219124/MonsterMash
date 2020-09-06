@@ -6,6 +6,7 @@ using System;
 
 public class CurrentRoom : MonoBehaviour
 {
+	public static CurrentRoom Instance;
     public enum EDoorPos { none = -1, TopLeft, TopRight, RightTop, RightBottom, BottomRight, BottomLeft, LeftBottom, LeftTop }
     public enum ETileLayer { none = -1, Base, Decoration, Foreground }
     public Tilemap BaseLayer;
@@ -19,7 +20,11 @@ public class CurrentRoom : MonoBehaviour
 
     [Flags]
     public enum ETileContentType
-    { Clear = 1, blocked = 2, Door = 4, Player = 8, PlayerDestination = 16, Enemy = 32, EnemyDestination = 64 }
+    { 
+		Clear = 0, Blocked = 1, Door = 2, Player = 4, PlayerDestination = 8, Enemy = 16, EnemyDestination = 32, 
+		Impassable = Blocked|Player|PlayerDestination|Enemy|EnemyDestination
+	}
+
 
     public ETileContentType[,] TileContent;
 
@@ -27,12 +32,16 @@ public class CurrentRoom : MonoBehaviour
 
     private List<Vector2Int> DoorLocs = new List<Vector2Int>();
 
+	void Awake()
+	{
+		Instance = this;
+	}
+
     private void Start()
     {
         EnemySpawn = GetComponent<EnemySpawner>();
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
         SetRoom(mapRoom);
-        //AssignTiles();
     }
     public void SetRoom(MapRoom room)
     {
@@ -55,16 +64,16 @@ public class CurrentRoom : MonoBehaviour
                 switch (tiles[index])
                 {
                     case Room.eTiles.Wall:
-                        type = ETileContentType.blocked;
+                        type = ETileContentType.Blocked;
                         break;
                     case Room.eTiles.Hole:
-                        type = ETileContentType.blocked;
+                        type = ETileContentType.Blocked;
                         break;
                     case Room.eTiles.River:
-                        type = ETileContentType.blocked;
+                        type = ETileContentType.Blocked;
                         break;
                     case Room.eTiles.Table:
-                        type = ETileContentType.blocked;
+                        type = ETileContentType.Blocked;
                         break;
                     default:
                         type = ETileContentType.Clear;
