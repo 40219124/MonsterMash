@@ -24,7 +24,7 @@ public class Settings
 	public const int MapSize = 5;
 	public const int MaxRooms = 15;
 
-	public const float ChanceOfHealingPotion = 100f;
+	public const float ChanceOfHealingPotion = 33f;
 
 	public const string SceneMain = "MainScene";
 	public const string SceneOverworld = "Overworld";
