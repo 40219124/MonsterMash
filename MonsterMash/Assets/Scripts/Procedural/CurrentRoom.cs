@@ -141,7 +141,7 @@ public class CurrentRoom : MonoBehaviour
     private EDoorPos EnumFromVector(Vector2Int pos)
     {
         EDoorPos outEnum = EDoorPos.none;
-        int index = pos.x + pos.y * Room.GameWidth;
+        int index = pos.x + (Room.GameHeight - 1 - pos.y) * Room.GameWidth;
 
         if (index == Room.DoorPlaceTop1)
         {
