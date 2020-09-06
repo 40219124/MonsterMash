@@ -57,7 +57,7 @@ public class ProceduralDungeon : MonoBehaviour
 		Debug.Log($"Trying to mark room {CurrentRoom} as boss room. DungeonGotBossRoom: {DungeonGotBossRoom}");
 		if (!DungeonGotBossRoom)
 		{
-			DungeonMap[CurrentRoom.x, CurrentRoom.y].IsBossRoom = true;
+			DungeonMap[CurrentRoom.x, CurrentRoom.y].SetAsBossRoom();
 			DungeonGotBossRoom = true;
 			Debug.Log("WELL DONE YOU FOUND THE BOSS ROOM!");
 		}

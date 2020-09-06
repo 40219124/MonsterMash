@@ -33,8 +33,14 @@ public class CurrentRoom : MonoBehaviour
 
     private List<Vector2Int> DoorLocs = new List<Vector2Int>();
 
+	[SerializeField] CollectableObject HealPotion;
+	[SerializeField] CollectableObject BossReward;
+
+
     void Awake()
     {
+		HealPotion.gameObject.SetActive(false);
+		BossReward.gameObject.SetActive(false);
         Instance = this;
     }
 
@@ -78,14 +84,9 @@ public class CurrentRoom : MonoBehaviour
 			if (ProceduralDungeon.Instance.IsDungeonCompleted())
 			{
 				ProceduralDungeon.Instance.MarkRoomAsBoss();
-				PlaceRoomPrize();
-			}
-
-			if (ThisRoom.IsBossRoom)
-			{
-				PlaceRoomPrize();
 			}
 		}
+		PlaceCollectableItems();
     }
     public void SetRoom(MapRoom room)
     {
@@ -246,9 +247,29 @@ public class CurrentRoom : MonoBehaviour
         }
     }
 
-    public void PlaceRoomPrize()
+	public void PlaceCollectableItems()
     {
-        ProceduralDungeon.Instance.MarkRoomAsBoss();
+		HealPotion.gameObject.SetActive(false);
+		BossReward.gameObject.SetActive(false);
+
+		if(ThisRoom.CollectableItems.Count > 2)
+		{
+			Debug.LogError("Too many CollectableItems");
+		}
+
+		foreach (var item in ThisRoom.CollectableItems)
+		{
+			if(item is HealingPotion)
+			{
+				Debug.Log($"added HealingPotion: {item}");
+				HealPotion.Setup(item);
+			}
+			else if(item is BossPrize)
+			{
+				Debug.Log($"added HealingPotion: {item}");
+				BossReward.Setup(item);
+			}
+		}
     }
 
     private EDoorPos EnumFromVector(Vector2Int pos)
