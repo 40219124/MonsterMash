@@ -8,8 +8,8 @@ public class ProceduralDungeon : MonoBehaviour
 	public static ProceduralDungeon Instance;
 
 	public MapRoom[,] DungeonMap = new MapRoom[Settings.MapSize, Settings.MapSize];
-	public Vector2Int StartingRoom;
 	public Vector2Int CurrentRoom;
+	public Vector3 EnterPos;
 	public AllRoomData AllRoomsData;
 	bool DungeonGotBossRoom = false;
 
@@ -27,10 +27,21 @@ public class ProceduralDungeon : MonoBehaviour
 		return DungeonMap[CurrentRoom.x,CurrentRoom.y];
 	}
 
-	public void MoveRoom(Vector2Int roomDirection)
+	public void MoveRoom(Vector2Int roomDirection, Vector3 playerPos)
 	{
 		CurrentRoom += roomDirection;
 		Debug.Log($"Moved To room {CurrentRoom}");
+
+		var xPos = (Room.GameWidth-1)-playerPos.x;
+		var yPos = (Room.GameHeight-1) - playerPos.y;
+
+		xPos = Mathf.Min(xPos, Room.GameWidth-2);
+		xPos = Mathf.Max(xPos, 1);
+
+		yPos = Mathf.Min(yPos, Room.GameHeight-2);
+		yPos = Mathf.Max(yPos, 1);
+
+		EnterPos = new Vector3(xPos, yPos);
 	}
 
 	public bool IsDungeonCompleted()
@@ -62,9 +73,8 @@ public class ProceduralDungeon : MonoBehaviour
 		var roomData = File.ReadAllText(path);
 		AllRoomsData = JsonUtility.FromJson<AllRoomData>(roomData);
 
-		StartingRoom = new Vector2Int(Random.Range(0, Settings.MapSize), Random.Range(0, Settings.MapSize));
-		CurrentRoom = StartingRoom;
-		var roughMap = MakeRoughMap(StartingRoom);
+		CurrentRoom = new Vector2Int(Random.Range(0, Settings.MapSize), Random.Range(0, Settings.MapSize));
+		var roughMap = MakeRoughMap(CurrentRoom);
 		Debug.Log($"Built roughMap: {ArrayToString(roughMap)}");
 
 		BuildRealMap(roughMap, Room.eArea.Outdoors);
@@ -99,7 +109,7 @@ public class ProceduralDungeon : MonoBehaviour
 			}
 		}
 
-		DungeonMap[StartingRoom.x,StartingRoom.y].IsStartingRoom = true;
+		DungeonMap[CurrentRoom.x,CurrentRoom.y].IsStartingRoom = true;
 	}
 
 	Room.eDoorPlaces GetRequiredDoorPostions(bool[,] roughMap, Vector2Int pos)

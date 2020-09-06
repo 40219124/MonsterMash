@@ -40,6 +40,7 @@ public class FlowManager : MonoBehaviour
 		}
 
 		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
+		FindObjectOfType<CurrentRoom>().Setup(sceneFrom == Settings.SceneOverworld);
     }
 
     public void TransToGameOver(string sceneFrom, bool wonTheGame)
@@ -86,17 +87,5 @@ public class FlowManager : MonoBehaviour
         yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneBodyPartPicker));
         yield return null;
         FindObjectOfType<PartPickerManager>().Setup();
-    }
-
-	public void TransToNextRoom(string sceneFrom, Vector2Int roomDirection)
-    {
-        StartCoroutine(TransToNextRoomCo(sceneFrom, roomDirection));
-    }
-
-    private IEnumerator TransToNextRoomCo(string sceneFrom, Vector2Int roomDirection)
-    {
-		ProceduralDungeon.Instance.MoveRoom(roomDirection);
-
-        yield return StartCoroutine(TransToOverworldCo(sceneFrom));
     }
 }

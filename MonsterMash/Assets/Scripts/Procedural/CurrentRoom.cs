@@ -37,19 +37,26 @@ public class CurrentRoom : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    public void Setup(bool loadedFromAnotherRoom)
     {
         EnemySpawn = GetComponent<EnemySpawner>();
 
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
         SetRoom(mapRoom);
 
-		if (ThisRoom.RoomState != ERoomState.NotSeen)
+		Player p = FindObjectOfType<Player>();
+		p.Profile = OverworldMemory.GetCombatProfile(true);
+
+		var playerPos = new Vector3(5,4,0);
+		if(loadedFromAnotherRoom)
 		{
-			Player p = FindObjectOfType<Player>();
-			p.transform.position = OverworldMemory.GetPlayerPosition();
-			p.Profile = OverworldMemory.GetCombatProfile(true);
+			playerPos = ProceduralDungeon.Instance.EnterPos;
 		}
+		else if (!ThisRoom.IsStartingRoom)
+		{
+			playerPos = OverworldMemory.GetPlayerPosition();
+		}
+		p.transform.position = playerPos;
 
 		if (ThisRoom.RoomState != ERoomState.Completed &&
 			!ThisRoom.IsStartingRoom)

@@ -20,6 +20,10 @@ public class Player : OverworldAgent
     // Update is called once per frame
     void Update()
     {
+		if (CurrentRoom.Instance?.TileContent == null)
+		{
+			return;
+		}
         HorizontalValue = Input.GetAxisRaw("Horizontal");
         VerticalValue = Input.GetAxisRaw("Vertical");
 
@@ -41,7 +45,9 @@ public class Player : OverworldAgent
 			else
 			{
 				LockedMovement = true;
-				FindObjectOfType<FlowManager>().TransToNextRoom(Settings.SceneOverworld, diffInt);
+				ProceduralDungeon.Instance.MoveRoom(diffInt, MoveTarget);
+
+				FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneOverworld);
 			}
         }
     }
