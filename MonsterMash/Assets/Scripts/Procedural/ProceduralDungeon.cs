@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Networking;
 
 public class ProceduralDungeon : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ProceduralDungeon : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			GenerateMap(Room.eArea.Outdoors);
+			StartCoroutine(GenerateMap(Room.eArea.Outdoors));
 		}
 	}
 
@@ -63,14 +64,30 @@ public class ProceduralDungeon : MonoBehaviour
 			Debug.Log("WELL DONE YOU FOUND THE BOSS ROOM!");
 		}
 	}
-
-	void GenerateMap(Room.eArea area)
+	
+	IEnumerator LoadAllRoomData()
 	{
-		CurrentAreaType = area;
-		string path = Application.streamingAssetsPath + "/RoomData.json";
-		var roomData = File.ReadAllText(path);
-		AllRoomsData = JsonUtility.FromJson<AllRoomData>(roomData);
+		string roomDataJson = "";
 
+		var filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "RoomData.json");
+        if (filePath.Contains("://")) //if on web
+        {
+            UnityWebRequest uwr = new UnityWebRequest(filePath);
+            yield return uwr;
+            roomDataJson = uwr.downloadHandler.text;
+        }
+        else
+		{
+            roomDataJson = System.IO.File.ReadAllText(filePath);
+		}
+
+		AllRoomsData = JsonUtility.FromJson<AllRoomData>(roomDataJson);
+	}
+
+	IEnumerator GenerateMap(Room.eArea area)
+	{
+		yield return StartCoroutine(LoadAllRoomData());
+		CurrentAreaType = area;
 		CurrentRoom = new Vector2Int(Random.Range(0, Settings.MapSize), Random.Range(0, Settings.MapSize));
 		var roughMap = MakeRoughMap(CurrentRoom);
 		Debug.Log($"Built roughMap: {ArrayToString(roughMap)}");
