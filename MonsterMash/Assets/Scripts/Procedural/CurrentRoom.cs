@@ -108,6 +108,7 @@ public class CurrentRoom : MonoBehaviour
 
     public void PlaceDoors()
     {
+		ThisRoom.IsCompleted = true;
         foreach (Vector2Int pos in DoorLocs)
         {
             BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoors[(int)EnumFromVector(pos)]);

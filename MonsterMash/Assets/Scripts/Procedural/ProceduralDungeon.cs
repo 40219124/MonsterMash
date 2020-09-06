@@ -26,6 +26,12 @@ public class ProceduralDungeon : MonoBehaviour
 		return DungeonMap[CurrentRoom.x,CurrentRoom.y];
 	}
 
+	public void MoveRoom(Vector2Int roomDirection)
+	{
+		CurrentRoom += roomDirection;
+		Debug.Log($"Moved To room {CurrentRoom}");
+	}
+
 	void GenerateMap()
 	{
 		string path = Application.streamingAssetsPath + "/RoomData.json";

@@ -28,33 +28,21 @@ public class Player : OverworldAgent
         if (CurrentRoom.Instance.TileContent[(int)MoveTarget.x, (int)MoveTarget.y].HasFlag(CurrentRoom.ETileContentType.Door))
         {
             // ~~~ Lifespan of 1 game jam
-            Vector2 diff = ((Vector2)MoveTarget - new Vector2(Room.GameWidth / 2.0f, Room.GameHeight / 2.0f)).normalized + new Vector2(0.5f, 0.5f);
+            Vector2 diff = ((Vector2)MoveTarget - new Vector2(Room.GameWidth / 2.0f, Room.GameHeight / 2.0f)).normalized * 1.5f;
             Vector2Int diffInt = new Vector2Int((int)diff.x, (int)diff.y);
 
-            if (diffInt == Vector2Int.up)
-            {
-                // ~~~ trans up
-                Debug.Log("up");
-            }
-            else if (diffInt == Vector2Int.right)
-            {
-                // ~~~ trans right
-                Debug.Log("right");
-            }
-            else if (diffInt == Vector2Int.down)
-            {
-                // ~~~ trans down
-                Debug.Log("down");
-            }
-            else if (diffInt == Vector2Int.left)
-            {
-                // ~~~ trans left
-                Debug.Log("Left");
-            }
-            else 
+            if (diffInt != Vector2Int.left &&
+				diffInt != Vector2Int.up &&
+				diffInt != Vector2Int.down &&
+				diffInt != Vector2Int.right)
             {
                 Debug.LogError("Impossible");
             }
+			else
+			{
+				LockedMovement = true;
+				FindObjectOfType<FlowManager>().TransToNextRoom(Settings.SceneOverworld, diffInt);
+			}
         }
     }
 
