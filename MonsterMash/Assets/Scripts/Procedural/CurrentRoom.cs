@@ -33,14 +33,14 @@ public class CurrentRoom : MonoBehaviour
 
     private List<Vector2Int> DoorLocs = new List<Vector2Int>();
 
-	[SerializeField] CollectableObject HealPotion;
-	[SerializeField] CollectableObject BossReward;
+    [SerializeField] CollectableObject HealPotion;
+    [SerializeField] CollectableObject BossReward;
 
 
     void Awake()
     {
-		HealPotion.gameObject.SetActive(false);
-		BossReward.gameObject.SetActive(false);
+        HealPotion.gameObject.SetActive(false);
+        BossReward.gameObject.SetActive(false);
         Instance = this;
     }
 
@@ -51,42 +51,42 @@ public class CurrentRoom : MonoBehaviour
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
         SetRoom(mapRoom);
 
-		Player p = FindObjectOfType<Player>();
-		p.Profile = OverworldMemory.GetCombatProfile(true);
+        Player p = FindObjectOfType<Player>();
+        p.Profile = OverworldMemory.GetCombatProfile(true);
 
-		var playerPos = new Vector3(5,4,0);
-		var targetPos = playerPos;
-		if(loadedFromAnotherRoom)
-		{
-			playerPos = ProceduralDungeon.Instance.EnterPos;
-			targetPos = ProceduralDungeon.Instance.EnterMoveTargetPos;
-		}
-		else if (!ThisRoom.IsStartingRoom)
-		{
-			playerPos = OverworldMemory.GetPlayerPosition();
-			targetPos = playerPos;
-		}
-		p.transform.position = playerPos;
-		p.MoveTarget = targetPos;
+        var playerPos = new Vector3(5, 4, 0);
+        var targetPos = playerPos;
+        if (loadedFromAnotherRoom)
+        {
+            playerPos = ProceduralDungeon.Instance.EnterPos;
+            targetPos = ProceduralDungeon.Instance.EnterMoveTargetPos;
+        }
+        else if (!ThisRoom.IsStartingRoom)
+        {
+            playerPos = OverworldMemory.GetPlayerPosition();
+            targetPos = playerPos;
+        }
+        p.transform.position = playerPos;
+        p.MoveTarget = targetPos;
 
 
-		if (ThisRoom.RoomState != ERoomState.Completed &&
-			!ThisRoom.IsStartingRoom)
-		{
-			EnemySpawn.SpawnEnemies(ThisRoom.RoomState != ERoomState.NotSeen);
-		}
+        if (ThisRoom.RoomState != ERoomState.Completed &&
+            !ThisRoom.IsStartingRoom)
+        {
+            EnemySpawn.SpawnEnemies(ThisRoom.RoomState != ERoomState.NotSeen);
+        }
 
-		ThisRoom.RoomState = ERoomState.Seen;
+        ThisRoom.RoomState = ERoomState.Seen;
 
-		if (OverworldMemory.GetEnemyProfiles().Count == 0)
-		{
-			PlaceDoors();
-			if (ProceduralDungeon.Instance.IsDungeonCompleted())
-			{
-				ProceduralDungeon.Instance.MarkRoomAsBoss();
-			}
-		}
-		PlaceCollectableItems();
+        if (OverworldMemory.GetEnemyProfiles().Count == 0)
+        {
+            PlaceDoors();
+            if (ProceduralDungeon.Instance.IsDungeonCompleted())
+            {
+                ProceduralDungeon.Instance.MarkRoomAsBoss();
+            }
+        }
+        PlaceCollectableItems();
     }
     public void SetRoom(MapRoom room)
     {
@@ -114,18 +114,19 @@ public class CurrentRoom : MonoBehaviour
                     // As above :double_shrug:
                     break;
                 case Room.eTiles.Door:
-                    // ~~~ help
-                    if (ThisRoom.PositionIsDoor(index))
                     {
-                        DoorLocs.Add(pos);
-                        type = ETileContentType.Door;
-                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoorsClosed[(int)EnumFromVector(pos)]);
+                        if (ThisRoom.PositionIsDoor(index))
+                        {
+                            DoorLocs.Add(pos);
+                            type = ETileContentType.Door;
+                            BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoorsClosed[(int)EnumFromVector(pos)]);
+                        }
+                        else
+                        {
+                            type = ETileContentType.Blocked;
+                        }
+                        break;
                     }
-                    else
-                    {
-                        type = ETileContentType.Blocked;
-                    }
-                    break;
                 case Room.eTiles.Table:
                     {
                         BaseDecoration.SetTile((Vector3Int)pos, TileTable.Table);
@@ -145,13 +146,17 @@ public class CurrentRoom : MonoBehaviour
                     type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.River:
-                    if (ThisRoom.RoomData.Tiles[index + Room.GameWidth] == Room.eTiles.River)
+                    if (ThisRoom.RoomData.Tiles[index - Room.GameWidth] != Room.eTiles.River)
                     {
-                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.River);
+                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.RiverTop);
+                    }
+                    else if (ThisRoom.RoomData.Tiles[index + Room.GameWidth] != Room.eTiles.River)
+                    {
+                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.RiverBottom);
                     }
                     else
                     {
-                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.RiverBottom);
+                        BaseDecoration.SetTile((Vector3Int)pos, TileTable.River);
                     }
                     type = ETileContentType.Blocked;
                     break;
@@ -186,7 +191,7 @@ public class CurrentRoom : MonoBehaviour
         float flowerChance = 4.0f * (tileType == Room.eTiles.Floor ? 1 : 0) + potionChance;
         float grassChance = 6.0f * (tileType == Room.eTiles.Floor ? 1 : 0) + flowerChance;
 
-        if(grassChance == 0.0f)
+        if (grassChance == 0.0f)
         {
             return;
         }
@@ -263,29 +268,29 @@ public class CurrentRoom : MonoBehaviour
         }
     }
 
-	public void PlaceCollectableItems()
+    public void PlaceCollectableItems()
     {
-		HealPotion.gameObject.SetActive(false);
-		BossReward.gameObject.SetActive(false);
+        HealPotion.gameObject.SetActive(false);
+        BossReward.gameObject.SetActive(false);
 
-		if(ThisRoom.CollectableItems.Count > 2)
-		{
-			Debug.LogError("Too many CollectableItems");
-		}
+        if (ThisRoom.CollectableItems.Count > 2)
+        {
+            Debug.LogError("Too many CollectableItems");
+        }
 
-		foreach (var item in ThisRoom.CollectableItems)
-		{
-			if(item is HealingPotion)
-			{
-				Debug.Log($"added HealingPotion: {item}");
-				HealPotion.Setup(item);
-			}
-			else if(item is BossPrize)
-			{
-				Debug.Log($"added HealingPotion: {item}");
-				BossReward.Setup(item);
-			}
-		}
+        foreach (var item in ThisRoom.CollectableItems)
+        {
+            if (item is HealingPotion)
+            {
+                Debug.Log($"added HealingPotion: {item}");
+                HealPotion.Setup(item);
+            }
+            else if (item is BossPrize)
+            {
+                Debug.Log($"added HealingPotion: {item}");
+                BossReward.Setup(item);
+            }
+        }
     }
 
     private EDoorPos EnumFromVector(Vector2Int pos)

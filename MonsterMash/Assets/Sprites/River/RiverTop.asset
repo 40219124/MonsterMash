@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: RiverTop
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 7369055635847757397, guid: 5a5165b043360a34fbc048aaa71bcbfd, type: 3}
+  - {fileID: 1055023726583247058, guid: 5a5165b043360a34fbc048aaa71bcbfd, type: 3}
+  - {fileID: -4445063612571619513, guid: 5a5165b043360a34fbc048aaa71bcbfd, type: 3}
+  - {fileID: 5166826259257506999, guid: 5a5165b043360a34fbc048aaa71bcbfd, type: 3}
+  - {fileID: -8368445204326545749, guid: 5a5165b043360a34fbc048aaa71bcbfd, type: 3}
+  - {fileID: -6132438268947151550, guid: 5a5165b043360a34fbc048aaa71bcbfd, type: 3}
+  - {fileID: 2410346586233989541, guid: 5a5165b043360a34fbc048aaa71bcbfd, type: 3}
+  - {fileID: 6571899542632053645, guid: 5a5165b043360a34fbc048aaa71bcbfd, type: 3}
+  m_MinSpeed: 8
+  m_MaxSpeed: 8
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 2

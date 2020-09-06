@@ -29,6 +29,7 @@ public class TileLookup : ScriptableObject
     public List<Tile> OutdoorDoorsOpen = new List<Tile>();
     public List<Tile> OutdoorDoorsClosed = new List<Tile>();
 
+    public AnimatedTile RiverTop;
     public AnimatedTile River;
     public AnimatedTile RiverBottom;
 

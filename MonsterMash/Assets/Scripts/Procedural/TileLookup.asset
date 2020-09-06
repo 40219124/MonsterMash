@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c0af10f2c633aa845abc6e36521d63e6, type: 2}
   - {fileID: 11400000, guid: 0d7dc9b6436579244ba7b4e62b9f9a04, type: 2}
   - {fileID: 11400000, guid: 8b58d47c91f2d4e48a67fa54fdf45bc4, type: 2}
+  RiverTop: {fileID: 11400000, guid: bdcb9577c79b90f4187e5a9c428724fd, type: 2}
   River: {fileID: 11400000, guid: d2761c43488913e4199101baa8946db8, type: 2}
   RiverBottom: {fileID: 11400000, guid: 7499f9c5911e779488bfc8212f6f106b, type: 2}
   Table: {fileID: 11400000, guid: 6b9550da4d553c347b017a45e78e3b0b, type: 2}
