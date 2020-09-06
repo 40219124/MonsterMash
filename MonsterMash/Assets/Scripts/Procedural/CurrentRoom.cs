@@ -29,10 +29,9 @@ public class CurrentRoom : MonoBehaviour
 
     private void Start()
     {
+		EnemySpawn = GetComponent<EnemySpawner>();
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
         SetRoom(mapRoom);
-        EnemySpawn = GetComponent<EnemySpawner>();
-        AssignTiles(); // ~~~ debug only
     }
     public void SetRoom(MapRoom room)
     {
