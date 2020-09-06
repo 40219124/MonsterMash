@@ -47,7 +47,10 @@ public class FlowManager : MonoBehaviour
 
 		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
 		yield return null;
-		FindObjectOfType<CurrentRoom>().PlaceDoors();
+		if (OverworldMemory.GetEnemyPositions().Count == 0)
+		{
+			FindObjectOfType<CurrentRoom>().PlaceDoors();
+		}
 		FindObjectOfType<EnemySpawner>().SpawnEnemies(loadEnemyFromMemory); // ~~~ spawn based on ERoomApproach
 		if (approach == ERoomApproach.FromBattle)
 		{
