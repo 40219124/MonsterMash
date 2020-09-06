@@ -271,8 +271,8 @@ public class OverworldAgent : MonoBehaviour
 				x -= 1;
 				break;
 		}
-		if (x >= Settings.MapSize || x < 0 ||
-			y >= Settings.MapSize || y < 0)
+		if (x >= Room.GameWidth || x < 0 ||
+			y >= Room.GameHeight || y < 0)
 		{
 			return false;
 		}

@@ -53,13 +53,14 @@ public class CurrentRoom : MonoBehaviour
     void BuildTileContent()
     {
         var tiles = ThisRoom.RoomData.Tiles;
-        TileContent = new ETileContentType[Settings.MapSize, Settings.MapSize];
+        TileContent = new ETileContentType[Room.GameWidth, Room.GameHeight];
 
-        for (int x = 0; x < Settings.MapSize; x++)
+        for (int x = 0; x < Room.GameWidth; x++)
         {
-            for (int y = 0; y < Settings.MapSize; y++)
+            for (int y = 0; y < Room.GameHeight; y++)
             {
-                int index = (9 - y) * Settings.MapSize + x;
+                int index = ((Room.GameHeight-1) - y) * Room.GameWidth + x;
+
                 ETileContentType type = ETileContentType.Clear;
                 switch (tiles[index])
                 {
@@ -133,7 +134,7 @@ public class CurrentRoom : MonoBehaviour
     {
         foreach (Vector2Int pos in DoorLocs)
         {
-            BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoors[(int)EDoorPos.TopLeft]);
+            BaseDecoration.SetTile((Vector3Int)pos, TileTable.OutdoorDoors[(int)EnumFromVector(pos)]);
         }
     }
 
