@@ -41,8 +41,20 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BaseLayer
+    uniqueID: 165928247
+    locked: 0
+  - name: BaseDecoration
+    uniqueID: 1941442269
+    locked: 0
+  - name: DecorationForeground
+    uniqueID: 3898162977
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 1699988613
     locked: 0
   - name: RenderTexture
     uniqueID: 3675425773

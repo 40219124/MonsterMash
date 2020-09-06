@@ -98,7 +98,6 @@ public class OverworldAgent : MonoBehaviour
         Anim = GetComponentInChildren<Animator>();
         FindObjectOfType<OverworldManager>().OnTransition += OnTransition;
         LockedMovement = true;
-        MoveTarget = transform.position;
     }
 
     protected void DoUpdate()
@@ -122,6 +121,16 @@ public class OverworldAgent : MonoBehaviour
                 }
             }
         }
+		else if (MoveTarget != transform.position)
+		{
+			HorizontalValue = MoveTarget.x - transform.position.x;
+			VerticalValue = MoveTarget.y - transform.position.y;
+			if (MoveAllowed(out EFourDirections nextDir))
+			{
+				CurrentMoveDir = nextDir;
+				StartCoroutine(AnimateSuccessfulMovement());
+			}
+		}
     }
 
     protected bool MoveAllowed(out EFourDirections dir)
@@ -253,22 +262,33 @@ public class OverworldAgent : MonoBehaviour
 
     protected bool ValidDirection(EFourDirections dir)
     {
-        foreach (var p in WhiskerInfo[(int)dir])
-        {
-            // For any tags currently there
-            if (p.Value > 0)
-            {
-                if (BlockingTags.Contains(p.Key))
-                {
-                    return false;
-                }
-                else if (p.Key.Equals("Whiskers"))
-                {
-                    // ~~~ avoid other persons destination
-                }
-            }
-        }
-        return true;
+		int x = (int)transform.position.x;
+		int y = (int)transform.position.y;
+
+		switch (dir)
+		{
+			case EFourDirections.up:
+				y += 1;
+				break;
+			case EFourDirections.down:
+				y -= 1;
+				break;
+			case EFourDirections.right:
+				x += 1;
+				break;
+			case EFourDirections.left:
+				x -= 1;
+				break;
+		}
+		if (x >= Room.GameWidth || x < 0 ||
+			y >= Room.GameHeight || y < 0)
+		{
+			return false;
+		}
+
+		var contentType = CurrentRoom.Instance.TileContent[x,y];
+		return (OverworldMemory.GetEnemyProfiles().Count > 0 && (contentType == CurrentRoom.ETileContentType.Clear)
+            || (OverworldMemory.GetEnemyProfiles().Count == 0 && (contentType & CurrentRoom.ETileContentType.Impassable) == CurrentRoom.ETileContentType.Clear));
     }
 
     public void StartBattle(OverworldAgent opponent)

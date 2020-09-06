@@ -35,18 +35,7 @@ public class RoomEditor : EditorWindow
     Texture2D Table;
     Texture2D Hole;
     Texture2D River;
-
-    const int GameHeight = 8;
-    const int GameWidth = 10;
-    const int DoorPlaceTop1 = 0 * GameWidth + 4;
-    const int DoorPlaceTop2 = 0 * GameWidth + 5;
-    const int DoorPlaceBottom1 = 7 * GameWidth + 4;
-    const int DoorPlaceBottom2 = 7 * GameWidth + 5;
-    const int DoorPlaceLeft1 = 4 * GameWidth + 0;
-    const int DoorPlaceLeft2 = 3 * GameWidth + 0;
-    const int DoorPlaceRight1 = 4 * GameWidth + 9;
-    const int DoorPlaceRight2 = 3 * GameWidth + 9;
-
+     
     static Room.eTiles PlacingTile = Room.eTiles.Floor;
 
     [MenuItem("MonsterMash/Room Editor")]
@@ -227,13 +216,13 @@ public class RoomEditor : EditorWindow
         ///End button selection
 
         ///Level Drawing
-        for (int i = 0; i < GameHeight; ++i)
+        for (int i = 0; i < Room.GameHeight; ++i)
         {
             GUILayout.BeginHorizontal();
             GUILayout.Space((position.width - 500) / 2.0f);
-            for (int j = 0; j < GameWidth; ++j)
+            for (int j = 0; j < Room.GameWidth; ++j)
             {
-                int tileIndex = i * GameWidth + j;
+                int tileIndex = i * Room.GameWidth + j;
                 GUI.enabled = room.Tiles[tileIndex] != Room.eTiles.Door;
                 btnStyle.normal.background = GetTileSprite(room.Tiles[tileIndex], new Vector2(j, i), room.Area);
                 if (GUILayout.Button($"", btnStyle, GUILayout.Height(50), GUILayout.Width(50)))
@@ -270,15 +259,15 @@ public class RoomEditor : EditorWindow
                 {
                     return area == Room.eArea.Outdoors ? Walls[(int)eWalls.TL] : WallsIndoor[(int)eWalls.TL];
                 }
-                else if (tileId == new Vector2(0, GameHeight - 1))
+                else if (tileId == new Vector2(0, Room.GameHeight - 1))
                 {
                     return area == Room.eArea.Outdoors ? Walls[(int)eWalls.BL] : WallsIndoor[(int)eWalls.BL];
                 }
-                else if (tileId == new Vector2(GameWidth - 1, 0))
+                else if (tileId == new Vector2(Room.GameWidth - 1, 0))
                 {
                     return area == Room.eArea.Outdoors ? Walls[(int)eWalls.TR] : WallsIndoor[(int)eWalls.TR];
                 }
-                else if (tileId == new Vector2(GameWidth - 1, GameHeight - 1))
+                else if (tileId == new Vector2(Room.GameWidth - 1, Room.GameHeight - 1))
                 {
                     return area == Room.eArea.Outdoors ? Walls[(int)eWalls.BR] : WallsIndoor[(int)eWalls.BR];
                 }
@@ -286,7 +275,7 @@ public class RoomEditor : EditorWindow
                 {
                     return area == Room.eArea.Outdoors ? Walls[(int)eWalls.Top] : WallsIndoor[(int)eWalls.Top];
                 }
-                else if (tileId.y == GameHeight - 1)
+                else if (tileId.y == Room.GameHeight - 1)
                 {
                     return area == Room.eArea.Outdoors ? Walls[(int)eWalls.Bottom] : WallsIndoor[(int)eWalls.Bottom];
                 }
@@ -294,7 +283,7 @@ public class RoomEditor : EditorWindow
                 {
                     return area == Room.eArea.Outdoors ? Walls[(int)eWalls.Left] : WallsIndoor[(int)eWalls.Left];
                 }
-                else if (tileId.x == GameWidth - 1)
+                else if (tileId.x == Room.GameWidth - 1)
                 {
                     return area == Room.eArea.Outdoors ? Walls[(int)eWalls.Right] : WallsIndoor[(int)eWalls.Right];
                 }
@@ -417,14 +406,14 @@ public class RoomEditor : EditorWindow
                 };
 
 
-                for (int i = 0; i < GameHeight; ++i)
+                for (int i = 0; i < Room.GameHeight; ++i)
                 {
                     using (new GUILayout.HorizontalScope())
                     {
                         GUILayout.Space((position.width - 500) / 2.0f);
-                        for (int j = 0; j < GameWidth; ++j)
+                        for (int j = 0; j < Room.GameWidth; ++j)
                         {
-                            btnStyle.normal.background = GetTileSprite(room.Tiles[i * GameWidth + j], new Vector2(j, i), room.Area);
+                            btnStyle.normal.background = GetTileSprite(room.Tiles[i * Room.GameWidth + j], new Vector2(j, i), room.Area);
                             GUILayout.Button($"", btnStyle, GUILayout.Height(8), GUILayout.Width(8));
                         }
                     }
@@ -437,38 +426,38 @@ public class RoomEditor : EditorWindow
     static void SetRoomDoors(ref Room room, bool top, bool bottom, bool left, bool right)
     {
         Room.eDoorPlaces doorPlaces = Room.eDoorPlaces.None;
-        room.Tiles[DoorPlaceTop1] = Room.eTiles.Wall;
-        room.Tiles[DoorPlaceTop2] = Room.eTiles.Wall;
-        room.Tiles[DoorPlaceBottom1] = Room.eTiles.Wall;
-        room.Tiles[DoorPlaceBottom2] = Room.eTiles.Wall;
-        room.Tiles[DoorPlaceLeft1] = Room.eTiles.Wall;
-        room.Tiles[DoorPlaceLeft2] = Room.eTiles.Wall;
-        room.Tiles[DoorPlaceRight1] = Room.eTiles.Wall;
-        room.Tiles[DoorPlaceRight2] = Room.eTiles.Wall;
+        room.Tiles[Room.DoorPlaceTop1] = Room.eTiles.Wall;
+        room.Tiles[Room.DoorPlaceTop2] = Room.eTiles.Wall;
+        room.Tiles[Room.DoorPlaceBottom1] = Room.eTiles.Wall;
+        room.Tiles[Room.DoorPlaceBottom2] = Room.eTiles.Wall;
+        room.Tiles[Room.DoorPlaceLeft1] = Room.eTiles.Wall;
+        room.Tiles[Room.DoorPlaceLeft2] = Room.eTiles.Wall;
+        room.Tiles[Room.DoorPlaceRight1] = Room.eTiles.Wall;
+        room.Tiles[Room.DoorPlaceRight2] = Room.eTiles.Wall;
 
         if (top)
         {
             doorPlaces |= Room.eDoorPlaces.Top;
-            room.Tiles[DoorPlaceTop1] = Room.eTiles.Door;
-            room.Tiles[DoorPlaceTop2] = Room.eTiles.Door;
+            room.Tiles[Room.DoorPlaceTop1] = Room.eTiles.Door;
+            room.Tiles[Room.DoorPlaceTop2] = Room.eTiles.Door;
         }
         if (bottom)
         {
             doorPlaces |= Room.eDoorPlaces.Bottom;
-            room.Tiles[DoorPlaceBottom1] = Room.eTiles.Door;
-            room.Tiles[DoorPlaceBottom2] = Room.eTiles.Door;
+            room.Tiles[Room.DoorPlaceBottom1] = Room.eTiles.Door;
+            room.Tiles[Room.DoorPlaceBottom2] = Room.eTiles.Door;
         }
         if (left)
         {
             doorPlaces |= Room.eDoorPlaces.Left;
-            room.Tiles[DoorPlaceLeft1] = Room.eTiles.Door;
-            room.Tiles[DoorPlaceLeft2] = Room.eTiles.Door;
+            room.Tiles[Room.DoorPlaceLeft1] = Room.eTiles.Door;
+            room.Tiles[Room.DoorPlaceLeft2] = Room.eTiles.Door;
         }
         if (right)
         {
             doorPlaces |= Room.eDoorPlaces.Right;
-            room.Tiles[DoorPlaceRight1] = Room.eTiles.Door;
-            room.Tiles[DoorPlaceRight2] = Room.eTiles.Door;
+            room.Tiles[Room.DoorPlaceRight1] = Room.eTiles.Door;
+            room.Tiles[Room.DoorPlaceRight2] = Room.eTiles.Door;
         }
 
         room.DoorPlaces = doorPlaces;

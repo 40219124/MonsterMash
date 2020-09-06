@@ -21,6 +21,9 @@ public class Settings
 	public const float AiPickTargetMaxTime = 0.5f;
 
 
+	public const int MapSize = 5;
+	public const int MaxRooms = 15;
+
 	public const string SceneMain = "MainScene";
 	public const string SceneOverworld = "Overworld";
 	public const string SceneOverworldMemory = "OverworldMemory";
