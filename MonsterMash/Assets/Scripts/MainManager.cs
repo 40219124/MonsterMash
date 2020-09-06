@@ -29,13 +29,6 @@ public class MainManager : MonoBehaviour
         StartCoroutine(GoToTitleCo());
     }
 
-    // ~~~ debug
-    IEnumerator LoadFirstScene()
-    {
-        yield return new WaitForSeconds(LoadDelay);
-        SceneManager.LoadSceneAsync((!OpeningScene.Equals("") ? OpeningScene : Settings.SceneOverworldMemory), LoadSceneMode.Additive);
-    }
-
     public void AddScene(string scene)
     {
         StartCoroutine(AddSceneCo(scene));

@@ -45,7 +45,7 @@ public class PartPickerManager : AdditiveSceneManager
         }
     }
 
-    // ~~~ when leaving clear the loot
+    // when leaving clear the loot
     public void LeavePicker()
     {
         OverworldMemory.ClearLoot();

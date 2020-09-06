@@ -6,6 +6,8 @@ public class EnemyOA : OverworldAgent
 {
     static protected Player Target;
 
+    private float FreezeTime = 1.0f;
+    private float RemainingFreeze = 0.0f;
     protected override void Start()
     {
         base.Start();
@@ -13,12 +15,19 @@ public class EnemyOA : OverworldAgent
         {
             Target = FindObjectOfType<Player>();
         }
+        RemainingFreeze = FreezeTime;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if(RemainingFreeze >= 0.0f)
+        {
+            RemainingFreeze -= Time.deltaTime;
+            return;
+        }
+
         for (int i = 0; i <= (int)EFourDirections.left; ++i)
         {
             foreach (var p in WhiskerInfo[i])
