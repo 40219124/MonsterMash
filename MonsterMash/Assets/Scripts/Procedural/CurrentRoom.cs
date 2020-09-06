@@ -170,7 +170,7 @@ public class CurrentRoom : MonoBehaviour
                     break;
             }
             TileContent[pos.x, pos.y] = type;
-            BaseLayer.SetTile((Vector3Int)pos, TileTable.OutdoorBase);
+            BaseLayer.SetTile((Vector3Int)pos, (ThisRoom.RoomData.Area == Room.eArea.Outdoors ? TileTable.OutdoorBase: TileTable.IndoorBase));
 
             PlaceRandomDecoration(type, pos, tile);
 			TryAddCollectableItems(type, pos, tile);
