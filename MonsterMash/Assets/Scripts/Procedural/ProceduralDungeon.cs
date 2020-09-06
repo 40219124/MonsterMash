@@ -19,7 +19,7 @@ public class ProceduralDungeon : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			GenerateMap();
+			GenerateMap(Room.eArea.Outdoors);
 		}
 	}
 
@@ -63,7 +63,7 @@ public class ProceduralDungeon : MonoBehaviour
 		}
 	}
 
-	void GenerateMap()
+	void GenerateMap(Room.eArea area)
 	{
 		string path = Application.streamingAssetsPath + "/RoomData.json";
 		var roomData = File.ReadAllText(path);
@@ -73,7 +73,7 @@ public class ProceduralDungeon : MonoBehaviour
 		var roughMap = MakeRoughMap(CurrentRoom);
 		Debug.Log($"Built roughMap: {ArrayToString(roughMap)}");
 
-		BuildRealMap(roughMap, Room.eArea.Outdoors);
+		BuildRealMap(roughMap, area);
 
 		Debug.Log($"Built real map: {ArrayToString(DungeonMap)}");
 	}

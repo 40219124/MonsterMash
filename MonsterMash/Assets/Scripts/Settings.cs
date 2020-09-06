@@ -22,7 +22,7 @@ public class Settings
 
 
 	public const int MapSize = 5;
-	public const int MaxRooms = 15;
+	public const int MaxRooms = 8;
 
 	public const float ChanceOfHealingPotion = 33f;
 
