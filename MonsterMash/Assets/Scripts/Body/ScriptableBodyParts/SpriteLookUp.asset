@@ -88,3 +88,12 @@ MonoBehaviour:
   - BodyPartType: 0
     MonsterType: 4
     BodyPartSprite: {fileID: 5786828276753209726, guid: 5d45c26897c3d9a468b33a567f98e01b, type: 3}
+  - BodyPartType: 3
+    MonsterType: 5
+    BodyPartSprite: {fileID: 3337193954552067841, guid: 93869057e7152f543afab2957435c3af, type: 3}
+  - BodyPartType: 4
+    MonsterType: 5
+    BodyPartSprite: {fileID: 6249446130026102735, guid: 93869057e7152f543afab2957435c3af, type: 3}
+  - BodyPartType: 0
+    MonsterType: 5
+    BodyPartSprite: {fileID: 264570928334729584, guid: 93869057e7152f543afab2957435c3af, type: 3}
