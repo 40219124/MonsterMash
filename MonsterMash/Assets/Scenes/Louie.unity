@@ -1869,7 +1869,7 @@ MonoBehaviour:
   Enemy:
     Torso:
       BodyPartType: 3
-      MonsterType: 2
+      MonsterType: 4
       HealthMaximum: 40
       HealthCurrent: 40
       Armour: 2
@@ -1877,7 +1877,7 @@ MonoBehaviour:
       AttackTimer: 0
     LeftArm:
       BodyPartType: 1
-      MonsterType: 2
+      MonsterType: 4
       HealthMaximum: 20
       HealthCurrent: 20
       Armour: 1
@@ -1885,7 +1885,7 @@ MonoBehaviour:
       AttackTimer: 3
     RightArm:
       BodyPartType: 1
-      MonsterType: 2
+      MonsterType: 4
       HealthMaximum: 23
       HealthCurrent: 23
       Armour: 0
@@ -1893,7 +1893,7 @@ MonoBehaviour:
       AttackTimer: 3
     Legs:
       BodyPartType: 2
-      MonsterType: 2
+      MonsterType: 4
       HealthMaximum: 30
       HealthCurrent: 30
       Armour: 3
