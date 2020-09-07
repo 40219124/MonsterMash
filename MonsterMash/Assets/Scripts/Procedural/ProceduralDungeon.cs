@@ -9,6 +9,7 @@ public class ProceduralDungeon : MonoBehaviour
 	[SerializeField] TextAsset RoomDataJson;
 	public static ProceduralDungeon Instance;
 
+	public int NumberOfDungeonsMade = 0;
 	public MapRoom[,] DungeonMap = new MapRoom[Settings.MapSize, Settings.MapSize];
 	public Room.eArea CurrentAreaType;
 	public Vector2Int CurrentRoom;
@@ -86,7 +87,7 @@ public class ProceduralDungeon : MonoBehaviour
 		}
 	}
 	
-	void GenerateMap(Room.eArea area)
+	public void GenerateMap(Room.eArea area)
 	{
 		AllRoomsData = JsonUtility.FromJson<AllRoomData>(RoomDataJson.text);
 		CurrentAreaType = area;
@@ -97,6 +98,7 @@ public class ProceduralDungeon : MonoBehaviour
 		BuildRealMap(roughMap, area);
 
 		MMLogger.Log($"Built real map: {ArrayToString(DungeonMap)}");
+		NumberOfDungeonsMade += 1;
 	}
 
 	void BuildRealMap(bool[,] roughMap, Room.eArea area)

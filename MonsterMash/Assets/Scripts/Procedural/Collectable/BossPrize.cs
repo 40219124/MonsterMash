@@ -11,7 +11,16 @@ public class BossPrize : CollectableItem
 
 	public override void PickUp()
 	{
-		//todo win game
 		base.PickUp();
+
+		if (ProceduralDungeon.Instance.NumberOfDungeonsMade == 1)
+		{
+			ProceduralDungeon.Instance.GenerateMap(Room.eArea.Indoors);
+			FlowManager.Instance.TransToOverworld(Settings.SceneOverworld);
+		}
+		else
+		{
+			FlowManager.Instance.TransToGameOver(Settings.SceneOverworld, true);
+		}
 	}
 }

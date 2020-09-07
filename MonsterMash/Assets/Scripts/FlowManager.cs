@@ -5,9 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(OverworldMemory))]
 public class FlowManager : MonoBehaviour
 {
+	public static FlowManager Instance;
+
     private void Start()
     {
         TransToOverworld();
+		Instance = this;
     }
     public void TransOverworldToBattle()
     {
@@ -25,6 +28,7 @@ public class FlowManager : MonoBehaviour
             bc.SetupBattle(OverworldMemory.GetCombatProfile(true), OverworldMemory.GetCombatProfile(false));
         }
     }
+
 
     // transition to overworld from unknown scene
     public void TransToOverworld(string sceneFrom = "")
