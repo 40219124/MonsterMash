@@ -24,7 +24,7 @@ public class PartPickerManager : AdditiveSceneManager
 				(monPro.Torso.MonsterType == EMonsterType.lobster ||
 				monPro.Torso.MonsterType == EMonsterType.shrimp))
 			{
-				parts.Add(monPro.Legs);
+				parts.Add(monPro.Torso);
 			}
 			else
 			{
