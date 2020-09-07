@@ -109,16 +109,16 @@ public class Body : MonoBehaviour
 
 	public void ShowStats(bool show, eBodyPartType selectedType, bool isLocked, bool isOurTurn=false, bool forceComplex=false)
 	{
-		TorsoPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Torso), 
+		TorsoPart?.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Torso), 
 			selectedType==eBodyPartType.Torso, isOurTurn, forceComplex);
 
-		LeftArmPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.LeftArm), 
+		LeftArmPart?.ShowStats(show && (!isLocked || selectedType==eBodyPartType.LeftArm), 
 			selectedType==eBodyPartType.LeftArm, isOurTurn, forceComplex);
 
-		RightArmPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.RightArm), 
+		RightArmPart?.ShowStats(show && (!isLocked || selectedType==eBodyPartType.RightArm), 
 			selectedType==eBodyPartType.RightArm, isOurTurn, forceComplex);
 
-		LegsPart.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Leg), 
+		LegsPart?.ShowStats(show && (!isLocked || selectedType==eBodyPartType.Leg), 
 			selectedType==eBodyPartType.Leg, isOurTurn, forceComplex);
 	}
 

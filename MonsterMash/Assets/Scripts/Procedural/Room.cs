@@ -104,4 +104,9 @@ public class AllRoomData
 
         return outRooms;
     }
+
+    public Room GetBossRoom(Room.eArea area)
+    {
+        return AllRooms.Find(r => r.Area == area && r.IsBossRoom);
+    }
 }

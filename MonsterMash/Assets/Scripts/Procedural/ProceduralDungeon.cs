@@ -55,6 +55,22 @@ public class ProceduralDungeon : MonoBehaviour
 		return true;
 	}
 
+	public bool IsLastRoom(MapRoom current)
+    {
+		foreach (MapRoom mapRoom in DungeonMap)
+		{
+			if(current == mapRoom)
+            {
+				continue;
+            }
+			if (mapRoom != null && mapRoom.RoomState != ERoomState.Completed)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public void MarkRoomAsBoss()
 	{
 		MMLogger.Log($"Trying to mark room {CurrentRoom} as boss room. DungeonGotBossRoom: {DungeonGotBossRoom}");

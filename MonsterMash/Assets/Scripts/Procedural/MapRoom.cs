@@ -33,6 +33,8 @@ public class MapRoom
 			var bossPrize = new BossPrize(new Vector2Int(5,5));
 
 			CollectableItems.Add(bossPrize);
+
+            RoomData = ProceduralDungeon.Instance.AllRoomsData.GetBossRoom(RoomData.Area);
 		}
 	}
 

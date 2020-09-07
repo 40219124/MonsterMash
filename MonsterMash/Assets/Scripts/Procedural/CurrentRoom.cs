@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
 using System.Xml.Serialization;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 
 public class CurrentRoom : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class CurrentRoom : MonoBehaviour
     public ETileContentType[,] TileContent;
 
     private EnemySpawner EnemySpawn;
+    private Vector3 BossSpawnLocation = new Vector3(5.0f, 5.0f, 0.0f);
 
     private List<Vector2Int> DoorLocs = new List<Vector2Int>();
 
@@ -50,6 +53,10 @@ public class CurrentRoom : MonoBehaviour
         EnemySpawn = GetComponent<EnemySpawner>();
 
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
+        if (ProceduralDungeon.Instance.IsLastRoom(ThisRoom))
+        {
+            ProceduralDungeon.Instance.MarkRoomAsBoss();
+        }
         SetRoom(mapRoom);
 
         Player p = FindObjectOfType<Player>();
@@ -82,10 +89,6 @@ public class CurrentRoom : MonoBehaviour
         if (OverworldMemory.GetEnemyProfiles().Count == 0)
         {
             PlaceDoors();
-            if (ProceduralDungeon.Instance.IsDungeonCompleted())
-            {
-                ProceduralDungeon.Instance.MarkRoomAsBoss();
-            }
         }
         PlaceCollectableItems();
     }
@@ -163,8 +166,12 @@ public class CurrentRoom : MonoBehaviour
                     type = ETileContentType.Blocked;
                     break;
                 case Room.eTiles.Enemy:
+                    if (ThisRoom.IsBossRoom)
+                    {
+                        break;
+                    }
                     // ~~~ add random chance for variation
-                    EnemySpawn.SpawnLocations.Add(new EnemySpawner.MonsterPosition() { type = ThisRoom.RoomData.Area == Room.eArea.Outdoors ? EMonsterType.mantis : EMonsterType.skeleton, pos = (Vector3Int)pos });
+                    EnemySpawn.SpawnLocations.Add(new EnemySpawner.MonsterPosition() { type = GetRandomEnemy(), pos = (Vector3Int)pos });
                     break;
                 case Room.eTiles.Boss:
                     break;
@@ -183,8 +190,20 @@ public class CurrentRoom : MonoBehaviour
         {
             PlaceTreeFluff();
         }
-        //BaseLayer.RefreshAllTiles();
-        //BaseLayer.SetTile(Vector3Int.up * 8, null);
+        if (ThisRoom.IsBossRoom)
+        {
+            switch (ThisRoom.RoomData.Area)
+            {
+                case Room.eArea.Outdoors:
+                    EnemySpawn.SpawnLocations.Add(new EnemySpawner.MonsterPosition() { type = EMonsterType.lobster, pos = BossSpawnLocation });
+                    break;
+                case Room.eArea.Indoors:
+                    EnemySpawn.SpawnLocations.Add(new EnemySpawner.MonsterPosition() { type = EMonsterType.shrimp, pos = BossSpawnLocation });
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     void TryAddCollectableItems(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
@@ -219,7 +238,7 @@ public class CurrentRoom : MonoBehaviour
         float rand = UnityEngine.Random.Range(0, 100.0f);
 
         ERoomDecoration decoration = ERoomDecoration.None;
-        if (rand < potionChance)
+        if (rand <= potionChance)
         {
             switch (UnityEngine.Random.Range(0, 2))
             {
@@ -233,11 +252,11 @@ public class CurrentRoom : MonoBehaviour
                     break;
             }
         }
-        else if (rand < flowerChance)
+        else if (rand <= flowerChance)
         {
             decoration = ERoomDecoration.Flowers;
         }
-        else if (rand < grassChance)
+        else if (rand <= grassChance)
         {
             switch (UnityEngine.Random.Range(0, 3))
             {
@@ -260,6 +279,48 @@ public class CurrentRoom : MonoBehaviour
         {
             DecorationForeground.SetTile((Vector3Int)pos, tile);
         }
+    }
+
+    private EMonsterType GetRandomEnemy()
+    {
+        float slugChance = 0.0f;
+        float mantisChance = 0.0f;
+        float skeletonChance = 0.0f;
+        switch (ThisRoom.RoomData.Area)
+        {
+            case Room.eArea.Outdoors:
+                {
+                    slugChance = 40.0f;
+                    mantisChance = 40.0f + slugChance;
+                    skeletonChance = 20.0f + mantisChance;
+                    break;
+                }
+            case Room.eArea.Indoors:
+                {
+                    slugChance = 20.0f;
+                    mantisChance = 30.0f + slugChance;
+                    skeletonChance = 50.0f + mantisChance;
+                    break;
+                }
+            default:
+                break;
+        }
+
+        float rand = UnityEngine.Random.Range(0, skeletonChance);
+        if (rand <= slugChance)
+        {
+            return EMonsterType.slug;
+        }
+        else if (rand <= mantisChance)
+        {
+            return EMonsterType.mantis;
+        }
+        else if (rand <= skeletonChance)
+        {
+            return EMonsterType.skeleton;
+        }
+
+        return EMonsterType.Frankenstein;
     }
 
     public void SetAsMoveTarget(Vector3 target, bool IsPlayer = false)
@@ -302,7 +363,7 @@ public class CurrentRoom : MonoBehaviour
             for (int x = xMin; x <= xMax; ++x)
             {
                 EEightDirections dir = GetEightDirections(new Vector2Int(x, y), xMin, xMax, yMin, yMax);
-                if (!IsNextToDoor(new Vector2Int(x,y)) && dir != EEightDirections.none)
+                if (!IsNextToDoor(new Vector2Int(x, y)) && dir != EEightDirections.none)
                 {
                     DecorationForeground.SetTile(new Vector3Int(x, y, 0), TileTable.TreeFluff.Find(t => t.Direction == dir).TileTile);
                 }
@@ -327,7 +388,7 @@ public class CurrentRoom : MonoBehaviour
         {
             return true;
         }
-        if(places.HasFlag(Room.eDoorPlaces.Left) && (pos == new Vector2Int(1, 4) || pos == new Vector2Int(1, 5)))
+        if (places.HasFlag(Room.eDoorPlaces.Left) && (pos == new Vector2Int(1, 4) || pos == new Vector2Int(1, 5)))
         {
             return true;
         }
@@ -338,10 +399,11 @@ public class CurrentRoom : MonoBehaviour
 
     public EEightDirections GetEightDirections(Vector2Int pos, int xMin, int xMax, int yMin, int yMax)
     {
-        if(!((pos.x == xMin || pos.x == xMax) || (pos.y == yMin || pos.y == yMax))){
+        if (!((pos.x == xMin || pos.x == xMax) || (pos.y == yMin || pos.y == yMax)))
+        {
             return EEightDirections.none;
         }
-        if(pos.x == xMin && pos.y == yMin)
+        if (pos.x == xMin && pos.y == yMin)
         {
             return EEightDirections.SW;
         }
