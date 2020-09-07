@@ -22,10 +22,8 @@ public class MMLogger
 
 	public static void LogError(string message, Object context=null)
 	{
-		if (LoggingAllowed)
-		{
-			Debug.LogError(message, context);
-		}
+		Debug.LogError(message, context);
+		
 	}
 	
 }
