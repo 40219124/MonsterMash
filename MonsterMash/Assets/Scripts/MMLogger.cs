@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MMLogger
 {
-	static bool LoggingAllowed = true;
+	static bool LoggingAllowed = false;
 
 	public static void Log(string message, Object context=null)
 	{
