@@ -89,6 +89,7 @@ public class ProceduralDungeon : MonoBehaviour
 	
 	public void GenerateMap(Room.eArea area)
 	{
+		DungeonGotBossRoom = false;
 		AllRoomsData = JsonUtility.FromJson<AllRoomData>(RoomDataJson.text);
 		CurrentAreaType = area;
 		CurrentRoom = new Vector2Int(Random.Range(0, Settings.MapSize), Random.Range(0, Settings.MapSize));
