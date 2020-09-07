@@ -57,13 +57,17 @@ public class ProceduralDungeon : MonoBehaviour
 
 	public bool IsLastRoom(MapRoom current)
     {
+        if (DungeonGotBossRoom)
+        {
+			return false;
+        }
 		foreach (MapRoom mapRoom in DungeonMap)
 		{
 			if(current == mapRoom)
             {
 				continue;
             }
-			if (mapRoom != null && mapRoom.RoomState != ERoomState.Completed)
+			else if (mapRoom != null && mapRoom.RoomState != ERoomState.Completed)
 			{
 				return false;
 			}

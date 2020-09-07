@@ -53,8 +53,9 @@ public class CurrentRoom : MonoBehaviour
         EnemySpawn = GetComponent<EnemySpawner>();
 
         var mapRoom = ProceduralDungeon.Instance.GetCurrentRoom();
-        if (ProceduralDungeon.Instance.IsLastRoom(ThisRoom))
+        if (ProceduralDungeon.Instance.IsLastRoom(mapRoom))
         {
+            mapRoom.RoomData = ProceduralDungeon.Instance.AllRoomsData.GetBossRoom(mapRoom.RoomData.Area);
             ProceduralDungeon.Instance.MarkRoomAsBoss();
         }
         SetRoom(mapRoom);
@@ -77,9 +78,12 @@ public class CurrentRoom : MonoBehaviour
         p.transform.position = playerPos;
         p.MoveTarget = targetPos;
 
+        if (ProceduralDungeon.Instance.IsLastRoom(ThisRoom))
+        {
+        }
 
         if (ThisRoom.RoomState != ERoomState.Completed &&
-            !ThisRoom.IsStartingRoom)
+        !ThisRoom.IsStartingRoom)
         {
             EnemySpawn.SpawnEnemies(ThisRoom.RoomState != ERoomState.NotSeen);
         }
