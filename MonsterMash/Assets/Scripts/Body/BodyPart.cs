@@ -6,10 +6,10 @@ public class BodyPart : MonoBehaviour
 {
 	public Body.eBodyPartType BodyPartType { get; private set; }
     public BodyPartData PartData { get; private set; }
-    public int Armour { get { return PartData.Armour; } }
+    public int Armour { get { return PartData == null? 0 : PartData.Armour; } }
     public int CurrentHealth
     {
-        get { return PartData.HealthCurrent; }
+        get { return PartData == null? 0: PartData.HealthCurrent; }
         private set { PartData.HealthCurrent = value; }
     }
     public bool IsAlive { get { return CurrentHealth > 0; } }
@@ -88,6 +88,11 @@ public class BodyPart : MonoBehaviour
 	{
 		if (monsterType == EMonsterType.none)
 		{
+			if(PartData == null)
+			{
+				BodyPartImage.sprite = null;
+				return;
+			}
 			monsterType = PartData.MonsterType;
 		}
 

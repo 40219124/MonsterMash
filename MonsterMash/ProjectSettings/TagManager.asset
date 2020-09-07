@@ -56,6 +56,9 @@ TagManager:
   - name: Foreground
     uniqueID: 1699988613
     locked: 0
+  - name: MiniMap
+    uniqueID: 3896383563
+    locked: 0
   - name: RenderTexture
     uniqueID: 3675425773
     locked: 0
