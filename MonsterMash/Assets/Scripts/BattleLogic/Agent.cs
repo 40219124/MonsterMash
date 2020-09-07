@@ -108,7 +108,7 @@ public class Agent : MonoBehaviour
 				}
 				default:
 				{
-					Debug.LogError($" unexpected button: {mostRecentDpad}");
+					MMLogger.LogError($" unexpected button: {mostRecentDpad}");
 					return;
 				}
 			}
@@ -153,13 +153,13 @@ public class Agent : MonoBehaviour
 			if (SelectedPart == Body.eBodyPartType.None ||
 				AiPickedTarget == Body.eBodyPartType.None)
 			{
-				Debug.Log($"AI Picked action but one none attacker: \"{SelectedPart}\" target \"{AiPickedTarget}\"");
+				MMLogger.Log($"AI Picked action but one none attacker: \"{SelectedPart}\" target \"{AiPickedTarget}\"");
 				SelectedPart = Body.eBodyPartType.None;
 				AiPickedTarget = Body.eBodyPartType.None;
 			}
 			else
 			{
-				Debug.Log($"AI Picked action attacker: \"{SelectedPart}\" target \"{AiPickedTarget}\"");
+				MMLogger.Log($"AI Picked action attacker: \"{SelectedPart}\" target \"{AiPickedTarget}\"");
 
 
 				PickAttackerTime = Random.Range(Settings.AiPickAttackerMinTime/Settings.AiTurnTimeSpeedMultiplier, Settings.AiPickAttackerMaxTime/Settings.AiTurnTimeSpeedMultiplier);

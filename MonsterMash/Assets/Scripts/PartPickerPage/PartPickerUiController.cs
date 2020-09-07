@@ -40,7 +40,7 @@ public class PartPickerUiController : MonoBehaviour
 
 		if (bodyPartsDataList != null && loop < bodyPartsDataList.Count)
 		{
-			Debug.LogError($"not enough PickerBodyParts setup (num setup: {PickerBodyParts.Count}) num neeed: {bodyPartsDataList.Count}");
+			MMLogger.LogError($"not enough PickerBodyParts setup (num setup: {PickerBodyParts.Count}) num neeed: {bodyPartsDataList.Count}");
 		}
 		
 
@@ -51,7 +51,7 @@ public class PartPickerUiController : MonoBehaviour
 				yield return StartCoroutine(PickPartUse(pickerBodyPart));
 			}
 		}
-		Debug.Log("Finished picking use of parts");
+		MMLogger.Log("Finished picking use of parts");
 
 		DpadAnimatorContoller.SetShow(false);
 		UseButton.SetSelected(false);
@@ -73,7 +73,7 @@ public class PartPickerUiController : MonoBehaviour
 
 	IEnumerator PickPartUse(PickerBodyPartUi pickerBodyPart)
 	{
-		Debug.Log($"picking use of part: {pickerBodyPart}");
+		MMLogger.Log($"picking use of part: {pickerBodyPart}");
 		UseButton.SetShow(true);
 		DiscardButton.SetShow(true);
 		UseButton.SetButtonSize(true);
@@ -110,11 +110,11 @@ public class PartPickerUiController : MonoBehaviour
 
 		if (currentButton == DiscardButton)
 		{
-			Debug.Log($"Discard Body Part: {pickerBodyPart}");
+			MMLogger.Log($"Discard Body Part: {pickerBodyPart}");
 		}
 		else
 		{
-			Debug.Log($"wanting to use Body Part: {pickerBodyPart}");
+			MMLogger.Log($"wanting to use Body Part: {pickerBodyPart}");
 
 			yield return StartCoroutine(SwapBodyPart(pickerBodyPart));
 		}
@@ -219,7 +219,7 @@ public class PartPickerUiController : MonoBehaviour
 			}
 			default:
 			{
-				Debug.LogError($"unexpected eBodyPartType: {bodyPartToOverWrite.BodyPartType}");
+				MMLogger.LogError($"unexpected eBodyPartType: {bodyPartToOverWrite.BodyPartType}");
 				break;
 			}
 		}

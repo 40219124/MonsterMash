@@ -36,14 +36,14 @@ public class BattleController : MonoBehaviour
 	{
 		if (Instance != null)
 		{
-			Debug.LogError($"Instance already set");
+			MMLogger.LogError($"Instance already set");
 		}
 		Instance = this;
 	}
 
 	public void SetupBattle(MonsterProfile playerProfile, MonsterProfile enemyProfile)
 	{
-		Debug.Log($"starting new Battle");
+		MMLogger.Log($"starting new Battle");
 		Player.OnGameStart(Enemy, playerProfile);
 		Enemy.OnGameStart(Player, enemyProfile);
 		BattleState = eBattleState.BattleIntro;
@@ -113,7 +113,7 @@ public class BattleController : MonoBehaviour
 		if (!Player.Body.IsAlive())
 		{
 			BattleState = eBattleState.EnemyWon;
-			Debug.Log($"game over {BattleState}");
+			MMLogger.Log($"game over {BattleState}");
 			FindObjectOfType<FlowManager>().TransToGameOver(Settings.SceneBattle, false); // ~~~ Avoid find later mayber 
 			return;
 		}
@@ -121,7 +121,7 @@ public class BattleController : MonoBehaviour
 		if (!Enemy.Body.IsAlive())
 		{
 			BattleState = eBattleState.PlayerWon;
-			Debug.Log($"game over {BattleState}");
+			MMLogger.Log($"game over {BattleState}");
 			// Remove enemy from memory 
 			var dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < 0.75f;// ~~~ drop chance
 			OverworldMemory.OpponentBeaten(dropLoot);
@@ -178,7 +178,7 @@ public class BattleController : MonoBehaviour
 			BattleState = eBattleState.EnemyTurn;
 		}
 
-		Debug.Log($"starting new turn: {BattleState}");
+		MMLogger.Log($"starting new turn: {BattleState}");
 	}
 
 	public bool TryAction(Action action)
@@ -186,19 +186,19 @@ public class BattleController : MonoBehaviour
 		if (BattleState != eBattleState.PlayerTurn &&
 			BattleState != eBattleState.EnemyTurn)
 		{
-			Debug.LogError($"trying to do action while BattleState not a player turn: {BattleState}");
+			MMLogger.LogError($"trying to do action while BattleState not a player turn: {BattleState}");
 			return false;
 		}
 
 		if (TimeLeftOfAction > 0 && CurrentAction != null)
 		{
-			Debug.LogError($"trying to do action while still doing the last one TimeLeftOfAction: {TimeLeftOfAction}, CurrentAction {CurrentAction}");
+			MMLogger.LogError($"trying to do action while still doing the last one TimeLeftOfAction: {TimeLeftOfAction}, CurrentAction {CurrentAction}");
 			return false;
 		}
 
 		if (action == null)
 		{
-			Debug.LogError($"trying to do action with action that is null");
+			MMLogger.LogError($"trying to do action with action that is null");
 			return false;
 		}
 
@@ -207,13 +207,13 @@ public class BattleController : MonoBehaviour
 
 		if (attacker == null)
 		{
-			Debug.LogError($"trying to do action with action.Attacker that is null");
+			MMLogger.LogError($"trying to do action with action.Attacker that is null");
 			return false;
 		}
 
 		if (target == null)
 		{
-			Debug.LogError($"trying to do action with action.Target that is null");
+			MMLogger.LogError($"trying to do action with action.Target that is null");
 			return false;
 		}
 
@@ -222,25 +222,25 @@ public class BattleController : MonoBehaviour
 
 		if (attackerLimb == null)
 		{
-			Debug.LogError($"trying to do action with attackerLimb that is null: {action}");
+			MMLogger.LogError($"trying to do action with attackerLimb that is null: {action}");
 			return false;
 		}
 
 		if (targetBodyPart == null)
 		{
-			Debug.LogError($"trying to do action with targetBodyPart that is null: {action}");
+			MMLogger.LogError($"trying to do action with targetBodyPart that is null: {action}");
 			return false;
 		}
 
 		if (!attackerLimb.IsAlive)
 		{
-			Debug.LogError($"trying to do action with attack limb({attackerLimb}) that not Alive");
+			MMLogger.LogError($"trying to do action with attack limb({attackerLimb}) that not Alive");
 			return false;
 		}
 
 		if (!targetBodyPart.IsAlive)
 		{
-			Debug.LogError($"trying to do action with TargetBodyPart({targetBodyPart}) that not Alive");
+			MMLogger.LogError($"trying to do action with TargetBodyPart({targetBodyPart}) that not Alive");
 			return false;
 		}
 
@@ -249,12 +249,12 @@ public class BattleController : MonoBehaviour
 		int actionTime = attackerLimb.AttackTime;
 		if (TurnTimeLeft + Settings.ActionTimeForgiveness <= actionTime)
 		{
-			Debug.Log($"not enough time to do action: {TurnTimeLeft} + {Settings.ActionTimeForgiveness} <= {actionTime}");
+			MMLogger.Log($"not enough time to do action: {TurnTimeLeft} + {Settings.ActionTimeForgiveness} <= {actionTime}");
 			return false;
 		}
 
 		//this is a valid action so lets do it yay!
-		Debug.Log($"Doing Action: {action}");
+		MMLogger.Log($"Doing Action: {action}");
 
 		TimeLeftOfAction = actionTime;
 		TimeSinceActionStarted = 0;

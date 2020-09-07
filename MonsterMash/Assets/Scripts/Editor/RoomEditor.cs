@@ -227,7 +227,7 @@ public class RoomEditor : EditorWindow
                 btnStyle.normal.background = GetTileSprite(room.Tiles[tileIndex], new Vector2(j, i), room.Area);
                 if (GUILayout.Button($"", btnStyle, GUILayout.Height(50), GUILayout.Width(50)))
                 {
-                    Debug.Log($"Editing: {j}, {i}");
+                    MMLogger.Log($"Editing: {j}, {i}");
                     room.Tiles[tileIndex] = PlacingTile;
                 }
             }
@@ -316,7 +316,7 @@ public class RoomEditor : EditorWindow
 
         if (File.Exists(path))
         {
-            Debug.Log($"Loading from: {path}");
+            MMLogger.Log($"Loading from: {path}");
 
             var roomData = File.ReadAllText(path);
 
@@ -342,17 +342,17 @@ public class RoomEditor : EditorWindow
     static void SaveRooms()
     {
         string path = Application.streamingAssetsPath + jsonFile;
-        Debug.Log($"saving to: {path}");
+        MMLogger.Log($"saving to: {path}");
 
         if (!File.Exists(path))
         {
-            Debug.Log("creating path");
+            MMLogger.Log("creating path");
             Directory.CreateDirectory(Application.streamingAssetsPath);
         }
 
         AllRooms.Save();
         File.WriteAllText(path, JsonUtility.ToJson(AllRooms));
-        Debug.Log("saved");
+        MMLogger.Log("saved");
     }
 
     static void NewRoom()

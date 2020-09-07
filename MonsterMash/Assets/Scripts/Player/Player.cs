@@ -38,7 +38,7 @@ public class Player : OverworldAgent
 				diffInt != Vector2Int.down &&
 				diffInt != Vector2Int.right)
             {
-                Debug.LogError("Impossible");
+                MMLogger.LogError("Impossible");
             }
 			else
 			{

@@ -24,7 +24,7 @@ public class BodyPartData
         //Body part type
         if (_bodyPartType == BodyPart.eBodyPartSlotType.None)
         {
-            Debug.LogError("Body part type not given.");
+            MMLogger.LogError("Body part type not given.");
             return;
         }
         BodyPartType = _bodyPartType;
@@ -32,7 +32,7 @@ public class BodyPartData
         //MonsterType
         if (_monsterType == EMonsterType.none)
         {
-            Debug.LogError("Monster type not given.");
+            MMLogger.LogError("Monster type not given.");
             return;
         }
         MonsterType = _monsterType;
@@ -40,7 +40,7 @@ public class BodyPartData
         // Health
         if (_health < 1)
         {
-            Debug.LogWarning($"Health data supplied too low: {_health}");
+            MMLogger.LogWarning($"Health data supplied too low: {_health}");
         }
         HealthMaximum = Mathf.Max(1, _health);
         HealthCurrent = HealthMaximum;
@@ -48,25 +48,25 @@ public class BodyPartData
         // Armour
         if (_armour < 0)
         {
-            Debug.LogWarning($"Armour data supplied too low: {_armour}");
+            MMLogger.LogWarning($"Armour data supplied too low: {_armour}");
         }
         Armour = Mathf.Max(0, _armour);
 
         // Damage
         if (_damage < 0)
         {
-            Debug.LogWarning($"Damage data supplied too low: {_damage}");
+            MMLogger.LogWarning($"Damage data supplied too low: {_damage}");
         }
         Damage = Mathf.Max(0, _damage);
 
         // AttackTimer
         if (_attackTimer < 1)
         {
-            Debug.LogWarning($"Attack timer supplied too low: {_attackTimer}");
+            MMLogger.LogWarning($"Attack timer supplied too low: {_attackTimer}");
         }
         else if (_attackTimer > Settings.TurnTime)
         {
-            Debug.LogWarning($"Attack timer supplied too high: {_attackTimer}");
+            MMLogger.LogWarning($"Attack timer supplied too high: {_attackTimer}");
         }
         AttackTimer = Mathf.Clamp(_attackTimer, 1, (int)Settings.TurnTime - 1);
     }
@@ -87,7 +87,7 @@ public class BodyPartData
     {
 		if(restoreDead || HealthCurrent > 0)
 		{
-			Debug.Log($"restore health on {this}");
+			MMLogger.Log($"restore health on {this}");
 			HealthCurrent = HealthMaximum;
 		}
     }

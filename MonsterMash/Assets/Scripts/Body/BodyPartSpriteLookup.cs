@@ -37,7 +37,7 @@ public class BodyPartSpriteLookup : ScriptableObject
 			}
 			default:
 			{
-				Debug.LogError($"Unexpected enum type: {bodyPartSlotType}");
+				MMLogger.LogError($"Unexpected enum type: {bodyPartSlotType}");
 				break;
 			}
 		}
@@ -54,7 +54,7 @@ public class BodyPartSpriteLookup : ScriptableObject
 			}
 		}
 
-		Debug.LogWarning($"Could not find sprite with bodyPartType: {bodyPartType}, monsterType: {monsterType}");
+		MMLogger.LogWarning($"Could not find sprite with bodyPartType: {bodyPartType}, monsterType: {monsterType}");
 		return null;
 	}
 }

@@ -26,7 +26,7 @@ public class NumberRender : MonoBehaviour
 		int number = inputNumber;
 		if (number < 0)
 		{
-			Debug.LogError($"NumberRender.SetNumber() call with {number} < 0", this);
+			MMLogger.LogError($"NumberRender.SetNumber() call with {number} < 0", this);
 			number *= -1;
 		}
 		
@@ -44,7 +44,7 @@ public class NumberRender : MonoBehaviour
 
 		if (number > 0)
 		{
-			Debug.LogError($"not enough NumberSpriteRenderers to display number: {inputNumber}", this);
+			MMLogger.LogError($"not enough NumberSpriteRenderers to display number: {inputNumber}", this);
 		}
 	}
 
@@ -52,12 +52,12 @@ public class NumberRender : MonoBehaviour
 	{
 		if (singleDigitNumber < 0)
 		{
-			Debug.LogError($"GetNumberSprite() call with {singleDigitNumber} < 0", this);
+			MMLogger.LogError($"GetNumberSprite() call with {singleDigitNumber} < 0", this);
 			return null;
 		}
 		if (singleDigitNumber/10 != 0)
 		{
-			Debug.LogError($"GetNumberSprite() call with {singleDigitNumber} not singleDigitNumber", this);
+			MMLogger.LogError($"GetNumberSprite() call with {singleDigitNumber} not singleDigitNumber", this);
 			return null;
 		}
 

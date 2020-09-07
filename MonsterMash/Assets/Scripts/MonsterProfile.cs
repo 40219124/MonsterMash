@@ -15,7 +15,7 @@ public class MonsterProfile
 
 	public void HealToMax(bool restoreDead)
 	{
-		Debug.Log("Healing player to max");
+		MMLogger.Log("Healing player to max");
 		Torso.RestoreHealth(restoreDead);
 		LeftArm.RestoreHealth(restoreDead);
 		RightArm.RestoreHealth(restoreDead);

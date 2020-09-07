@@ -382,19 +382,19 @@ public class CurrentRoom : MonoBehaviour
 
         if (ThisRoom.CollectableItems.Count > 2)
         {
-            Debug.LogError("Too many CollectableItems");
+            MMLogger.LogError("Too many CollectableItems");
         }
 
         foreach (var item in ThisRoom.CollectableItems)
         {
             if (item is HealingPotion)
             {
-                Debug.Log($"added HealingPotion: {item}");
+                MMLogger.Log($"added HealingPotion: {item}");
                 HealPotion.Setup(item, ThisRoom.RoomState != ERoomState.Completed);
             }
             else if (item is BossPrize)
             {
-                Debug.Log($"added HealingPotion: {item}");
+                MMLogger.Log($"added HealingPotion: {item}");
                 BossReward.Setup(item, ThisRoom.RoomState != ERoomState.Completed);
             }
         }

@@ -34,7 +34,7 @@ public class ProceduralDungeon : MonoBehaviour
 	public void MoveRoom(Vector2Int roomDirection, Vector3 playerPos)
 	{
 		CurrentRoom += roomDirection;
-		Debug.Log($"Moved To room {CurrentRoom}");
+		MMLogger.Log($"Moved To room {CurrentRoom}");
 
 		var xPos = (Room.GameWidth-1)-playerPos.x;
 		var yPos = (Room.GameHeight-1) - playerPos.y;
@@ -57,12 +57,12 @@ public class ProceduralDungeon : MonoBehaviour
 
 	public void MarkRoomAsBoss()
 	{
-		Debug.Log($"Trying to mark room {CurrentRoom} as boss room. DungeonGotBossRoom: {DungeonGotBossRoom}");
+		MMLogger.Log($"Trying to mark room {CurrentRoom} as boss room. DungeonGotBossRoom: {DungeonGotBossRoom}");
 		if (!DungeonGotBossRoom)
 		{
 			DungeonMap[CurrentRoom.x, CurrentRoom.y].SetAsBossRoom();
 			DungeonGotBossRoom = true;
-			Debug.Log("WELL DONE YOU FOUND THE BOSS ROOM!");
+			MMLogger.Log("WELL DONE YOU FOUND THE BOSS ROOM!");
 		}
 	}
 	
@@ -72,11 +72,11 @@ public class ProceduralDungeon : MonoBehaviour
 		CurrentAreaType = area;
 		CurrentRoom = new Vector2Int(Random.Range(0, Settings.MapSize), Random.Range(0, Settings.MapSize));
 		var roughMap = MakeRoughMap(CurrentRoom);
-		Debug.Log($"Built roughMap: {ArrayToString(roughMap)}");
+		MMLogger.Log($"Built roughMap: {ArrayToString(roughMap)}");
 
 		BuildRealMap(roughMap, area);
 
-		Debug.Log($"Built real map: {ArrayToString(DungeonMap)}");
+		MMLogger.Log($"Built real map: {ArrayToString(DungeonMap)}");
 	}
 
 	void BuildRealMap(bool[,] roughMap, Room.eArea area)
@@ -99,7 +99,7 @@ public class ProceduralDungeon : MonoBehaviour
 					}
 					else
 					{
-						Debug.LogError($"AllRoomsData cannot find room {neededDoorPos} from area: {area}");
+						MMLogger.LogError($"AllRoomsData cannot find room {neededDoorPos} from area: {area}");
 					}
 				}
 				DungeonMap[x,y] = mapRoom;

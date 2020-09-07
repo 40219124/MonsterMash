@@ -15,7 +15,7 @@ public class HealingPotion : CollectableItem
 		var profile = OverworldMemory.GetCombatProfile(true);
 		if(profile == null)
 		{
-			Debug.LogError($"couldn't get profile");
+			MMLogger.LogError($"couldn't get profile");
 		}
 
 		base.PickUp();

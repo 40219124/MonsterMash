@@ -44,7 +44,7 @@ public class MiniMapController : MonoBehaviour
 
 				if (index >= RoomAnimators.Count)
 				{
-					Debug.LogError("not enough RoomAnimators set up for set up for mini map");
+					MMLogger.LogError("not enough RoomAnimators set up for set up for mini map");
 				}
 				else
 				{

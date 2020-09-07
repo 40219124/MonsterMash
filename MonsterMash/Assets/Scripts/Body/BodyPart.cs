@@ -40,7 +40,7 @@ public class BodyPart : MonoBehaviour
 			StatBox == null ||
             PartAnimator == null)
         {
-            Debug.LogWarning("not all Ui is set up for body part", this);
+            MMLogger.LogWarning("not all Ui is set up for body part", this);
             return;
         }
 
@@ -56,7 +56,7 @@ public class BodyPart : MonoBehaviour
 
         CurrentHealth -= healthDelta;
 		CurrentHealth = Math.Max(CurrentHealth, 0);
-        Debug.Log($"ApplyAttack({damage}) health: {preHealth} -> {CurrentHealth}");
+        MMLogger.Log($"ApplyAttack({damage}) health: {preHealth} -> {CurrentHealth}");
 
         HealthDeltaNumber.SetNumber(healthDelta);
 

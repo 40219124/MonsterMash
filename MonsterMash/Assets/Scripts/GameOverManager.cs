@@ -11,7 +11,7 @@ public class GameOverManager : AdditiveSceneManager
 
 	public void Setup(bool wonTheGame)
 	{
-		Debug.Log($"GameOver wonTheGame: {wonTheGame}");
+		MMLogger.Log($"GameOver wonTheGame: {wonTheGame}");
 		GameOverAnimator.SetBool("Won", wonTheGame);
 	}
 
