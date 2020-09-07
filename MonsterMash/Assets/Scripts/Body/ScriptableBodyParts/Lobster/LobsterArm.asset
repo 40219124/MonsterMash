@@ -15,9 +15,9 @@ MonoBehaviour:
   BodyPartType: 1
   MonsterType: 3
   HealthAvg: 20
-  HealthVariation: 5
-  ArmourAvg: 0
+  HealthVariation: 2
+  ArmourAvg: 1
   ArmourVariation: 1
-  DamageAvg: 6
+  DamageAvg: 10
   DamageVariation: 2
   AttackTime: 3
