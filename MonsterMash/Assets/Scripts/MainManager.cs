@@ -29,6 +29,16 @@ public class MainManager : MonoBehaviour
         StartCoroutine(GoToTitleCo());
     }
 
+	void Update()
+	{
+
+		if (Input.GetButton("Exit"))
+		{
+			Debug.Log("Quitting");
+			Application.Quit();
+		}
+	}
+
     public void AddScene(string scene)
     {
         StartCoroutine(AddSceneCo(scene));
