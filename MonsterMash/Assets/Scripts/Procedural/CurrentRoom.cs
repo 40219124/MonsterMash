@@ -33,7 +33,7 @@ public class CurrentRoom : MonoBehaviour
     public ETileContentType[,] TileContent;
 
     private EnemySpawner EnemySpawn;
-    private Vector3 BossSpawnLocation = new Vector3(5.0f, 5.0f, 0.0f);
+    private Vector3Int BossSpawnLocation = new Vector3Int(5, 4, 0);
 
     private List<Vector2Int> DoorLocs = new List<Vector2Int>();
 
@@ -77,10 +77,6 @@ public class CurrentRoom : MonoBehaviour
         }
         p.transform.position = playerPos;
         p.MoveTarget = targetPos;
-
-        if (ProceduralDungeon.Instance.IsLastRoom(ThisRoom))
-        {
-        }
 
         if (ThisRoom.RoomState != ERoomState.Completed &&
         !ThisRoom.IsStartingRoom)
@@ -207,6 +203,10 @@ public class CurrentRoom : MonoBehaviour
                 default:
                     break;
             }
+            TileContent[BossSpawnLocation.x - 1, BossSpawnLocation.y + 1] = ETileContentType.Enemy;
+            TileContent[BossSpawnLocation.x - 1, BossSpawnLocation.y] = ETileContentType.Enemy;
+            TileContent[BossSpawnLocation.x, BossSpawnLocation.y + 1] = ETileContentType.Enemy;
+            TileContent[BossSpawnLocation.x, BossSpawnLocation.y] = ETileContentType.Enemy;
         }
     }
 
