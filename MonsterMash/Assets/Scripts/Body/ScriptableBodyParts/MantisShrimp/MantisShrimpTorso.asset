@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BodyPartType: 3
   MonsterType: 4
-  HealthAvg: 40
+  HealthAvg: 60
   HealthVariation: 5
   ArmourAvg: 4
   ArmourVariation: 1

@@ -203,10 +203,20 @@ public class CurrentRoom : MonoBehaviour
                 default:
                     break;
             }
-            TileContent[BossSpawnLocation.x - 1, BossSpawnLocation.y + 1] = ETileContentType.Enemy;
-            TileContent[BossSpawnLocation.x - 1, BossSpawnLocation.y] = ETileContentType.Enemy;
-            TileContent[BossSpawnLocation.x, BossSpawnLocation.y + 1] = ETileContentType.Enemy;
-            TileContent[BossSpawnLocation.x, BossSpawnLocation.y] = ETileContentType.Enemy;
+            /*if (ThisRoom.RoomState == ERoomState.Completed)
+            {
+                TileContent[BossSpawnLocation.x - 1, BossSpawnLocation.y + 1] = ETileContentType.Clear;
+                TileContent[BossSpawnLocation.x - 1, BossSpawnLocation.y] = ETileContentType.Clear;
+                TileContent[BossSpawnLocation.x, BossSpawnLocation.y + 1] = ETileContentType.Clear;
+                TileContent[BossSpawnLocation.x, BossSpawnLocation.y - 1] = ETileContentType.Clear;
+            }
+            else
+            {
+                TileContent[BossSpawnLocation.x - 1, BossSpawnLocation.y + 1] = ETileContentType.Enemy;
+                TileContent[BossSpawnLocation.x - 1, BossSpawnLocation.y] = ETileContentType.Enemy;
+                TileContent[BossSpawnLocation.x, BossSpawnLocation.y + 1] = ETileContentType.Enemy;
+                TileContent[BossSpawnLocation.x, BossSpawnLocation.y - 1] = ETileContentType.Enemy;
+            }*/
         }
     }
 
