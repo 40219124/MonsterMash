@@ -31,12 +31,12 @@ public class FlowManager : MonoBehaviour
 
 
     // transition to overworld from unknown scene
-    public void TransToOverworld(string sceneFrom = "")
+    public void TransToOverworld(string sceneFrom = "", bool isNewDungeon=false)
     {
-        StartCoroutine(TransToOverworldCo(sceneFrom));
+        StartCoroutine(TransToOverworldCo(sceneFrom, isNewDungeon));
     }
 
-    private IEnumerator TransToOverworldCo(string sceneFrom)
+    private IEnumerator TransToOverworldCo(string sceneFrom, bool isNewDungeon)
     {
 		if (!sceneFrom.Equals(""))
 		{
@@ -44,7 +44,7 @@ public class FlowManager : MonoBehaviour
 		}
 
 		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
-		FindObjectOfType<CurrentRoom>().Setup(sceneFrom == Settings.SceneOverworld);
+		FindObjectOfType<CurrentRoom>().Setup(sceneFrom == Settings.SceneOverworld && !isNewDungeon);
     }
 
     public void TransToGameOver(string sceneFrom, bool wonTheGame)

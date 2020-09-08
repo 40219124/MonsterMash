@@ -48,7 +48,7 @@ public class Player : OverworldAgent
 				{
 					ProceduralDungeon.Instance.MoveRoom(diffInt, MoveTarget);
 
-					FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneOverworld);
+					FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneOverworld, isNewDungeon:true);
 				}
 			}
         }
