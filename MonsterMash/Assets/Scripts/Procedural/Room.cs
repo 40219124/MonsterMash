@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class Room
@@ -45,9 +46,11 @@ public class Room
 
     public int RoomId;
     public eDoorPlaces DoorPlaces = eDoorPlaces.Left;
-    public bool IsBossRoom;//this isn't used yet
+    public bool IsBossRoom;
     public eArea Area = eArea.Outdoors;
     public eTiles[] Tiles = new eTiles[90];
+	public Vector2 PlayerSpawn;
+	public Vector2Int HealingSpawn;
 
 
     public Room()

@@ -385,10 +385,29 @@ public class RoomEditor : EditorWindow
                 bool top = EditorGUILayout.Toggle("Top", room.DoorPlaces.HasFlag(Room.eDoorPlaces.Top));
                 bool botttom = EditorGUILayout.Toggle("Bottom", room.DoorPlaces.HasFlag(Room.eDoorPlaces.Bottom));
                 GUILayout.EndHorizontal();
+
                 GUILayout.BeginHorizontal();
                 bool left = EditorGUILayout.Toggle("Left", room.DoorPlaces.HasFlag(Room.eDoorPlaces.Left));
                 bool right = EditorGUILayout.Toggle("Right", room.DoorPlaces.HasFlag(Room.eDoorPlaces.Right));
                 GUILayout.EndHorizontal();
+
+				GUILayout.BeginHorizontal();
+				GUILayout.BeginVertical();
+				room.PlayerSpawn = EditorGUILayout.Vector2Field("Player Spawn", room.PlayerSpawn);
+				if (!CheckSpawnValid(room.PlayerSpawn))
+				{
+					EditorGUILayout.HelpBox("Player Spawn not set", MessageType.Error);
+				}
+				GUILayout.EndVertical();
+
+				GUILayout.BeginVertical();
+				room.HealingSpawn = Vector2ToInt(EditorGUILayout.Vector2Field("Healing Spawn", room.HealingSpawn));
+				if (!CheckSpawnValid(room.HealingSpawn))
+				{
+					EditorGUILayout.HelpBox("Healing Spawn not set", MessageType.Error);
+				}
+				GUILayout.EndVertical();
+				GUILayout.EndHorizontal();
 
                 SetRoomDoors(ref room, top, botttom, left, right);
             }
@@ -422,6 +441,17 @@ public class RoomEditor : EditorWindow
         }
         GUILayout.Space(20);
     }
+	
+	bool CheckSpawnValid(Vector2 spawnPos)
+	{
+		return spawnPos.x > 0 && spawnPos.x < Room.GameWidth-1 &&
+				spawnPos.y > 0 && spawnPos.y < Room.GameHeight-1;
+	}
+
+	Vector2Int Vector2ToInt(Vector2 vec)
+	{
+		return new Vector2Int(Mathf.RoundToInt(vec.x), Mathf.RoundToInt(vec.y));
+	}
 
     static void SetRoomDoors(ref Room room, bool top, bool bottom, bool left, bool right)
     {

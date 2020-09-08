@@ -63,7 +63,7 @@ public class CurrentRoom : MonoBehaviour
         Player p = FindObjectOfType<Player>();
         p.Profile = OverworldMemory.GetCombatProfile(true);
 
-        var playerPos = new Vector3(5, 4, 0);
+        var playerPos = ThisRoom.RoomData.PlayerSpawn;
         var targetPos = playerPos;
         if (loadedFromAnotherRoom)
         {
@@ -96,6 +96,7 @@ public class CurrentRoom : MonoBehaviour
     {
         ThisRoom = room;
         AssignTiles();
+		TryAddCollectableItems();
     }
 
     private void AssignTiles()
@@ -182,7 +183,6 @@ public class CurrentRoom : MonoBehaviour
             BaseLayer.SetTile((Vector3Int)pos, (ThisRoom.RoomData.Area == Room.eArea.Outdoors ? TileTable.OutdoorBase : TileTable.IndoorBase));
 
             PlaceRandomDecoration(type, pos, tile);
-            TryAddCollectableItems(type, pos, tile);
 
             index++;
         }
@@ -220,10 +220,9 @@ public class CurrentRoom : MonoBehaviour
         }
     }
 
-    void TryAddCollectableItems(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
+    void TryAddCollectableItems()
     {
         if (ThisRoom.CollectableItems.Count > 0 ||
-            tileType != Room.eTiles.Floor ||
             ThisRoom.IsStartingRoom)
         {
             return;
@@ -231,7 +230,7 @@ public class CurrentRoom : MonoBehaviour
 
         if (UnityEngine.Random.Range(0f, 100f) <= Settings.ChanceOfHealingPotion)
         {
-            var healingPotion = new HealingPotion(pos);
+            var healingPotion = new HealingPotion(ThisRoom.RoomData.HealingSpawn);
 
             ThisRoom.CollectableItems.Add(healingPotion);
         }
