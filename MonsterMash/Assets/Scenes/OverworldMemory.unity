@@ -192,11 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0586c96bcf9eac14da693df88a59ed12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomDataJson: {fileID: 4900000, guid: 5e306d08e50685444afc9cf70235d0e7, type: 3}
-  CurrentAreaType: 0
-  CurrentRoom: {x: 0, y: 0}
-  EnterPos: {x: 0, y: 0, z: 0}
-  EnterMoveTargetPos: {x: 0, y: 0, z: 0}
+  StartingRoom: {x: 0, y: 0}
   AllRoomsData:
     LatestRoomID: 0
     AllRooms: []

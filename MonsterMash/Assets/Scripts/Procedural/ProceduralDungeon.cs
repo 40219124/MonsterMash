@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 
 public class ProceduralDungeon : MonoBehaviour
 {
-	[SerializeField] TextAsset RoomDataJson;
 	public static ProceduralDungeon Instance;
 
 	public int NumberOfDungeonsMade = 0;
@@ -23,8 +22,14 @@ public class ProceduralDungeon : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			GenerateMap(Room.eArea.Outdoors);
+			StartCoroutine(Setup());
 		}
+	}
+
+	IEnumerator Setup()
+	{
+		yield return StartCoroutine(LoadAllRoomData());
+		GenerateMap(Room.eArea.Outdoors);
 	}
 
 	public MapRoom GetCurrentRoom()
@@ -93,10 +98,28 @@ public class ProceduralDungeon : MonoBehaviour
 		}
 	}
 	
+	IEnumerator LoadAllRoomData()
+	{
+		string roomDataJson = "";
+
+		var filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "RoomData.json");
+        if (filePath.Contains("://")) //if on web
+        {
+            UnityWebRequest uwr = new UnityWebRequest(filePath);
+            yield return uwr;
+            roomDataJson = uwr.downloadHandler.text;
+        }
+        else
+		{
+            roomDataJson = System.IO.File.ReadAllText(filePath);
+		}
+
+		AllRoomsData = JsonUtility.FromJson<AllRoomData>(roomDataJson);
+	}
+
 	public void GenerateMap(Room.eArea area)
 	{
 		DungeonGotBossRoom = false;
-		AllRoomsData = JsonUtility.FromJson<AllRoomData>(RoomDataJson.text);
 		CurrentAreaType = area;
 		CurrentRoom = new Vector2Int(Random.Range(0, Settings.MapSize), Random.Range(0, Settings.MapSize));
 		var roughMap = MakeRoughMap(CurrentRoom);
