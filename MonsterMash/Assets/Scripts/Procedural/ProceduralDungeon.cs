@@ -38,7 +38,13 @@ public class ProceduralDungeon : MonoBehaviour
 		MMLogger.Log($"Moved To room {CurrentRoom}");
 
 		var xPos = (Room.GameWidth-1)-playerPos.x;
-		var yPos = (Room.GameHeight-1) - playerPos.y;
+
+		var yPos = playerPos.y;
+		if (playerPos.y == 0 ||
+			playerPos.y == Room.GameHeight-1)
+		{
+			yPos = (Room.GameHeight-1) - yPos;
+		}
 
 		EnterPos = new Vector3(xPos, yPos);
 		EnterMoveTargetPos = EnterPos + (Vector3Int)roomDirection;
