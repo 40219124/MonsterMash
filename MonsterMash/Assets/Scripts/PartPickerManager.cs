@@ -59,7 +59,7 @@ public class PartPickerManager : AdditiveSceneManager
     public void LeavePicker()
     {
         OverworldMemory.ClearLoot();
-        FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBodyPartPicker);
+        FlowManager.Instance.TransToOverworld(Settings.SceneBodyPartPicker);
     }
 
     // Update is called once per frame

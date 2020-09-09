@@ -11,7 +11,6 @@ public class HealingPotion : CollectableItem
 
 	public override void PickUp()
 	{
-		//todo heal the player
 		var profile = OverworldMemory.GetCombatProfile(true);
 		if(profile == null)
 		{
