@@ -52,6 +52,13 @@ public class BattleController : MonoBehaviour
 		CurrentAgent = UnityEngine.Random.Range(0, 2) == 1? Player : Enemy;
 	}
 
+	public bool HasValidAttcker(Agent agent)
+	{
+		return agent.Body.LeftArmPart.IsValidAttacker() ||
+				agent.Body.RightArmPart.IsValidAttacker() ||
+				agent.Body.LegsPart.IsValidAttacker();
+	}
+
 	void Update()
 	{
 		TimeSinceActionStarted += Time.deltaTime;
@@ -100,9 +107,7 @@ public class BattleController : MonoBehaviour
 
 		if (TimeLeftOfAction <= 0 && CurrentAction == null)
 		{
-			if (!CurrentAgent.Body.LeftArmPart.IsValidAttacker() &&
-				!CurrentAgent.Body.RightArmPart.IsValidAttacker() &&
-				!CurrentAgent.Body.LegsPart.IsValidAttacker())
+			if (!HasValidAttcker(CurrentAgent))
 			{
 				deltaTime *= Settings.NoActionAvailableSpeedMultiplier;
 			}

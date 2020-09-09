@@ -45,19 +45,21 @@ public class BattleUiController: MonoBehaviour
 
 		var opponent = currentAgent.Opponent;
 
-		bool isPlayer = Settings.ShowStatsForAi || currentAgent.ControlType == Agent.eControlType.Player;
+		bool isPlayer = currentAgent.ControlType == Agent.eControlType.Player;
 
 		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Pressed)
 		{
 			ForceShowComplexStats = !ForceShowComplexStats;
 		}
 
+		bool hasVaildAction = battleController.HasValidAttcker(currentAgent);
+
 		bool shouldPreShow = isPlayer && battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime;
 
 		bool shouldPostShow = battleController.TimeSinceActionStarted <= Settings.PostPickHangTime &&
 			battleController.CurrentAction != null;
 
-		bool showUi = ForceShowComplexStats || ((shouldPreShow || shouldPostShow) && isPlayer);
+		bool showUi = Settings.ShowStatsForAi || ForceShowComplexStats || ((shouldPreShow || shouldPostShow) && isPlayer);
 
 		var attackerLocked = false;
 		var targetLocked = false;
@@ -89,7 +91,7 @@ public class BattleUiController: MonoBehaviour
 			}
 		}
 
-		var showDpad = currentAgent.ControlType == Agent.eControlType.Player &&
+		var showDpad = hasVaildAction && currentAgent.ControlType == Agent.eControlType.Player &&
 						(!attackerLocked || !targetLocked) && shouldPreShow;
 						
 		DpadAnimatorContoller.SetShow(showDpad);
