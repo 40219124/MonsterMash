@@ -6,6 +6,10 @@ public class GameOverManager : AdditiveSceneManager
 {	
 
 	[SerializeField] Animator GameOverAnimator;
+
+	[SerializeField] AudioClip LostAudioClip;
+	[SerializeField] AudioClip WonAudioClip;
+
     float timeElapsed = 0.0f;
     bool triggered = false;
 
@@ -13,6 +17,9 @@ public class GameOverManager : AdditiveSceneManager
 	{
 		MMLogger.Log($"GameOver wonTheGame: {wonTheGame}");
 		GameOverAnimator.SetBool("Won", wonTheGame);
+
+		var audioClip = wonTheGame ? WonAudioClip : LostAudioClip;
+		AudioSource.PlayClipAtPoint(audioClip, transform.position);
 	}
 
     void Update()

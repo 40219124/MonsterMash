@@ -702,6 +702,8 @@ MonoBehaviour:
   localRenderTexture: {fileID: 1049742135}
   RequiredScenes: []
   GameOverAnimator: {fileID: 2128101330}
+  LostAudioClip: {fileID: 8300000, guid: 3401a5995febbae4f907f4b0b87df0a1, type: 3}
+  WonAudioClip: {fileID: 8300000, guid: 15d17e31706b2544e9d619630145e4c6, type: 3}
 --- !u!114 &1317643412
 MonoBehaviour:
   m_ObjectHideFlags: 0
