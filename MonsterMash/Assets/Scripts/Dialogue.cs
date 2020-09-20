@@ -23,6 +23,8 @@ public class Dialogue : MonoBehaviour
 		TargetString = text;
 		TimeAccumulator = 0;
 		Text.text = "";
+		Background.flipX = postion.x < 0;
+		Background.flipY = postion.y < 0;
 	}
 
 	void Update()
