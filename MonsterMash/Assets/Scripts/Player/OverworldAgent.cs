@@ -5,6 +5,9 @@ using UnityEngine;
 public class OverworldAgent : MonoBehaviour
 {
     public enum EAxisDirection { none = -1, horizontal, vertical };
+
+	[SerializeField] List<AudioClip> WalkSounds;
+
     protected float _horizontalValue = 0.0f;
     public float HorizontalValue
     {
@@ -242,6 +245,12 @@ public class OverworldAgent : MonoBehaviour
 
         Anim.SetInteger("Direction", (int)CurrentMoveDir);
         Anim.SetTrigger("Animate");
+		
+		if (WalkSounds.Count > 0)
+		{
+			var walkClip = WalkSounds[Random.Range(0, WalkSounds.Count)];
+			AudioSource.PlayClipAtPoint(walkClip, transform.position);
+		}
 
         while (timeElapsed < AnimationTime)
         {
