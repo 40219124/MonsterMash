@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 2086689261610303755}
+  TalkClip: {fileID: 8300000, guid: 27d8c63a583edc34bb8a50d7ccfceaab, type: 3}
   Background: {fileID: 8638836120774009173}
 --- !u!1 &4571057802321585523
 GameObject:
