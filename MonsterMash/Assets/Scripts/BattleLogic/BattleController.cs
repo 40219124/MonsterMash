@@ -52,6 +52,13 @@ public class BattleController : MonoBehaviour
 		CurrentAgent = UnityEngine.Random.Range(0, 2) == 1? Player : Enemy;
 	}
 
+	public bool HasValidAttcker(Agent agent)
+	{
+		return agent.Body.LeftArmPart.IsValidAttacker() ||
+				agent.Body.RightArmPart.IsValidAttacker() ||
+				agent.Body.LegsPart.IsValidAttacker();
+	}
+
 	void Update()
 	{
 		TimeSinceActionStarted += Time.deltaTime;
@@ -100,9 +107,7 @@ public class BattleController : MonoBehaviour
 
 		if (TimeLeftOfAction <= 0 && CurrentAction == null)
 		{
-			if (!CurrentAgent.Body.LeftArmPart.IsValidAttacker() &&
-				!CurrentAgent.Body.RightArmPart.IsValidAttacker() &&
-				!CurrentAgent.Body.LegsPart.IsValidAttacker())
+			if (!HasValidAttcker(CurrentAgent))
 			{
 				deltaTime *= Settings.NoActionAvailableSpeedMultiplier;
 			}
@@ -114,7 +119,7 @@ public class BattleController : MonoBehaviour
 		{
 			BattleState = eBattleState.EnemyWon;
 			MMLogger.Log($"game over {BattleState}");
-			FindObjectOfType<FlowManager>().TransToGameOver(Settings.SceneBattle, false); // ~~~ Avoid find later mayber 
+			FlowManager.Instance.TransToGameOver(Settings.SceneBattle, false);
 			return;
 		}
 
@@ -123,16 +128,16 @@ public class BattleController : MonoBehaviour
 			BattleState = eBattleState.PlayerWon;
 			MMLogger.Log($"game over {BattleState}");
 			// Remove enemy from memory 
-			var dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < 0.75f;// ~~~ drop chance
+			var dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < Settings.ChanceOfALimbDrop;
 			OverworldMemory.OpponentBeaten(dropLoot);
 
 			if(dropLoot || Settings.AlwaysGoToPickerPostBattle)
 			{
-				FindObjectOfType<FlowManager>().TransToPicker(Settings.SceneBattle); // ~~~ Avoid find later mayber
+				FlowManager.Instance.TransToPicker(Settings.SceneBattle);
 			}
 			else
 			{
-				FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneBattle);
+				FlowManager.Instance.TransToOverworld(Settings.SceneBattle);
 			}
 			return;
 		}

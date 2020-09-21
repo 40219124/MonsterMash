@@ -5,6 +5,10 @@ using System;
 
 public class TimerUi : MonoBehaviour
 {
+
+	[SerializeField] AudioClip TurnStartAudioClip;
+	[SerializeField] AudioClip TurnEndAudioClip;
+
 	[SerializeField] Animator TimerAnimator;
 	[SerializeField] NumberRender TimeLeftNumber;
 
@@ -18,6 +22,7 @@ public class TimerUi : MonoBehaviour
 	[SerializeField] float EndPos;
 
 	float LastVfxProgress = -1;
+	BattleController.eBattleState LastBattleState;
 
 	void Awake()
 	{
@@ -74,7 +79,6 @@ public class TimerUi : MonoBehaviour
 
 		//TimerAnimator.SetBool("BarMoving", vfxProgress != LastVfxProgress);
 		TimerAnimator.SetBool("BarMoving", false);
-		LastVfxProgress = vfxProgress;
 
 
 		if (BubbleVfx != null)
@@ -82,5 +86,21 @@ public class TimerUi : MonoBehaviour
 			vfxProgress = StartPos + vfxProgress*(EndPos-StartPos);
 			BubbleVfx.position = new Vector3(vfxProgress, BubbleVfx.position.y, BubbleVfx.position.z);
 		}
+
+		if (LastBattleState == BattleController.eBattleState.TurnTransition && 
+			(battleController.BattleState == BattleController.eBattleState.PlayerTurn ||
+			battleController.BattleState == BattleController.eBattleState.EnemyTurn))
+		{
+			AudioSource.PlayClipAtPoint(TurnStartAudioClip, transform.position);
+		}
+		else if ((LastBattleState == BattleController.eBattleState.PlayerTurn ||
+				LastBattleState == BattleController.eBattleState.EnemyTurn) && 
+				battleController.BattleState == BattleController.eBattleState.TurnTransition)
+		{
+			AudioSource.PlayClipAtPoint(TurnEndAudioClip, transform.position);
+		}
+
+		LastBattleState = battleController.BattleState;
+		LastVfxProgress = vfxProgress;
 	}
 }

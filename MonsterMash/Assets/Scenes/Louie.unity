@@ -486,6 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3156b37e200334ebe3a63d8139110a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectedAudioClip: {fileID: 8300000, guid: 0a8c86d66bc6c9f4fa3235d73cfc02ac, type: 3}
   OutSideBackground: {fileID: 960039108}
   InSideBackground: {fileID: 1314303267}
   DpadAnimatorContoller: {fileID: 1877820472}
@@ -1427,6 +1428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6787d9d8d303c1c4b8d9aa746b6f1f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TurnStartAudioClip: {fileID: 8300000, guid: 901d829872f6e4b4f97fa374a0bb8e66, type: 3}
+  TurnEndAudioClip: {fileID: 8300000, guid: 383211a4d8b812345a05b3d0c66bfbd9, type: 3}
   TimerAnimator: {fileID: 1242440739}
   TimeLeftNumber: {fileID: 316906358}
   ActionTimeSlider: {fileID: 1866259730}

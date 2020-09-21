@@ -25,6 +25,7 @@ public class Settings
 	public const int MaxRooms = 8;
 
 	public const float ChanceOfHealingPotion = 33f;
+	public const float ChanceOfALimbDrop = 33f;
 
 	public const string SceneMain = "MainScene";
 	public const string SceneOverworld = "Overworld";

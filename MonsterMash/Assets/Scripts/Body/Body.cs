@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Body : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class Body : MonoBehaviour
 		Leg,
 		Torso,
 	}
+	
+	[Space]
+	[Header("Audio")]
+	[SerializeField] List<AudioClip> HitAudioClips;
 
 	[Space]
 	[Header("UI")]
@@ -69,6 +74,12 @@ public class Body : MonoBehaviour
 
 		var targetPart = GetBodyPart(targetBodyPartType);
 		targetPart.ApplyAttack(damage);
+
+		if (HitAudioClips.Count > 0)
+		{
+			var hitClip = HitAudioClips[Random.Range(0, HitAudioClips.Count)];
+			AudioSource.PlayClipAtPoint(hitClip, transform.position);
+		}
 	}
 
 	public Limb GetLimb(eBodyPartType targetBodyPartType)

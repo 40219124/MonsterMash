@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player : OverworldAgent
 {
-    [SerializeField]
-    MonsterGenerator MGen;
+	[SerializeField] AudioClip UseDoorAudioClip;
+    [SerializeField] MonsterGenerator MGen;
+
     protected override void Start()
     {
         // ~~~ do better later
@@ -17,7 +18,6 @@ public class Player : OverworldAgent
         base.Start();
     }
 
-    // Update is called once per frame
     void Update()
     {
         HorizontalValue = Input.GetAxisRaw("Horizontal");
@@ -47,7 +47,7 @@ public class Player : OverworldAgent
 				if(!IsMoving())
 				{
 					ProceduralDungeon.Instance.MoveRoom(diffInt, MoveTarget);
-
+					AudioSource.PlayClipAtPoint(UseDoorAudioClip, transform.position);
 					FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneOverworld, isNewDungeon:true);
 				}
 			}

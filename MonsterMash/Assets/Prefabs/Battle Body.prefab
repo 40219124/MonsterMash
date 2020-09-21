@@ -116,6 +116,17 @@ MonoBehaviour:
   LeftArmPart: {fileID: 3883670800153346734}
   RightArmPart: {fileID: 3883670800289194158}
   LegsPart: {fileID: 3883670799996375839}
+  HitAudioClips:
+  - {fileID: 8300000, guid: 5c84e09db0775124abc69020f61a7a7f, type: 3}
+  - {fileID: 8300000, guid: 42191ddf41cbdf541a2a295c0b0a61d1, type: 3}
+  - {fileID: 8300000, guid: 1d369d8155cd95d4bb82433c900a76ac, type: 3}
+  - {fileID: 8300000, guid: c048ee6388fa8b04cb39bf37eb54684b, type: 3}
+  - {fileID: 8300000, guid: 85f38eb58f75d4043b2ee5dd5a627c0c, type: 3}
+  - {fileID: 8300000, guid: 38cb6a15572e4cd4ba133420a8f61ba5, type: 3}
+  - {fileID: 8300000, guid: d9999c0547e70d14595b88b9505feded, type: 3}
+  - {fileID: 8300000, guid: d035239651ac07a4496d4296ba6ecf6a, type: 3}
+  - {fileID: 8300000, guid: aa5b90f56f9b04a4397faef443d4b733, type: 3}
+  - {fileID: 8300000, guid: efff65030bc5a6247add6b0b302fd94d, type: 3}
   BodyAnimator: {fileID: 8146293413818025135}
   BodyPartImageLookup: {fileID: 11400000, guid: fbbda82cfb39b6041b6c369878752a10, type: 2}
   DPadGameTransform: {fileID: 6859213488809015673}

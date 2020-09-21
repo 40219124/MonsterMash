@@ -41,7 +41,7 @@ public class OverworldManager : AdditiveSceneManager
     {
         yield return WaitForActors();
         // ABSOLUTE LAST THING
-        FindObjectOfType<FlowManager>().TransOverworldToBattle();
+        FlowManager.Instance.TransOverworldToBattle();
     }
 
     public void DoTransitionToPicker()
@@ -57,7 +57,7 @@ public class OverworldManager : AdditiveSceneManager
     {
         yield return WaitForActors();
         // ABSOLUTE LAST THING
-        FindObjectOfType<FlowManager>().TransToPicker(Settings.SceneOverworld);
+        FlowManager.Instance.TransToPicker(Settings.SceneOverworld);
     }
 
 

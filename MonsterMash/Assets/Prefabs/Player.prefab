@@ -46,10 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fb49f75bbf3f9428ed329f0845bb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveTarget: {x: 0, y: 0, z: 0}
+  WalkSounds:
+  - {fileID: 8300000, guid: 5296e8e5147336046834597f2a6f0761, type: 3}
+  - {fileID: 8300000, guid: 2dede3e6c1a5fab4b8d5d86021390592, type: 3}
   AnimationTime: 0.5
   PixelsPerStep: 16
   Profile:
+    HeadType: 0
     Torso:
       BodyPartType: 0
       MonsterType: 0
@@ -82,6 +85,7 @@ MonoBehaviour:
       Armour: 0
       Damage: 0
       AttackTimer: 0
+  UseDoorAudioClip: {fileID: 8300000, guid: a4594cc80b3b6cc46bf57670e2fa2481, type: 3}
   MGen: {fileID: 11400000, guid: 93666616f9b606a4488354f8293c1af1, type: 2}
 --- !u!50 &4216496406460835757
 Rigidbody2D:

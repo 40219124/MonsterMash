@@ -217,7 +217,6 @@ public class Agent : MonoBehaviour
 		var bodyPartPrioList = new List<(BodyPart, Body.eBodyPartType)>(4);
 		bodyPartPrioList.Add((Opponent.Body.TorsoPart, Body.eBodyPartType.Torso));
 
-		//todo sort this by health + dps
 		bodyPartPrioList.Add((Opponent.Body.LeftArmPart, Body.eBodyPartType.LeftArm));
 		bodyPartPrioList.Add((Opponent.Body.RightArmPart, Body.eBodyPartType.RightArm));
 		bodyPartPrioList.Add((Opponent.Body.LegsPart, Body.eBodyPartType.Leg));

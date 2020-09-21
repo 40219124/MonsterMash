@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollectableObject : MonoBehaviour
 {
+	[SerializeField] AudioClip CollectItemAudioClip;
 	CollectableItem ItemData;
 	bool roomHasEnemys;
 
@@ -24,6 +25,7 @@ public class CollectableObject : MonoBehaviour
 		if(collected)
 		{
 			ItemData.PickUp();
+			AudioSource.PlayClipAtPoint(CollectItemAudioClip, transform.position);
 			gameObject.SetActive(false);
 		}
 

@@ -160,6 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonType: 4
   Animator: {fileID: 4830093140785047764}
+  HighLightAudioClip: {fileID: 8300000, guid: 61facd6c9ebcadf448f2bc1212081480, type: 3}
+  PressAudioClip: {fileID: 8300000, guid: 114ec2023e7cbe84ea4ab1f4d7f1b5e9, type: 3}
 --- !u!95 &4830093140785047764
 Animator:
   serializedVersion: 3
