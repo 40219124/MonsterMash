@@ -48,7 +48,7 @@ public class Player : OverworldAgent
 				{
 					ProceduralDungeon.Instance.MoveRoom(diffInt, MoveTarget);
 					AudioSource.PlayClipAtPoint(UseDoorAudioClip, transform.position);
-					FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneOverworld, isNewDungeon:true);
+					FindObjectOfType<FlowManager>().TransToOverworld(Settings.SceneOverworld, isNewDungeon:false);
 				}
 			}
         }
