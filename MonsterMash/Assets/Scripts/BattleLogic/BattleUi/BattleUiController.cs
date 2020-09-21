@@ -4,6 +4,8 @@ using System;
 
 public class BattleUiController: MonoBehaviour
 {
+	[SerializeField] AudioClip SelectedAudioClip;
+
 	[SerializeField] GameObject OutSideBackground;
 	[SerializeField] GameObject InSideBackground;
 
@@ -13,6 +15,9 @@ public class BattleUiController: MonoBehaviour
 	[SerializeField] Transform TurnArrow;
 
 	bool ForceShowComplexStats;
+
+	Body.eBodyPartType LastSelectedAttacker;
+	Body.eBodyPartType LastSelectedTarget;
 
 	void Awake()
 	{
@@ -108,5 +113,14 @@ public class BattleUiController: MonoBehaviour
 
 		currentAgent.Body.ShowStats(showUi, selectedAttacker, attackerLocked, isOurTurn:true, ForceShowComplexStats);
 		opponent.Body.ShowStats(showUi, selectedTarget, targetLocked, isOurTurn:false, ForceShowComplexStats);
+
+		if (currentAgent.ControlType == Agent.eControlType.Player &&
+			((selectedAttacker != Body.eBodyPartType.None && selectedAttacker != LastSelectedAttacker) ||
+			(selectedTarget != Body.eBodyPartType.None  && selectedTarget != LastSelectedTarget)))
+		{
+			AudioSource.PlayClipAtPoint(SelectedAudioClip, transform.position);
+		}
+		LastSelectedAttacker = selectedAttacker;
+		LastSelectedTarget = selectedTarget;
 	}
 }

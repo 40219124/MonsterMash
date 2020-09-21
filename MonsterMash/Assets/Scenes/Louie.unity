@@ -486,6 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3156b37e200334ebe3a63d8139110a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectedAudioClip: {fileID: 8300000, guid: 0a8c86d66bc6c9f4fa3235d73cfc02ac, type: 3}
   OutSideBackground: {fileID: 960039108}
   InSideBackground: {fileID: 1314303267}
   DpadAnimatorContoller: {fileID: 1877820472}
