@@ -85,6 +85,7 @@ MonoBehaviour:
       Armour: 0
       Damage: 0
       AttackTimer: 0
+  UseDoorAudioClip: {fileID: 8300000, guid: a4594cc80b3b6cc46bf57670e2fa2481, type: 3}
   MGen: {fileID: 11400000, guid: 93666616f9b606a4488354f8293c1af1, type: 2}
 --- !u!50 &4216496406460835757
 Rigidbody2D:
