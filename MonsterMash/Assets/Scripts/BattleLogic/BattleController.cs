@@ -92,6 +92,30 @@ public class BattleController : MonoBehaviour
 		if (BattleState != eBattleState.PlayerTurn &&
 			BattleState != eBattleState.EnemyTurn)
 		{
+			if (SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
+			{
+				MMLogger.Log($"pressed A now leaving game over to go to next screen");
+				
+				if (BattleState == eBattleState.PlayerWon)
+				{
+					// Remove enemy from memory 
+					var dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < Settings.ChanceOfALimbDrop;
+					OverworldMemory.OpponentBeaten(dropLoot);
+					if(dropLoot || Settings.AlwaysGoToPickerPostBattle)
+					{
+						FlowManager.Instance.TransToPicker(Settings.SceneBattle);
+					}
+					else
+					{
+						FlowManager.Instance.TransToOverworld(Settings.SceneBattle);
+					}
+				}
+				else if (BattleState == eBattleState.EnemyWon)
+				{
+					FlowManager.Instance.TransToGameOver(Settings.SceneBattle, false);
+				}
+
+			}
 			return;
 		}
 
@@ -118,27 +142,14 @@ public class BattleController : MonoBehaviour
 		if (!Player.Body.IsAlive())
 		{
 			BattleState = eBattleState.EnemyWon;
-			MMLogger.Log($"game over {BattleState}");
-			FlowManager.Instance.TransToGameOver(Settings.SceneBattle, false);
+			MMLogger.Log($"game over {BattleState} now in game over state");
 			return;
 		}
 
 		if (!Enemy.Body.IsAlive())
 		{
 			BattleState = eBattleState.PlayerWon;
-			MMLogger.Log($"game over {BattleState}");
-			// Remove enemy from memory 
-			var dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < Settings.ChanceOfALimbDrop;
-			OverworldMemory.OpponentBeaten(dropLoot);
-
-			if(dropLoot || Settings.AlwaysGoToPickerPostBattle)
-			{
-				FlowManager.Instance.TransToPicker(Settings.SceneBattle);
-			}
-			else
-			{
-				FlowManager.Instance.TransToOverworld(Settings.SceneBattle);
-			}
+			MMLogger.Log($"game over {BattleState} now in game over state");
 			return;
 		}
 
