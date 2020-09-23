@@ -34,10 +34,14 @@ public class BattleUiController: MonoBehaviour
 	{
 		var battleController = BattleController.Instance;
 		
-		ButtonAPrompt.SetActive(battleController.BattleState == BattleController.eBattleState.BattleIntro);
+		bool isGameOver = battleController.BattleState == BattleController.eBattleState.PlayerWon ||
+						  battleController.BattleState == BattleController.eBattleState.EnemyWon;
+
+		ButtonAPrompt.SetActive(battleController.BattleState == BattleController.eBattleState.BattleIntro || isGameOver);
 
 		var currentAgent = battleController.CurrentAgent;
 
+		TurnArrow.gameObject.SetActive(!isGameOver);
 		TurnArrow.position = currentAgent.Body.Root.position;
 
 		if (battleController.BattleState == BattleController.eBattleState.BattleIntro)
