@@ -33,6 +33,19 @@ public class TimerUi : MonoBehaviour
 	{
 		var battleController = BattleController.Instance;
 
+		bool gameOver = battleController.BattleState == BattleController.eBattleState.EnemyWon ||
+						battleController.BattleState == BattleController.eBattleState.PlayerWon;
+
+		TimerAnimator.SetBool("GamePlaying", battleController.BattleState != BattleController.eBattleState.BattleIntro && !gameOver);
+
+		//TimerAnimator.SetBool("BarMoving", vfxProgress != LastVfxProgress);
+		TimerAnimator.SetBool("BarMoving", false);
+
+		if (gameOver)
+		{
+			return;
+		}
+
 		float maxTime = Settings.TurnTime;
 		float timeLeft = battleController.TurnTimeLeft;
 		float timeUsed = maxTime-timeLeft;
@@ -74,12 +87,6 @@ public class TimerUi : MonoBehaviour
 
 		TimeUsedSlider.localScale = new Vector3(timeUsed/maxTime, 1, 1);
 		ActionTimeSlider.localScale = new Vector3(actionTime/maxTime, 1, 1);
-
-		TimerAnimator.SetBool("GamePlaying", vfxProgress != LastVfxProgress);
-
-		//TimerAnimator.SetBool("BarMoving", vfxProgress != LastVfxProgress);
-		TimerAnimator.SetBool("BarMoving", false);
-
 
 		if (BubbleVfx != null)
 		{
