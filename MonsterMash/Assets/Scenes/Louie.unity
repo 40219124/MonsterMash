@@ -491,6 +491,7 @@ MonoBehaviour:
   InSideBackground: {fileID: 1314303267}
   DpadAnimatorContoller: {fileID: 1877820472}
   ButtonAPrompt: {fileID: 1669640077}
+  GameStateText: {fileID: 1766966710}
   TurnArrow: {fileID: 2109632131}
 --- !u!114 &400619756 stripped
 MonoBehaviour:
@@ -1723,6 +1724,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!102 &1766966710 stripped
+TextMesh:
+  m_CorrespondingSourceObject: {fileID: 1415458111, guid: 8c5e95d983ac98b4c8762359c3f60831, type: 3}
+  m_PrefabInstance: {fileID: 939629736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1866259729
 GameObject:
   m_ObjectHideFlags: 0
