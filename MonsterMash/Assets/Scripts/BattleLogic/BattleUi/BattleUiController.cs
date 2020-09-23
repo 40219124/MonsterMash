@@ -11,6 +11,7 @@ public class BattleUiController: MonoBehaviour
 
 	[SerializeField] DpadAnimator DpadAnimatorContoller;
 	[SerializeField] GameObject ButtonAPrompt;
+	[SerializeField] TextMesh GameStateText;
 
 	[SerializeField] Transform TurnArrow;
 
@@ -49,7 +50,16 @@ public class BattleUiController: MonoBehaviour
 			DpadAnimatorContoller.SetShow(false);
 			battleController.Player.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
 			battleController.Enemy.Body.ShowStats(true, Body.eBodyPartType.None, false, isOurTurn:false, true);
+			GameStateText.text = "READY?";
 			return;
+		}
+		else if (battleController.BattleState == BattleController.eBattleState.PlayerWon)
+		{
+			GameStateText.text = "YOU WON";
+		}
+		else if (battleController.BattleState == BattleController.eBattleState.EnemyWon)
+		{
+			GameStateText.text = "YOU LOST";
 		}
 
 		var opponent = currentAgent.Opponent;
