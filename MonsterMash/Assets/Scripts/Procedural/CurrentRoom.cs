@@ -58,6 +58,9 @@ public class CurrentRoom : MonoBehaviour
             mapRoom.RoomData = ProceduralDungeon.Instance.AllRoomsData.GetBossRoom(mapRoom.RoomData.Area);
             ProceduralDungeon.Instance.MarkRoomAsBoss();
         }
+
+		MMLogger.Log($"entering and setting up room {mapRoom.RoomData.RoomId}");
+		
         SetRoom(mapRoom);
 
         Player p = FindObjectOfType<Player>();
