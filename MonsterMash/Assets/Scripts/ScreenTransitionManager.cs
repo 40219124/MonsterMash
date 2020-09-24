@@ -8,6 +8,18 @@ public class ScreenTransitionManager : AdditiveSceneManager
 	[SerializeField] Transform RootTransform;
 
 	public static ScreenTransitionManager Instance;
+	
+	public static bool IsAnimating
+	{get
+		{
+			if (Instance == null)
+			{
+				return false;
+			}
+			var stateInfo = Instance.TransitionAnimator.GetCurrentAnimatorStateInfo(0);
+			return stateInfo.IsName("To White") || stateInfo.IsName("To Black");
+		}
+	}
 
 	bool ShowingBlack;
 
@@ -26,37 +38,22 @@ public class ScreenTransitionManager : AdditiveSceneManager
 	public static void SetShowBlack(bool showBlack, Vector2 pos)
 	{
 		Instance.TransitionAnimator.SetBool("ShowBlack", showBlack);
-		MMLogger.Log($"setting show black to: {showBlack} was {Instance.ShowingBlack}");
+		MMLogger.Log($"setting show black to: {showBlack} was {Instance.ShowingBlack} at pos: {pos}");
 		Instance.ShowingBlack = showBlack;
 
-		var rootPos = Vector3.zero;
-		if (pos != null)
-		{
-			rootPos = new Vector3(pos.x, pos.y);
-		}
+		Instance.RootTransform.position = new Vector3(pos.x, pos.y);
 
-		Instance.RootTransform.position = rootPos;
+		Instance.TransitionAnimator.speed = 2;
 	}
-
-	// void Update()
-	// {
-	// 	if (SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
-	// 	{
-	// 		SetShowBlack(!ShowingBlack);
-	// 	}
-
-	// }
 
 	public static IEnumerator WaitForSetBlack(bool showBlack, Vector2 pos)
 	{
 		SetShowBlack(showBlack, pos);
 
-		AnimatorStateInfo stateInfo;
 		do
 		{
 			yield return null;
-			stateInfo = Instance.TransitionAnimator.GetCurrentAnimatorStateInfo(0);
-		} while (stateInfo.IsName("To White") || stateInfo.IsName("To Black"));
+		} while (IsAnimating);
 
 		yield break;
 	}
