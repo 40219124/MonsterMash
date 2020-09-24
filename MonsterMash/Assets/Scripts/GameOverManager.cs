@@ -10,8 +10,8 @@ public class GameOverManager : AdditiveSceneManager
 	[SerializeField] AudioClip LostAudioClip;
 	[SerializeField] AudioClip WonAudioClip;
 
-    float timeElapsed = 0.0f;
-    bool triggered = false;
+	float timeElapsed = 0.0f;
+	bool triggered = false;
 
 	public void Setup(bool wonTheGame)
 	{
@@ -22,13 +22,13 @@ public class GameOverManager : AdditiveSceneManager
 		AudioSource.PlayClipAtPoint(audioClip, transform.position);
 	}
 
-    void Update()
-    {
-        timeElapsed += Time.deltaTime;
-        if(!triggered && timeElapsed > 1.0f && SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
-        {
-            FlowManager.Instance.TransToTitle(Settings.SceneGameOver);
-            triggered = true;
-        }
-    }
+	void Update()
+	{
+		timeElapsed += Time.deltaTime;
+		if(!triggered && timeElapsed > 1.0f && SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
+		{
+			FlowManager.Instance.TransToTitle(Settings.SceneGameOver);
+			triggered = true;
+		}
+	}
 }

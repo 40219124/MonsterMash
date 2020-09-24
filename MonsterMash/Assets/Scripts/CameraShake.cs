@@ -5,34 +5,34 @@ using System;
 //code from anthony
 public class CameraShake : MonoBehaviour
 {
-    public float Duration = 0.5f;
-    public float Speed = 1.0f;
-    public float Magnitude = 0.1f;
+	public float Duration = 0.5f;
+	public float Speed = 1.0f;
+	public float Magnitude = 0.1f;
 
-    public AnimationCurve Falloff;
+	public AnimationCurve Falloff;
 
-    float Elapsed;
-    float Intensity;
+	float Elapsed;
+	float Intensity;
 	Vector3 OriginalCamPos;
 
-    void Start()
-    {
-        Intensity = 0.0f;
-        Elapsed = 1000000;
+	void Start()
+	{
+		Intensity = 0.0f;
+		Elapsed = 1000000;
 		OriginalCamPos = transform.position;
-    }
+	}
 
-    public void PlayShake(float intensity)
-    {
-        Intensity = intensity;
-        Elapsed = 0;
-    }
+	public void PlayShake(float intensity)
+	{
+		Intensity = intensity;
+		Elapsed = 0;
+	}
 
-    void Update()
-    {
-        Elapsed += Time.deltaTime;
+	void Update()
+	{
+		Elapsed += Time.deltaTime;
 
-        float percentComplete = Elapsed / Duration;
+		float percentComplete = Elapsed / Duration;
 
 		float x = OriginalCamPos.x;
 		float y = OriginalCamPos.y;
@@ -53,5 +53,5 @@ public class CameraShake : MonoBehaviour
 		}
 
 		transform.position = new Vector3(x, y, OriginalCamPos.z);
-    }
+	}
 }

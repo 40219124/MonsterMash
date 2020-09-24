@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PartPickerManager : AdditiveSceneManager
 {
-    public void Setup()
-    {
-        PartPickerUiController picker = FindObjectOfType<PartPickerUiController>();
-        MonsterProfile monPro = OverworldMemory.GetLootProfile();
-        // For getting new parts
-        if (monPro != null)
-        {
-            List<BodyPartData> parts = new List<BodyPartData>();
+	public void Setup()
+	{
+		PartPickerUiController picker = FindObjectOfType<PartPickerUiController>();
+		MonsterProfile monPro = OverworldMemory.GetLootProfile();
+		// For getting new parts
+		if (monPro != null)
+		{
+			List<BodyPartData> parts = new List<BodyPartData>();
 
 
 			if(monPro.Torso != null &&
@@ -40,25 +40,25 @@ public class PartPickerManager : AdditiveSceneManager
 				parts.Add(toPickFrom[bodyPart]);
 			}
 
-            picker.Setup(OverworldMemory.GetCombatProfile(true), parts);
-        }
-        // for stat viewing
-        else
-        {
-            picker.Setup(OverworldMemory.GetCombatProfile(true), null);
-        }
-    }
+			picker.Setup(OverworldMemory.GetCombatProfile(true), parts);
+		}
+		// for stat viewing
+		else
+		{
+			picker.Setup(OverworldMemory.GetCombatProfile(true), null);
+		}
+	}
 
-    // when leaving clear the loot
-    public void LeavePicker()
-    {
-        OverworldMemory.ClearLoot();
-        FlowManager.Instance.TransToOverworld(Settings.SceneBodyPartPicker);
-    }
+	// when leaving clear the loot
+	public void LeavePicker()
+	{
+		OverworldMemory.ClearLoot();
+		FlowManager.Instance.TransToOverworld(Settings.SceneBodyPartPicker);
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 
-    }
+	}
 }

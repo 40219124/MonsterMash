@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MiniMapController : MonoBehaviour
 {
-    [SerializeField] List<Animator> RoomAnimators;
+	[SerializeField] List<Animator> RoomAnimators;
 
 
 	void Update()

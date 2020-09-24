@@ -68,17 +68,17 @@ public class ProceduralDungeon : MonoBehaviour
 	}
 
 	public bool IsLastRoom(MapRoom current)
-    {
-        if (DungeonGotBossRoom)
-        {
+	{
+		if (DungeonGotBossRoom)
+		{
 			return false;
-        }
+		}
 		foreach (MapRoom mapRoom in DungeonMap)
 		{
 			if(current == mapRoom)
-            {
+			{
 				continue;
-            }
+			}
 			else if (mapRoom != null && mapRoom.RoomState != ERoomState.Completed)
 			{
 				return false;
@@ -103,15 +103,15 @@ public class ProceduralDungeon : MonoBehaviour
 		string roomDataJson = "";
 
 		var filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "RoomData.json");
-        if (filePath.Contains("://")) //if on web
-        {
-            UnityWebRequest uwr = new UnityWebRequest(filePath);
-            yield return uwr;
-            roomDataJson = uwr.downloadHandler.text;
-        }
-        else
+		if (filePath.Contains("://")) //if on web
 		{
-            roomDataJson = System.IO.File.ReadAllText(filePath);
+			UnityWebRequest uwr = new UnityWebRequest(filePath);
+			yield return uwr;
+			roomDataJson = uwr.downloadHandler.text;
+		}
+		else
+		{
+			roomDataJson = System.IO.File.ReadAllText(filePath);
 		}
 
 		AllRoomsData = JsonUtility.FromJson<AllRoomData>(roomDataJson);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PartPickerUiController : MonoBehaviour
 {
-    [SerializeField] Body PlayerBody;
+	[SerializeField] Body PlayerBody;
 	[SerializeField] List<PickerBodyPartUi> PickerBodyParts;
 
 	[SerializeField] Button UseButton;

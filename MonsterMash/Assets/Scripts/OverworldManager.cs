@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class OverworldManager : AdditiveSceneManager
 {
-    public delegate bool TransitionToBattle();
-    public TransitionToBattle OnTransition = null;
+	public delegate bool TransitionToBattle();
+	public TransitionToBattle OnTransition = null;
 
-    public bool Transitioning = false;
+	public bool Transitioning = false;
 
 	[SerializeField] ButtonAnimator BButton;
 	[SerializeField] ButtonAnimator AButton;
@@ -24,54 +24,54 @@ public class OverworldManager : AdditiveSceneManager
 	{
 		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Released && !Transitioning)
 		{
-            DoTransitionToPicker();
+			DoTransitionToPicker();
 		}
 	}
 
-    public void DoTransitionToBattle()
-    {
-        if (!Transitioning)
-        {
-            Transitioning = true;
-            StartCoroutine(DoTransToBattleCo());
-        }
-    }
+	public void DoTransitionToBattle()
+	{
+		if (!Transitioning)
+		{
+			Transitioning = true;
+			StartCoroutine(DoTransToBattleCo());
+		}
+	}
 
-    IEnumerator DoTransToBattleCo()
-    {
-        yield return WaitForActors();
-        // ABSOLUTE LAST THING
-        FlowManager.Instance.TransOverworldToBattle();
-    }
+	IEnumerator DoTransToBattleCo()
+	{
+		yield return WaitForActors();
+		// ABSOLUTE LAST THING
+		FlowManager.Instance.TransOverworldToBattle();
+	}
 
-    public void DoTransitionToPicker()
-    {
-        if (!Transitioning)
-        {
-            Transitioning = true;
-            StartCoroutine(DoTransToPickerCo());
-        }
-    }
+	public void DoTransitionToPicker()
+	{
+		if (!Transitioning)
+		{
+			Transitioning = true;
+			StartCoroutine(DoTransToPickerCo());
+		}
+	}
 
-    IEnumerator DoTransToPickerCo()
-    {
-        yield return WaitForActors();
-        // ABSOLUTE LAST THING
-        FlowManager.Instance.TransToPicker(Settings.SceneOverworld);
-    }
+	IEnumerator DoTransToPickerCo()
+	{
+		yield return WaitForActors();
+		// ABSOLUTE LAST THING
+		FlowManager.Instance.TransToPicker(Settings.SceneOverworld);
+	}
 
 
-    IEnumerator WaitForActors()
-    {
-        bool notReady = true;
-        while (notReady)
-        {
-            notReady = false;
-            foreach (TransitionToBattle d in OnTransition.GetInvocationList())
-            {
-                notReady |= !d.Invoke();
-            }
-            yield return null;
-        }
-    }
+	IEnumerator WaitForActors()
+	{
+		bool notReady = true;
+		while (notReady)
+		{
+			notReady = false;
+			foreach (TransitionToBattle d in OnTransition.GetInvocationList())
+			{
+				notReady |= !d.Invoke();
+			}
+			yield return null;
+		}
+	}
 }
