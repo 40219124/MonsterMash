@@ -9,6 +9,10 @@ using System.Security.Cryptography;
 
 public class CurrentRoom : MonoBehaviour
 {
+	[SerializeField] CollectableObject HealPotion;
+	[SerializeField] CollectableObject BossReward;
+	[SerializeField] MapRoom ThisRoom;
+
 	public static CurrentRoom Instance;
 	public enum EDoorPos { none = -1, TopLeft, TopRight, RightTop, RightBottom, BottomRight, BottomLeft, LeftBottom, LeftTop }
 	public enum ETileLayer { none = -1, Base, Decoration, Foreground }
@@ -16,11 +20,8 @@ public class CurrentRoom : MonoBehaviour
 	public Tilemap BaseDecoration;
 	public Tilemap DecorationForeground;
 	public Tilemap Foreground;
-
 	public TileLookup TileTable;
-
-	[SerializeField]
-	MapRoom ThisRoom;
+	public ETileContentType[,] TileContent;
 
 	[Flags]
 	public enum ETileContentType
@@ -29,17 +30,9 @@ public class CurrentRoom : MonoBehaviour
 		Impassable = Blocked | Player | PlayerDestination | Enemy | EnemyDestination
 	}
 
-
-	public ETileContentType[,] TileContent;
-
 	EnemySpawner EnemySpawn;
 	Vector3Int BossSpawnLocation = new Vector3Int(5, 4, 0);
-
 	List<Vector2Int> DoorLocs = new List<Vector2Int>();
-
-	[SerializeField] CollectableObject HealPotion;
-	[SerializeField] CollectableObject BossReward;
-
 
 	void Awake()
 	{
@@ -95,6 +88,7 @@ public class CurrentRoom : MonoBehaviour
 		}
 		PlaceCollectableItems();
 	}
+
 	public void SetRoom(MapRoom room)
 	{
 		ThisRoom = room;
@@ -254,47 +248,57 @@ public class CurrentRoom : MonoBehaviour
 		float rand = UnityEngine.Random.Range(0, 100.0f);
 
 		ERoomDecoration decoration = ERoomDecoration.None;
-		if (rand <= potionChance)
+
+		if (ThisRoom.RoomState == ERoomState.NotSeen)
 		{
-			switch (UnityEngine.Random.Range(0, 2))
+			if (rand <= potionChance)
 			{
-				case 0:
-					decoration = ERoomDecoration.Potion1;
-					break;
-				case 1:
-					decoration = ERoomDecoration.Potions2;
-					break;
-				default:
-					break;
+				switch (UnityEngine.Random.Range(0, 2))
+				{
+					case 0:
+						decoration = ERoomDecoration.Potion1;
+						break;
+					case 1:
+						decoration = ERoomDecoration.Potions2;
+						break;
+					default:
+						break;
+				}
+			}
+			else if (rand <= flowerChance)
+			{
+				decoration = ERoomDecoration.Flowers;
+			}
+			else if (rand <= grassChance)
+			{
+				switch (UnityEngine.Random.Range(0, 3))
+				{
+					case 0:
+						decoration = ERoomDecoration.BrownGrass1;
+						break;
+					case 1:
+						decoration = ERoomDecoration.BrownGrass2;
+						break;
+					case 2:
+						decoration = ERoomDecoration.BrownGrass3;
+						break;
+					default:
+						break;
+				}
 			}
 		}
-		else if (rand <= flowerChance)
+		else
 		{
-			decoration = ERoomDecoration.Flowers;
-		}
-		else if (rand <= grassChance)
-		{
-			switch (UnityEngine.Random.Range(0, 3))
-			{
-				case 0:
-					decoration = ERoomDecoration.BrownGrass1;
-					break;
-				case 1:
-					decoration = ERoomDecoration.BrownGrass2;
-					break;
-				case 2:
-					decoration = ERoomDecoration.BrownGrass3;
-					break;
-				default:
-					break;
-			}
+			decoration = ThisRoom.RoomDecorations[pos.x, pos.y];
 		}
 
 		Tile tile = TileTable.Decorations.Find(d => d.Decoration == decoration)?.DecTile;
 		if (tile != null)
 		{
 			DecorationForeground.SetTile((Vector3Int)pos, tile);
+			
 		}
+		ThisRoom.RoomDecorations[pos.x, pos.y] = decoration;
 	}
 
 	EMonsterType GetRandomEnemy()
@@ -344,6 +348,7 @@ public class CurrentRoom : MonoBehaviour
 		ETileContentType state = (IsPlayer ? ETileContentType.PlayerDestination : ETileContentType.EnemyDestination);
 		TileContent[(int)target.x, (int)target.y] |= state;
 	}
+
 	public void SetAsActorPos(Vector3 target, bool IsPlayer = false)
 	{
 		ETileContentType dest = (IsPlayer ? ETileContentType.PlayerDestination : ETileContentType.EnemyDestination);
@@ -351,6 +356,7 @@ public class CurrentRoom : MonoBehaviour
 		TileContent[(int)target.x, (int)target.y] &= ~dest;
 		TileContent[(int)target.x, (int)target.y] |= pos;
 	}
+
 	public void MoveActorFrom(Vector3 pos, bool IsPlayer = false)
 	{
 		ETileContentType dest = (IsPlayer ? ETileContentType.PlayerDestination : ETileContentType.EnemyDestination);
@@ -358,6 +364,7 @@ public class CurrentRoom : MonoBehaviour
 		TileContent[(int)pos.x, (int)pos.y] &= ~posE;
 		TileContent[(int)pos.x, (int)pos.y] &= ~dest;
 	}
+
 	public void PlaceDoors()
 	{
 		List<Tile> doorList = (ThisRoom.RoomData.Area == Room.eArea.Indoors ? TileTable.IndoorDoorsOpen : TileTable.OutdoorDoorsOpen);
@@ -453,6 +460,7 @@ public class CurrentRoom : MonoBehaviour
 		}
 		return EEightDirections.none;
 	}
+
 	public void PlaceCollectableItems()
 	{
 		HealPotion.gameObject.SetActive(false);
