@@ -43,18 +43,30 @@ public class BodyPartUi : MonoBehaviour
 	}
 	public void SetDamageNumber(bool show, int value=69)
 	{
+		if (value == 0)
+		{
+			show = false;
+		}
 		DamageIconGameObject.SetActive(show);
 		DamageNumber.gameObject.SetActive(show);
 		DamageNumber.SetNumber(value);
 	}
 	public void SetArmourNumber(bool show, int value=69)
 	{
+		if (value == 0)
+		{
+			show = false;
+		}
 		ArmourIconGameObject.SetActive(show);
 		ArmourNumber.gameObject.SetActive(show);
 		ArmourNumber.SetNumber(value);
 	}
 	public void SetTimeNumber(bool show, int value=69)
 	{
+		if (value == 0)
+		{
+			show = false;
+		}
 		TimeIconGameObject.SetActive(show);
 		TimeNumber.gameObject.SetActive(show);
 		TimeNumber.SetNumber(value);
