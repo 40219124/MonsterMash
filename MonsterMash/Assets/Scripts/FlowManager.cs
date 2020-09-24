@@ -45,11 +45,24 @@ public class FlowManager : MonoBehaviour
     {
 		if (!sceneFrom.Equals(""))
 		{
+			if (sceneFrom != Settings.SceneOverworld)
+			{
+				yield return ScreenTransitionManager.WaitForSetBlack(true, Vector2.zero);
+			}
 			yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
+			
 		}
 
 		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
 		FindObjectOfType<CurrentRoom>().Setup(sceneFrom == Settings.SceneOverworld && !isNewDungeon);
+		yield return null;
+		var transPos = Vector2.zero;
+		var player = FindObjectOfType<Player>();
+		if (player != null)
+		{
+			transPos = player.transform.position;
+		}
+		ScreenTransitionManager.SetShowBlack(false, transPos);
 
     }
 
