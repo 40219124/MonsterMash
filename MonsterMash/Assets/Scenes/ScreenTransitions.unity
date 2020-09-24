@@ -158,6 +158,7 @@ MonoBehaviour:
   localRenderTexture: {fileID: 1250219996}
   RequiredScenes: []
   TransitionAnimator: {fileID: 305363895}
+  RootTransform: {fileID: 1238457231}
 --- !u!4 &305363893
 Transform:
   m_ObjectHideFlags: 0

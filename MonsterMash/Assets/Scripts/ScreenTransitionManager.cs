@@ -5,6 +5,8 @@ using UnityEngine;
 public class ScreenTransitionManager : AdditiveSceneManager
 {
 	[SerializeField] Animator TransitionAnimator;
+	[SerializeField] Transform RootTransform;
+
 	public static ScreenTransitionManager Instance;
 
 	bool ShowingBlack;
@@ -21,11 +23,19 @@ public class ScreenTransitionManager : AdditiveSceneManager
 		}
 	}
 
-	public static void SetShowBlack(bool showBlack)
+	public static void SetShowBlack(bool showBlack, Vector2 pos)
 	{
 		Instance.TransitionAnimator.SetBool("ShowBlack", showBlack);
 		MMLogger.Log($"setting show black to: {showBlack} was {Instance.ShowingBlack}");
 		Instance.ShowingBlack = showBlack;
+
+		var rootPos = Vector3.zero;
+		if (pos != null)
+		{
+			rootPos = new Vector3(pos.x, pos.y);
+		}
+
+		Instance.RootTransform.position = rootPos;
 	}
 
 	// void Update()
@@ -37,9 +47,9 @@ public class ScreenTransitionManager : AdditiveSceneManager
 
 	// }
 
-	public static IEnumerator WaitForSetBlack(bool showBlack)
+	public static IEnumerator WaitForSetBlack(bool showBlack, Vector2 pos)
 	{
-		SetShowBlack(showBlack);
+		SetShowBlack(showBlack, pos);
 
 		AnimatorStateInfo stateInfo;
 		do
