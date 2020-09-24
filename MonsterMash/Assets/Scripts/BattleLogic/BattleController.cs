@@ -143,6 +143,7 @@ public class BattleController : MonoBehaviour
 		{
 			BattleState = eBattleState.EnemyWon;
 			MMLogger.Log($"game over {BattleState} now in game over state");
+			Player.Body.PlayDeathAnim();
 			return;
 		}
 
@@ -150,6 +151,7 @@ public class BattleController : MonoBehaviour
 		{
 			BattleState = eBattleState.PlayerWon;
 			MMLogger.Log($"game over {BattleState} now in game over state");
+			Enemy.Body.PlayDeathAnim();
 			return;
 		}
 

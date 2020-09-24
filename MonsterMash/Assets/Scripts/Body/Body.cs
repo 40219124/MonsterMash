@@ -20,6 +20,7 @@ public class Body : MonoBehaviour
 	[Space]
 	[Header("Audio")]
 	[SerializeField] List<AudioClip> HitAudioClips;
+	[SerializeField] List<AudioClip> DeathAudioClips;
 
 	[Space]
 	[Header("UI")]
@@ -62,6 +63,15 @@ public class Body : MonoBehaviour
 		if (BodyAnimator != null)
 		{
 			BodyAnimator.SetBool("Doing Attack", false);
+		}
+	}
+
+	public void PlayDeathAnim()
+	{
+		if (DeathAudioClips.Count > 0)
+		{
+			var deathClip = DeathAudioClips[Random.Range(0, DeathAudioClips.Count)];
+			AudioSource.PlayClipAtPoint(deathClip, transform.position);
 		}
 	}
 

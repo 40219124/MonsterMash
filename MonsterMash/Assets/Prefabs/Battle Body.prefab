@@ -127,6 +127,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d035239651ac07a4496d4296ba6ecf6a, type: 3}
   - {fileID: 8300000, guid: aa5b90f56f9b04a4397faef443d4b733, type: 3}
   - {fileID: 8300000, guid: efff65030bc5a6247add6b0b302fd94d, type: 3}
+  DeathAudioClips:
+  - {fileID: 8300000, guid: 9507a89993e0b984eb99811cb5e68bce, type: 3}
   BodyAnimator: {fileID: 8146293413818025135}
   BodyPartImageLookup: {fileID: 11400000, guid: fbbda82cfb39b6041b6c369878752a10, type: 2}
   DPadGameTransform: {fileID: 6859213488809015673}
