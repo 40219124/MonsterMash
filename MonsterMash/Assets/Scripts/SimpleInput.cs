@@ -47,16 +47,15 @@ public class SimpleInput : MonoBehaviour
 			return $"Active: {Active}, state: {State}";
 		}
 
-        public void SetActive(bool _active)
+        public void SetActive(bool active)
         {
-            Active = _active;
+			if (ScreenTransitionManager.IsAnimating)
+			{
+				active = false;
+			}
 
-            SetState(_active);
-        }
-
-        private void SetState(bool _active)
-        {
-            if (_active)
+            Active = active;
+            if (Active)
             {
                 if (State == EButtonState.Held || State == EButtonState.Pressed)
                 {

@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class PartPickerManager : AdditiveSceneManager
 {
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     public void Setup()
     {
         PartPickerUiController picker = FindObjectOfType<PartPickerUiController>();

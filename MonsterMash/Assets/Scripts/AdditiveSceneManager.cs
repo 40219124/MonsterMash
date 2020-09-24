@@ -22,13 +22,10 @@ public class AdditiveSceneManager : MonoBehaviour
                 SceneManager.LoadScene(s, LoadSceneMode.Additive);
             }
         }
-    }
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-        if (FindObjectOfType<MainManager>() != null)
-        {
-            foreach (Camera c in FindObjectsOfType<Camera>())
+
+		if (MainManager.Instance != null)
+		{
+			foreach (Camera c in FindObjectsOfType<Camera>())
             {
                 if (c.name == localCamera.name)
                 {
@@ -38,6 +35,6 @@ public class AdditiveSceneManager : MonoBehaviour
             }
             localCamera.gameObject.SetActive(false);
             localRenderTexture.gameObject.SetActive(false);
-        }
+		}
     }
 }
