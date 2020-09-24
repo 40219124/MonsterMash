@@ -310,6 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5014b5648f36440bd25265286ea95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveAudioClip: {fileID: 8300000, guid: 0a8c86d66bc6c9f4fa3235d73cfc02ac, type: 3}
+  SelectedAudioClip: {fileID: 8300000, guid: 890328a2965b17946a6348864e3dc004, type: 3}
   PlayerBody: {fileID: 292994621}
   PickerBodyParts:
   - {fileID: 143721773}

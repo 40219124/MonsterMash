@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PartPickerUiController : MonoBehaviour
 {
+	[SerializeField] AudioClip MoveAudioClip;
+	[SerializeField] AudioClip SelectedAudioClip;
+
 	[SerializeField] Body PlayerBody;
 	[SerializeField] List<PickerBodyPartUi> PickerBodyParts;
 
@@ -90,20 +93,23 @@ public class PartPickerUiController : MonoBehaviour
 
 		while (SimpleInput.GetInputState(EInput.A) != EButtonState.Released || currentButton == null)
 		{
-			if (SimpleInput.GetInputActive(EInput.dpadLeft))
+			if (SimpleInput.GetInputActive(EInput.dpadLeft) && currentButton != UseButton)
 			{
 				currentButton = UseButton;
 				UseButton.SetSelected(true);
 				DiscardButton.SetSelected(false);
+				AudioSource.PlayClipAtPoint(MoveAudioClip, Vector3.zero);
 			}
-			else if (SimpleInput.GetInputActive(EInput.dpadRight))
+			else if (SimpleInput.GetInputActive(EInput.dpadRight) && currentButton != DiscardButton)
 			{
 				currentButton = DiscardButton;
 				UseButton.SetSelected(false);
 				DiscardButton.SetSelected(true);
+				AudioSource.PlayClipAtPoint(MoveAudioClip, Vector3.zero);
 			}
 			yield return null;
 		}
+		AudioSource.PlayClipAtPoint(SelectedAudioClip, Vector3.zero);
 
 		UseButton.SetShow(false);
 		DiscardButton.SetShow(false);
@@ -178,16 +184,25 @@ public class PartPickerUiController : MonoBehaviour
 				{
 					case (EInput.dpadLeft):
 					{
+						if (currentBodyPart != PlayerBody.LeftArmPart)
+						{
+							AudioSource.PlayClipAtPoint(MoveAudioClip, Vector3.zero);
+						}
 						currentBodyPart = PlayerBody.LeftArmPart;
 						break;
 					}
 					case (EInput.dpadRight):
 					{
+						if (currentBodyPart != PlayerBody.RightArmPart)
+						{
+							AudioSource.PlayClipAtPoint(MoveAudioClip, Vector3.zero);
+						}
 						currentBodyPart = PlayerBody.RightArmPart;
 						break;
 					}
 				}
 			}
+			AudioSource.PlayClipAtPoint(SelectedAudioClip, Vector3.zero);
 			SwapPart(currentBodyPart, bodyPartData);
 		}
 		pickerBodyPart.gameObject.SetActive(false);
