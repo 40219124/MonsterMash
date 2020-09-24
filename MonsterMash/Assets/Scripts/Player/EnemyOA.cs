@@ -6,8 +6,8 @@ public class EnemyOA : OverworldAgent
 {
     static protected Player Target;
 
-    private float FreezeTime = 1.0f;
-    private float RemainingFreeze = 0.0f;
+    float FreezeTime = 1.0f;
+    float RemainingFreeze = 0.0f;
     protected override void Start()
     {
         base.Start();

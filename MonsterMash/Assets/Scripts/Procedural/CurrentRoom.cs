@@ -20,7 +20,7 @@ public class CurrentRoom : MonoBehaviour
     public TileLookup TileTable;
 
     [SerializeField]
-    private MapRoom ThisRoom;
+    MapRoom ThisRoom;
 
     [Flags]
     public enum ETileContentType
@@ -32,10 +32,10 @@ public class CurrentRoom : MonoBehaviour
 
     public ETileContentType[,] TileContent;
 
-    private EnemySpawner EnemySpawn;
-    private Vector3Int BossSpawnLocation = new Vector3Int(5, 4, 0);
+    EnemySpawner EnemySpawn;
+    Vector3Int BossSpawnLocation = new Vector3Int(5, 4, 0);
 
-    private List<Vector2Int> DoorLocs = new List<Vector2Int>();
+    List<Vector2Int> DoorLocs = new List<Vector2Int>();
 
     [SerializeField] CollectableObject HealPotion;
     [SerializeField] CollectableObject BossReward;
@@ -102,7 +102,7 @@ public class CurrentRoom : MonoBehaviour
 		TryAddCollectableItems();
     }
 
-    private void AssignTiles()
+    void AssignTiles()
     {
         TileContent = new ETileContentType[Room.GameWidth, Room.GameHeight];
         EnemySpawn.SpawnLocations.Clear();
@@ -239,7 +239,7 @@ public class CurrentRoom : MonoBehaviour
         }
     }
 
-    private void PlaceRandomDecoration(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
+    void PlaceRandomDecoration(ETileContentType type, Vector2Int pos, Room.eTiles tileType)
     {
 
         float potionChance = 25.0f * (tileType == Room.eTiles.Table ? 1 : 0);
@@ -297,7 +297,7 @@ public class CurrentRoom : MonoBehaviour
         }
     }
 
-    private EMonsterType GetRandomEnemy()
+    EMonsterType GetRandomEnemy()
     {
         float slugChance = 0.0f;
         float mantisChance = 0.0f;
@@ -484,7 +484,7 @@ public class CurrentRoom : MonoBehaviour
         BossReward.PickUp(playerPos);
     }
 
-    private EDoorPos EnumFromVector(Vector2Int pos)
+    EDoorPos EnumFromVector(Vector2Int pos)
     {
         EDoorPos outEnum = EDoorPos.none;
         int index = pos.x + (Room.GameHeight - 1 - pos.y) * Room.GameWidth;

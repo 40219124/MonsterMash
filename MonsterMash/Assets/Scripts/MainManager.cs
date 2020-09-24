@@ -7,7 +7,7 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance { get; private set; }
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {

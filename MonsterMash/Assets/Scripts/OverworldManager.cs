@@ -37,7 +37,7 @@ public class OverworldManager : AdditiveSceneManager
         }
     }
 
-    private IEnumerator DoTransToBattleCo()
+    IEnumerator DoTransToBattleCo()
     {
         yield return WaitForActors();
         // ABSOLUTE LAST THING
@@ -53,7 +53,7 @@ public class OverworldManager : AdditiveSceneManager
         }
     }
 
-    private IEnumerator DoTransToPickerCo()
+    IEnumerator DoTransToPickerCo()
     {
         yield return WaitForActors();
         // ABSOLUTE LAST THING
@@ -61,7 +61,7 @@ public class OverworldManager : AdditiveSceneManager
     }
 
 
-    private IEnumerator WaitForActors()
+    IEnumerator WaitForActors()
     {
         bool notReady = true;
         while (notReady)

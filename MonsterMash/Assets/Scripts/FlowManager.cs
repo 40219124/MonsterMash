@@ -7,7 +7,7 @@ public class FlowManager : MonoBehaviour
 {
 	public static FlowManager Instance;
 
-    private void Start()
+    void Start()
     {
         TransToOverworld();
 		Instance = this;
@@ -17,7 +17,7 @@ public class FlowManager : MonoBehaviour
         StartCoroutine(TransOverworldToBattleCo());
     }
 
-    private IEnumerator TransOverworldToBattleCo()
+    IEnumerator TransOverworldToBattleCo()
     {
 		var player = FindObjectOfType<Player>();
 		yield return ScreenTransitionManager.WaitForSetBlack(true, player.transform.position);
@@ -41,7 +41,7 @@ public class FlowManager : MonoBehaviour
         StartCoroutine(TransToOverworldCo(sceneFrom, isNewDungeon));
     }
 
-    private IEnumerator TransToOverworldCo(string sceneFrom, bool isNewDungeon)
+    IEnumerator TransToOverworldCo(string sceneFrom, bool isNewDungeon)
     {
 		if (!sceneFrom.Equals(""))
 		{
@@ -71,7 +71,7 @@ public class FlowManager : MonoBehaviour
         StartCoroutine(TransToGameOverCo(sceneFrom, wonTheGame));
     }
 
-    private IEnumerator TransToGameOverCo(string sceneFrom, bool wonTheGame)
+    IEnumerator TransToGameOverCo(string sceneFrom, bool wonTheGame)
     {
 		var transPos = Vector2.zero;
 		var player = FindObjectOfType<Player>();
@@ -96,7 +96,7 @@ public class FlowManager : MonoBehaviour
         StartCoroutine(TransToTitleCo(sceneFrom));
     }
 
-    private IEnumerator TransToTitleCo(string sceneFrom)
+    IEnumerator TransToTitleCo(string sceneFrom)
     {
 		yield return ScreenTransitionManager.WaitForSetBlack(true, Vector2.zero);
         if (!sceneFrom.Equals(""))
@@ -113,7 +113,7 @@ public class FlowManager : MonoBehaviour
         StartCoroutine(TransToPickerCo(sceneFrom));
     }
 
-    private IEnumerator TransToPickerCo(string sceneFrom)
+    IEnumerator TransToPickerCo(string sceneFrom)
     {
 		var transPos = Vector2.zero;
 		var player = FindObjectOfType<Player>();

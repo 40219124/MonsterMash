@@ -6,9 +6,9 @@ public enum EButtonState { none = -1, Pressed, Held, Released };
 public enum EInput { none = -1, dpadUp, dpadRight, dpadDown, dpadLeft, A, B, Start, Select };
 public class SimpleInput : MonoBehaviour
 {
-    private static SimpleInput instance;
+    static SimpleInput instance;
 
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {
@@ -24,7 +24,7 @@ public class SimpleInput : MonoBehaviour
         }
     }
 
-    private float DeadZone = 0.5f;
+    float DeadZone = 0.5f;
 
     public class ButtonInfo
     {

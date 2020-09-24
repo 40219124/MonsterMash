@@ -79,7 +79,7 @@ public class RoomEditor : EditorWindow
         River = Resources.Load("River") as Texture2D;
     }
 
-    private void OnGUI()
+    void OnGUI()
     {
         if (EditingMode)
         {
@@ -302,7 +302,7 @@ public class RoomEditor : EditorWindow
         EditingRoom = i;
     }
 
-    private void OnFocus()
+    void OnFocus()
     {
         if (!EditingMode)
         {

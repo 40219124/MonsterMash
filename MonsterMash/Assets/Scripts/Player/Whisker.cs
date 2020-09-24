@@ -17,7 +17,7 @@ public class Whisker : MonoBehaviour
         StartCoroutine(FindAgent());
     }
 
-    private IEnumerator FindAgent()
+    IEnumerator FindAgent()
     {
         while (Agent == null)
         {
@@ -27,12 +27,12 @@ public class Whisker : MonoBehaviour
         Agent.SetWhiskerInfo(WhiskerLocation, Interactions);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         ChangeInteraction(collision.tag, 1);
     }
 
-    private void ChangeInteraction(string tag, int change)
+    void ChangeInteraction(string tag, int change)
     {
         if (!Interactions.ContainsKey(tag))
         {
@@ -41,7 +41,7 @@ public class Whisker : MonoBehaviour
         Interactions[tag] += change;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         ChangeInteraction(collision.tag, -1);
     }

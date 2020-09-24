@@ -13,7 +13,7 @@ public class AdditiveSceneManager : MonoBehaviour
     [SerializeField]
     List<string> RequiredScenes = new List<string>();
 
-    private void Awake()
+    void Awake()
     {
         foreach (string s in RequiredScenes)
         {

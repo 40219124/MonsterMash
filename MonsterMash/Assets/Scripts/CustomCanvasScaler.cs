@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class CustomCanvasScaler : CanvasScaler
 {
-    private Canvas m_RootCanvas;
-    private const float kLogBase = 2;
+    Canvas m_RootCanvas;
+    const float kLogBase = 2;
 
     protected override void OnEnable()
     {
