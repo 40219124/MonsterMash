@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance { get; private set; }
-    [SerializeField]
-    string OpeningScene;
-    [SerializeField]
-    float LoadDelay = 2.0f;
 
     private void Awake()
     {
@@ -22,8 +18,9 @@ public class MainManager : MonoBehaviour
             enabled = false;
             return;
         }
+		AddScene(Settings.TransitionOverlay);
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         StartCoroutine(GoToTitleCo());

@@ -34,5 +34,6 @@ public class Settings
 	public const string SceneBodyPartPicker = "BodyPartPicker";
 	public const string SceneGameOver = "GameOver";
 	public const string SceneTitle = "TitleScreen";
+	public const string TransitionOverlay = "ScreenTransitions";
 
 }

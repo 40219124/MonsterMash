@@ -19,6 +19,8 @@ public class FlowManager : MonoBehaviour
 
     private IEnumerator TransOverworldToBattleCo()
     {
+		yield return ScreenTransitionManager.WaitForSetBlack(true);
+
         yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(Settings.SceneOverworld));
         yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneBattle));
         yield return null;
@@ -27,6 +29,8 @@ public class FlowManager : MonoBehaviour
         {
             bc.SetupBattle(OverworldMemory.GetCombatProfile(true), OverworldMemory.GetCombatProfile(false));
         }
+
+		ScreenTransitionManager.SetShowBlack(false);
     }
 
 
@@ -45,6 +49,7 @@ public class FlowManager : MonoBehaviour
 
 		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneOverworld));
 		FindObjectOfType<CurrentRoom>().Setup(sceneFrom == Settings.SceneOverworld && !isNewDungeon);
+
     }
 
     public void TransToGameOver(string sceneFrom, bool wonTheGame)
@@ -54,6 +59,8 @@ public class FlowManager : MonoBehaviour
 
     private IEnumerator TransToGameOverCo(string sceneFrom, bool wonTheGame)
     {
+		yield return ScreenTransitionManager.WaitForSetBlack(true);
+
         if (!sceneFrom.Equals(""))
         {
             yield return MainManager.Instance.SubtractSceneCo(sceneFrom);
@@ -61,6 +68,8 @@ public class FlowManager : MonoBehaviour
         yield return MainManager.Instance.AddSceneCo(Settings.SceneGameOver);
 		yield return null;
         FindObjectOfType<GameOverManager>().Setup(wonTheGame);
+
+		ScreenTransitionManager.SetShowBlack(false);
     }
     public void TransToTitle(string sceneFrom)
     {
@@ -84,6 +93,8 @@ public class FlowManager : MonoBehaviour
 
     private IEnumerator TransToPickerCo(string sceneFrom)
     {
+		yield return ScreenTransitionManager.WaitForSetBlack(true);
+
         if (!sceneFrom.Equals(""))
 		{
             yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
@@ -91,5 +102,6 @@ public class FlowManager : MonoBehaviour
         yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.SceneBodyPartPicker));
         yield return null;
         FindObjectOfType<PartPickerManager>().Setup();
+		ScreenTransitionManager.SetShowBlack(false);
     }
 }

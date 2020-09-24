@@ -59,6 +59,9 @@ TagManager:
   - name: MiniMap
     uniqueID: 3896383563
     locked: 0
+  - name: Transitions
+    uniqueID: 3459335179
+    locked: 0
   - name: RenderTexture
     uniqueID: 3675425773
     locked: 0
