@@ -53,10 +53,10 @@ public class EnemySpawner : MonoBehaviour
 				Transform e = Instantiate(MPTable.Table.Find(p => p.Type == enemy.type).Prefab, this.transform);
 				e.position = enemy.pos;
 
-				OverworldMemory.RecordProfile(monPro, e.GetInstanceID());
+				OverworldMemory.RecordEnemyProfile(monPro, e.GetInstanceID());
 
 				// update memory with new trans id's
-				OverworldMemory.RecordProfile(monPro, e.GetInstanceID());
+				OverworldMemory.RecordEnemyProfile(monPro, e.GetInstanceID());
 			}
 		}
 

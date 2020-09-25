@@ -7,7 +7,7 @@ public class OverworldMemory : MonoBehaviour
 {
 	[SerializeField] MonsterGenerator PlayerMGen;
 
-	static MonsterProfile PlayerProfile;
+	public static PlayerProfile PlayerProfile;
 	static Dictionary<int, MonsterProfile> EnemyProfiles = new Dictionary<int, MonsterProfile>();
 
 	static Vector3 PlayerPos;
@@ -20,25 +20,14 @@ public class OverworldMemory : MonoBehaviour
 	{
 		if (GetCombatProfile(true) == null)
 		{
-			var profile = PlayerMGen.GetMonster(EMonsterType.Frankenstein);
-			RecordProfile(profile);
+			PlayerProfile = new PlayerProfile();
+			PlayerProfile.CombatProfile = PlayerMGen.GetMonster(EMonsterType.Frankenstein);
 		}
 	}
 
 	// Profiles
-	public static void RecordProfile(MonsterProfile profile, int id = -1)
+	public static void RecordEnemyProfile(MonsterProfile profile, int id)
 	{
-		// Set player profile
-		if (id == -1)
-		{
-			if (PlayerProfile == null)
-			{
-				PlayerProfile = profile;
-			}
-			return;
-		}
-		
-		
 		// Set enemy profile
 		if (!EnemyProfiles.ContainsKey(id))
 		{
@@ -65,7 +54,7 @@ public class OverworldMemory : MonoBehaviour
 	{
 		if (isPlayer)
 		{
-			return PlayerProfile;
+			return PlayerProfile.CombatProfile;
 		}
 		else
 		{

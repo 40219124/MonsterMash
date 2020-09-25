@@ -50,6 +50,11 @@ public class BattleController : MonoBehaviour
 		TimeSinceActionStarted = 0;
 
 		CurrentAgent = UnityEngine.Random.Range(0, 2) == 1? Player : Enemy;
+
+		if (OverworldMemory.PlayerProfile != null)
+		{
+			OverworldMemory.PlayerProfile.NumberOfBattlesPlayed += 1;
+		}
 	}
 
 	public bool HasValidAttcker(Agent agent)
@@ -189,6 +194,10 @@ public class BattleController : MonoBehaviour
 
 		if (CurrentAgent == Player)
 		{
+			if (OverworldMemory.PlayerProfile != null)
+			{
+				OverworldMemory.PlayerProfile.TurnsPlayedInBattle += 1;
+			}
 			BattleState = eBattleState.PlayerTurn;
 		}
 		else
