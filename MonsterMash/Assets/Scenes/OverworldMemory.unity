@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8dbfff674e7b54ab3d97e3642b33fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerMGen: {fileID: 11400000, guid: 93666616f9b606a4488354f8293c1af1, type: 2}
 --- !u!4 &731897376
 Transform:
   m_ObjectHideFlags: 0
@@ -192,7 +193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0586c96bcf9eac14da693df88a59ed12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingRoom: {x: 0, y: 0}
+  NumberOfDungeonsMade: 0
+  CurrentAreaType: 0
+  CurrentRoom: {x: 0, y: 0}
+  EnterPos: {x: 0, y: 0, z: 0}
+  EnterMoveTargetPos: {x: 0, y: 0, z: 0}
   AllRoomsData:
     LatestRoomID: 0
     AllRooms: []

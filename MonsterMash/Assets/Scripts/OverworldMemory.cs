@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class OverworldMemory : MonoBehaviour
 {
+	[SerializeField] MonsterGenerator PlayerMGen;
 
 	static MonsterProfile PlayerProfile;
 	static Dictionary<int, MonsterProfile> EnemyProfiles = new Dictionary<int, MonsterProfile>();
@@ -14,6 +15,15 @@ public class OverworldMemory : MonoBehaviour
 
 	static int opponentID;
 	static MonsterProfile opponentLoot;
+
+	void Awake()
+	{
+		if (GetCombatProfile(true) == null)
+		{
+			var profile = PlayerMGen.GetMonster(EMonsterType.Frankenstein);
+			RecordProfile(profile);
+		}
+	}
 
 	// Profiles
 	public static void RecordProfile(MonsterProfile profile, int id = -1)

@@ -33,7 +33,6 @@ public class EnemySpawner : MonoBehaviour
 
 				Transform e = Instantiate(MPTable.Table.Find(p => p.Type == type).Prefab, this.transform);
 				e.position = idPos.Value;
-				e.GetComponent<OverworldAgent>().Profile = monPro;
 
 				// update memory with new trans id's
 				oldToNew.Add((idPos.Key, e.GetInstanceID()));
@@ -53,7 +52,8 @@ public class EnemySpawner : MonoBehaviour
 
 				Transform e = Instantiate(MPTable.Table.Find(p => p.Type == enemy.type).Prefab, this.transform);
 				e.position = enemy.pos;
-				e.GetComponent<OverworldAgent>().Profile = monPro;
+
+				OverworldMemory.RecordProfile(monPro, e.GetInstanceID());
 
 				// update memory with new trans id's
 				OverworldMemory.RecordProfile(monPro, e.GetInstanceID());

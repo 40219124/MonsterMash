@@ -7,17 +7,6 @@ public class Player : OverworldAgent
 	[SerializeField] AudioClip UseDoorAudioClip;
 	[SerializeField] MonsterGenerator MGen;
 
-	protected override void Start()
-	{
-		// ~~~ do better later
-		if (OverworldMemory.GetCombatProfile(true) == null)
-		{
-			Profile = MGen.GetMonster(EMonsterType.Frankenstein);
-			OverworldMemory.RecordProfile(Profile);
-		}
-		base.Start();
-	}
-
 	void Update()
 	{
 		HorizontalValue = Input.GetAxisRaw("Horizontal");
@@ -62,7 +51,6 @@ public class Player : OverworldAgent
 			return false;
 		}
 		OverworldMemory.RecordPosition(transform.position);
-		OverworldMemory.RecordProfile(Profile);
 		return true;
 	}
 }

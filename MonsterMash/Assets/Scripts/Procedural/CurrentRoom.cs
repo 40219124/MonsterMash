@@ -57,7 +57,6 @@ public class CurrentRoom : MonoBehaviour
 		SetRoom(mapRoom);
 
 		Player p = FindObjectOfType<Player>();
-		p.Profile = OverworldMemory.GetCombatProfile(true);
 
 		var playerPos = ThisRoom.RoomData.PlayerSpawn;
 		var targetPos = playerPos;

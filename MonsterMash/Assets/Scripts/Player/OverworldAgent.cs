@@ -119,8 +119,6 @@ public class OverworldAgent : MonoBehaviour
 
 	protected Animator Anim;
 
-	public MonsterProfile Profile;
-
 	// Start is called before the first frame update
 	protected virtual void Start()
 	{
@@ -347,7 +345,6 @@ public class OverworldAgent : MonoBehaviour
 			return false;
 		}
 		OverworldMemory.RecordPosition(transform.position, transform.GetInstanceID());
-		OverworldMemory.RecordProfile(Profile, transform.GetInstanceID());
 		return true;
 	}
 
