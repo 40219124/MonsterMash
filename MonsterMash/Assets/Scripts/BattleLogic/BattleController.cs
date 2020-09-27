@@ -104,7 +104,12 @@ public class BattleController : MonoBehaviour
 				if (BattleState == eBattleState.PlayerWon)
 				{
 					// Remove enemy from memory 
-					var dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < Settings.ChanceOfALimbDrop;
+					bool dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < Settings.ChanceOfALimbDrop;
+					if (OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfBattlesPlayed].Value <= 1)
+					{
+						dropLoot = true;
+					}
+					
 					OverworldMemory.OpponentBeaten(dropLoot);
 					if(dropLoot || Settings.AlwaysGoToPickerPostBattle)
 					{
