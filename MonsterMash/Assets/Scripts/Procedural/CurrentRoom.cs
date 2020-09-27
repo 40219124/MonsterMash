@@ -79,12 +79,16 @@ public class CurrentRoom : MonoBehaviour
 			EnemySpawn.SpawnEnemies(ThisRoom.RoomState != ERoomState.NotSeen);
 		}
 
-		ThisRoom.RoomState = ERoomState.Seen;
-
 		if (OverworldMemory.GetEnemyProfiles().Count == 0)
 		{
 			PlaceDoors();
 		}
+		
+		if (ThisRoom.RoomState != ERoomState.Completed)
+		{
+			ThisRoom.RoomState = ERoomState.Seen;
+		}
+
 		PlaceCollectableItems();
 	}
 
@@ -367,6 +371,15 @@ public class CurrentRoom : MonoBehaviour
 	public void PlaceDoors()
 	{
 		List<Tile> doorList = (ThisRoom.RoomData.Area == Room.eArea.Indoors ? TileTable.IndoorDoorsOpen : TileTable.OutdoorDoorsOpen);
+
+		if (ThisRoom.RoomState != ERoomState.Completed)
+		{
+			if (OverworldMemory.PlayerProfile != null)
+			{
+				OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfRoomsCompleted].Value += 1;
+			}
+		}
+
 		ThisRoom.RoomState = ERoomState.Completed;
 		foreach (Vector2Int pos in DoorLocs)
 		{
