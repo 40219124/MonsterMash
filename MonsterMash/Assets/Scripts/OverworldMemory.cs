@@ -18,7 +18,7 @@ public class OverworldMemory : MonoBehaviour
 
 	void Awake()
 	{
-		if (GetCombatProfile(true) == null)
+		if (PlayerProfile == null)
 		{
 			PlayerProfile = new PlayerProfile();
 			PlayerProfile.CombatProfile = PlayerMGen.GetMonster(EMonsterType.Frankenstein);

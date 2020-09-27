@@ -53,7 +53,7 @@ public class BattleController : MonoBehaviour
 
 		if (OverworldMemory.PlayerProfile != null)
 		{
-			OverworldMemory.PlayerProfile.NumberOfBattlesPlayed += 1;
+			OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfBattlesPlayed].Value += 1;
 		}
 	}
 
@@ -196,7 +196,7 @@ public class BattleController : MonoBehaviour
 		{
 			if (OverworldMemory.PlayerProfile != null)
 			{
-				OverworldMemory.PlayerProfile.TurnsPlayedInBattle += 1;
+				OverworldMemory.PlayerProfile.ProfileStats[eStatType.TurnsPlayedInBattle].Value += 1;
 			}
 			BattleState = eBattleState.PlayerTurn;
 		}
