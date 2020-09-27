@@ -42,7 +42,12 @@ public class ProceduralDungeon : MonoBehaviour
 		CurrentRoom += roomDirection;
 		MMLogger.Log($"Moved To room {CurrentRoom} RoomID: {GetCurrentRoom().RoomData.RoomId}");
 
-		var xPos = (Room.GameWidth-1)-playerPos.x;
+		var xPos = playerPos.x;
+		if (playerPos.x == 0 ||
+			playerPos.x == Room.GameWidth-1)
+		{
+			xPos = (Room.GameWidth-1)-xPos;
+		}
 
 		var yPos = playerPos.y;
 		if (playerPos.y == 0 ||
