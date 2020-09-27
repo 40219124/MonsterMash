@@ -222,6 +222,11 @@ public class CurrentRoom : MonoBehaviour
 
 	void TryAddCollectableItems()
 	{
+		if (ThisRoom.RoomState != ERoomState.NotSeen)
+		{
+			return;
+		}
+
 		if (ThisRoom.CollectableItems.Count > 0 ||
 			ThisRoom.IsStartingRoom)
 		{
