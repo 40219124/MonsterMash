@@ -41,6 +41,13 @@ public class Player : OverworldAgent
 				}
 			}
 		}
+
+		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Released && !LockedMovement && !IsMoving())
+		{
+			LockedMovement = true;
+			OverworldMemory.RecordPosition(transform.position);
+			FindObjectOfType<OverworldManager>().DoTransitionToPicker();
+		}
 	}
 
 	protected override bool OnTransition()

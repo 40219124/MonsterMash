@@ -65,7 +65,7 @@ public class CurrentRoom : MonoBehaviour
 			playerPos = ProceduralDungeon.Instance.EnterPos;
 			targetPos = ProceduralDungeon.Instance.EnterMoveTargetPos;
 		}
-		else if (!ThisRoom.IsStartingRoom)
+		else if (ThisRoom.RoomState != ERoomState.NotSeen)
 		{
 			playerPos = OverworldMemory.GetPlayerPosition();
 			targetPos = playerPos;

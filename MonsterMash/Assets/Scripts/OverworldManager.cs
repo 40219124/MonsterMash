@@ -20,14 +20,6 @@ public class OverworldManager : AdditiveSceneManager
 		AButton.SetHighlight(false);
 	}
 
-	void Update()
-	{
-		if (SimpleInput.GetInputState(EInput.Select) == EButtonState.Released && !Transitioning)
-		{
-			DoTransitionToPicker();
-		}
-	}
-
 	public void DoTransitionToBattle()
 	{
 		if (!Transitioning)
