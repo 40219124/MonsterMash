@@ -12,6 +12,7 @@ public class PlayerProfileStat : MonoBehaviour
 	public void Setup(PlayerProfile.StatValue statInfo, int index)
 	{
 		Label.text = statInfo.StatName;
+		Value.UseLargeNumbers = true;
 		Value.SetNumber((int)statInfo.Value);
 		transform.position = new Vector3(0, -Hight * index, 0);
 	}

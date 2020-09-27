@@ -76,7 +76,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 9.75, y: 1}
+  m_Size: {x: 9.75, y: 1.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216533178fac58741827debb818a0318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hight: 1.125
+  Hight: 1.5
   Label: {fileID: 1174801093384198663}
   Value: {fileID: 6604491295188568101}
   Animator: {fileID: 3076284165357433111}
@@ -291,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8774630188449881776, guid: 7dfb397c88112b546b7663cd22135497, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 4.0625
       objectReference: {fileID: 0}
     - target: {fileID: 8774630188449881776, guid: 7dfb397c88112b546b7663cd22135497, type: 3}
       propertyPath: m_LocalPosition.y

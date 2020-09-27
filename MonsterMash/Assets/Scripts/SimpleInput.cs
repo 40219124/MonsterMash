@@ -32,6 +32,7 @@ public class SimpleInput : MonoBehaviour
 		bool isDpad;
 
 		public EButtonState State { get; private set;}
+		public float TimeInState { get; private set;}
 		public bool Active { get; private set; }
 
 		public ButtonInfo(EInput b)
@@ -47,8 +48,19 @@ public class SimpleInput : MonoBehaviour
 			return $"Active: {Active}, state: {State}";
 		}
 
+		void SetState(EButtonState state)
+		{
+			if (State != state)
+			{
+				TimeInState = 0;
+			}
+			State = state;
+		}
+
 		public void SetActive(bool active)
 		{
+			TimeInState += Time.deltaTime;
+			
 			if (ScreenTransitionManager.IsAnimating)
 			{
 				active = false;
@@ -59,11 +71,11 @@ public class SimpleInput : MonoBehaviour
 			{
 				if (State == EButtonState.Held || State == EButtonState.Pressed)
 				{
-					State = EButtonState.Held;
+					SetState(EButtonState.Held);
 				}
 				else
 				{
-					State = EButtonState.Pressed;
+					SetState(EButtonState.Pressed);
 					if(isDpad)
 					{
 						recentDpadInput = button;
@@ -74,11 +86,11 @@ public class SimpleInput : MonoBehaviour
 			{
 				if (State == EButtonState.Held || State == EButtonState.Pressed)
 				{
-					State = EButtonState.Released;
+					SetState(EButtonState.Released);
 				}
 				else
 				{
-					State = EButtonState.none;
+					SetState(EButtonState.none);
 				}
 			}
 		}
@@ -91,7 +103,6 @@ public class SimpleInput : MonoBehaviour
 	List<string> AxisStrings = new List<string>() {
 		 "Vertical", "Horizontal" , "Vertical" ,"Horizontal" , "ButtonA", "ButtonB", "Start", "Select" };
 
-	// Update is called once per frame
 	void Update()
 	{
 		Buttons[(int)EInput.dpadUp].SetActive(Input.GetAxisRaw(AxisStrings[(int)EInput.dpadUp]) > DeadZone);
@@ -107,6 +118,11 @@ public class SimpleInput : MonoBehaviour
 	public static EButtonState GetInputState(EInput input)
 	{
 		return Buttons[(int)input].State;
+	}
+
+	public static float GetTimeInState(EInput input)
+	{
+		return Buttons[(int)input].TimeInState;
 	}
 
 	public static bool GetInputActive(EInput input)
