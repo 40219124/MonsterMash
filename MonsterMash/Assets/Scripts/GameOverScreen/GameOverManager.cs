@@ -23,7 +23,7 @@ public class GameOverManager : AdditiveSceneManager
 
 	void Awake()
 	{
-		Setup(true);
+		//Setup(true);
 	}
 
 	public void Setup(bool wonTheGame)
