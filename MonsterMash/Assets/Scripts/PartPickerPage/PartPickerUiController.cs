@@ -214,21 +214,37 @@ public class PartPickerUiController : MonoBehaviour
 		{
 			case (Body.eBodyPartType.Torso):
 			{
+				if (OverworldMemory.PlayerProfile != null)
+				{
+					OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfTorsoSwapped].Value += 1;
+				}
 				ProfileData.Torso = dataToWrite;
 				break;
 			}
 			case (Body.eBodyPartType.LeftArm):
 			{
+				if (OverworldMemory.PlayerProfile != null)
+				{
+					OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfArmsSwapped].Value += 1;
+				}
 				ProfileData.LeftArm = dataToWrite;
 				break;
 			}
 			case (Body.eBodyPartType.RightArm):
 			{
+				if (OverworldMemory.PlayerProfile != null)
+				{
+					OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfArmsSwapped].Value += 1;
+				}
 				ProfileData.RightArm = dataToWrite;
 				break;
 			}
 			case (Body.eBodyPartType.Leg):
 			{
+				if (OverworldMemory.PlayerProfile != null)
+				{
+					OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfLegsSwapped].Value += 1;
+				}
 				ProfileData.Legs = dataToWrite;
 				break;
 			}
