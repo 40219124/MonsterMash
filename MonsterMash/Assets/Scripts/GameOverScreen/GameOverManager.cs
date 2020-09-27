@@ -70,7 +70,7 @@ public class GameOverManager : AdditiveSceneManager
 
 	IEnumerator Intro()
 	{
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(2f);
 
 		int loop = 0;
 		foreach (var stat in StatsList)
