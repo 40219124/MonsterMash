@@ -14,6 +14,8 @@ public class GameOverManager : AdditiveSceneManager
 	[SerializeField] PlayerProfileStat ProfileStatPrefab;
 	[SerializeField] Transform ProfileStatHolder;
 	List<PlayerProfileStat> StatsList = new List<PlayerProfileStat>();
+
+	[SerializeField] NumberRender TotalScoreNumber;
 	
 
 	bool IntroDone = false;
@@ -33,14 +35,18 @@ public class GameOverManager : AdditiveSceneManager
 
 		var audioClip = wonTheGame ? WonAudioClip : LostAudioClip;
 		AudioSource.PlayClipAtPoint(audioClip, transform.position);
-
+		int score = 1234;
 
 		var profileStats = new Dictionary<eStatType, PlayerProfile.StatValue>();
 
 		if (OverworldMemory.PlayerProfile?.ProfileStats != null)
 		{
 			profileStats = OverworldMemory.PlayerProfile.ProfileStats;
+			score = OverworldMemory.PlayerProfile.GetScore();
 		}
+
+		TotalScoreNumber.UseLargeNumbers = true;
+		TotalScoreNumber.SetNumber(score);
 
 		//this is just for debug
 		if (profileStats.Count == 0)
@@ -57,6 +63,7 @@ public class GameOverManager : AdditiveSceneManager
 		foreach (var statInfo in profileStats.Values)
 		{
 			var stat = Instantiate(ProfileStatPrefab, ProfileStatHolder);
+			stat.transform.localPosition = Vector3.zero;
 			stat.Setup(statInfo, index);
 			index += 1;
 			StatsList.Add(stat);

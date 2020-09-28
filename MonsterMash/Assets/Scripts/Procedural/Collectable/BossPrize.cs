@@ -13,6 +13,11 @@ public class BossPrize : CollectableItem
 	{
 		base.PickUp();
 
+		if (OverworldMemory.PlayerProfile != null)
+		{
+			OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfLevelsCompleted].Value += 1;
+		}
+
 		if (ProceduralDungeon.Instance.NumberOfDungeonsMade == 1)
 		{
 			ProceduralDungeon.Instance.GenerateMap(Room.eArea.Indoors);
