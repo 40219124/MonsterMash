@@ -27,6 +27,10 @@ public class Settings
 	public const float ChanceOfHealingPotion = 33f;
 	public const float ChanceOfALimbDrop = 33f;
 
+	public const float UpgradeBodyPartHealthMultiplier = 1.1f;
+	public const float UpgradeBodyPartDamageMultiplier = 1.1f;
+	public const float UpgradeBodyPartArmorMultiplier = 1.1f;
+
 	public const string SceneMain = "MainScene";
 	public const string SceneOverworld = "Overworld";
 	public const string SceneOverworldMemory = "OverworldMemory";

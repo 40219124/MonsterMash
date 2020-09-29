@@ -91,4 +91,15 @@ public class BodyPartData
 			HealthCurrent = HealthMaximum;
 		}
     }
+
+	public void Upgrade(bool restoreDead)
+	{
+		if (restoreDead || HealthCurrent > 0)
+		{
+			HealthMaximum = (int) (HealthMaximum * Settings.UpgradeBodyPartHealthMultiplier);
+			Damage = (int) (Damage * Settings.UpgradeBodyPartDamageMultiplier);
+			Armour = (int) (Armour * Settings.UpgradeBodyPartArmorMultiplier);
+			RestoreHealth(restoreDead);
+		}
+	}
 }
