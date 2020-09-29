@@ -14,7 +14,7 @@ public class PlayerProfileStat : MonoBehaviour
 		Label.text = statInfo.StatName;
 		Value.UseLargeNumbers = true;
 		Value.SetNumber((int)statInfo.Value);
-		transform.position = new Vector3(0, -Hight * index, 0);
+		transform.localPosition = new Vector3(0, -Hight * index, 0);
 	}
 
 	public void SetSelected(bool selected)
