@@ -7,7 +7,10 @@ public class Limb: BodyPart
 	{
 		bool shouldShow = show && IsAlive;
 
-		bool disabled = !IsAlive || (!IsValidAttacker() && isOurTurn) || forceDisable;
+
+		bool ableToPreQueue = Agent.AbleToPreQueue();
+
+		bool disabled = !IsAlive || (!IsValidAttacker() && !ableToPreQueue && isOurTurn) || forceDisable;
 
         StatBox.Show(shouldShow, selected, selected || forceComplex, disabled);
 

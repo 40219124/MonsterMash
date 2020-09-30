@@ -73,7 +73,15 @@ public class BattleUiController: MonoBehaviour
 
 		bool hasVaildAction = battleController.HasValidAttcker(currentAgent);
 
-		bool shouldPreShow = isPlayer && battleController.TimeLeftOfAction <= Settings.PreShowBattleUiTime;
+
+		float preShowTime = Settings.PreShowBattleUiTime;
+		if (battleController.CurrentAction != null)
+		{
+			preShowTime += battleController.CurrentAction.GetAttackTime() * Settings.PreQueueActionTimePercentage;
+		}
+
+		bool shouldPreShow = isPlayer && battleController.TimeLeftOfAction <= preShowTime;
+		
 
 		bool shouldPostShow = battleController.TimeSinceActionStarted <= Settings.PostPickHangTime &&
 			battleController.CurrentAction != null;

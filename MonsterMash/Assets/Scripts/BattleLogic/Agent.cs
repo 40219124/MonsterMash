@@ -21,6 +21,23 @@ public class Agent : MonoBehaviour
 	public Body.eBodyPartType LockedAttacker { get; private set;}
 	public Body.eBodyPartType LockedTarget { get; private set;}
 
+	public static bool AbleToPreQueue()
+	{
+		var battleController = BattleController.Instance;
+		if (battleController == null)
+		{
+			MMLogger.LogError($"calling AbleToPreQueue while battleController null");
+			return false;
+		}
+
+		float timeLeftOfActionRatio = 0f;
+		if (battleController.CurrentAction != null)
+		{
+			timeLeftOfActionRatio = battleController.TimeLeftOfAction / battleController.CurrentAction.GetAttackTime();
+		}
+		return timeLeftOfActionRatio < Settings.PreQueueActionTimePercentage;
+	}
+
 	void Update()
 	{
 		var battleController = BattleController.Instance;
@@ -34,7 +51,7 @@ public class Agent : MonoBehaviour
 
 		if ((LockedAttacker == Body.eBodyPartType.None ||
 			LockedTarget == Body.eBodyPartType.None) &&
-			battleController.TimeLeftOfAction <= Settings.PreQueueActionTime)
+			AbleToPreQueue())
 		{
 			if (ControlType == eControlType.Player)
 			{

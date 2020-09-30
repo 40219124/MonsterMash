@@ -7,8 +7,8 @@ public class Settings
 	public const float TurnTime = 6.0f;
 	public const float BattleIntroMaxTime = 30.0f;
 	public const float TurnTransitionTime = 1.5f;
-	public const float PreShowBattleUiTime = 1.5f;
-	public const float PreQueueActionTime = 1.5f;
+	public const float PreShowBattleUiTime = 0.5f;
+	public const float PreQueueActionTimePercentage = 0.4f; //this is max 0.5
 	public const float PostPickHangTime = 0.25f;
 
 	public const float NoActionAvailableSpeedMultiplier = 5f;

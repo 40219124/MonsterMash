@@ -294,7 +294,7 @@ public class BattleController : MonoBehaviour
 		StartCoroutine(DoAttack(actionTime, attackerLimb));
 		return true;
 	}
-
+	
 	IEnumerator DoAttack(int actionTime, Limb attackerLimb)
 	{
 		CurrentAgent.Body.StartAttack();

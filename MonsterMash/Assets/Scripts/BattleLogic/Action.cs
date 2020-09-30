@@ -20,4 +20,10 @@ public class Action
 	{
 		return $"Attacker: type: {AttackerPartType}, Target: type: {TargetPartType}";
 	}
+
+	public float GetAttackTime()
+	{
+		var limb = Attacker.GetLimb(AttackerPartType);
+		return limb.AttackTime;
+	}
 }
