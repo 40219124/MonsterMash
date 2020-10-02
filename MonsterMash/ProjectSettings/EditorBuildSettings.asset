@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScreenTransitions.unity
     guid: fa96bee4effc1044cbf9c780471b55a6
+  - enabled: 1
+    path: Assets/Scenes/RewardReveal.unity
+    guid: 826968d9815271e468790754211a80dc
   m_configObjects: {}

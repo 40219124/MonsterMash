@@ -107,6 +107,25 @@ public class FlowManager : MonoBehaviour
 		MainManager.Instance.GoToTitle();
 		ScreenTransitionManager.SetShowBlack(false, Vector2.zero);
 	}
+	
+	public void TransToRewardReveal(string sceneFrom)
+	{
+		StartCoroutine(TransToRewardRevealCo(sceneFrom));
+	}
+
+	IEnumerator TransToRewardRevealCo(string sceneFrom)
+	{
+		yield return ScreenTransitionManager.WaitForSetBlack(true, Vector2.zero);
+
+		if (!sceneFrom.Equals(""))
+		{
+			yield return StartCoroutine(MainManager.Instance.SubtractSceneCo(sceneFrom));
+		}
+
+		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.RewardReveal));
+		yield return null;
+		ScreenTransitionManager.SetShowBlack(false, Vector2.zero);
+	}
 
 	public void TransToPicker(string sceneFrom)
 	{

@@ -113,7 +113,7 @@ public class BattleController : MonoBehaviour
 					OverworldMemory.OpponentBeaten(dropLoot);
 					if(dropLoot || Settings.AlwaysGoToPickerPostBattle)
 					{
-						FlowManager.Instance.TransToPicker(Settings.SceneBattle);
+						FlowManager.Instance.TransToRewardReveal(Settings.SceneBattle);
 					}
 					else
 					{
