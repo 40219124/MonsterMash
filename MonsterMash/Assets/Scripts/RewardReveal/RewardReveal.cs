@@ -15,6 +15,7 @@ public class RewardReveal : MonoBehaviour
 		if (parts != null && parts.Count > 0)
 		{
 			PickerBodyPart.SetupData(parts[0], SpriteLookup);
+			pickerBodyPart.SetSelected(true);
 		}
 		
         ScreenAnimator.SetBool("ShowReward", true);
