@@ -943,6 +943,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &113553046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4967041070087294300, guid: 145787a99699d4649a29bc596a076be2, type: 3}
+  m_PrefabInstance: {fileID: 2091428448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf25b7a3a6af54a42987bf3b1531f279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &114097515
 GameObject:
   m_ObjectHideFlags: 0
@@ -2645,6 +2656,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenAnimator: {fileID: 324237994}
+  PickerBodyPart: {fileID: 113553046}
+  SpriteLookup: {fileID: 11400000, guid: fbbda82cfb39b6041b6c369878752a10, type: 2}
 --- !u!1 &334365940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,7 +3841,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: -20
   m_Sprite: {fileID: 21300000, guid: 78fcfca3c28db0d459ee4293fbdd8d5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

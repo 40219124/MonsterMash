@@ -14,7 +14,7 @@ public class OverworldMemory : MonoBehaviour
 	static Dictionary<int, Vector3> EnemyPositions = new Dictionary<int, Vector3>();
 
 	static int opponentID;
-	static MonsterProfile opponentLoot;
+	static List<BodyPartData> BodyPartLootList = new List<BodyPartData>();
 
 	void Awake()
 	{
@@ -123,21 +123,49 @@ public class OverworldMemory : MonoBehaviour
 	public static void OpponentBeaten(bool getLoot)
 	{
 		EnemyPositions.Remove(OpponentID);
+
+		ClearLoot();
 		if (getLoot)
 		{
-			opponentLoot = EnemyProfiles[opponentID];
+			var monPro = EnemyProfiles[opponentID];
+
+			if(monPro.Torso != null &&
+				(monPro.Torso.MonsterType == EMonsterType.lobster ||
+				monPro.Torso.MonsterType == EMonsterType.shrimp))
+			{
+				BodyPartLootList.Add(monPro.Torso);
+			}
+			else
+			{
+				var toPickFrom = new List<BodyPartData>();
+				if(monPro.LeftArm != null)
+				{
+					toPickFrom.Add(monPro.LeftArm);
+				}
+				if(monPro.RightArm != null)
+				{
+					toPickFrom.Add(monPro.RightArm);
+				}
+				if(monPro.Legs != null)
+				{
+					toPickFrom.Add(monPro.Legs);
+				}
+
+				int bodyPart = Random.Range(0, toPickFrom.Count);
+				BodyPartLootList.Add(toPickFrom[bodyPart]);
+			}
 		}
 		EnemyProfiles.Remove(OpponentID);
 	}
 
-	public static MonsterProfile GetLootProfile()
+	public static List<BodyPartData> GetLootProfile()
 	{
-		return opponentLoot;
+		return BodyPartLootList;
 	}
 
 	public static void ClearLoot()
 	{
-		opponentLoot = null;
+		BodyPartLootList.Clear();
 	}
 
 	// To clear info // ~~~ change once spawning supplies id's instead of distruction
@@ -155,6 +183,6 @@ public class OverworldMemory : MonoBehaviour
 		EnemyPositions.Clear();
 		PlayerPos = Vector3.zero;
 		opponentID = 0;
-		opponentLoot = null;
+		BodyPartLootList = null;
 	}
 }

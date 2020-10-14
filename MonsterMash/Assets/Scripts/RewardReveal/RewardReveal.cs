@@ -5,10 +5,18 @@ using UnityEngine;
 public class RewardReveal : MonoBehaviour
 {
 	[SerializeField] Animator ScreenAnimator;
+	[SerializeField] PickerBodyPartUi PickerBodyPart;
+	[SerializeField] BodyPartSpriteLookup SpriteLookup;
 
 	
     void Awake()
     {
+		var parts = OverworldMemory.GetLootProfile();
+		if (parts != null && parts.Count > 0)
+		{
+			PickerBodyPart.SetupData(parts[0], SpriteLookup);
+		}
+		
         ScreenAnimator.SetBool("ShowReward", true);
     }
 
