@@ -49,6 +49,7 @@ public class ScreenTransitionManager : AdditiveSceneManager
 	public static IEnumerator WaitForSetBlack(bool showBlack, Vector2 pos)
 	{
 		SetShowBlack(showBlack, pos);
+		yield return null;
 
 		do
 		{
