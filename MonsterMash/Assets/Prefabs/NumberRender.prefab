@@ -211,8 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NumberSpriteRenderers:
-  - {fileID: 7398719169329952561}
   - {fileID: 7750494383406275164}
+  - {fileID: 7398719169329952561}
   NumberSpriteList:
   - {fileID: -7542371115539988336, guid: 628e008fa9f3cea48a03d0de39196f4f, type: 3}
   - {fileID: -1797931468360238817, guid: 628e008fa9f3cea48a03d0de39196f4f, type: 3}
