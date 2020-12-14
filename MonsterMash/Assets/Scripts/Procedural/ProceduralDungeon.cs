@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class ProceduralDungeon : MonoBehaviour
 {
 	public static ProceduralDungeon Instance;
+	public static string RoomJsonFile = System.IO.Path.Combine("Assets", "Resources", "RoomData.txt");
 
 	public int NumberOfDungeonsMade = 0;
 	public MapRoom[,] DungeonMap = new MapRoom[Settings.MapSize, Settings.MapSize];
@@ -106,20 +107,13 @@ public class ProceduralDungeon : MonoBehaviour
 	IEnumerator LoadAllRoomData()
 	{
 		string roomDataJson = "";
+		var asset = Resources.Load<TextAsset>("RoomData");
+		roomDataJson = asset.text;
 
-		var filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "RoomData.json");
-		if (filePath.Contains("://")) //if on web
-		{
-			UnityWebRequest uwr = new UnityWebRequest(filePath);
-			yield return uwr;
-			roomDataJson = uwr.downloadHandler.text;
-		}
-		else
-		{
-			roomDataJson = System.IO.File.ReadAllText(filePath);
-		}
-
+		MMLogger.Log($"roomDataJson: {roomDataJson}");
 		AllRoomsData = JsonUtility.FromJson<AllRoomData>(roomDataJson);
+		MMLogger.Log($"AllRoomsData: {AllRoomsData}");
+		yield return null;
 	}
 
 	public void GenerateMap(Room.eArea area)

@@ -19,7 +19,6 @@ public class RoomEditor : EditorWindow
 
 
     static AllRoomData AllRooms;
-    static string jsonFile = "/RoomData.json";
     Vector2 ScrollPos;
     int EditingRoom;
     bool EditingMode;
@@ -312,7 +311,7 @@ public class RoomEditor : EditorWindow
 
     void LoadRooms()
     {
-        string path = Application.streamingAssetsPath + jsonFile;
+        string path = ProceduralDungeon.RoomJsonFile;
 
         if (File.Exists(path))
         {
@@ -341,7 +340,7 @@ public class RoomEditor : EditorWindow
 
     static void SaveRooms()
     {
-        string path = Application.streamingAssetsPath + jsonFile;
+        string path = ProceduralDungeon.RoomJsonFile;
         MMLogger.Log($"saving to: {path}");
 
         if (!File.Exists(path))

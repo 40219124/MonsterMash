@@ -3,7 +3,7 @@ using UnityEngine;
 public class MMLogger
 {
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 	static bool LoggingAllowed = true;
 #else
 	static bool LoggingAllowed = false;
