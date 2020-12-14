@@ -218,7 +218,7 @@ public class FlowManager : MonoBehaviour
 		LoadingScreens.Remove(screen);
 	}
 
-	bool IsScreenLoading(string screen)
+	public bool IsScreenLoading(string screen)
 	{
 		return LoadingScreens.Contains(screen);
 	}

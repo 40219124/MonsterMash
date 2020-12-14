@@ -33,7 +33,7 @@ public class Player : OverworldAgent
 			{
 				LockedMovement = true;
 
-				if(!IsMoving())
+				if(!IsMoving() && !FlowManager.Instance.IsScreenLoading(Settings.SceneOverworld))
 				{
 					ProceduralDungeon.Instance.MoveRoom(diffInt, MoveTarget);
 					AudioSource.PlayClipAtPoint(UseDoorAudioClip, transform.position);

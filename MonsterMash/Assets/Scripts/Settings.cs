@@ -1,5 +1,6 @@
 public class Settings
 {
+	public const bool ShouldSpawnEnemies = true;
 	public const bool AlwaysGoToPickerPostBattle = false;
 	public const bool ShowStatsForAi = false;
 	public const bool DpadOnlyCombat = true;

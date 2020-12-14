@@ -74,7 +74,7 @@ public class CurrentRoom : MonoBehaviour
 		p.MoveTarget = targetPos;
 
 		if (ThisRoom.RoomState != ERoomState.Completed &&
-		!ThisRoom.IsStartingRoom)
+			!ThisRoom.IsStartingRoom && Settings.ShouldSpawnEnemies)
 		{
 			EnemySpawn.SpawnEnemies(ThisRoom.RoomState != ERoomState.NotSeen);
 		}
