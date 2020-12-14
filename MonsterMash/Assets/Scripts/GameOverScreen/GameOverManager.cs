@@ -23,6 +23,8 @@ public class GameOverManager : AdditiveSceneManager
 
 	int SelectedIndex = 0;
 
+	float ScrollSpeed = 4f;
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -146,10 +148,14 @@ public class GameOverManager : AdditiveSceneManager
 		SelectedIndex = index;
 		StatsList[SelectedIndex].SetSelected(true);
 
-		var yPos = ProfileStatPrefab.Hight * SelectedIndex;
-		yPos = Mathf.Max(yPos, 0);
-		yPos = Mathf.Min(yPos, (StatsList.Count-2)*ProfileStatPrefab.Hight);
+		var newYPos = ProfileStatPrefab.Hight * SelectedIndex;
+		newYPos = Mathf.Max(newYPos, 0);
+		newYPos = Mathf.Min(newYPos, (StatsList.Count-2)*ProfileStatPrefab.Hight);
 
-		ProfileStatHolder.transform.localPosition = new Vector3(0, yPos, 0);
+
+		var currentY = ProfileStatHolder.transform.localPosition.y;
+		newYPos = Mathf.Lerp(currentY, newYPos, Time.deltaTime * ScrollSpeed);
+
+		ProfileStatHolder.transform.localPosition = new Vector3(0, newYPos, 0);
 	}
 }
