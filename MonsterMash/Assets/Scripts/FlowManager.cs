@@ -175,7 +175,7 @@ public class FlowManager : MonoBehaviour
 		yield return null;
 		ScreenTransitionManager.SetShowBlack(false, Vector2.zero);
 
-		RemoveScreenFromLoading(Settings.SceneTitle);
+		RemoveScreenFromLoading(Settings.RewardReveal);
 	}
 
 	public void TransToPicker(string sceneFrom)

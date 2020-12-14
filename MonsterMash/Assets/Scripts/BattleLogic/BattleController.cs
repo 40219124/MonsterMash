@@ -94,8 +94,8 @@ public class BattleController : MonoBehaviour
 			}
 		}
 
-		if (BattleState != eBattleState.PlayerTurn &&
-			BattleState != eBattleState.EnemyTurn)
+		if (BattleState == eBattleState.PlayerWon ||
+			BattleState == eBattleState.EnemyWon)
 		{
 			if (SimpleInput.GetInputState(EInput.A) == EButtonState.Released)
 			{
@@ -125,45 +125,49 @@ public class BattleController : MonoBehaviour
 			return;
 		}
 
-		var deltaTime = Time.deltaTime;
-
-		if (CurrentAgent.ControlType != Agent.eControlType.Player)
+		if (BattleState == eBattleState.PlayerTurn ||
+			BattleState == eBattleState.EnemyTurn)
 		{
-			deltaTime *= Settings.AiTurnTimeSpeedMultiplier;
-		}
+			var deltaTime = Time.deltaTime;
 
-		TimeLeftOfAction -= deltaTime;
-		TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
-
-		if (TimeLeftOfAction <= 0 && CurrentAction == null)
-		{
-			if (!HasValidAttcker(CurrentAgent))
+			if (CurrentAgent.ControlType != Agent.eControlType.Player)
 			{
-				deltaTime *= Settings.NoActionAvailableSpeedMultiplier;
+				deltaTime *= Settings.AiTurnTimeSpeedMultiplier;
 			}
-		}
-		TurnTimeLeft -= deltaTime;
-		TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 
-		if (!Player.Body.IsAlive())
-		{
-			BattleState = eBattleState.EnemyWon;
-			MMLogger.Log($"game over {BattleState} now in game over state");
-			Player.Body.PlayDeathAnim();
-			return;
-		}
+			TimeLeftOfAction -= deltaTime;
+			TimeLeftOfAction = Math.Max(TimeLeftOfAction, 0);
 
-		if (!Enemy.Body.IsAlive())
-		{
-			BattleState = eBattleState.PlayerWon;
-			MMLogger.Log($"game over {BattleState} now in game over state");
-			Enemy.Body.PlayDeathAnim();
-			return;
-		}
+			if (TimeLeftOfAction <= 0 && CurrentAction == null)
+			{
+				if (!HasValidAttcker(CurrentAgent))
+				{
+					deltaTime *= Settings.NoActionAvailableSpeedMultiplier;
+				}
+			}
+			TurnTimeLeft -= deltaTime;
+			TurnTimeLeft = Math.Max(TurnTimeLeft, 0);
 
-		if (TurnTimeLeft <= 0 && TimeLeftOfAction <= 0)
-		{
-			StartTurnTransition();
+			if (!Player.Body.IsAlive())
+			{
+				BattleState = eBattleState.EnemyWon;
+				MMLogger.Log($"game over {BattleState} now in game over state");
+				Player.Body.PlayDeathAnim();
+				return;
+			}
+
+			if (!Enemy.Body.IsAlive())
+			{
+				BattleState = eBattleState.PlayerWon;
+				MMLogger.Log($"game over {BattleState} now in game over state");
+				Enemy.Body.PlayDeathAnim();
+				return;
+			}
+
+			if (TurnTimeLeft <= 0 && TimeLeftOfAction <= 0)
+			{
+				StartTurnTransition();
+			}
 		}
 	}
 
@@ -326,7 +330,7 @@ public class BattleController : MonoBehaviour
 
 	bool ShouldDropLoot()
 	{
-		bool dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < Settings.ChanceOfALimbDrop;
+		bool dropLoot = UnityEngine.Random.Range(0f, 100f) < Settings.ChanceOfALimbDrop;
 		if (OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfBattlesPlayed].Value <= 1)
 		{
 			dropLoot = true;

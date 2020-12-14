@@ -122,6 +122,8 @@ public class OverworldMemory : MonoBehaviour
 
 	public static void OpponentBeaten(bool getLoot)
 	{
+		MMLogger.Log($"OpponentBeaten called with getLoot: {getLoot}");
+		
 		EnemyPositions.Remove(OpponentID);
 
 		ClearLoot();
