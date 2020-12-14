@@ -23,8 +23,9 @@ public class GameOverManager : AdditiveSceneManager
 
 	int SelectedIndex = 0;
 
-	void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		//Setup(true);
 	}
 

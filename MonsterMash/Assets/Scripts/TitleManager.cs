@@ -8,8 +8,9 @@ public class TitleManager : AdditiveSceneManager
 	float timeElapsed = 0.0f;
 	bool triggered = false;
 
-	void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		AButton.SetHighlight(true);
 	}
 

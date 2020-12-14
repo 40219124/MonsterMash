@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PartPickerManager : AdditiveSceneManager
 {
+	protected override void Awake()
+	{
+		base.Awake();
+	}
+	
 	public void Setup()
 	{
 		PartPickerUiController picker = FindObjectOfType<PartPickerUiController>();

@@ -14,8 +14,9 @@ public class OverworldManager : AdditiveSceneManager
 	[SerializeField] ButtonAnimator BButton;
 	[SerializeField] ButtonAnimator AButton;
 
-	void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		BButton.SetHighlight(false);
 		AButton.SetHighlight(false);
 	}
