@@ -6,6 +6,7 @@ using UnityEngine;
 public class FlowManager : MonoBehaviour
 {
 	public static FlowManager Instance;
+	List<string> LoadingScreens = new List<string>();
 
 	void Start()
 	{
@@ -19,6 +20,14 @@ public class FlowManager : MonoBehaviour
 
 	IEnumerator TransOverworldToBattleCo()
 	{
+		if (IsScreenLoading(Settings.SceneBattle))
+		{
+			MMLogger.LogWarning($"TransOverworldToBattleCo called but screen already loading so stopping call");
+			yield break;
+		}
+
+		AddScreenToLoading(Settings.SceneBattle);
+
 		var player = FindObjectOfType<Player>();
 		yield return ScreenTransitionManager.WaitForSetBlack(true, player.transform.position);
 
@@ -32,6 +41,8 @@ public class FlowManager : MonoBehaviour
 		}
 
 		ScreenTransitionManager.SetShowBlack(false, Vector2.zero);
+
+		RemoveScreenFromLoading(Settings.SceneBattle);
 	}
 
 
@@ -43,6 +54,15 @@ public class FlowManager : MonoBehaviour
 
 	IEnumerator TransToOverworldCo(string sceneFrom, bool isNewDungeon)
 	{
+		if (IsScreenLoading(Settings.SceneOverworld))
+		{
+			MMLogger.LogWarning($"TransToOverworldCo called but screen already loading so stopping call");
+			yield break;
+		}
+
+		AddScreenToLoading(Settings.SceneOverworld);
+
+		MMLogger.Log($"TransToOverworldCo called with sceneFrom:{sceneFrom}, isNewDungeon:{isNewDungeon}");
 		if (!sceneFrom.Equals(""))
 		{
 			if (sceneFrom != Settings.SceneOverworld)
@@ -64,6 +84,7 @@ public class FlowManager : MonoBehaviour
 		}
 		ScreenTransitionManager.SetShowBlack(false, transPos);
 
+		RemoveScreenFromLoading(Settings.SceneOverworld);
 	}
 
 	public void TransToGameOver(string sceneFrom, bool wonTheGame)
@@ -73,6 +94,14 @@ public class FlowManager : MonoBehaviour
 
 	IEnumerator TransToGameOverCo(string sceneFrom, bool wonTheGame)
 	{
+		if (IsScreenLoading(Settings.SceneGameOver))
+		{
+			MMLogger.LogWarning($"TransToGameOverCo called but screen already loading so stopping call");
+			yield break;
+		}
+
+		AddScreenToLoading(Settings.SceneGameOver);
+
 		var transPos = Vector2.zero;
 		var player = FindObjectOfType<Player>();
 		if (player != null)
@@ -90,6 +119,8 @@ public class FlowManager : MonoBehaviour
 		FindObjectOfType<GameOverManager>().Setup(wonTheGame);
 
 		ScreenTransitionManager.SetShowBlack(false, Vector2.zero);
+
+		RemoveScreenFromLoading(Settings.SceneGameOver);
 	}
 	public void TransToTitle(string sceneFrom)
 	{
@@ -98,6 +129,14 @@ public class FlowManager : MonoBehaviour
 
 	IEnumerator TransToTitleCo(string sceneFrom)
 	{
+		if (IsScreenLoading(Settings.SceneTitle))
+		{
+			MMLogger.LogWarning($"TransToTitleCo called but screen already loading so stopping call");
+			yield break;
+		}
+
+		AddScreenToLoading(Settings.SceneTitle);
+
 		yield return ScreenTransitionManager.WaitForSetBlack(true, Vector2.zero);
 		if (!sceneFrom.Equals(""))
 		{
@@ -106,6 +145,8 @@ public class FlowManager : MonoBehaviour
 		OverworldMemory.ClearAll();
 		MainManager.Instance.GoToTitle();
 		ScreenTransitionManager.SetShowBlack(false, Vector2.zero);
+
+		RemoveScreenFromLoading(Settings.SceneTitle);
 	}
 	
 	public void TransToRewardReveal(string sceneFrom)
@@ -115,6 +156,14 @@ public class FlowManager : MonoBehaviour
 
 	IEnumerator TransToRewardRevealCo(string sceneFrom)
 	{
+		if (IsScreenLoading(Settings.RewardReveal))
+		{
+			MMLogger.LogWarning($"TransToRewardRevealCo called but screen already loading so stopping call");
+			yield break;
+		}
+
+		AddScreenToLoading(Settings.RewardReveal);
+
 		yield return ScreenTransitionManager.WaitForSetBlack(true, Vector2.zero);
 
 		if (!sceneFrom.Equals(""))
@@ -125,6 +174,8 @@ public class FlowManager : MonoBehaviour
 		yield return StartCoroutine(MainManager.Instance.AddSceneCo(Settings.RewardReveal));
 		yield return null;
 		ScreenTransitionManager.SetShowBlack(false, Vector2.zero);
+
+		RemoveScreenFromLoading(Settings.SceneTitle);
 	}
 
 	public void TransToPicker(string sceneFrom)
@@ -134,6 +185,8 @@ public class FlowManager : MonoBehaviour
 
 	IEnumerator TransToPickerCo(string sceneFrom)
 	{
+		AddScreenToLoading(Settings.SceneBodyPartPicker);
+
 		var transPos = Vector2.zero;
 		var player = FindObjectOfType<Player>();
 		if (player != null)
@@ -150,5 +203,23 @@ public class FlowManager : MonoBehaviour
 		yield return null;
 		FindObjectOfType<PartPickerManager>().Setup();
 		ScreenTransitionManager.SetShowBlack(false, Vector2.zero);
+
+		RemoveScreenFromLoading(Settings.SceneBodyPartPicker);
+	}
+
+
+	void AddScreenToLoading(string screen)
+	{
+		LoadingScreens.Add(screen);
+	}
+
+	void RemoveScreenFromLoading(string screen)
+	{
+		LoadingScreens.Remove(screen);
+	}
+
+	bool IsScreenLoading(string screen)
+	{
+		return LoadingScreens.Contains(screen);
 	}
 }

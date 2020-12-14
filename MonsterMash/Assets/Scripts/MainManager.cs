@@ -42,9 +42,15 @@ public class MainManager : MonoBehaviour
 	}
 	public IEnumerator AddSceneCo(string scene)
 	{
+		MMLogger.Log($"AddSceneCo called with scene: {scene}");
+
 		if (!SceneManager.GetSceneByName(scene).isLoaded)
 		{
 			yield return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+		}
+		else
+		{
+			MMLogger.LogError($"AddSceneCo called with scene: {scene} that is already loaded");
 		}
 	}
 
@@ -54,9 +60,15 @@ public class MainManager : MonoBehaviour
 	}
 	public IEnumerator SubtractSceneCo(string scene)
 	{
+		MMLogger.Log($"SubtractSceneCo called with scene: {scene}");
+
 		if (SceneManager.GetSceneByName(scene).isLoaded)
 		{
 			yield return SceneManager.UnloadSceneAsync(scene);
+		}
+		else
+		{
+			MMLogger.LogError($"SubtractSceneCo called with scene: {scene} that is not loaded");
 		}
 	}
 
