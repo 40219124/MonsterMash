@@ -13,6 +13,9 @@ public class AdditiveSceneManager : MonoBehaviour
     [SerializeField]
     List<string> RequiredScenes = new List<string>();
 
+
+	public static Camera AudioListener;
+
     protected virtual void Awake()
     {
         foreach (string s in RequiredScenes)
@@ -35,6 +38,10 @@ public class AdditiveSceneManager : MonoBehaviour
             }
             localCamera.gameObject.SetActive(false);
             localRenderTexture.gameObject.SetActive(false);
+		}
+		else
+		{
+			AudioListener = localCamera;
 		}
     }
 }

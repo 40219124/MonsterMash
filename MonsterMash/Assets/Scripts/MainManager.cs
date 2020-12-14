@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
+	[SerializeField] Camera LocalCamera;
+
 	public static MainManager Instance { get; private set; }
 
 	void Awake()
@@ -19,6 +21,7 @@ public class MainManager : MonoBehaviour
 			return;
 		}
 		AddScene(Settings.TransitionOverlay);
+		AdditiveSceneManager.AudioListener = LocalCamera;
 	}
 
 	void Start()

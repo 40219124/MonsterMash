@@ -247,7 +247,7 @@ public class OverworldAgent : MonoBehaviour
 		if (WalkSounds.Count > 0)
 		{
 			var walkClip = WalkSounds[Random.Range(0, WalkSounds.Count)];
-			AudioSource.PlayClipAtPoint(walkClip, transform.position);
+			AudioSource.PlayClipAtPoint(walkClip, AdditiveSceneManager.AudioListener.transform.position, volume:0.2f);
 		}
 
 		while (timeElapsed < AnimationTime)
