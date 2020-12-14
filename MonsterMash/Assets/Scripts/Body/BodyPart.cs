@@ -67,7 +67,7 @@ public class BodyPart : MonoBehaviour
 
     public override string ToString()
     {
-        return $"health: {CurrentHealth} / {PartData.HealthMaximum}";
+        return $"health: {CurrentHealth} / {PartData?.HealthMaximum}";
     }
 
     public virtual void ShowStats(bool show, bool selected, bool isOurTurn, bool forceComplex, bool forceDisable=false)

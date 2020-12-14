@@ -31,6 +31,15 @@ public class BattleControllerEditor : Editor
 			EditorGUILayout.LabelField($"not in battle");
 		}
 
+		if (GUILayout.Button("WIN"))
+		{
+			BattleController.Instance.DebugWin();
+		}
+
+		if (GUILayout.Button("LOSE"))
+		{
+			BattleController.Instance.DebugLose();
+		}
     }
 }
 #endif

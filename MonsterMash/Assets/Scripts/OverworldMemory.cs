@@ -183,6 +183,6 @@ public class OverworldMemory : MonoBehaviour
 		EnemyPositions.Clear();
 		PlayerPos = Vector3.zero;
 		opponentID = 0;
-		BodyPartLootList = null;
+		BodyPartLootList.Clear();
 	}
 }

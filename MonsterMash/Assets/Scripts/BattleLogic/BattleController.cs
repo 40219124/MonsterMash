@@ -104,11 +104,7 @@ public class BattleController : MonoBehaviour
 				if (BattleState == eBattleState.PlayerWon)
 				{
 					// Remove enemy from memory 
-					bool dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < Settings.ChanceOfALimbDrop;
-					if (OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfBattlesPlayed].Value <= 1)
-					{
-						dropLoot = true;
-					}
+					bool dropLoot = ShouldDropLoot();
 					
 					OverworldMemory.OpponentBeaten(dropLoot);
 					if(dropLoot || Settings.AlwaysGoToPickerPostBattle)
@@ -327,4 +323,30 @@ public class BattleController : MonoBehaviour
 
 		CurrentAction = null;
 	}
+
+	bool ShouldDropLoot()
+	{
+		bool dropLoot = UnityEngine.Random.Range(0.0f, 1.0f) < Settings.ChanceOfALimbDrop;
+		if (OverworldMemory.PlayerProfile.ProfileStats[eStatType.NumberOfBattlesPlayed].Value <= 1)
+		{
+			dropLoot = true;
+		}
+		return dropLoot;
+	}
+
+#region Debug options
+#if UNITY_EDITOR
+	public void DebugWin()
+	{
+		MMLogger.Log($"DebugWin called");
+		Enemy.Body.ApplyAttack(Body.eBodyPartType.Torso, 1000);
+	}
+
+	public void DebugLose()
+	{
+		MMLogger.Log($"DebugLose called");
+		Player.Body.ApplyAttack(Body.eBodyPartType.Torso, 1000);
+	}
+#endif
+#endregion
 }
